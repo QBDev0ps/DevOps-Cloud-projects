@@ -1,4 +1,4 @@
-# DOCUMENTATION FOR LINUX PRACTICE PROJECT
+# DOCUMENTATION FOR LINUX PROJECT
 
 ## This project shows the implementation of some command line operations in linux regarding aspects such as file manangement, directory navigation, user and permission management, package installation and network configuration.
 
