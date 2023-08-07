@@ -21,7 +21,7 @@ Below is the outcome after downloading and installing VirtualBox from www.virtua
 ## LINUX COMMANDS
 
 ## 1. sudo Command
-sudo is shortform for "superuser do". It enables the user perform tasks that require administrative rights.
+sudo is shortform for "superuser do". It will enable you perform tasks that require administrative rights.
 To perform an administrative task such as installing the available upgrades of all packages currently installed on the system , you run the following command:
 
 `sudo apt upgrade`
@@ -61,6 +61,44 @@ The image below represents the expected outcome:
 cd can also be used with flags. `cd -` to go to the last directory we were in. `cd ..` to go one directory up or we can enter `cd` alone to navigate back to the default home directory. The outputs of these commands should look like this: 
 
 ![cd flags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2be20299-5ddb-4052-910e-56934be6a074)
+
+
+## 4. ls Command
+Here, we use this command to list the files and folders in our system. Executing the command without any parameters shows the contents of our current working directory. We can achieve this by simply entering:
+
+`ls`
+
+The output we get is shown below:
+
+![ls](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cb5d5ddb-4c4c-4cff-84b6-00cf22b6a3c1)
+
+Wwe can also use ls to see the files in another directory by specifying the path. From root user, we can see the files in the home directory of vboxuser by entering: 
+
+`ls /home/vboxuser`
+
+Although we are still in the root directory, we are able to see the content of the specified path:
+
+![ls root](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c01a1c84-4e4f-463a-9f78-4c5b9042a746)
+
+The ls command has some flags that can extend its functionality. `ls -R` lists all the files in the sub directories as shown below:
+
+![ls -R](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce7fa8dd-8c4e-4945-bfb1-096a66736e65)
+
+As shown in the next image, entering the command: `ls -a` lists all the files along with the hidden files while `ls -lh` lists all the files in a more easily readable format whilst showing more detail.
+
+![ls -a](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3c0d49e-9115-4be4-aa1b-fbde2bf6ff2d)
+
+
+## 5. cat Command
+We can use this to list, combine or write a file's content on to the Command Line Interface. So to show what we wrote in the DevOps file we simply enter the following command:
+
+`cat DevOps`
+
+The output of this command is as shown in the image below:
+
+![cat](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/81189f4f-a763-476e-94e9-8ee48e74e6bd)
+
+
 
 
 
