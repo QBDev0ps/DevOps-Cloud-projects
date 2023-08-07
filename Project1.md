@@ -49,3 +49,20 @@ The output for this command is as shown below:
 ![pwd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/df80777c-cc7a-43a6-a077-1349e6da7e8b)
 
 
+## 3. cd Command
+We can use this command to change from our current working directory to another or we can use it to navigate to a folder by entering the command with the folder name (DevOps_folder) as shown below:
+
+`cd DevOps_folder`
+
+The image below represents the expected outcome:
+
+![cd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/83510595-cd46-482c-bcd9-b2054b240ef6)
+
+cd can also be used with flags. `cd -` to go to the last directory we were in. `cd ..` to go one directory up or we can enter `cd` alone to navigate back to the default home directory. The outputs of these commands should look like this: 
+
+![cd flags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2be20299-5ddb-4052-910e-56934be6a074)
+
+
+
+
+
