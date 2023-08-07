@@ -129,6 +129,32 @@ As mentioned earlier, the command does not return any value but by using the `ls
 
 ## 8. mkdir Command
 
+This is a command we can use to create one or multiple directories at once. We can also use a flag to set permissions for the directories as they are being created. For usage, you need to type the command and specify the directory name to be created as shown in the image below:
 
+`mkdir DevOps_folder`
 
+The output for this can be viewed with the `ls` command:
 
+![mkdir](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/095866aa-d026-4e50-bd7a-5a334bc33894)
+
+To create a folder called inside_folder inside the DevOps_folder:
+
+`mkdir DevOps_folder/inside_folder/`
+
+To create a folder called second_inside_folder inside the inside_folder:
+
+`mkdir DevOps_folder/inside_folder/second_inside_folder`
+
+To view the output we can use `cd` to change to the created directory and then we use `ls` to view its content:
+
+![mkdir3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/67407461-594c-4d8c-902b-06cc08db42e8)
+
+We can also use flags with this command. To create a directory named movies with full read, write and execute permissions for all users, we enter the following:
+
+`mkdir -m777 movies`
+
+The output for this is shown below:
+
+![mkdir4](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0614b866-aa92-4930-a6a4-ca152f5f9619)
+
+## 9. rmdir Command
