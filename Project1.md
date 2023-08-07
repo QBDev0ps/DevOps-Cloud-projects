@@ -99,7 +99,35 @@ The output of this command is as shown in the image below:
 ![cat](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/81189f4f-a763-476e-94e9-8ee48e74e6bd)
 
 
+## 6. cp Command
+We use this to copy files or folders and their contents to another location. It is used by entering the command, follwed by the file name and then the destination directory. For instance, here we want to copy the DevOps file to the Desktop directory, so we enter the following command:
 
+`cp DevOps Desktop/`
+
+The command does not return any value on the CLI as the operation has already beeen carried out in the background but for confirmation, we can run the `ls` command to list the files in the desktop directory and in the image below, we can see that the DevOps file has been successfully copied.
+
+![cp](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9ebe1975-5ce4-4c17-83a7-eec3a1fe855a)
+
+
+## 7. mv Command
+This is the command we will use to move or rename files.  We can use it by entering the command, followed by the filename and then the destination directory. Here we want to move the DevOps2 folder to the Desktop folder, so we enter the following command:
+
+`mv DevOps2 Desktop/`
+
+Just like the `cp` command, there is no output to the CLI when `mv` is executed. But we can use ls to see its effect as shown in the image below. We see that the DevOps2 file has been removed from it's original location in the home directory and its current location is now the Desktop folder:
+
+![mv](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/73eb7d7a-0571-4ced-82ac-c2e353639994)
+
+To show how the `mv` command is used to rename a file, we simply enter mv and specify the filename (DevOps2) and its path followed by the new filename (DevOps_New) and its path:
+
+`mv Desktop/DevOps2 Desktop/DveOps_New`
+
+As mentioned earlier, the command does not return any value but by using the `ls` command, we can see its output. DevOps2 has now been renamed to DevOps_New:
+
+![mv2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5a552f09-e7b7-4154-a5bb-5e1b576beac3)
+
+
+## 8. mkdir Command
 
 
 
