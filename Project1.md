@@ -296,4 +296,30 @@ The corresponding output should look like the image shown below:
 
 ![tar](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cde6d822-dab3-4e2a-8e84-1ba36a70c8fa)
 
+## 21. chmod Command
+
+We can use this command to modify a file or directory's read, write, execute permissions. For instance, to enable all users the ability to read, write and execute (rwxrwxrwx) the learning_linux file, we will enter the following command: 
+
+`chmod 777 learning_linux`
+
+As shown in the images of the command entry and output below, 777 is the numeric value for assigning rwxrwxrwx permissions. Subsequently, we use the `ls` command in combination with `-ltr` flag to show that the permissions on the learning_linux file have been successfully modified:
+
+![chmod](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/15f863ea-73e0-439d-96be-1e1421e6c50c)
+
+![chmod2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/215461b5-eb6c-42c6-97fd-c7855b890434)
+
+## 22. chown Command
+
+This command lets us change the ownership of a file or directory. For instance to give the user: Abdul, the ownership of the DevOps file, we simply enter the following command:
+
+`chown Abdul DevOps`
+
+By entering the `ls -ltr` command, can view the output shown in the image below. In the shown output, it is clear that the user: Abdul has been granted ownership of the DevOps file:
+
+![chown](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f0c7d11-35a9-4319-bd08-bf87240fc584)
+
+
+## 23. jobs Command
+
+
 
