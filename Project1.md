@@ -157,4 +157,71 @@ The output for this is shown below:
 
 ![mkdir4](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0614b866-aa92-4930-a6a4-ca152f5f9619)
 
+
 ## 9. rmdir Command
+
+This command can be used to permanently remove or delete an empty directory. To illustrate this, we will delete second_inside_folder using the following command:
+
+`rmdir DevOps_folder/inside_folder/second_inside_folder`
+
+The command when entered does not return any value. However as shown in the output below, using the `ls` command to check the inside_folder directory shows that scond_inside_folder has been removed.
+
+![rmdir](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/45a9af1f-8fd8-455c-b0ab-a1529a7eadba)
+
+
+## 10. rm Command
+
+We can use this to remove or delete files within a directory. To remove DevOps_file, we proceed to enter the command as:
+
+`rm DevOps_file`
+
+In the image below, the `ls` command is used to show that the DevOps_file file has been deleted:
+
+![rm](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/18ac5b63-7069-4fd9-a310-b460ca62856c)
+
+The command can also be used to remove folders recursively when the `-r` flag is added. i.e it deletes the folder and its contents:
+
+`rm -r DevOps_folder`
+
+The output is shown below:
+
+![rm2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce0f1472-fb63-42db-918a-b7c02f1114f0)
+
+
+## 11. touch Command
+
+This creates an empty text editor file. We will implement this command by creating a file named DevOps. This is done by entering the following command:
+
+`touch DevOps`
+
+The output is shown below:
+
+![touch2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/029bbcf0-203e-43e3-9c26-4fac793d493b)
+
+
+## 13. find Command
+
+We can use this to search for and show the location of files within a specific directory. It is usually used with `-name` flag to specify the filename. To look for the DevOps file in the home directory, we will enter the following command:
+
+`find /home -name DevOps`
+
+The output is returned on the CLi and the path for the DevOps file is shown:
+
+![find](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/81d81124-c8a9-4f06-ad0f-a380917f3e77)
+
+
+## 14. grep Command
+
+This will let us find a word by searching through all the texts in a specific file. To implement it, we will use the command to show all the instances of the word: 'blue' written in the DevOps file:
+
+`grep blue DevOps`
+
+The command outputs all instances of 'blue' to the CLI as shown in the image below:
+
+![grep](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/68beb553-2247-4275-a3f0-f8a6de8597b5)
+
+
+## 15. df Command
+
+
+
