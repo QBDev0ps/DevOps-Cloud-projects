@@ -199,6 +199,16 @@ The output is shown below:
 ![touch2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/029bbcf0-203e-43e3-9c26-4fac793d493b)
 
 
+## 12. locate Command
+
+We can use this to find any file in the database system. Here, we simply implement it by entering the command, followed by the filename:
+
+'locate DevOps'
+
+The location for the DevOps file is shown on the terminal interface:
+
+![locate](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6919495e-363b-4408-9c9f-bf5b74c39ac8)
+
 ## 13. find Command
 
 We can use this to search for and show the location of files within a specific directory. It is usually used with `-name` flag to specify the filename. To look for the DevOps file in the home directory, we will enter the following command:
@@ -222,6 +232,31 @@ The command outputs all instances of 'blue' to the CLI as shown in the image bel
 
 
 ## 15. df Command
+
+This reports the system's diskspace usage in percentage and kilobytes. It can be used in combination with different flags to extend functionality. For instance, to show the current directory's system disk space usage in a human readable format, we enter the following command:
+
+`df -h`
+
+The output for this is as shown below:
+
+![df](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/59b860b2-94e4-4a01-a689-08350df0410b)
+
+
+## 16. du Command
+
+This command will allow us to see how much a file or directory takes up. We shall specify the directory path in the use of this command as shown below:
+
+`du Desktop/learning_linux`
+
+Entering the command outputs the following:
+
+![du](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/aab37c3e-0f0e-4505-b245-2b4bf068ace8)
+
+
+## 17. head Command
+
+
+
 
 
 
