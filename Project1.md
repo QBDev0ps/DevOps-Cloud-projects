@@ -255,8 +255,45 @@ Entering the command outputs the following:
 
 ## 17. head Command
 
+Entering this command will enable us view the upper part or the first 10 lines of a text file. For instance to show the top part of the learning_linux file we enter the following command:
+
+`head learning_linux`
+
+The output of this command is shown in the image below:
+
+![head](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/aebc6bfd-7390-4cc9-bad7-a6dc8f4c11c0)
 
 
+## 18. tail Command
 
+Entering this command will enable us view the lower part or the last 10 lines of a text file. For instance to show the lower part of the learning_linux file we enter the following command:
+
+`tail learning_linux`
+
+The output of this command is shown in the image below:
+
+![tail](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89a613f5-a33b-4e16-ac58-517af1d9ddfc)
+
+
+## 19. diff Command
+
+This command compares the contents of two files line by line and it displays the parts that do not match. To implement this, we proceed to compare the contents of the DevOps file and the learning_linux file:
+
+`diff DevOps learning_linux`
+
+The command outputs the parts of the two files that do not match:
+
+![diff](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b7113bee-ec8f-4bbe-ab79-6c105f0491a8)
+
+
+## 20. tar Command
+
+We can use this command to archive multiple files into a TAR file. For instance if we want to archive the DevOps and the learning_linux files,  in to archive file named combined_archive, we simply enter the command below:
+
+`tar -cvf combined_archive DevOps learning_linux`
+
+The corresponding output should look like the image shown below:
+
+![tar](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cde6d822-dab3-4e2a-8e84-1ba36a70c8fa)
 
 
