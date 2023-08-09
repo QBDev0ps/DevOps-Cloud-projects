@@ -411,4 +411,51 @@ The image of the output shows the entered sentence displayed via the terminal:
 
 ## 32. zip, unzip Commands
 
+The zip command can be used to compress a file into a zip file. This is useful for archiving and reducing disk usage. To utilize it we simply enter the command,folled by the name of the zip file to be created and subsequently the name of the fie to be compressed. So for instance to comprees the DevOps file into a zip file called DevOps_archive, we enter the following command:
+
+`zip DevOps_archive DevOps`
+
+The output shows that the DevOps file was compressed by 28% and by running the `ls` command, we can see that the DevOps_archive.zip file has been created: 
+
+![zip](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75488b88-83ca-4b01-99c8-25128661998b)
+
+To unzip a zip file we will need to enter the unzip command followed by the name of the zip file to be unzipped. So to unzip DevOps_archive we will enter the following command:
+
+`unzip DevOps_archive`
+
+The output is as shown in the image below confirming the DevOPs file has been restored to it's original form:
+
+![unzip](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6aae21ee-edc2-4164-b384-478cc7f3c39b)
+
+
+## 33. hostname Command
+
+This is used to know the system's hostname. To use the command we can simply enter:
+
+`hostname` 
+
+As shown the image below the comand can be entered without any flags or with some flags to extend functionality. `hostname -i` shows the system's IP address, `hostname -a display's the hostanme alias while `hostname -A` displays the system's Fully Qualified Domain Name (FQDN):
+
+![hostname](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b99f5748-6e1a-467d-8a75-cf2924642d26)
+
+
+## 34. useradd, userdel Commands
+
+useradd is used to create a new user Account and only those with Admin rights can run it. To use it, we type in the `useradd` command along with the name of the new user account and then we type the `passwd` command along with the name of the user account. So in our instance to create a user account named Abdul1, we enter the following commands:
+
+`useradd Abdul11
+
+`passwd Abdul1
+
+The system prompts us to input the password once and then asks us to reconfirm it as shown in the output image below.
+
+![useradd and userdel](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/700726dc-ffda-4755-8e38-aaf6dc91d903)
+
+as can be seen in the above image, Userdel is used to delete a user account. We simply enter the command along with the name of the user account. In our instance, we entered the following command to delete the user account named Abdul1:
+
+`userdel Abdul1`
+
+
+## 35. 
+
 
