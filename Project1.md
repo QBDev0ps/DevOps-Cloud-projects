@@ -451,11 +451,13 @@ The system prompts us to input the password once and then asks us to reconfirm i
 
 ![useradd and userdel](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/700726dc-ffda-4755-8e38-aaf6dc91d903)
 
-as can be seen in the above image, Userdel is used to delete a user account. We simply enter the command along with the name of the user account. In our instance, we entered the following command to delete the user account named Abdul1:
+As can be seen in the above image, userdel is used to delete a user account. We simply enter the command along with the name of the user account. In our instance, we entered the following command to delete the user account named Abdul1:
 
 `userdel Abdul1`
 
 
-## 35. 
+## 35. apt-get Command
+
+This command is used for handling Advanced Package Tool Libraries in Linux. It lets us retrieve information and bundles from authenticated sources to manage, update, remove and install software and their dependencies. Using this command requires Admin privileges.
 
 
