@@ -537,7 +537,7 @@ The ps (process status) command produces a snapshot of all running processes in 
 
 ![ps](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/23c918f1-da01-4ee3-b033-28691a540cc1)
 
-The ps command has some acceptable flags or options that can be used to extend its functionality:
+## The ps command has some acceptable flags or options that can be used to extend its functionality:
 
 When we enter `ps -T` it displays all processes associated with the current shell session:
 
