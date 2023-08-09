@@ -326,8 +326,89 @@ This command is what we use to display all running processes along with their st
 
 ![jobs 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f637e1f8-594b-42cc-8693-b6c7e1329566)
 
+
 ## 24. kill Command
 
 We use this command to terminate an unresponsive program. However, to kill a program, it is essential to know its Process Identification Number (PID). You can detect this by entering the either the `ps ux` command or the `jobs -l` command. The kill command can also be used with signals. We can enter `kill SIGKILL PID` to force a program to stop and lose unsaved progress. However, entering `kill SIGTERM PID` stops a program but gives it time to save its progress. The system uses the SIGTERM signal by default if you enter the kill command without specifying a signal. The image below shows how we obtained the PID of the `apt upgrade` process and we used the command `kill 19682` to terminate this process:
 
 ![kill](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4bc2a518-1a52-4843-8e65-7f037bb1cb5f)
+
+
+## 25. ping Command
+
+This is the command that we enter to troubleshoot network connectivity issues and check whether a network or server is reachable. To use it, we simply type it along with the destination server hostname or IP address. So to check the availability of google.com we type the following command:
+
+`ping google.com`
+
+As shown in the image below, the command connects us to google.com and also shows useful information such as response time. We exit the process with ctrl+c: 
+
+![ping](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/20949109-38fe-44c9-9377-3aa0df0f5e3a)
+
+
+## 26. wget Command
+
+This is used to download files from the internet. It can download files recursively and also in the background without hindering other running processes. We can implement it by entering the command followed by the download URL. For instance to download the lates version of WordPress, we enter the following command:
+
+`wget https://wordpress.org/latest.zip`
+
+In the output below, we can see that the system connects to the WordPress website via the specified URL and downloads the file 'latest.zip.1':
+
+![wget](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/822f0585-2896-490a-a438-3cbd74188219)
+
+
+## 27. uname Command
+
+This prints detailed information about our Linux system and hardware. It can be used in combination with flags to extend functionality. Entering `uname -a` prints all system information, entering `uname -s` prints the kernel name and entering `uname -n` prints the node's hostname:
+
+![uname](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/901885cf-9430-4e82-a80c-1f379e671c00)
+
+
+## 28. top Command
+
+This displays all the running processes and a dynamic real-time view of the current system. It sums up resource utilization from CPU to Memory usage. we can implement this by simply entering the command: 
+
+`top`
+
+The output is shown in the image below. ctrl+c is used to exit the command:
+
+![top](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f3c2a115-8163-471e-889b-e4779f85e9f8)
+
+
+## 29. history Command
+
+This lists up to 500 previously executed commands allowing us to reuse them without necessarily re-entering them. It is implemented by simply entering the command:
+
+`history`
+
+The output below shows the previously entered commands:
+
+![history](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c16b7b86-914d-406c-9ab2-3c632670379d)
+
+
+## 30. man Command
+
+This command displays the user manual for any command or utility that can be run on the terminal The user manual includes information like name, description and options for each command. The user manual also consists of 9 sections for each command. To implement, we shall use the command to show the user manual for the ls commannd, and also to show section 2 of the uname command by entering the following: 
+
+`man ls`   `man 2 uname`
+
+The first image below shows the output of man for the ls command. While the second image shows how specifying 2 in the command entry allowed the output to show us section 2 of the uname command:
+
+![man1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/845897d7-0df1-4251-a369-843a92429d29)
+
+![man2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/06c9f5f1-7f84-4610-820e-86c972d6c8d2)
+
+
+## 31. echo Command
+
+We can use this to display a text or string on the CLI. It basically asks the system to return what we tell it to. We can use it by simply typing the command folled by the text or string we want displayed:
+
+`echo My name is Abdul-Quadri Bello`
+
+The image of the output shows the entered sentence displayed via the terminal:
+
+![echo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8aafdc44-d59a-40b9-adfb-6d5b4621dba3)
+
+
+## 32. zip, unzip Commands
+
+
