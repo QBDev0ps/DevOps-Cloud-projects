@@ -509,6 +509,52 @@ The image below shows the outputs for alias and unalais when implemented:
 As seen in the image after the suceesful creation of the alias 'listing', it had the same use and functionality as the ls command. In the same vein after running the unalias command on 'listing', it lost the functionality accordingly and the system could no longer recognise it as an alias or as a command.
 
 
-## 38. 
+## 38. su Command
+
+The switch user command allows us to run a program as a different user. It changes the administrative account during the current logged in session. It is a very useful command as it lets us switch to the Admin or Root user temporarily so that we can carry out administrative functions. Executing it will require us to enter the password of the user account we are switching to. It can be implemented by simply entering `su` which will inform the system to switch to the root user and send a prompt for password entry. It can aslo be implemented by entering su along with the username of the account we are switching to. For instance to switch from the root user to vboxuser, we enter the following command:
+
+`su vboxuser`
+
+And as shown in the image below, we switch back to the root user by entering `su` and inputting the appropriate password:
+
+![su](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b3f087c-c7dc-424a-b551-a3e9be5dfac6)
+
+
+## 39. htop Command
+
+This is an interactive program that monitors system resources and server processes in real time. The command can be used by simply entering `htop`. We also note that this command can be used with flags or options that provide added functionality and improvements in comparison to the `top` command. 
+
+`-d` shows the delay between updates in tenths of seconds. `-C` activates the monocrome mode and `-h` displays the help message and exit,
+
+The output when we enter the `htop` command is shown below:
+
+![htop](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/72a30431-a087-4ace-b1a3-6f6c8716aacb)
+
+
+## 40. ps Command
+
+The ps (process status) command produces a snapshot of all running processes in the system. To implement it we simply enter `ps` as shown in the image below. Executing this command without a flag or an option will list all the running processes in the shell along with their Process ID (PID), the Type of Terminal (TTY), the running time (TIME), and the command that launched the process (CMD). 
+
+![ps](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/23c918f1-da01-4ee3-b033-28691a540cc1)
+
+The ps command has some acceptable flags or options that can be used to extend its functionality:
+
+When we enter `ps -T` it displays all processes associated with the current shell session:
+
+![ps-t](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5bca676f-815a-41f4-b99a-b53882b1dad2)
+
+When we enter `ps -u` vboxuser it lists all processes associated with the user 'vboxuser' specifically:
+
+![ps-u](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e282b48b-302c-4718-8796-423e704f5163)
+
+When we execute `ps -e` it shows all the running processes:
+
+![ps-e](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9f931807-9734-49e7-a83a-4a03cb1bfdef)
+
+
+
+## This brings us to the conclusion of this project. Thank you!
+
+
 
 
