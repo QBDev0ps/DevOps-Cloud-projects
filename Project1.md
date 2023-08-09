@@ -321,5 +321,13 @@ By entering the `ls -ltr` command, can view the output shown in the image below.
 
 ## 23. jobs Command
 
+This command is what we use to display all running processes along with their statuses. To implement this command and see how it works, we initiate a process or job by running the `sudo apt update` command to update the package lists on the system. Next we pause this process and send it to the background with control Z. At this point, anybody approaching the terminal freshly is oblivious to that fact that there is a process/job running in the background. They can however do a check to ascertain if there is any running process with the `jobs` command. As shown in the image below, the command reveals the process in the background and its current status. Some flags can also be used with the command to extend functionality. 
+`-l` lists process IDs along with their status information, `-p` lists status IDs only and `-n` lists jobs whose status has changed since the last notification.
 
+![jobs 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f637e1f8-594b-42cc-8693-b6c7e1329566)
 
+## 24. kill Command
+
+We use this command to terminate an unresponsive program. However, to kill a program, it is essential to know its Process Identification Number (PID). You can detect this by entering the either the `ps ux` command or the `jobs -l` command. The kill command can also be used with signals. We can enter `kill SIGKILL PID` to force a program to stop and lose unsaved progress. However, entering `kill SIGTERM PID` stops a program but gives it time to save its progress. The system uses the SIGTERM signal by default if you enter the kill command without specifying a signal. The image below shows how we obtained the PID of the `apt upgrade` process and we used the command `kill 19682` to terminate this process:
+
+![kill](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4bc2a518-1a52-4843-8e65-7f037bb1cb5f)
