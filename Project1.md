@@ -458,6 +458,57 @@ As can be seen in the above image, userdel is used to delete a user account. We 
 
 ## 35. apt-get Command
 
-This command is used for handling Advanced Package Tool Libraries in Linux. It lets us retrieve information and bundles from authenticated sources to manage, update, remove and install software and their dependencies. Using this command requires Admin privileges.
+This is a command line interface tool used for handling Advanced Package Tool Libraries in Linux. Its main task is to retrieve the information and packages from the authenticated sources for installation, upgrade, and removal of packages along with their dependencies. Using this command requires Admin privileges. The command can be used with different options as shown in the image below. The `apt-get update` command updates the package lists for available software packages from the configured repositories. `apt-get upgrade` installs the latest versions of the packages currently installed on the user’s system. And the `apt-get check` command  is used to update the package cache and check for broken dependencies.
+
+![apt-get](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/94567c9a-c2c5-4ff5-83bb-8a00b36e6cec)
+
+
+## 36. nano, vi, jed Commands
+
+These commands can allow us to edit and manage files via a text editor. 
+
+The nano command denotes keywords and can work with most languages. To use it, we will need to enter the command followed by the name of the file to be edited. For instance to open the learning_linux file with the nano command,  we simply enter the following:
+
+`nano learning_linux`
+
+The output is shown in the image below: 
+
+![nano](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a1137e0b-7d99-4e2a-947a-fe56cd48da83)
+
+The vi command works in two modes. `insert` is used to edit and create a text file while `command` performs operations such as saving, opening, copying and pasting a file. We will implement the command by using it on the learning_linux file:
+
+`vi learning_linux`
+
+The output is shown in the image below: 
+
+![vi](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a9d46b41-508e-43d6-90e5-7f49ba6040e3)
+
+The jed command has a dropdown menu interface that allows users to perform actions without entering keyboard combinationsor commands. We can use it by simply entering the command below:
+
+`jed`
+
+The output is shown in the image below: 
+
+![jed](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9bf93330-5283-4721-b3d2-a7a023f7c017)
+
+
+# 37. alias, unalias Commands
+
+The alias command allows us to create a shortcut with the same functionality as a command, filename or text. It instructs the shell to replace one string with another. It is used by entering the coomand followed by the alias name, followed by the equal to (=) sign and follwed lastly by the command or filename to be replaced. To implement it, we will create an alias called 'listing' for the ls command by entering the following command:
+
+`alias listing = ls`
+
+The unalias command simply deletes an existing alias. It is used by entering the command, followed by the alias name. To unalias 'listing', we will enter the following command:
+
+`unalias listing`
+
+The image below shows the outputs for alias and unalais when implemented:
+
+![alias and unalias](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fa80ac05-39a7-4dbb-b245-61725e01035d)
+
+As seen in the image after the suceesful creation of the alias 'listing', it had the same use and functionality as the ls command. In the same vein after running the unalias command on 'listing', it lost the functionality accordingly and the system could no longer recognise it as an alias or as a command.
+
+
+## 38. 
 
 
