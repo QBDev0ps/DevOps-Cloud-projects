@@ -100,17 +100,17 @@ The output of this command is as shown in the image below:
 
 
 ## 6. cp Command
-We use this to copy files or folders and their contents to another location. It is used by entering the command, follwed by the file name and then the destination directory. For instance, here we want to copy the DevOps file to the Desktop directory, so we enter the following command:
+We use this to copy files or folders and their contents to another location. It is used by entering the command, followed by the file name and then the destination directory. For instance, here we want to copy the DevOps file to the Desktop directory, so we execute the following command:
 
 `cp DevOps Desktop/`
 
-The command does not return any value on the CLI as the operation has already beeen carried out in the background but for confirmation, we can run the `ls` command to list the files in the desktop directory and in the image below, we can see that the DevOps file has been successfully copied.
+The command does not return any value on the standard output or Command Line Interface (CLI) as the operation has already beeen carried out in the background but for confirmation, we can run the `ls` command to list the files in the desktop directory and in the image below, we can see that the DevOps file has been successfully copied.
 
 ![cp](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9ebe1975-5ce4-4c17-83a7-eec3a1fe855a)
 
 
 ## 7. mv Command
-This is the command we will use to move or rename files.  We can use it by entering the command, followed by the filename and then the destination directory. Here we want to move the DevOps2 folder to the Desktop folder, so we enter the following command:
+This is the command we will use to move or rename files.  We can use it by entering the command, followed by the filename and then the destination directory. Here we want to move the DevOps2 folder to the Desktop folder, so we execute the following command:
 
 `mv DevOps2 Desktop/`
 
@@ -190,7 +190,7 @@ The output is shown below:
 
 ## 11. touch Command
 
-This creates an empty text editor file. We will implement this command by creating a file named DevOps. This is done by entering the following command:
+This creates an empty text editor file. We will implement this command by creating a file named DevOps. This is done by executing the following command:
 
 `touch DevOps`
 
@@ -215,7 +215,7 @@ We can use this to search for and show the location of files within a specific d
 
 `find /home -name DevOps`
 
-The output is returned on the CLi and the path for the DevOps file is shown:
+The output is returned on the standard output or CLI and the path for the DevOps file is shown:
 
 ![find](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/81d81124-c8a9-4f06-ad0f-a380917f3e77)
 
@@ -277,7 +277,7 @@ The output of this command is shown in the image below:
 
 ## 19. diff Command
 
-This command compares the contents of two files line by line and it displays the parts that do not match. To implement this, we proceed to compare the contents of the DevOps file and the learning_linux file:
+This command compares the contents of two files line by line and it displays the parts that do not match. To implement this, we proceed to compare the contents of the DevOps file and the learning_linux file by executing the following command:
 
 `diff DevOps learning_linux`
 
@@ -288,7 +288,7 @@ The command outputs the parts of the two files that do not match:
 
 ## 20. tar Command
 
-We can use this command to archive multiple files into a TAR file. For instance if we want to archive the DevOps and the learning_linux files,  in to archive file named combined_archive, we simply enter the command below:
+We can use this command to archive multiple files into a TAR file. For instance if we want to archive the DevOps and the learning_linux files into an archive file named combined_archive, we simply execute the command below:
 
 `tar -cvf combined_archive DevOps learning_linux`
 
@@ -321,7 +321,7 @@ By entering the `ls -ltr` command, can view the output shown in the image below.
 
 ## 23. jobs Command
 
-This command is what we use to display all running processes along with their statuses. To implement this command and see how it works, we initiate a process or job by running the `sudo apt update` command to update the package lists on the system. Next we pause this process and send it to the background with control Z. At this point, anybody approaching the terminal freshly is oblivious to that fact that there is a process/job running in the background. They can however do a check to ascertain if there is any running process with the `jobs` command. As shown in the image below, the command reveals the process in the background and its current status. Some flags can also be used with the command to extend functionality. 
+This command is what we use to display all running processes along with their statuses. To implement this command and see how it works, we initiate a process or job by running the `sudo apt update` command to update the package lists on the system. Next we pause this process and send it to the background with ctrl+z. At this point, anybody approaching the terminal freshly is oblivious to that fact that there is a process/job running in the background. They can however do a check to ascertain if there is any running process with the `jobs` command. As shown in the image below, the command reveals the process in the background and its current status. Some flags can also be used with the command to extend functionality. 
 `-l` lists process IDs along with their status information, `-p` lists status IDs only and `-n` lists jobs whose status has changed since the last notification.
 
 ![jobs 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f637e1f8-594b-42cc-8693-b6c7e1329566)
@@ -347,7 +347,7 @@ As shown in the image below, the command connects us to google.com and also show
 
 ## 26. wget Command
 
-This is used to download files from the internet. It can download files recursively and also in the background without hindering other running processes. We can implement it by entering the command followed by the download URL. For instance to download the lates version of WordPress, we enter the following command:
+This is used to download files from the internet. It can download files recursively and also in the background without hindering other running processes. We can implement it by entering the command followed by the download URL. For instance to download the lates version of WordPress, we execute the following command:
 
 `wget https://wordpress.org/latest.zip`
 
@@ -391,7 +391,7 @@ This command displays the user manual for any command or utility that can be run
 
 `man ls`   `man 2 uname`
 
-The first image below shows the output of man for the ls command. While the second image shows how specifying 2 in the command entry allowed the output to show us section 2 of the uname command:
+The first image below shows the output of man for the ls command. While the second image shows how specifying 2 in the command entry allowed the output to show us Section 2 of the uname command:
 
 ![man1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/845897d7-0df1-4251-a369-843a92429d29)
 
@@ -411,7 +411,7 @@ The image of the output shows the entered sentence displayed via the terminal:
 
 ## 32. zip, unzip Commands
 
-The zip command can be used to compress a file into a zip file. This is useful for archiving and reducing disk usage. To utilize it we simply enter the command,folled by the name of the zip file to be created and subsequently the name of the fie to be compressed. So for instance to comprees the DevOps file into a zip file called DevOps_archive, we enter the following command:
+The zip command can be used to compress a file into a zip file. This is useful for archiving and reducing disk usage. To utilize it we simply enter the command, followed by the name of the zip file to be created and subsequently the name of the fie to be compressed. So for instance to compress the DevOps file into a zip file called DevOps_archive, we execute the following command:
 
 `zip DevOps_archive DevOps`
 
@@ -441,11 +441,11 @@ As shown the image below the comand can be entered without any flags or with som
 
 ## 34. useradd, userdel Commands
 
-useradd is used to create a new user Account and only those with Admin rights can run it. To use it, we type in the `useradd` command along with the name of the new user account and then we type the `passwd` command along with the name of the user account. So in our instance to create a user account named Abdul1, we enter the following commands:
+useradd is used to create a new user Account and only those with Admin rights can execute it. To use it, we type in the `useradd` command along with the name of the new user account and then we type the `passwd` command along with the name of the user account. So in our instance to create a user account named Abdul1, we enter the following commands:
 
-`useradd Abdul11
+`useradd Abdul1`
 
-`passwd Abdul1
+`passwd Abdul1`
 
 The system prompts us to input the password once and then asks us to reconfirm it as shown in the output image below.
 
@@ -537,7 +537,7 @@ The ps (process status) command produces a snapshot of all running processes in 
 
 ![ps](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/23c918f1-da01-4ee3-b033-28691a540cc1)
 
-## The ps command has some acceptable flags or options that can be used to extend its functionality:
+The ps command has some acceptable flags or options that can be used to extend its functionality:
 
 When we enter `ps -T` it displays all processes associated with the current shell session:
 
