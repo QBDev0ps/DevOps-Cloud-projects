@@ -140,3 +140,15 @@ Step 8: Next, we are taken to the recommended plan page and here we will click o
 ![recommended plan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/27f4a2f5-2a5a-43eb-a649-742154eaf379)
 
 ### To create a new repository, we carry out the following steps:
+
+Step 1: We click on the plus sign (+) at the top right corner of our github account. A dropdown menu box appears and we select New repository.
+
+![plus sign](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b8fdf5ae-6f7a-4396-9bbc-aadaea9bfd2d)
+
+Step 2: We fill out the form by entering a unique and previously unused name for our repository. We enter a description and then we check the box to add a README.md file. And then we leave every other box or button in their default state.
+
+![new repository](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/084013f0-a0ce-4320-adb7-0d569b76e835)
+
+Step 3: We click the green 'Create repository' button at the bottom of the page to create our repository.
+
+![create repository button](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2672317f-6cac-4411-ac17-319f512e2e10)
