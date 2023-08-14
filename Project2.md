@@ -74,6 +74,29 @@ As we can see in the image, the command lists all the branches and identifies th
 
 ![git branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab00b3cf-0275-417a-a47f-80f0504a25d5)
 
+To change back into an existing or old branch, for instance our 'main' branch, we simply execute the following command:
 
+`git checkout main`
 
+We can also merge a branch into another branch. To demonstrate this, we shall merge our branch titled my-new-branch in to our 'main' branch. Please note that we made some changes to 'my-new-branch' by adding a line of text to the index.txt file as shown in the image below:
+
+![index merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/063f54dd-0cf0-4a45-912f-da2720289280)
+
+After adding the new line of text, we add our changed file to the staging environment with `git add .` and after this, we commit the change with `git commit -m "Added another line of text"`. 
+
+To merge the edited index.txt file in 'my-new-branch' into the file in our unedited 'main' branch, we firstly switch to our 'main' branch with `git checkout main`  and then we execute the following command:
+
+`git merge my-new-branch`
+
+The image below shows the output of the merge process described above:
+
+![git merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/21a81f5d-20ae-488e-bedb-20ffb0847358)
+
+Now that we have merged the changes inside 'my-new-branch' into 'main' branch,  we can delete 'my-new-branch'. To execute this, we enter the following command:
+
+`git branch -d my-new-branch`
+
+Subsequently, when we enter `git branch` as shown in the image below, we can see that 'my-new-branch' has been deleted and no longer exists.
+
+![git delete branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/de16ab50-a4b7-4d1f-8b9b-e7309511d25f)
 
