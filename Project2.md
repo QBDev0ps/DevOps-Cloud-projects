@@ -52,3 +52,28 @@ After executing the command above, we now have our files being held in the stagi
 As shown in the output seen in the image below, the commit process was successful. Also we used the -m flag so that we can include a message ("initial commit") to provide some clarity and context about the commit.
 
 ![commit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2d4d8d59-07d7-4965-8d5b-b688acb1beb7)
+
+
+## Working with Branches
+
+Creating a git branch helps us to make a different copy of our source code i.e. a different copy of the main branch. By doing this, we can make edits and changes in our new copy as we please and these changes will remain independent of the original copy of our source code. This is an especially useful collaboration tool for programmers as different team members can create different branches to make changes or work on additional features and then merge all the changes to the main branch when all the work is done.
+
+To make our first git branch which will be named my-new-branch, we execute the following command: 
+
+`git checkout -b my-new-branch`
+
+As shown in the output image below, the -b flag helps us to create and change into our new branch:
+
+![mynewbranch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/973db837-9384-46c6-bb33-4ef7bbba4042)
+
+To see all the branches in our local git repository, we enter the command below:
+
+`git branch`
+
+As we can see in the image, the command lists all the branches and identifies the branch we are currently in with an asterisk symbol.
+
+![git branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab00b3cf-0275-417a-a47f-80f0504a25d5)
+
+
+
+
