@@ -152,3 +152,6 @@ Step 2: We fill out the form by entering a unique and previously unused name for
 Step 3: We click the green 'Create repository' button at the bottom of the page to create our repository.
 
 ![create repository button](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2672317f-6cac-4411-ac17-319f512e2e10)
+
+### Pushing your Local git Repository to your remote github Repository
+
