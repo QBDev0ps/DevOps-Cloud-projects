@@ -78,7 +78,7 @@ To change back into an existing or old branch, for instance our 'main' branch, w
 
 `git checkout main`
 
-We can also merge a branch into another branch. To demonstrate this, we shall merge our branch titled my-new-branch in to our 'main' branch. Please note that we made some changes to 'my-new-branch' by adding a line of text to the index.txt file as shown in the image below:
+We can also merge a branch into another branch. To demonstrate this, we shall merge our branch titled 'my-new-branch' in to our 'main' branch. Please note that we made some changes to 'my-new-branch' by adding a line of text to the index.txt file as shown in the image below:
 
 ![index merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/063f54dd-0cf0-4a45-912f-da2720289280)
 
@@ -99,4 +99,7 @@ Now that we have merged the changes inside 'my-new-branch' into 'main' branch,  
 Subsequently, when we enter `git branch` as shown in the image below, we can see that 'my-new-branch' has been deleted and no longer exists.
 
 ![git delete branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/de16ab50-a4b7-4d1f-8b9b-e7309511d25f)
+
+
+## Collaboration and Remote Repositories
 
