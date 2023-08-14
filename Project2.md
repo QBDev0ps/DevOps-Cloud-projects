@@ -1,1 +1,3 @@
-## GIT Project
+# Documentation for GIT Project
+
+## This project shows 
