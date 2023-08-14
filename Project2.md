@@ -103,3 +103,6 @@ Subsequently, when we enter `git branch` as shown in the image below, we can see
 
 ## Collaboration and Remote Repositories
 
+Github is a web based platform where git repositories are hosted. It enables collaboration between remote web or application development teams as they can work and make changes on different branches of the same code base in the same web based repository.
+
+### To create a Github account, we carry out the following steps:
