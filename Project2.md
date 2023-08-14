@@ -106,3 +106,37 @@ Subsequently, when we enter `git branch` as shown in the image below, we can see
 Github is a web based platform where git repositories are hosted. It enables collaboration between remote web or application development teams as they can work and make changes on different branches of the same code base in the same web based repository.
 
 ### To create a Github account, we carry out the following steps:
+
+Step 1: We navigate to the github.com home page.
+
+![github homepage](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89ac088f-3f80-4e16-86a4-e43524290765)
+
+Step 2: We enter our email, password and username.
+
+![username](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ecf6271a-1e1c-4928-9ea4-5193e01cb3f4)
+
+Step 3: Next, we take the verification quiz to confirm our identity.
+
+![quiz](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/17b2e2f8-1b09-478f-a48a-3263486424c8)
+
+Step 4: After completing the verification quiz, we click on the create account button at the bottom of the page.
+
+![create account](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eee36f5d-44ff-48e4-a78d-ebf457915e37)
+
+Step 5: After clicking on the create account button, a launch code was sent to our registered email address, so we proceed to enter the code in the provided textbox and then we click on the Continue button.
+
+![launch code](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6d148a55-c164-4067-845b-626778823dbc)
+
+Step 6: The next page asks us to choose how many team members we will be working with and to also choose if the user is a student or a teacher. So we choose our preferred options and click on the Continue button.
+
+![team members](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/399aa079-c16f-4c84-84d6-b4759dfebd1a)
+
+Step 7: The next page asks us to choose what specific github feature we are interested in using. So we select our preferred options and click on the Continue button.
+
+![specific feature](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/71220a5d-91d1-4946-ad46-a63b88292cb0)
+
+Step 8: Next, we are taken to the recommended plan page and here we will click on the "Continue for free" button and this creates our Github account.
+
+![recommended plan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/27f4a2f5-2a5a-43eb-a649-742154eaf379)
+
+### To create a new repository, we carry out the following steps:
