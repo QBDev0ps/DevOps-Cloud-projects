@@ -218,10 +218,28 @@ The output of emphasis in Italics and in bold can be seen below:
 
 For ordered lists, we simply enter as in the example below:
 
+![ordered list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4490ab52-02ec-425c-b8fd-12d53a347aec)
+
+As shown below: the output is exactly as entered:
+
 1. First Item
 2. Second Item
 3. Third Item
 
-As shown below: the output is exactly as entered:
+For unordered lists we simply enter as in the example below: 
 
-5. 
+![unordered list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/037f0c71-61e1-4abf-923d-b0796a903bee)
+
+As shown below, the output is exactly as entered:
+
+- Item 1
+- Item 2
+- Item 3
+
+4. Links: To create a hyperlink, we enclose the link text with square brackets followed by the URL enclosed in paranthesis. For instance if we want to create the link that says 'visit google.com', we enter as shown below:
+
+   ![link](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7130dfa9-424b-4407-b094-75a5aa6a16da)
+
+   As shown in the output below, the link has been created:
+
+   [visit google.com](https://www.google.com)
