@@ -33,7 +33,7 @@ It is important to note that we have 3 different environments in Git. We have th
 
 Making a commit constitutes saving changes made to the files in our directory. These changes can be in form of adding, deleting or modifying files. It means a snapshot our repository is staken at the current state when we commit and saved in the .git folder in our working directory.
 
-To make our first commit, we need to first of all create a text file that will be called index.txt inside our working directory. WE do this by executing the following command: 
+To make our first commit, we need to first of all create a text file that will be called index.txt inside our working directory. We do this by executing the following command: 
 
 `touch index.txt`
 
