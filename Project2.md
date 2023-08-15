@@ -211,8 +211,17 @@ The output of the three heading styles can be seen below:
 The output of emphasis in Italics and in bold can be seen below:
 
 *italic* or _italic_
+
 **bold** or __bold__
 
-3. Lists: The markdown syntax can support both ordered and unordered lists
+3. Lists: The markdown syntax can support both ordered and unordered lists.
+
+For ordered lists, we simply enter as in the example below:
+
+1. First Item
+2. Second Item
+3. Third Item
+
+As shown below: the output is exactly as entered:
 
 5. 
