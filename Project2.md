@@ -196,13 +196,23 @@ The markdown syntax is a lightweight markup language that allows us to add forma
 
 1. Headings: To create headings we simply use the hash (#) symbol and a space before the text. The number of hash signs used reflects the level of the heading as shown below:
 
+![headings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e5e7250f-6970-4a8f-bdd4-37bfbe2f9cad)
+
+The output of the three heading styles can be seen below:
+
 # Heading 1
 ## Heading 2
 ### Heading 3
 
-2. Emphasis: We can use asterisk (*) or underscore (_) to place emphasis on text. As shown below, To put a text in Italics we can either put one asterisk before and after the text or we can put one underscore before and after the text. And to put a text in Bold, we can either put two asterisks before and after the text or we can put two underscores before and after the text. 
-   
+2. Emphasis: We can use asterisk (*) or underscore (_) to place emphasis on text. As shown below, To put a text in Italics we can either put one asterisk before and after the text or we can put one underscore before and after the text. And to put a text in Bold, we can either put two asterisks before and after the text or we can put two underscores before and after the text.
+
+![emphasis](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/18d7a633-ada1-404d-8844-f7fb63c63644)
+
+The output of emphasis in Italics and in bold can be seen below:
+
 *italic* or _italic_
 **bold** or __bold__
 
-3. 
+3. Lists: The markdown syntax can support both ordered and unordered lists
+
+5. 
