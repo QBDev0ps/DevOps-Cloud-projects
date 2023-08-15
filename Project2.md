@@ -107,7 +107,7 @@ Github is a web based platform where git repositories are hosted. It enables col
 
 ### To create a Github account, we carry out the following steps:
 
-Step 1: We navigate to the github.com home page.
+Step 1: We navigate to the [github.com](https://www.github.com) home page.
 
 ![github homepage](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89ac088f-3f80-4e16-86a4-e43524290765)
 
