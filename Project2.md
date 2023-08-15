@@ -139,7 +139,9 @@ Step 8: Next, we are taken to the recommended plan page and here we will click o
 
 ![recommended plan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/27f4a2f5-2a5a-43eb-a649-742154eaf379)
 
-### To create a new repository, we carry out the following steps:
+### Creating a New git Repository
+
+To create a new repository, we carry out the following steps:
 
 Step 1: We click on the plus sign (+) at the top right corner of our github account. A dropdown menu box appears and we select New repository.
 
@@ -153,5 +155,34 @@ Step 3: We click the green 'Create repository' button at the bottom of the page 
 
 ![create repository button](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2672317f-6cac-4411-ac17-319f512e2e10)
 
-### Pushing your Local git Repository to your remote github Repository
+### Pushing your Local git Repository to your Remote github Repository
 
+After we have created our github account and our github repository, we can now send a copy of our local repository on the computer to our repository in github. This can be executed by carrying out the following steps:
+
+Step 1: We obtain the remote link for our repository by clicking the green 'Code' button and copying the https link.
+
+![remote link](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6ed03f07-fc2e-464c-b252-2632fe333dce)
+
+Step 2: We add our remote repository to our local repository using the following command:
+
+`git remote add origin https://github.com/Quadri-Bello/DevOps_Repo.git`
+
+![add repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/436e5abd-3f2b-4d6c-8d88-20648f9dc1d5)
+
+Step 3: We push the content in our local repository to our remote repository using the following command:
+
+`git push origin main`
+
+As shown in the output image below, using the command `git push origin` along with our branch name 'main' pushes all the files in our local repository to the main repository. 'origin' in the command makes reference to our remote repository url that was obtained in Step 1 and connected to our local repository in Step 2.
+
+![git push](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3cd25d59-4236-4b30-b3b4-dcedf86590c6)
+
+### Cloning your Remote git Repository
+
+We can also make a local copy of our remote repository inside our local machine. We can do this by executing the following command: 
+
+`git clone https://github.com/Quadri-Bello/DevOps_Repo.git`
+
+As seen below entering the `git clone` command along with the link to our repository downloads our local repository onto our local computer.
+
+![git clone](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/66494618-55ee-4b8a-b575-3567d04329ac)
