@@ -186,3 +186,23 @@ We can also make a local copy of our remote repository inside our local machine.
 As seen below entering the `git clone` command along with the link to our repository downloads our local repository onto our local computer.
 
 ![git clone](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/66494618-55ee-4b8a-b575-3567d04329ac)
+
+
+## Branch Management and Tagging
+
+### Introduction to Markdown Syntax
+
+The markdown syntax is a lightweight markup language that allows us to add formatting elements to our text without needing to use complex HTML or other formatting languages. It allows to format text using using elements like bold and italic styles, creating headers, lists, links etc. Markdown syntax can be used in creating files, documents, posts and web pages. To demonstrate how it works, we shall utilize some of the most commonly used markdown syntax elements below: 
+
+1. Headings: To create headings we simply use the hash (#) symbol and a space before the text. The number of hash signs used reflects the level of the heading as shown below:
+
+# Heading 1
+## Heading 2
+### Heading 3
+
+2. Emphasis: We can use asterisk (*) or underscore (_) to place emphasis on text. As shown below, To put a text in Italics we can either put one asterisk before and after the text or we can put one underscore before and after the text. And to put a text in Bold, we can either put two asterisks before and after the text or we can put two underscores before and after the text. 
+   
+*italic* or _italic_
+**bold** or __bold__
+
+3. 
