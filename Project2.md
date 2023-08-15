@@ -256,7 +256,7 @@ As shown in the output below, the image of the shoe is displayed:
 
 ![code](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9446152f-ead8-4e1c-8a3a-16c40a0de860)
 
-The output below shows how code is formatted in markdown syntax:
+The output below shows how the code is formatted in markdown syntax:
 
 `console.log ('Welcome to Darey.io')`
 
