@@ -236,10 +236,28 @@ As shown below, the output is exactly as entered:
 - Item 2
 - Item 3
 
-4. Links: To create a hyperlink, we enclose the link text with square brackets followed by the URL enclosed in paranthesis. For instance if we want to create the link that says 'visit google.com', we enter as shown below:
+4. Links: To create a hyperlink, we enclose the link text with square [] brackets followed by the URL enclosed in parentheses (). For instance if we want to create the link that says 'visit google.com', we enter as shown below:
 
    ![link](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7130dfa9-424b-4407-b094-75a5aa6a16da)
 
    As shown in the output below, the link has been created:
 
    [visit google.com](https://www.google.com)
+
+5. Images: The markdown syntax can also be used to display images. To display an image, we firstly enter an exclamation mark (!), followed by the image alt text enclosed in square brackets [], and then the image url enclosed in parentheses (). For instance to display the image of a shoe, we enter the following:
+
+![shoe image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/26643c8b-a7af-4757-89dc-c06e792066f1)
+
+As shown in the output below, the image of the shoe is displayed:
+
+![shoe](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d81c35bb-aa1e-4e52-ba9e-bd1a0b192841)
+
+6. Code: To display code or snippets of code in markdown syntax, we need to enter the code and enclose it in back ticks (`). For instance, to enter the code: console.log ('Welcome to Darey.io'), we simply input the following:
+
+![code](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9446152f-ead8-4e1c-8a3a-16c40a0de860)
+
+The output below shows how code is formatted in markdown syntax:
+
+`console.log ('Welcome to Darey.io')`
+
+## This brings us to the conclusion of this project. Thank you!
