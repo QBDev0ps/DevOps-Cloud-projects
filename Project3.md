@@ -1,6 +1,6 @@
 # DOCUMENTATION FOR LAMP STACK IMPLEMENTATION PROJECT
 
-## This project shows the implementation of the LAMP Stack.It covers essential aspects of the LAMP stack implementation such as the process of setting up a LInux Environment, configuring the Apache Web server, managing MySQL databases, and writing PHP code for server side functionality.
+## This project shows the implementation of the LAMP Stack. It covers essential aspects of the LAMP stack implementation such as the process of setting up a LInux Environment, configuring the Apache Web server, managing MySQL databases, and writing PHP code for server side functionality.
 
 ## Pre Installations and Dependencies
 
