@@ -29,3 +29,35 @@ After completing the update process we can now proceed to install the apache web
 `sudo apt install apache2`
 
 ![apache installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/05c63919-b424-479c-b075-377091ff5118)
+
+To verify that the apache2 service is running on our ubuntu server, we enter the following command:
+
+`sudo systemctl status apache2`
+
+![apache status](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9defa108-ca6d-495a-80ba-d837eda3fcd6)
+
+As can be seen in the status image above, apache is fully active and running.
+
+The next step is to open TCP Port 80 on our machine. Port 80 is the defualt port used by web browsers to access web pages. So we implement this by adding a rule to our EC2 configuration to allow http traffic via port 80. The steps are listed below:
+
+1. Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/](https://console.aws.amazon.com/ec2/).
+
+2. From the top navigation bar, select a Region for the security group. Security groups are specific to a Region, so you should select the same Region in which you created your instance.
+
+3. In the navigation pane, choose **Instances**.
+
+4. Select your instance and, in bottom half of the screen, choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+5. For the security group to which you'll add the new rule, choose the security group ID link to open the security group.
+
+6. On the **Inbound rules** tab, choose **Edit inbound rules**.
+
+7. On the **Edit inbound rules** page, do the following:
+
+a. Choose **Add rule**.
+
+b. For ****Type, choose **HTTP**.
+
+c. Under **Source**, leave it at **Custom** and select **0.0.0.0/0** in the space with the magnifying glass.
+
+d. Choose **Save rules** at the bottom right corner of the page
