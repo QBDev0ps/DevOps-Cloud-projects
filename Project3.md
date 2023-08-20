@@ -247,7 +247,7 @@ The ouput from the browser is as shown in the image below:
 
 ## STEP 5: Enable PHP on the Website
 
-With the default **DirectoryIndex** settings in Apache, the `index.html` file will always take precedence over the `index.php` file. We however need to modify this behaviour so that `index.php` can become the default landing page. To implement this, we will need to use `vim` to edit the **/etc/apache2/mods-enabled/dir.conf** file and change the order in which the **index.php** file is listed within the **DirectoryIndex** directive:
+With the default **DirectoryIndex** settings in Apache, the `index.html` file will always take precedence over the `index.php` file. We however need to modify this behaviour so that `index.php` can become the default landing page. To implement this, we will need to use **`vim`** (it is the same thing as **`vi`**) to edit the **/etc/apache2/mods-enabled/dir.conf** file and change the order in which the **index.php** file is listed within the **DirectoryIndex** directive:
 
 **`$ sudo vim /etc/apache2/mods-enabled/dir.conf`**
 
@@ -268,7 +268,9 @@ After saving and closing the file we use the command below to reload the Apache 
 
 **`$ sudo systemctl reload apache2`**
 
-The next step is to create a PHP test script to confirm that PHP is correctly installed and configured on the server. To execute this, we create a file named index.php in the projectlamp web root folder.
+The next step is to create a PHP test script to confirm that PHP is correctly installed and configured on the server. To execute this, we create a file named `index.php` in the projectlamp web root folder.
+
+`$ vim /var/www/projectlamp/index.php`
 
 This will open a blank file. We then add the following PHP code inside the file:
 
@@ -278,6 +280,8 @@ phpinfo();
 ```
 
 Afterwards, we save and close the file and then we reload the web page. The output seen is as shown in the image below:
+
+![php webpage](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ef419b6b-a034-4f03-b237-4e192a75741d)
 
 The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
 
