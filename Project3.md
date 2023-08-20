@@ -236,3 +236,12 @@ Next, to test that our Virtual Host works as expected, we create an index.html f
 ```
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
 ```
+Then the next step is to go to our browser to open our website URL via our public IP address (syntax is: **http://<Public-IP-Address>:80**) or via our server's DNS name (syntax is: **http://<Public-DNS-Name>:80**) In our own use case, we enter the following url in our browser:
+
+**`http://16.170.229.201:80`**
+
+The ouput from the browser is as shown in the image below:
+
+![website working](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/22cb1241-cf8a-40d7-8329-fe8f05798969)
+
+
