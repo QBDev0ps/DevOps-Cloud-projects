@@ -166,3 +166,31 @@ At this point, we have successfully installed all four components of the LAMP St
 ☑️ MySQL Database Management System
 
 ☑️ PHP
+
+
+## STEP 3: Creating a Virtual Host for your Website using Apache
+
+Apache virtual host enables us to have multiple websites on a single machine. To test our LAMP setup with a PHP script, we will need to create a virtual host to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling `projectlamp`.
+
+To create the directory for `projectlamp`, we execute the following command:
+
+`$ sudo mkdir /var/www/projectlamp`
+
+Next we execute the command below to assign ownership of the created directory by using the `$USER environment variable which references your current system's user:
+
+`$ sudo chown -R $USER:$USER /var/www/projectlamp`
+
+Then, using the vi editor, we create and open a new configuration file in Apache’s `sites-available` directory by executing the following command:
+
+`$ sudo vi /etc/apache2/sites-available/projectlamp.conf` 
+
+The above command creates a blank file. then we enter `i` to enter insert mode and we paste the following configuration:
+
+`<VirtualHost *:80>
+    ServerName projectlamp
+    ServerAlias www.projectlamp 
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/projectlamp
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>`
