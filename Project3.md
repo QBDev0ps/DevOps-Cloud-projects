@@ -160,6 +160,9 @@ We can execute the command below to confirm our version of PHP:
 At this point, we have successfully installed all four components of the LAMP Stack:
 
 ✔️ Ubuntu Linux Operating System
+
 ✔️ Apache HTTP Server
+
 ✔️ MySQL Database Management System
+
 ✔️ PHP
