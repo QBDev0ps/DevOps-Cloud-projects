@@ -14,7 +14,7 @@ In order to execute this project successfully we need to first of all complete t
 
 4. Establish connection with your EC2 instance: Connect to your EC2 instance via your SSH client by following [these instructions.](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html)
 
-*After completing the necessary prerequisites, we proceed to implement the following steps to fully implement our LAMP Stack and deploy it in AWS Cloud:*
+**After completing the necessary prerequisites, we proceed to implement the following steps to fully implement our LAMP Stack and deploy it in AWS Cloud:**
 
 
 ## STEP 1: Installing Apache and Updating the Firewall
@@ -75,7 +75,7 @@ To verify that the apache2 webpage is accessible locally from our ubuntu machine
 
 In the output image above, we can see the [HTML](https://en.wikipedia.org/wiki/HTML) code of our Apache Service web page displayed on our terminal.
 
-Next we need to test to ensure that our web server is responding to requests from the internet. To implement this, we open a web browser and in the adress bar, we enter the url using this syntax `http://<PUBLIC-IP-ADDRESS>:80`. We can retrieve our public IP address by entering the following command:
+Next we need to test to ensure that our web server is responding to requests from the internet. To implement this, we open a web browser and in the adress bar, we enter the url using this syntax **`http://<PUBLIC-IP-ADDRESS>:80`**. We can retrieve our public IP address by entering the following command:
 
 **`$ curl -s http://169.254.169.254/latest/meta-data/public-ipv4`**
 
@@ -104,7 +104,7 @@ After the installation is complete, we log into the MySQL console by executing t
 
 ![log into mysql](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cf8bdd85-5bd0-4917-9d7a-5bfde21ce9ea)
 
-Next, we need to run a script that is preinstalled with MySQL to help secure access to our database system. However, before running the script, we need to set a password (which will be defined as `PassWord.1`) for the root user. We implement this by entering the command below:
+Next, we need to run a script that is preinstalled with MySQL to help secure access to our database system. However, before running the script, we need to set a password (which will be defined as **`PassWord.1`**) for the root user. We implement this by entering the command below:
 
 **`mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`**
 
@@ -118,7 +118,7 @@ Next we run the MySQL interactive script by executing the following command:
 
 **`$ sudo mysql_secure_installation`**
 
-As shown in the output image below, we use the `VALIDATE PASSWORD PLUGIN` to set up a strong password for MySQl root user and we follow all the prompts to choose our preferences.
+As shown in the output image below, we use the **`VALIDATE PASSWORD PLUGIN`** to set up a strong password for MySQl root user and we follow all the prompts to choose our preferences.
 
 ![mysql script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/971685c5-5b76-48fe-a1d9-106749e7ec04)
 
@@ -137,7 +137,7 @@ As shown in the above image, to exit the MySQL console, we simply execute the co
 
 ## STEP 3: Installing PHP
 
-After installing Apache Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LAMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. Apart from the `php` package, we will need to install two additional packages namely:
+After installing Apache Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LAMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. Apart from the **`php`** package, we will need to install two additional packages namely:
 
 a. **`php-mysql`**: This enables communication between PHP and MySQL based databases.
 
@@ -245,3 +245,4 @@ The ouput from the browser is as shown in the image below:
 ![website working](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/22cb1241-cf8a-40d7-8329-fe8f05798969)
 
 
+## STEP 5: Enable PHP on the Website
