@@ -195,15 +195,36 @@ The above command creates a blank file. Then we press `i` on the keybord to ente
  &ensp; `CustomLog ${APACHE_LOG_DIR}/access.log combined`<br />
 `</VirtualHost>`<br />
 
-To save and close the file, we use the folowing steps:
-a. Press `esc` on the keyboard.
-b. Type `:` 
-c. Type `wq`
-d. Press `Enter`
+![sudo vi configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1311a6a9-7508-4c9d-8237-a995eeb6da0a)
+
+<br />To save and close the file, we use the folowing steps:<br />
+a. Press `esc` on the keyboard.<br />
+b. Type `:` <br />
+c. Type `wq`<br />
+d. Press `Enter`<br />
 
 To show the new file in the sites available directory, we execute the following command:
 
-$ sudo ls /etc/apache2/sites-available
+`$ sudo ls /etc/apache2/sites-available`
 
 The output of the above command is as shown in the image below:
 
+![sudo ls sites available](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/62b27627-377e-4adf-a8c8-83c3279fc887)
+
+As it stands, we have implemented a VirtualHost configuration that directs Apache to to use /var/www/projectlamp as its web root directory when serving projectlamp.
+
+We can now execute **a2ensite** command to enable the new virtual host:
+
+`$ sudo a2ensite projectlamp`
+
+Then we use **a2dessite** command to disable apache's default website:
+
+`$ sudo a2dissite 000-default`
+
+Next, we run the command below to ensure that there are no syntax errors in the configuration file:
+
+`$ sudo apache2ctl configtest`
+
+And afterwards, using the command below, we reload Apache so that the changes can take effect:
+
+`$ sudo systemctl reload apache2`
