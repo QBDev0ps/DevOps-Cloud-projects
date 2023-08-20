@@ -249,7 +249,7 @@ The ouput from the browser is as shown in the image below:
 
 With the default **DirectoryIndex** settings in Apache, the `index.html` file will always take precedence over the `index.php` file. We however need to modify this behaviour so that `index.php` can become the default landing page. To implement this, we will need to use `vim` to edit the **/etc/apache2/mods-enabled/dir.conf** file and change the order in which the **index.php** file is listed within the **DirectoryIndex** directive:
 
-`$ sudo vim /etc/apache2/mods-enabled/dir.conf`
+**`$ sudo vim /etc/apache2/mods-enabled/dir.conf`**
 
 Next, we execute the change as shown below:
 
@@ -261,4 +261,24 @@ Next, we execute the change as shown below:
         DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
 ```
-**(Please note that the system will not recongnise lines 1-3 in the code above as they have been commented out with the `#` sign)**
+
+**(Please note that lines 1-3 in the code above will not be recognised as they have been commented out with the `#` sign)**
+
+After saving and closing the file we use the command below to reload the Apache service to enable the changes take effect:
+
+**`$ sudo systemctl reload apache2`**
+
+The next step is to create a PHP test script to confirm that PHP is correctly installed and configured on the server. To execute this, we create a file named index.php in the projectlamp web root folder.
+
+This will open a blank file. We then add the following PHP code inside the file:
+
+```
+<?php
+phpinfo();
+```
+
+Afterwards, we save and close the file and then we reload the web page. The output seen is as shown in the image below:
+
+The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
+
+**`$ sudo rm /var/www/projectlamp/index.php`**
