@@ -184,7 +184,7 @@ Then, using the vi editor, we create and open a new configuration file in Apache
 
 `$ sudo vi /etc/apache2/sites-available/projectlamp.conf` 
 
-The above command creates a blank file. then we enter `i` to enter insert mode and we paste the following configuration:
+The above command creates a blank file. Then we press `i` on the keybord to enter insert mode and we paste the following configuration:
 
 <br />`<VirtualHost *:80>`<br />
 &ensp; `ServerName projectlamp`<br />
@@ -194,3 +194,16 @@ The above command creates a blank file. then we enter `i` to enter insert mode a
  &ensp; `ErrorLog ${APACHE_LOG_DIR}/error.log`<br />
  &ensp; `CustomLog ${APACHE_LOG_DIR}/access.log combined`<br />
 `</VirtualHost>`<br />
+
+To save and close the file, we use the folowing steps:
+a. Press `esc` on the keyboard.
+b. Type `:` 
+c. Type `wq`
+d. Press `Enter`
+
+To show the new file in the sites available directory, we execute the following command:
+
+$ sudo ls /etc/apache2/sites-available
+
+The output of the above command is as shown in the image below:
+
