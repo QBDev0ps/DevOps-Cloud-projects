@@ -16,6 +16,7 @@ In order to execute this project successfully we need to first of all complete t
 
 *After completing the necessary prerequisites, we proceed to implement the following steps to fully implement our LAMP Stack and deploy it in AWS Cloud:*
 
+
 ## STEP 1: Installing Apache and Updating the Firewall
 
 The apache web server is the most popular and widely used web server in the world. It is fast, reliable, secure, and can be customized to meet the needs of different environments with the use of modules and extensions. However, before we install apache we need to firstly update our ubuntu web server by running the command below: 
@@ -68,12 +69,26 @@ Selecting the **Source** setting as **0.0.0.0/0** means we can access our server
 
 To verify that the apache2 webpage is accessible locally from our ubuntu machine, we run the following command:
 
-`$ curl http://localhost:80`   or   `$ curl http://127.0.0.1:80
+`$ curl http://localhost:80`   or   `$ curl http://127.0.0.1:80`
 
 ![verify apache access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3e1685db-4835-4ec1-b961-546ac37976d9)
 
-In the output image above, we can see the code of our Apache Service web page displayed on our terminal.
+In the output image above, we can see the [HTML](https://en.wikipedia.org/wiki/HTML) code of our Apache Service web page displayed on our terminal.
 
-Next we need to test to ensure that our web server is responding to requests from the internet. we open a web page and enter the following url in the adress bar:
+Next we need to test to ensure that our web server is responding to requests from the internet. To implement this, we open a web browser and in the adress bar, we enter the url using this syntax `http://<PUBLIC-IP-ADDRESS>:80`. We can retrieve our public IP address by entering the following command:
 
+`$ curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+
+![public IP](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3cddd5d8-4011-4a1b-ba9c-e9acfff2d02d)
+
+Now that we have the public IP address, we proceed to enter the following url in our browser:
+
+`http://16.170.229.201:80`
+
+![apache ubuntu web page](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cb19a8a7-d441-4a77-8147-4ff11db1eb37)
+
+As shown in the output image above, we can see the apache ubuntu default web page which tells us that our web server is now properly installed and accessible through our firewall.
+
+
+## STEP 2: Installing MySQL
 
