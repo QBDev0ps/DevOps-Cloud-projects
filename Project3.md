@@ -94,7 +94,7 @@ As shown in the output image above, we can see the apache ubuntu default web pag
 
 After completing the setup of our Web Server, we need to install a Database Management System to be able to store and manage data for our webpage. MySQL is an open-source Relational Database Management System (RDBMS) that enables users to store, manage, and retrieve structured data efficiently. It is widely used for various applications, from small-scale projects to large-scale websites and enterprise-level solutions. To run this installation, we enter the following command:
 
-`<span style="color: red;">$ sudo apt install mysql-server -y</span>`
+`$ sudo apt install mysql-server -y`
 
 ![mysql installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7d431123-ba91-4309-8bf8-189778e6062c)
 
@@ -104,10 +104,35 @@ After the installation is complete, we log into the MySQL console by executing t
 
 ![log into mysql](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cf8bdd85-5bd0-4917-9d7a-5bfde21ce9ea)
 
-Next, we need to run a script that is preinstalled with MySQL to help secure access to our database system. However, before running the script, we need to set a password (which will be defined as `Password.1`) for the root user. We implement this by entering the command below:
+Next, we need to run a script that is preinstalled with MySQL to help secure access to our database system. However, before running the script, we need to set a password (which will be defined as `PassWord.1`) for the root user. We implement this by entering the command below:
 
 `mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
 
 Then we exit with the following command:
 
 `mysql> exit`
+
+![alter sql user password and exit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/62d41aaf-5e05-42ad-a3e2-b1b2f06e5cba)
+
+Next we run the MySQL interactive script by executing the following command:
+
+`$ sudo mysql_secure_installation`
+
+As shown in the output image below, we use the `VALIDATE PASSWORD PLUGIN` to set up a strong password for MySQl root user and we follow all the prompts to choose our preferences.
+
+![mysql script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/971685c5-5b76-48fe-a1d9-106749e7ec04)
+
+Next, with the following command, we confirm our abilty to log into the MySQl console with our newly created root password:
+
+`$ sudo mysql -p`
+
+This prompts us for the root password and as we can see in the output image below, we are able to log in. 
+
+![test mysql password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8a4f751f-c30e-4967-9805-29271d2d310c)
+
+As shown in the above image, to exit the MySQL console, we simply execute the command below:
+
+`mysql> exit`
+
+
+## STEP 3: Installing PHP
