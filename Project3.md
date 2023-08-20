@@ -14,6 +14,18 @@ In order to execute this project successfully we need to first of all complete t
 
 4. Establish connection with your EC2 instance: Connect to your EC2 instance via your SSH client by following [these instructions.](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html)
 
-*After completing the necessary prerequisites, we proceed to execute the following steps to fully implement our LAMP Stack and deploy it in AWS Cloud:*
+*After completing the necessary prerequisites, we proceed to implement the following steps to fully implement our LAMP Stack and deploy it in AWS Cloud:*
 
 ## STEP 1: Installing Apache and Updating the Firewall
+
+The apache web server is the most popular and widely used web server in the world. It is fast, reliable, secure, and can be customized to meet the needs of different environments with the use of modules and extensions. However, before we install apache we need to firstly update our ubuntu web server by running the command below: 
+
+`sudo apt update`
+
+![sudo apt update](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/84b1b3b6-bb08-454b-adf9-3df0ad2ae3f0)
+
+After completing the update process we can now proceed to install the apache web server, To do this, we execute the following command:
+
+`sudo apt install apache2`
+
+![apache installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/05c63919-b424-479c-b075-377091ff5118)
