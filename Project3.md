@@ -264,6 +264,8 @@ Next, we execute the change as shown below:
 
 **(Please note that lines 1-3 in the code above will not be recognised as they have been commented out with the `#` sign)**
 
+![vim index php](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d7bdfe70-9093-4d8d-a552-5083b7dc663b)
+
 After saving and closing the file we use the command below to reload the Apache service to enable the changes take effect:
 
 **`$ sudo systemctl reload apache2`**
@@ -286,3 +288,6 @@ Afterwards, we save and close the file and then we reload the web page. The outp
 The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
 
 **`$ sudo rm /var/www/projectlamp/index.php`**
+
+
+## This brings us to the conclusion of this project. Thank you!
