@@ -170,7 +170,7 @@ At this point, we have successfully installed all four components of the LAMP St
 
 ## STEP 4: Creating a Virtual Host for your Website using Apache
 
-Apache virtual host enables us to have multiple websites on a single machine. To test our LAMP setup with a PHP script, we will need to create a virtual host to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling `projectlamp`.
+Apache virtual host enables us to have multiple websites on a single machine. To test our LAMP setup with a PHP script, we will need to create a virtual host to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling **`projectlamp`**.
 
 To create the directory for **`projectlamp`**, we execute the following command:
 
