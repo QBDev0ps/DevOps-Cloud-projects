@@ -136,3 +136,26 @@ As shown in the above image, to exit the MySQL console, we simply execute the co
 
 
 ## STEP 3: Installing PHP
+
+After installing Apache Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LAMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. Apart from the `php` package, we will need to install two additional packages namely:
+
+a. `php-mysql`: This enables communication between PHP and MySQL based databases.
+
+b. `libapache2-mod-php`: This enables Apache to hanle PHP files.
+
+To proceed, we install these three packages all together at the same time by entering the following command:
+
+`$ sudo apt install php libapache2-mod-php php-mysql`
+
+As seen in the ouput image below the sytem installs PHP along with the other two modules.
+
+![php installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2d38b817-bdf8-493f-a124-8be618e7304c)
+
+We can execute the command below to confirm our version of PHP:
+
+`php -v`
+
+![check php version](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e495cfc3-f3da-4632-b2f2-778b3184fde2)
+
+At this point, we have successfully installed all four components of the LAMP Stack:
+
