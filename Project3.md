@@ -21,19 +21,19 @@ In order to execute this project successfully we need to first of all complete t
 
 The apache web server is the most popular and widely used web server in the world. It is fast, reliable, secure, and can be customized to meet the needs of different environments with the use of modules and extensions. However, before we install apache we need to firstly update our ubuntu web server by running the command below: 
 
-`$ sudo apt update`
+**`$ sudo apt update`**
 
 ![sudo apt update](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/84b1b3b6-bb08-454b-adf9-3df0ad2ae3f0)
 
 After completing the update process we can now proceed to install the apache web server, To do this, we execute the following command:
 
-`$ sudo apt install apache2`
+**`$ sudo apt install apache2`**
 
 ![apache installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/05c63919-b424-479c-b075-377091ff5118)
 
 To verify that the apache2 service is running on our ubuntu server, we enter the following command:
 
-`$ sudo systemctl status apache2`
+**`$ sudo systemctl status apache2`**
 
 ![apache status](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9defa108-ca6d-495a-80ba-d837eda3fcd6)
 
@@ -69,7 +69,7 @@ Selecting the **Source** setting as **0.0.0.0/0** means we can access our server
 
 To verify that the apache2 webpage is accessible locally from our ubuntu machine, we run the following command:
 
-`$ curl http://localhost:80`   or   `$ curl http://127.0.0.1:80`
+**`$ curl http://localhost:80`**   or  **`$ curl http://127.0.0.1:80`**
 
 ![verify apache access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3e1685db-4835-4ec1-b961-546ac37976d9)
 
@@ -77,13 +77,13 @@ In the output image above, we can see the [HTML](https://en.wikipedia.org/wiki/H
 
 Next we need to test to ensure that our web server is responding to requests from the internet. To implement this, we open a web browser and in the adress bar, we enter the url using this syntax `http://<PUBLIC-IP-ADDRESS>:80`. We can retrieve our public IP address by entering the following command:
 
-`$ curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+**`$ curl -s http://169.254.169.254/latest/meta-data/public-ipv4`**
 
 ![public IP](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3cddd5d8-4011-4a1b-ba9c-e9acfff2d02d)
 
 Now that we have the public IP address, we proceed to enter the following url in our browser:
 
-`http://16.170.229.201:80`
+**`http://16.170.229.201:80`**
 
 ![apache ubuntu web page](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cb19a8a7-d441-4a77-8147-4ff11db1eb37)
 
@@ -94,29 +94,29 @@ As shown in the output image above, we can see the apache ubuntu default web pag
 
 After completing the setup of our Web Server, we need to install a Database Management System to be able to store and manage data for our webpage. MySQL is an open-source Relational Database Management System (RDBMS) that enables users to store, manage, and retrieve structured data efficiently. It is widely used for various applications, from small-scale projects to large-scale websites and enterprise-level solutions. To run this installation, we enter the following command:
 
-`$ sudo apt install mysql-server -y`
+**`$ sudo apt install mysql-server -y`**
 
 ![mysql installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7d431123-ba91-4309-8bf8-189778e6062c)
 
 After the installation is complete, we log into the MySQL console by executing the command below:
 
-`$ sudo mysql`
+**`$ sudo mysql`**
 
 ![log into mysql](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cf8bdd85-5bd0-4917-9d7a-5bfde21ce9ea)
 
 Next, we need to run a script that is preinstalled with MySQL to help secure access to our database system. However, before running the script, we need to set a password (which will be defined as `PassWord.1`) for the root user. We implement this by entering the command below:
 
-`mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
+**`mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`**
 
 Then we exit with the following command:
 
-`mysql> exit`
+**`mysql> exit`**
 
 ![alter sql user password and exit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/62d41aaf-5e05-42ad-a3e2-b1b2f06e5cba)
 
 Next we run the MySQL interactive script by executing the following command:
 
-`$ sudo mysql_secure_installation`
+**`$ sudo mysql_secure_installation`**
 
 As shown in the output image below, we use the `VALIDATE PASSWORD PLUGIN` to set up a strong password for MySQl root user and we follow all the prompts to choose our preferences.
 
@@ -124,7 +124,7 @@ As shown in the output image below, we use the `VALIDATE PASSWORD PLUGIN` to set
 
 Next, with the following command, we confirm our abilty to log into the MySQl console with our newly created root password:
 
-`$ sudo mysql -p`
+**`$ sudo mysql -p`**
 
 This prompts us for the root password and as we can see in the output image below, we are able to log in. 
 
@@ -132,20 +132,20 @@ This prompts us for the root password and as we can see in the output image belo
 
 As shown in the above image, to exit the MySQL console, we simply execute the command below:
 
-`mysql> exit`
+**`mysql> exit`**
 
 
 ## STEP 3: Installing PHP
 
 After installing Apache Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LAMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. Apart from the `php` package, we will need to install two additional packages namely:
 
-a. `php-mysql`: This enables communication between PHP and MySQL based databases.
+a. **`php-mysql`**: This enables communication between PHP and MySQL based databases.
 
-b. `libapache2-mod-php`: This enables Apache to hanle PHP files.
+b. **`libapache2-mod-php`**: This enables Apache to hanle PHP files.
 
 To proceed, we install these three packages all together at the same time by entering the following command:
 
-`$ sudo apt install php libapache2-mod-php php-mysql`
+**`$ sudo apt install php libapache2-mod-php php-mysql`**
 
 As seen in the ouput image below the sytem installs PHP along with the other two modules.
 
@@ -153,7 +153,7 @@ As seen in the ouput image below the sytem installs PHP along with the other two
 
 We can execute the command below to confirm our version of PHP:
 
-`php -v`
+**`php -v`**
 
 ![check php version](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e495cfc3-f3da-4632-b2f2-778b3184fde2)
 
@@ -172,28 +172,30 @@ At this point, we have successfully installed all four components of the LAMP St
 
 Apache virtual host enables us to have multiple websites on a single machine. To test our LAMP setup with a PHP script, we will need to create a virtual host to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling `projectlamp`.
 
-To create the directory for `projectlamp`, we execute the following command:
+To create the directory for **`projectlamp`**, we execute the following command:
 
-`$ sudo mkdir /var/www/projectlamp`
+**`$ sudo mkdir /var/www/projectlamp`**
 
 Next we execute the command below to assign ownership of the created directory by using the `$USER environment variable which references your current system's user:
 
-`$ sudo chown -R $USER:$USER /var/www/projectlamp`
+**`$ sudo chown -R $USER:$USER /var/www/projectlamp`**
 
 Then, using the vi editor, we create and open a new configuration file in Apache’s `sites-available` directory by executing the following command:
 
-`$ sudo vi /etc/apache2/sites-available/projectlamp.conf` 
+**`$ sudo vi /etc/apache2/sites-available/projectlamp.conf`** 
 
 The above command creates a blank file. Then we press `i` on the keybord to enter insert mode and we paste the following configuration:
 
-<br />`<VirtualHost *:80>`<br />
-&ensp; `ServerName projectlamp`<br />
-&ensp; `ServerAlias www.projectlamp`<br />
- &ensp; `ServerAdmin webmaster@localhost`<br />
-&ensp; `DocumentRoot /var/www/projectlamp`<br />
- &ensp; `ErrorLog ${APACHE_LOG_DIR}/error.log`<br />
- &ensp; `CustomLog ${APACHE_LOG_DIR}/access.log combined`<br />
-`</VirtualHost>`<br />
+```
+<VirtualHost *:80>
+   ServerName projectlamp
+   ServerAlias www.projectlamp
+   ServerAdmin webmaster@localhost
+   DocumentRoot /var/www/projectlamp
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 
 ![sudo vi configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1311a6a9-7508-4c9d-8237-a995eeb6da0a)
 
@@ -205,7 +207,7 @@ d. Press `Enter`<br />
 
 To show the new file in the sites available directory, we execute the following command:
 
-`$ sudo ls /etc/apache2/sites-available`
+**`$ sudo ls /etc/apache2/sites-available`**
 
 The output of the above command is as shown in the image below:
 
@@ -215,20 +217,22 @@ As it stands, we have implemented a VirtualHost configuration that directs Apach
 
 We can now execute **a2ensite** command to enable the new virtual host:
 
-`$ sudo a2ensite projectlamp`
+**`$ sudo a2ensite projectlamp`**
 
 Then we use **a2dessite** command to disable apache's default website:
 
-`$ sudo a2dissite 000-default`
+**`$ sudo a2dissite 000-default`**
 
 Next, we run the command below to ensure that there are no syntax errors in the configuration file:
 
-`$ sudo apache2ctl configtest`
+**`$ sudo apache2ctl configtest`**
 
 And afterwards, using the command below, we reload Apache so that the changes can take effect:
 
-`$ sudo systemctl reload apache2`
+**`$ sudo systemctl reload apache2`**
 
 Next, to test that our Virtual Host works as expected, we create an index.html file in the /var/www/projectlamp directory:
 
-`sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html`
+```
+sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+```
