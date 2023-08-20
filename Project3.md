@@ -228,3 +228,7 @@ Next, we run the command below to ensure that there are no syntax errors in the 
 And afterwards, using the command below, we reload Apache so that the changes can take effect:
 
 `$ sudo systemctl reload apache2`
+
+Next, to test that our Virtual Host works as expected, we create an index.html file in the /var/www/projectlamp directory:
+
+`sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html`
