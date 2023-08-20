@@ -246,3 +246,19 @@ The ouput from the browser is as shown in the image below:
 
 
 ## STEP 5: Enable PHP on the Website
+
+With the default **DirectoryIndex** settings in Apache, the `index.html` file will always take precedence over the `index.php` file. We however need to modify this behaviour so that `index.php` can become the default landing page. To implement this, we will need to use `vim` to edit the **/etc/apache2/mods-enabled/dir.conf** file and change the order in which the **index.php** file is listed within the **DirectoryIndex** directive:
+
+`$ sudo vim /etc/apache2/mods-enabled/dir.conf`
+
+Next, we execute the change as shown below:
+
+```
+<IfModule mod_dir.c>
+        #Change this:
+        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
+**(Please note that the system will not recongnise lines 1-3 in the code above as they have been commented out with the `#` sign)**
