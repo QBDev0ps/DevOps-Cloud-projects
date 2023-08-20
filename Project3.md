@@ -186,11 +186,18 @@ Then, using the vi editor, we create and open a new configuration file in Apache
 
 The above command creates a blank file. then we enter `i` to enter insert mode and we paste the following configuration:
 
-`<VirtualHost *:80>
-    ServerName projectlamp
-    ServerAlias www.projectlamp 
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/projectlamp
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>`
+`<VirtualHost *:80>`
+
+    `ServerName projectlamp`
+    
+    `ServerAlias www.projectlamp`
+    
+    `ServerAdmin webmaster@localhost`
+    
+    `DocumentRoot /var/www/projectlamp`
+    
+    `ErrorLog ${APACHE_LOG_DIR}/error.log`
+    
+    `CustomLog ${APACHE_LOG_DIR}/access.log combined`
+    
+`</VirtualHost>`
