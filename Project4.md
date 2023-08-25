@@ -22,3 +22,19 @@ In order to execute this project successfully we need to first of all complete t
 Nginx is a high performance web server we will employ to display web pages to our site visitors. However, before we install Nginx we need to firstly update our ubuntu web server by running the command below:
 
 **`$ sudo apt update`**
+
+![sudo apt update](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/77a5ae94-bcd7-42ef-974f-a0662313001c)
+
+After completing the update process we can now proceed to install the Nginx web server, To do this, we execute the following command:
+
+**`$ sudo apt install nginx`**
+
+![sudo apt install](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/774f3a51-4e34-4bf0-a31b-73cc3ec34cf5)
+
+When prompted, we enter **`Y`** to confirm that we want to install Nginx. When the installation is complete, the Nginx service should be active and running on our ubuntu server. To verify this, we enter the following command:
+
+**`$ sudo systemctl status nginx`**
+
+![sudo systemctl status](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc9e7ce0-a782-466b-8ef0-218320e1232c)
+
+As can be seen in the status image above, Nginx is fully active and running.
