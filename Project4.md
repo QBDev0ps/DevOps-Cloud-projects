@@ -152,3 +152,85 @@ Along with the above two, other core PHP packages will be automatically installe
 As seen in the ouput image above, the sytem installs the two PHP modules. Now that we have our PHP modules installed, the next step is to configure Nginx to use them.
 
 ## STEP 4: Configuring Nginx to use PHP Processor
+
+Similar to Virtual Hosts in Apache, Nginx enables us to create server blocks so we can have multiple websites on a single machine. Nginx already has one server block enabled by default which is configured to serve files out of a directory **`/var/www/html`**. This works well for single sites but not multiple websites so we will need to create a directory structure within **`/var/www`** to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling **`projectLEMP`**.
+
+To create the directory for **`projectLEMP`**, we execute the following command:
+
+**`$ sudo mkdir /var/www/projectLEMP`**
+
+Next we execute the command below to assign ownership of the created directory by using the `$USER environment variable which references your current system's user:
+
+**`$ sudo chown -R $USER:$USER /var/www/projectLEMP`**
+
+Then, using the nano editor, we create and open a new configuration file in Nginx’s **`sites-available`** directory by executing the following command:
+
+**`$ sudo nano /etc/nginx/sites-available/projectLEMP`** 
+
+The above command creates a blank file. Then we copy and paste the following configuration into the nano editor:
+
+```
+#/etc/nginx/sites-available/projectLEMP
+
+server {
+    listen 80;
+    server_name projectLEMP www.projectLEMP;
+    root /var/www/projectLEMP;
+
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+     }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+}
+```
+
+![nano editor](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41bb001b-d270-4bc6-bdea-cf3217074dd9)
+
+To save the file, press **`ctrl+o`** and press enter. To exit the editor, press **`ctrl+x`**
+
+Next, we activate our configuration by linking to the config file from Nginx's **`sites-enabled`** directory:
+
+**`$ sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/`**
+
+This will tell Nginx to use the configuration next time it is reloaded. We can test for syntax errors by executing the following command:
+
+**`$ sudo nginx -t`**
+
+The output for this is shown in the image below:
+
+![test nginx configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75e3b66d-15c6-4ac9-87ed-907687db7bf1)
+
+We also need to disable the default Nginx host that is currently configured to listen on Port 80. For this, we execute the following:
+
+**`$ sudo unlink /etc/nginx/sites-enabled/default`**
+
+And afterwards, using the command below, we reload Nginx so that the changes can take effect:
+
+**`$ sudo systemctl reload nginx`**
+
+Next, to test that our new server block works as expected, we create an index.html file in the /var/www/projectLEMP directory:
+
+```
+sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
+```
+
+Then the next step is to go to our browser to open our website URL via our public IP address (syntax is: **http://<Public-IP-Address>:80**) or via our server's DNS name (syntax is: **http://<Public-DNS-Name>:80**) In our own use case, we enter the following url in our browser:
+
+**`http://16.171.139.68:80`**
+
+The ouput from the browser is as shown in the image below:
+
+![LEMP STACK WEB PAGE](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f0f2a86e-b118-4410-a7e4-1678d73ae57c)
+
+
