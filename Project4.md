@@ -89,6 +89,7 @@ Now that we have the public IP address, we proceed to enter the following url in
 
 As shown in the output image above, we can see the Nginx default web page which tells us that our web server is now properly installed and accessible through our firewall.
 
+
 ## STEP 2: Installing MySQL
 
 After completing the setup of our Web Server, we need to install a Database Management System to be able to store and manage data for our webpage. MySQL is an open-source Relational Database Management System (RDBMS) that enables users to store, manage, and retrieve structured data efficiently. It is widely used for various applications, from small-scale projects to large-scale websites and enterprise-level solutions. To run this installation, we enter the following command:
@@ -135,6 +136,7 @@ As shown in the above image, to exit the MySQL console, we simply execute the co
 
 **`mysql> exit`**
 
+
 ## STEP 3: Installing PHP
 
 After installing Nginx Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LEMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. While Apache embeds the PHP interpreter in each request, Nginx requires an external program to handle PHP processing and act as a conduit between the PHP interpreter itself and the webserver. Although this ensures a better overall performance in most PHP websites, it however requires some additional configuration. To proceed, we will need to install the following PHP packages:
@@ -150,6 +152,7 @@ Along with the above two, other core PHP packages will be automatically installe
 ![PHP installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/932cf2ef-aa1c-4ae9-bf75-904c2fbd0ac9)
 
 As seen in the ouput image above, the sytem installs the two PHP modules. Now that we have our PHP modules installed, the next step is to configure Nginx to use them.
+
 
 ## STEP 4: Configuring Nginx to use PHP Processor
 
@@ -197,7 +200,7 @@ server {
 
 ![nano editor](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41bb001b-d270-4bc6-bdea-cf3217074dd9)
 
-To save the file, press **`ctrl+o`** and press enter. To exit the editor, press **`ctrl+x`**
+To save the file, press **`CTRL+O`** and press enter. To exit the editor, press **`CTRL+X`**
 
 Next, we activate our configuration by linking to the config file from Nginx's **`sites-enabled`** directory:
 
@@ -231,6 +234,26 @@ Then the next step is to go to our browser to open our website URL via our publi
 
 The ouput from the browser is as shown in the image below:
 
-![LEMP STACK WEB PAGE](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f0f2a86e-b118-4410-a7e4-1678d73ae57c)
+![lempstack webpage1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fd42a64f-3956-43c0-be6c-2914456c3026)
 
 
+## STEP 5: Testing PHP with Nginx
+
+At this point, our LEMP stack is fully installed and operational. We can however test it to validate that Nginx can correctly hand **`.php`** files off to our PHP processor. To do this, we shall create a test PHP file within our document root called **`info.php`**. We implement this with the nano editor by executing the following command:
+
+**`$ nano /var/www/projectLEMP/info.php`**
+
+Next, we paste in the below valid PHP code that should return information about our server:
+
+```
+<?php
+phpinfo();
+```
+
+We save and exit the file by pressing **`CTRL+X`**, then **`y`** and **`ENTER`**
+
+We can now access this page in our web browser by visiting the domain name or IP address we have set up in our Nginx configuration file, followed by **`/info.php`**. The syntax for this is **`http://`server_domain_or_IP`/info.php**. In our own use case, we enter the following in our browser:
+
+**`http://16.171.139.68:80/info.php`**
+
+The output is as shown in the image below:
