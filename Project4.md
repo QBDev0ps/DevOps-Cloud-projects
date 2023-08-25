@@ -265,3 +265,42 @@ The output is as shown in the image below:
 The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
 
 **`$ sudo rm /var/www/your_domain/info.php`**
+
+
+## STEP 6: Retrieving Data from MySQL Database with PHP
+
+In this step, we will create a test database(DB) with a simple "To do List" and configure it so that the Nginx website will be able to query data from the DB and display it. Also, in order to be able to connect MySQL database from PHP, we will need to create a user by using the **`mysql_native_password`** authentication method.
+
+To implement, we will create a Database named **sql_database** and a user named **user_abdul**.
+
+Firstly we connect to the MySQL console using the root account:
+
+**`$ sudo mysql`**
+
+To create a new database we run the follwing command from the MySQL console:
+
+**`mysql> CREATE DATABASE `sql_database`;`**
+
+We shall now proceed to create a new user and grant him full privileges on the database we have just created.
+
+The following command creates a new user named **`user_abdul`** and defines the user's password as **`Password123@`** by using **`mysql_native_password`** as default authentication method:
+
+**`mysql>  CREATE USER 'user_abdul'@'%' IDENTIFIED WITH mysql_native_password BY 'Password123@';`**
+
+Now we need to grant this user permission over **`sql_database`** by entering the following command:
+
+**`mysql> GRANT ALL ON example_database.* TO 'user_abdul'@'%';`**
+
+Executing the command above will give the **abdul_user** user full privileges over the **sql_database** database while preventing this user from creating or modifying other databases on our server.
+
+We can now exit the MySQL shell with the following command:
+
+**`mysql> exit`**
+
+
+
+
+
+
+
+
