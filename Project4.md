@@ -14,7 +14,7 @@ In order to execute this project successfully we need to first of all complete t
 
 4. Establish connection with your EC2 instance: Connect to your EC2 instance via your SSH client by following [these instructions.](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html)
 
-**After completing the necessary prerequisites, we proceed with the following steps to fully implement our LEMP Stack and deploy it in AWS Cloud:**
+_**After completing the necessary prerequisites, we proceed with the following steps to fully implement our LEMP Stack and deploy it in AWS Cloud:**_
 
 
 ## STEP 1: Installing the Nginx Web Server
