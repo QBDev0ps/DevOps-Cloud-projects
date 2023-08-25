@@ -250,10 +250,18 @@ Next, we paste in the below valid PHP code that should return information about 
 phpinfo();
 ```
 
+![nano on php file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c05f7d2e-169d-4bea-a7ac-bb37ec2eaf61)
+
 We save and exit the file by pressing **`CTRL+X`**, then **`y`** and **`ENTER`**
 
-We can now access this page in our web browser by visiting the domain name or IP address we have set up in our Nginx configuration file, followed by **`/info.php`**. The syntax for this is **`http://`server_domain_or_IP`/info.php**. In our own use case, we enter the following in our browser:
+We can now access this page in our web browser by visiting the domain name or IP address we have set up in our Nginx configuration file, followed by **`/info.php`**. The syntax for this is **`http://server_domain_or_IP/info.php`**. In our own use case, we enter the following in our browser:
 
 **`http://16.171.139.68:80/info.php`**
 
 The output is as shown in the image below:
+
+![php web page](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6754835c-6b4c-490d-be61-a0d89d0b0547)
+
+The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
+
+**`$ sudo rm /var/www/your_domain/info.php`**
