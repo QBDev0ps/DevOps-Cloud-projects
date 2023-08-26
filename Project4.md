@@ -315,11 +315,15 @@ CREATE TABLE sql_database.todo_list (item_id INT AUTO_INCREMENT,content VARCHAR(
 
 Next, we insert a few rows of content into the test table by entering the following command. We repeat the command a few times (each time with different values) to populate the table:
 
-**`mysql> INSERT INTO sql_database.todo_list (content) VALUES ("My first important item");'**
+```
+mysql> INSERT INTO sql_database.todo_list (content) VALUES ("My first important item");
+```
 
 To confirm that the data was successfully saved to the test table, we run the following command:
 
-**`mysql>  SELECT * FROM sql_database.todo_list;`**
+```
+mysql>  SELECT * FROM sql_database.todo_list;
+```
 
 The output seen is as shown in the image below:
 
