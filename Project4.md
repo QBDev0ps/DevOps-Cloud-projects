@@ -264,7 +264,7 @@ The output is as shown in the image below:
 
 The page in the image above contains relevant and sensitive information about the configurations of our PHP environment and our Ubuntu Server. So after going through the details on the page, we opt to remove it with the **`rm`** command:
 
-**`$ sudo rm /var/www/your_domain/info.php`**
+**`$ sudo rm /var/www/projectLEMP/info.php`**
 
 
 ## STEP 6: Retrieving Data from MySQL Database with PHP
@@ -275,7 +275,11 @@ To implement, we will create a Database named **sql_database** and a user named 
 
 Firstly we connect to the MySQL console using the root account:
 
-**`$ sudo mysql`**
+**`$ sudo mysql -p`**
+
+![mysql password login](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/64ae23d3-41f7-426f-abab-9248905c824a)
+
+As shown in the image above, the system will prompt for the password and we enter it to successfully log into the MySQL console.
 
 To create a new database we run the follwing command from the MySQL console:
 
@@ -289,7 +293,7 @@ The following command creates a new user named **`user_abdul`** and defines the 
 
 Now we need to grant this user permission over **`sql_database`** by entering the following command:
 
-**`mysql> GRANT ALL ON example_database.* TO 'user_abdul'@'%';`**
+**`mysql> GRANT ALL ON sql_database.* TO 'user_abdul'@'%';`**
 
 Executing the command above will give the **user_abdulr** user full privileges over the **sql_database** database while preventing this user from creating or modifying other databases on our server.
 
@@ -297,15 +301,21 @@ We can now exit the MySQL shell with the following command:
 
 **`mysql> exit`**
 
-Next thing we do is to test if the user has the proper permissions by loggin in to the MySQL console again but this time we use the custom user credentials:
+![sql create DB and user](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/28679b69-c36b-4458-b53d-48cfcb1febfb)
+
+Next thing we do is to test if the user has the proper permissions by logging in to the MySQL console again but this time we use the custom user credentials:
 
 **`$ mysql -u user_abdul -p`**
 
-The **`-p`** flag in the command above prompts us for the password used when creating **`user_abdul`** user. After successfully logging into the MySQL console, we confirm that we have access to the **`sql_database`** database by entering the following:
+The **`-p`** flag in the command above prompts us for the password used when creating **`user_abdul`** user. 
+
+After successfully logging into the MySQL console, we confirm that we have access to the **`sql_database`** database by entering the following:
 
 **`mysql> SHOW DATABASES;'**
 
 This gives us the output shown in the image below:
+
+![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89f4e0fc-86f1-4ff3-978c-bd4bef3cc414)
 
 Next, we create a test table named **todo_list**. From our MySQL console, we run the following statement:
 
@@ -326,6 +336,8 @@ mysql>  SELECT * FROM sql_database.todo_list;
 ```
 
 The output seen is as shown in the image below:
+
+![select all from sql databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4ee0d7ad-eaf8-48ea-9e3f-0929096f6781)
 
 After confirming that we have valid data in our test table, we exit the MySQL console:
 
@@ -357,6 +369,8 @@ try {
 }
 ```
 
+![nano php2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/93985f54-274e-4379-af1b-ebef08657b49)
+
 We save and exit the editor by pressing **`CTRL+X`**, then **`y`** and **`ENTER`**
 
 We can now access this page in our web browser by visiting the domain name or IP address we have set up in our Nginx configuration file, followed by **`/todo_list.php`**. The syntax for this is **`http://server_domain_or_IP/todo_list.php`**. In our own use case, we enter the following in our browser:
@@ -365,7 +379,7 @@ We can now access this page in our web browser by visiting the domain name or IP
 
 The output is as shown in the image below:
 
-
+![todo list output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2e3a6a73-137d-4948-b1bc-d18b3eb89cd1)
 
 ## This brings us to the conclusion of this project. Thank you!
 
