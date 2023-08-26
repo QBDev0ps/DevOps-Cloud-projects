@@ -279,7 +279,7 @@ Firstly we connect to the MySQL console using the root account:
 
 To create a new database we run the follwing command from the MySQL console:
 
-**`mysql> CREATE DATABASE `sql_database`;`**
+**`mysql> CREATE DATABASE sql_database;`**
 
 We shall now proceed to create a new user and grant him full privileges on the database we have just created.
 
@@ -291,16 +291,79 @@ Now we need to grant this user permission over **`sql_database`** by entering th
 
 **`mysql> GRANT ALL ON example_database.* TO 'user_abdul'@'%';`**
 
-Executing the command above will give the **abdul_user** user full privileges over the **sql_database** database while preventing this user from creating or modifying other databases on our server.
+Executing the command above will give the **user_abdulr** user full privileges over the **sql_database** database while preventing this user from creating or modifying other databases on our server.
 
 We can now exit the MySQL shell with the following command:
 
 **`mysql> exit`**
 
+Next thing we do is to test if the user has the proper permissions by loggin in to the MySQL console again but this time we use the custom user credentials:
+
+**`$ mysql -u user_abdul -p`**
+
+The **`-p`** flag in the command above prompts us for the password used when creating **`user_abdul`** user. After successfully logging into the MySQL console, we confirm that we have access to the **`sql_database`** database by entering the following:
+
+**`mysql> SHOW DATABASES;'**
+
+This gives us the output shown in the image below:
+
+Next, we create a test table named **todo_list**. From our MySQL console, we run the following statement:
+
+```
+CREATE TABLE sql_database.todo_list (item_id INT AUTO_INCREMENT,content VARCHAR(255),PRIMARY KEY(item_id));
+```
+
+Next, we insert a few rows of content into the test table by entering the following command. We repeat the command a few times (each time with different values) to populate the table:
+
+**`mysql> INSERT INTO sql_database.todo_list (content) VALUES ("My first important item");'**
+
+To confirm that the data was successfully saved to the test table, we run the following command:
+
+**`mysql>  SELECT * FROM sql_database.todo_list;`**
+
+The output seen is as shown in the image below:
+
+After confirming that we have valid data in our test table, we exit the MySQL console:
+
+**`mysql> exit`**
+
+Now we can create a PHP script that will connect to the MySQL database and query for our content. We will create a new PHP file in our custom web root directory using the nano editor.
+
+**`$ nano /var/www/projectLEMP/todo_list.php`**
+
+The PHP script below connects to the MySQL database and queries for the content of the todo_list table, and then displays the results in a list. We copy it and paste into our **`todo_list.php script`**:
+
+```
+<?php
+$user = "user_abdul";
+$password = "Password123@";
+$database = "sql_database";
+$table = "todo_list";
+
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+```
+
+We save and exit the editor by pressing **`CTRL+X`**, then **`y`** and **`ENTER`**
+
+We can now access this page in our web browser by visiting the domain name or IP address we have set up in our Nginx configuration file, followed by **`/todo_list.php`**. The syntax for this is **`http://server_domain_or_IP/todo_list.php`**. In our own use case, we enter the following in our browser:
+
+**`http://16.171.139.68:80/todo_list.php`**
+
+The output is as shown in the image below:
 
 
 
-
+## This brings us to the conclusion of this project. Thank you!
 
 
 
