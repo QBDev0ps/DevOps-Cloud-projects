@@ -1,8 +1,8 @@
-# DOCUMENTATION FOR WEB STACK IMPLEMENTATION (LEMP) PROJECT
+## DOCUMENTATION FOR WEB STACK IMPLEMENTATION (LEMP) PROJECT
 
 This project shows the implementation of the LEMP Stack. It covers essential aspects of the LEMP stack implementation such as the process of setting up a Linux Environment, configuring Nginx for optimal performance, managing MySQL databases, and writing PHP code to bring applications to life.
 
-### Pre Installations and Dependencies
+### <br>Pre Installations and Dependencies<br/>
 
 In order to execute this project successfully we need to first of all complete the following prerequisites:
 
@@ -17,7 +17,7 @@ In order to execute this project successfully we need to first of all complete t
 _**After completing the necessary prerequisites, we proceed with the following steps to fully implement our LEMP Stack and deploy it in AWS Cloud:**_
 
 
-## STEP 1: Installing the Nginx Web Server
+### <br>STEP 1: Installing the Nginx Web Server<br/>
 
 Nginx is a high performance web server we will employ to display web pages to our site visitors. However, before we install Nginx we need to firstly update our ubuntu web server by running the command below:
 
@@ -90,7 +90,7 @@ Now that we have the public IP address, we proceed to enter the following url in
 As shown in the output image above, we can see the Nginx default web page which tells us that our web server is now properly installed and accessible through our firewall.
 
 
-## STEP 2: Installing MySQL
+### <br>STEP 2: Installing MySQL<br/>
 
 After completing the setup of our Web Server, we need to install a Database Management System to be able to store and manage data for our webpage. MySQL is an open-source Relational Database Management System (RDBMS) that enables users to store, manage, and retrieve structured data efficiently. It is widely used for various applications, from small-scale projects to large-scale websites and enterprise-level solutions. To run this installation, we enter the following command:
 
@@ -137,7 +137,7 @@ As shown in the above image, to exit the MySQL console, we simply execute the co
 **`mysql> exit`**
 
 
-## STEP 3: Installing PHP
+### <br>STEP 3: Installing PHP<br/>
 
 After installing Nginx Web Server and MySQL Database Management System. It is now time for our PHP installation. PHP is the component of our LEMP Stack setup that allows webpages run dynamic processes to enable content to be displayed on the end user's browser. While Apache embeds the PHP interpreter in each request, Nginx requires an external program to handle PHP processing and act as a conduit between the PHP interpreter itself and the webserver. Although this ensures a better overall performance in most PHP websites, it however requires some additional configuration. To proceed, we will need to install the following PHP packages:
 
@@ -154,7 +154,7 @@ Along with the above two, other core PHP packages will be automatically installe
 As seen in the ouput image above, the sytem installs the two PHP modules. Now that we have our PHP modules installed, the next step is to configure Nginx to use them.
 
 
-## STEP 4: Configuring Nginx to use PHP Processor
+### <br>STEP 4: Configuring Nginx to use PHP Processor<br/>
 
 Similar to Virtual Hosts in Apache, Nginx enables us to create server blocks so we can have multiple websites on a single machine. Nginx already has one server block enabled by default which is configured to serve files out of a directory **`/var/www/html`**. This works well for single sites but not multiple websites so we will need to create a directory structure within **`/var/www`** to hold our website's files and folders. To do this we need to firstly set up a domain we will be calling **`projectLEMP`**.
 
@@ -237,7 +237,7 @@ The ouput from the browser is as shown in the image below:
 ![lempstack webpage1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fd42a64f-3956-43c0-be6c-2914456c3026)
 
 
-## STEP 5: Testing PHP with Nginx
+### <br>STEP 5: Testing PHP with Nginx<br/>
 
 At this point, our LEMP stack is fully installed and operational. We can however test it to validate that Nginx can correctly hand **`.php`** files off to our PHP processor. To do this, we shall create a test PHP file within our document root called **`info.php`**. We implement this with the nano editor by executing the following command:
 
@@ -267,7 +267,7 @@ The page in the image above contains relevant and sensitive information about th
 **`$ sudo rm /var/www/projectLEMP/info.php`**
 
 
-## STEP 6: Retrieving Data from MySQL Database with PHP
+### <br>STEP 6: Retrieving Data from MySQL Database with PHP<br/>
 
 In this step, we will create a test database(DB) with a simple "To do List" and configure it so that the Nginx website will be able to query data from the DB and display it. Also, in order to be able to connect MySQL database from PHP, we will need to create a user by using the **`mysql_native_password`** authentication method.
 
@@ -311,7 +311,7 @@ The **`-p`** flag in the command above prompts us for the password used when cre
 
 After successfully logging into the MySQL console, we confirm that we have access to the **`sql_database`** database by entering the following:
 
-**`mysql> SHOW DATABASES;'**
+**`mysql> SHOW DATABASES;`**
 
 This gives us the output shown in the image below:
 
@@ -323,7 +323,7 @@ Next, we create a test table named **todo_list**. From our MySQL console, we run
 CREATE TABLE sql_database.todo_list (item_id INT AUTO_INCREMENT,content VARCHAR(255),PRIMARY KEY(item_id));
 ```
 
-Next, we insert a few rows of content into the test table by entering the following command. We repeat the command a few times (each time with different values) to populate the table:
+After this, we insert a few rows of content into the test table by entering the following command. We repeat the command a few times (each time with different values) to populate the table:
 
 ```
 mysql> INSERT INTO sql_database.todo_list (content) VALUES ("My first important item");
@@ -381,7 +381,7 @@ The output is as shown in the image below:
 
 ![todo list output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2e3a6a73-137d-4948-b1bc-d18b3eb89cd1)
 
-## This brings us to the conclusion of this project. Thank you!
+### <br>This brings us to the conclusion of this project. Thank you!<br/>
 
 
 
