@@ -61,15 +61,18 @@ The output of the command is shown below:
 
 ![For Loop](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/602a7fe1-8258-4c66-a4db-919b21b4c05b)
 
-3. **Command Substitution:** Thisenables us to capture the output of a command and use it as a value within our script. we can use the bactick **`** or the **$()** syntax for command substitution.
+3. **Command Substitution:** This enables us to capture the output of a command and use it as a value within our script. we can use the bactick **`** or the **$()** syntax for command substitution.
 
 For example, to use bactick for command substitution, we enter the following:
 
-**`current_date=`date +%Y-%m-%d` `**
+```current_date=`date +%Y-%m-%d`
+```
 
 To use $() syntax for command substitution, we enter the following:
 
-**`current_date=$(date +%Y-%m-%d)`**
+```
+current_date=$(date +%Y-%m-%d)
+```
 
 4. **Input and Output:** Bash allows users a number of ways to handle input and output. We can use the **`read`** command to accept user input and we can use the **`echo`** command to output text to the CLI. In addition, we can also redirect input and output using < (input from a file), > (output to a file), and | (use the output of one command as input to another.
 
