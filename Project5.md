@@ -127,4 +127,31 @@ As seen in the last line of the code above, we call the greet function and set t
 
 **`mkdir shell-scripting`**
 
-**Step 1:**
+**Step 2:** We move inside the created folder with **`cd shell-scripting`**, and we create a file called _**user-input.sh**_ by entering the following command:
+
+**`touch user-input.sh`**
+
+**Step 3:** We copy the block of code below, then we paste inside the file.
+
+```
+#!/bin/bash
+
+# Prompt the user for their name
+echo "Enter your name:"
+read name
+
+# Display a greeting with the entered name
+echo "Hello, $name! Nice to meet you."
+```
+
+**Step 4:** We save the file.
+
+**Step 5:** We make the file executable by running the following command:
+
+**`sudo chmod +x user-input.sh`**
+
+**Step 6:** We run the script by using the following command:
+
+**`./user.input.sh`**
+
+### <br>Directory Manipulation and Navigation<br/>
