@@ -154,4 +154,8 @@ echo "Hello, $name! Nice to meet you."
 
 **`./user.input.sh`**
 
+As can be seen in the output image below, executing the script prompts for our name and after we enter it, it displays a greeting message with our name included as specified in the script.
+
+![first script output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8a86437-d69f-4688-9728-6d131720cc23)
+
 ### <br>Directory Manipulation and Navigation<br/>
