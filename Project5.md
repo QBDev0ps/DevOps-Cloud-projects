@@ -63,13 +63,13 @@ The output of the command is shown below:
 
 3. **Command Substitution:** This enables us to capture the output of a command and use it as a value within our script. we can use the bactick **`** or the **$()** syntax for command substitution.
 
-For example, to use bactick for command substitution, we enter the following:
+For example, to use bactick **`** for command substitution, we enter the following:
 
 ```
 current_date=`date +%Y-%m-%d`
 ```
 
-To use $() syntax for command substitution, we enter the following:
+To use **$()** syntax for command substitution, we enter the following:
 
 ```
 current_date=$(date +%Y-%m-%d)
