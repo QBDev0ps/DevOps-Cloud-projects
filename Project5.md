@@ -65,7 +65,8 @@ The output of the command is shown below:
 
 For example, to use bactick for command substitution, we enter the following:
 
-```current_date=`date +%Y-%m-%d`
+```
+current_date=`date +%Y-%m-%d`
 ```
 
 To use $() syntax for command substitution, we enter the following:
