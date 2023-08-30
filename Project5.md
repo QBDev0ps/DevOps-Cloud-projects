@@ -4,8 +4,19 @@ This project shows to write shell scripts. It covers essential aspects of Shell 
 
 ### <br>Introduction to Shell Scripting and User Inputs<br/>
 
-A [Shell script](https://en.wikipedia.org/wiki/Shell_script) is a collection of commands and instructions that are executed sequentially in a shell. Essentially, shell scripting helps us automate repetitive tasks. For instance, rather than type the **`git clone`** command 1000 times to clone 1000 repositories, we can simply write a script that does this job and then we can call the script whenever we want to perform the task. Shell scripts are created by saving a series of commands in a text file with **.sh** extension. These scripts can then be executed directly from the command line or called from another script.
+A [Shell Script](https://en.wikipedia.org/wiki/Shell_script) is a collection of commands and instructions that are executed sequentially in a shell. Essentially, shell scripting helps us automate repetitive tasks. For instance, rather than type the **`git clone`** command 1000 times to clone 1000 repositories, we can simply write a script that does this job and then we can call the script whenever we want to perform the task. Shell scripts are created by saving a series of commands in a text file with **.sh** extension. These scripts can then be executed directly from the command line or called from another script.
 
 ### <br>Shell Scripting Syntax Elements<br/>
 
-1. 
+1. **Variables:** Bash allows a user to define and work with variables. Variables can store various data types such as numbers strings and arrays. Values can be assigned to variables using the **=** operator. And a variable's value can be accessed by preceeding the variable name with a **$** sign.
+
+For example, to assign value to a variable we wnter the command below:
+
+**`name="Moyosore"`**
+
+To retrieve the value from a variable:
+
+**echo $name**
+
+
+2. 
