@@ -350,8 +350,8 @@ In this project section, we will be focusing on backing up files and using times
 #!/bin/bash
 
 # Define the source directory and backup directory
-source_dir="/path/to/source_directory"
-backup_dir="/path/to/backup_directory"
+source_dir="/c/Users/USER/source_directory"
+backup_dir="c/Users/USER/backup_directory"
 
 # Create a timestamp with the current date and time
 timestamp=$(date +"%Y%m%d%H%M%S")
@@ -379,7 +379,7 @@ echo "Backup completed. Files copied to: $backup_dir_with_timestamp"
 
 The output of executing our script is shown in the image below:
 
-
+![file backup and timestamping](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/392d2082-2892-4656-a30f-59f6436041e6)
 
 ### <br>This brings us to the conclusion of this project. Thank you!<br/>
 
