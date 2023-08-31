@@ -338,7 +338,7 @@ The output of executing our script is shown in the image below:
 
 ### <br>File Backup and Timestamping<br/>
 
-In this project section, we will be focusing on backing up files and using timestamps. We will write a shell script that defines the source directory and backup directory paths. Then the script will create a timestamp using the current date and time and create a backup directory with the timestamp appended to its name. Next, the script will copy all files from the source directory to the backup directory using the **`cp`** command with the **`-r`** option to copy recursively. Finally, the script will display a message to indicate the completion of the backup process and show the path of the backup directory with the timestamp.We shall proceed to implement this by using the following steps:
+In this project section, we will be focusing on backing up files and using timestamps. We will write a shell script that defines the source directory and backup directory paths. Then the script will create a timestamp using the current date and time and create a backup directory with the timestamp appended to its name. Next, the script will copy all files from the source directory to the backup directory using the **`cp`** command with the **`-r`** option to copy recursively. Finally, the script will display a message to indicate the completion of the backup process and show the path of the backup directory with the timestamp. We shall proceed to implement this by using the following steps:
 
 **Step 1:** On our terminal, we create a file that will be named _**backup.sh**_ using the follwing command:
 
