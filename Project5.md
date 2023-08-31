@@ -162,7 +162,7 @@ As can be seen in the output image below, executing the script prompts for our n
 
 Here, we will be writing a shell script that will display the current directory, create a new directory called _**"my_directory"**_, switch to that directory, create two files inside it, list the files, move back one level up, remove the _**"my_directory"**_ and its contents and then finally list the files in the current directory again. We will implement thsi with the following steps:
 
-**Step 1:** We create a file that will be named _**navigating-linux-filesystem.sh**_
+**Step 1:** We create and open a file that will be named _**navigating-linux-filesystem.sh**_
 
 **Step 2:** We copy and paste the following block of code into the file we created:
 
