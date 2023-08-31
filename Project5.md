@@ -316,7 +316,8 @@ echo "Remainder: $remainder"
 
 # Perform some more complex calculations
 power_of_2=$((num1 ** 2))
-square_root=$(awk "BEGIN{ sqrt=$num2; print sqrt }")
+# square_root=$(awk "BEGIN{ sqrt=$num2; print sqrt }")
+square_root=$(echo "$num2" | awk '{print sqrt($1)}')
 
 # Display the results
 echo "Number 1 raised to the power of 2: $power_of_2"
@@ -332,3 +333,6 @@ echo "Square root of number 2: $square_root"
 **`./calculations.sh`**
 
 The output of executing our script is shown in the image below:
+
+![calculations script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8c0f11e4-5ee5-4650-9a97-2a2bed8cce6a)
+
