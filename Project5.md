@@ -222,3 +222,59 @@ The output of executing our script is shown in the image below:
 ![navigating linux filesystem](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f2f59cb8-658b-444e-b041-604680a2b680)
 
 ### <br>File Operations and Sorting<br/>
+
+In this part of the project, we will write a shell script that focuses on file operations and sorting. The script will create three files (*__file1.txt, file2.txt and file3.txt__*), it will display the files in their current order, sort them out alphabetically, save the sorted files in _**sorted_files.txt**_, display the sorted files, remove the original files, rename the sorted file to _**sorted_files_sorted_alphabetically.txt**_, and then display the content of the final sorted file. We shall proceed to implement this by using the following steps:
+
+**Step 1:** On our terminal, we create a file that will be named _**sorting.sh**_ using the follwing command:
+
+**`touch sorting.sh`**
+
+**Step 2:** We open our file in an editor, then we copy and paste in the following block of code:
+
+```
+#!/bin/bash
+
+# Create three files
+echo "Creating files..."
+echo "This is file3." > file3.txt
+echo "This is file1." > file1.txt
+echo "This is file2." > file2.txt
+echo "Files created."
+
+# Display the files in their current order
+echo "Files in their current order:"
+ls
+
+# Sort the files alphabetically
+echo "Sorting files alphabetically..."
+ls | sort > sorted_files.txt
+echo "Files sorted."
+
+# Display the sorted files
+echo "Sorted files:"
+cat sorted_files.txt
+
+# Remove the original files
+echo "Removing original files..."
+rm file1.txt file2.txt file3.txt
+echo "Original files removed."
+
+# Rename the sorted file to a more descriptive name
+echo "Renaming sorted file..."
+mv sorted_files.txt sorted_files_sorted_alphabetically.txt
+echo "File renamed."
+
+# Display the final sorted file
+echo "Final sorted file:"
+cat sorted_files_sorted_alphabetically.txt
+```
+
+**Step 3:** We run the following command to make our file executable:
+
+**`sudo chmod +x sorting.sh`**
+
+**Step 4:** We run our script using the command below:
+
+**`./sorting.sh`**
+
+The output of executing our script is shown in the image below:
