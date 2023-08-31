@@ -336,3 +336,50 @@ The output of executing our script is shown in the image below:
 
 ![calculations script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8c0f11e4-5ee5-4650-9a97-2a2bed8cce6a)
 
+### <br>File Backup and Timestamping<br/>
+
+In this project section, we will be focusing on backing up files and using timestamps. We will write a shell script that defines the source directory and backup directory paths. Then the script will create a timestamp using the current date and time and create a backup directory with the timestamp appended to its name. Next, the script will copy all files from the source directory to the backup directory using the **`cp`** command with the **`-r`** option to copy recursively. Finally, the script will display a message to indicate the completion of the backup process and show the path of the backup directory with the timestamp.We shall proceed to implement this by using the following steps:
+
+**Step 1:** On our terminal, we create a file that will be named _**backup.sh**_ using the follwing command:
+
+**`touch backup.sh`**
+
+**Step 2:** We open our file in an editor, then we copy and paste in the following block of code:
+
+```
+#!/bin/bash
+
+# Define the source directory and backup directory
+source_dir="/path/to/source_directory"
+backup_dir="/path/to/backup_directory"
+
+# Create a timestamp with the current date and time
+timestamp=$(date +"%Y%m%d%H%M%S")
+
+# Create a backup directory with the timestamp
+backup_dir_with_timestamp="$backup_dir/backup_$timestamp"
+
+# Create the backup directory
+mkdir -p "$backup_dir_with_timestamp"
+
+# Copy all files from the source directory to the backup directory
+cp -r "$source_dir"/* "$backup_dir_with_timestamp"
+
+# Display a message indicating the backup process is complete
+echo "Backup completed. Files copied to: $backup_dir_with_timestamp"
+```
+
+**Step 3:** We run the following command to make our file executable:
+
+**`sudo chmod +x backup.sh`**
+
+**Step 4:** We run our script using the command below:
+
+**`./backup.sh`**
+
+The output of executing our script is shown in the image below:
+
+
+
+### <br>This brings us to the conclusion of this project. Thank you!<br/>
+
