@@ -162,9 +162,11 @@ As can be seen in the output image below, executing the script prompts for our n
 
 Here, we will be writing a shell script that will display the current directory, create a new directory called _**"my_directory"**_, switch to that directory, create two files inside it, list the files, move back one level up, remove the _**"my_directory"**_ and its contents and then finally list the files in the current directory again. We will implement thsi with the following steps:
 
-**Step 1:** We create and open a file that will be named _**navigating-linux-filesystem.sh**_
+**Step 1:** We create file that will be named _**navigating-linux-filesystem.sh**_ using the command below:
 
-**Step 2:** We copy and paste the following block of code into the file we created:
+**`touch navigating-linux-filesystem.sh`**
+
+**Step 2:** We open the file in our editor and then we copy and paste the following block of code into the file we created:
 
 ```
 #!/bin/bash
@@ -217,3 +219,6 @@ ls
 
 The output of executing our script is shown in the image below:
 
+![navigating linux filesystem](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f2f59cb8-658b-444e-b041-604680a2b680)
+
+### <br>File Operations and Sorting<br/>
