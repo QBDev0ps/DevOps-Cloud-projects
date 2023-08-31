@@ -160,7 +160,7 @@ As can be seen in the output image below, executing the script prompts for our n
 
 ### <br>Directory Manipulation and Navigation<br/>
 
-Here, we will be writing a shell script that will display the current directory, create a new directory called _**"my_directory"**_, switch to that directory, create two files inside it, list the files, move back one level up, remove the _**"my_directory"**_ and its contents and then finally list the files in the current directory again. We will implement thsi with the following steps:
+We will  begin by writing a shell script to focus on how to manipulate and traverse through directories. Here, we will be writing a shell script that will display the current directory, create a new directory called _**"my_directory"**_, switch to that directory, create two files inside it, list the files, move back one level up, remove the _**"my_directory"**_ and its contents and then finally list the files in the current directory again. We will implement thsi with the following steps:
 
 **Step 1:** We create file that will be named _**navigating-linux-filesystem.sh**_ using the command below:
 
@@ -276,5 +276,59 @@ cat sorted_files_sorted_alphabetically.txt
 **Step 4:** We run our script using the command below:
 
 **`./sorting.sh`**
+
+The output of executing our script is shown in the image below:
+
+![file operations and sorting script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6af5828d-e87a-4ca2-9f69-808f87fdc999)
+
+### <br>Working with Numbers and Calculations<br/>
+
+In this aspect of project, we will write a shell script that defines two variables (_**num1 and num2**_) with numeric values, performs basic arithmetic operations (addition, subtraction, multiplication, division and modulus) and displays the results. Our shell script will also perform more complex calculations such as raising num1 to the power of 2 and calculating the square root of num2, and then it will display these results as well. We will implement this with the following steps: 
+
+**Step 1:** On our terminal, we create a file that will be named _**calculations.sh**_ using the follwing command:
+
+**`touch calculations.sh`**
+
+**Step 2:** We open our file in an editor, then we copy and paste in the following block of code:
+
+```
+#!/bin/bash
+
+# Define two variables with numeric values
+num1=10
+num2=5
+
+# Perform basic arithmetic operations
+sum=$((num1 + num2))
+difference=$((num1 - num2))
+product=$((num1 * num2))
+quotient=$((num1 / num2))
+remainder=$((num1 % num2))
+
+# Display the results
+echo "Number 1: $num1"
+echo "Number 2: $num2"
+echo "Sum: $sum"
+echo "Difference: $difference"
+echo "Product: $product"
+echo "Quotient: $quotient"
+echo "Remainder: $remainder"
+
+# Perform some more complex calculations
+power_of_2=$((num1 ** 2))
+square_root=$(awk "BEGIN{ sqrt=$num2; print sqrt }")
+
+# Display the results
+echo "Number 1 raised to the power of 2: $power_of_2"
+echo "Square root of number 2: $square_root"
+```
+
+**Step 3:** We run the following command to make our file executable:
+
+**`sudo chmod +x calculations.sh`**
+
+**Step 4:** We run our script using the command below:
+
+**`./calculations.sh`**
 
 The output of executing our script is shown in the image below:
