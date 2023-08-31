@@ -10,7 +10,7 @@ A [Shell Script](https://en.wikipedia.org/wiki/Shell_script) is a collection of 
 
 1. **Variables:** Bash allows a user to define and work with variables. Variables can store various data types such as numbers strings and arrays. Values can be assigned to variables using the **=** operator. And a variable's value can be accessed by preceeding the variable name with a **$** sign.
 
-For example, to assign value to a variable we wnter the command below:
+For example, to assign value to a variable we enter the command below:
 
 **`name="Moyosore"`**
 
