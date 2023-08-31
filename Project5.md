@@ -159,3 +159,61 @@ As can be seen in the output image below, executing the script prompts for our n
 ![first script output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8a86437-d69f-4688-9728-6d131720cc23)
 
 ### <br>Directory Manipulation and Navigation<br/>
+
+Here, we will be writing a shell script that will display the current directory, create a new directory called _**"my_directory"**_, switch to that directory, create two files inside it, list the files, move back one level up, remove the _**"my_directory"**_ and its contents and then finally list the files in the current directory again. We will implement thsi with the following steps:
+
+**Step 1:** We create a file that will be named _**navigating-linux-filesystem.sh**_
+
+**Step 2:** We copy and paste the following block of code into the file we created:
+
+```
+#!/bin/bash
+
+# Display current directory
+echo "Current directory: $PWD"
+
+# Create a new directory
+echo "Creating a new directory..."
+mkdir my_directory
+echo "New directory created."
+
+# Change to the new directory
+echo "Changing to the new directory..."
+cd my_directory
+echo "Current directory: $PWD"
+
+# Create some files
+echo "Creating files..."
+touch file1.txt
+touch file2.txt
+echo "Files created."
+
+# List the files in the current directory
+echo "Files in the current directory:"
+ls
+
+# Move one level up
+echo "Moving one level up..."
+cd ..
+echo "Current directory: $PWD"
+
+# Remove the new directory and its contents
+echo "Removing the new directory..."
+rm -rf my_directory
+echo "Directory removed."
+
+# List the files in the current directory again
+echo "Files in the current directory:"
+ls
+```
+
+**Step 3:** We run the following command to make our file executable:
+
+**`sudo chmod +x navigating-linux-filesystem.sh`**
+
+**Step 4:** We run our script using the command below:
+
+**`./navigating-linux-filesystem.sh`**
+
+The output of executing our script is shown in the image below:
+
