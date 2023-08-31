@@ -283,7 +283,7 @@ The output of executing our script is shown in the image below:
 
 ### <br>Working with Numbers and Calculations<br/>
 
-In this aspect of project, we will write a shell script that defines two variables (_**num1 and num2**_) with numeric values, performs basic arithmetic operations (addition, subtraction, multiplication, division and modulus) and displays the results. Our shell script will also perform more complex calculations such as raising num1 to the power of 2 and calculating the square root of num2, and then it will display these results as well. We will implement this with the following steps: 
+In this aspect of the project, we will write a shell script that defines two variables (_**num1 and num2**_) with numeric values, performs basic arithmetic operations (addition, subtraction, multiplication, division and modulus) and displays the results. Our shell script will also perform more complex calculations such as raising num1 to the power of 2 and calculating the square root of num2, and then it will display these results as well. We will implement this with the following steps: 
 
 **Step 1:** On our terminal, we create a file that will be named _**calculations.sh**_ using the follwing command:
 
