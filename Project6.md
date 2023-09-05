@@ -1,6 +1,8 @@
 ## DOCUMENTATION FOR IMPLEMENTING CLIENT SERVER ARCHITECTURE USING MySQL DATABASE MANAGEMENT SYSTEM (DBMS)
 
-This project demonstrates the implementation of a basic client-server setup using MySQL RDBMS. Client-Server refers to a model of computing where the client requests a service and the server provides it. It is an architecture in which two or more computers (i.e. seperate entities of client which is the computer sending the request and server which is the computer responding to the request) communicate through the internet over a network to send and receive requests between one another.
+This project demonstrates the implementation of a basic client-server setup using MySQL RDBMS. Client-Server refers to a model of computing where the client requests a service and the server provides it. It is an architecture in which two or more computers (i.e. seperate entities of **Client** which is the computer sending the request and **Server** which is the computer responding to the request) communicate through the internet over a network to send and receive requests between one another. 
+
+In our set up, we shall establish connection over a Local Network between our Client Machine and our MySQL Server Database Engine. And we shall ascertain that we can perform SQL queries remotely on the SQL Database Server via our Client.
 
 We shall proceed with the by utilizing the following steps:
 
@@ -18,14 +20,36 @@ We shall proceed with the by utilizing the following steps:
 
 ### <br>Step 2: Install MySQL *Server* Software on **`mysql server`** <br/>
 
-We install MySQL _**Server**_ Software on our "Server" by entering the following command:
+ We install MySQL _**Server**_ Software on our "Server" by entering the following command:
 
 **`$ sudo apt install mysql-server -y`**
 
 ![mysql-server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/21156ca6-0d05-4df8-82c2-6cde82ccf4dc)
 
 
-### <br>Step 3: Install MySQL *Client* Software on **`mysql client`** <br/>
+### <br>Step 3: Configure **`mysql server`** and Create New User<br/>
+
+Next, we need to configure our MySQL Database System. To enable access from **`mysql client`**, we will need to create a dedicated user on **`mysql server`**. But first of all, we need to set a password for the root user and then we need to run a script that is preinstalled with MySQL to help prevent security exploits and secure access to our database system by modifying some less secure default settings. We do this by executing the following:
+
+```
+# Log into MySQL Console
+$ sudo mysql
+
+# Set Password for the Root User
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password8';
+
+# Exit MySQL Console
+mysql> exit
+```
+
+Next we run the MySQL interactive script by executing the following command:
+
+**`$ sudo mysql_secure_installation`**
+
+As shown in the output image below, we use the **`VALIDATE PASSWORD PLUGIN`** to set up a strong password for MySQL root user and we follow all the prompts to choose our preferences.
+
+
+### <br>Step 4: Install MySQL *Client* Software on **`mysql client`** <br/>
 
 And then we install MySQL _**Client**_ Software on our "Client" by entering the following command:
 
@@ -34,7 +58,7 @@ And then we install MySQL _**Client**_ Software on our "Client" by entering the 
 ![mysql-client installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/072942eb-73e3-4575-8a2a-8d065e2d4ec5)
 
 
-### <br>Step 4: Edit Inbound rules on **`mysql server`** to enable access to **`mysql client`** traffic. <br/>
+### <br>Step 5: Edit Inbound rules on **`mysql server`** to enable access to **`mysql client`** traffic. <br/>
 
 By default, both of our running EC2 virtual servers are located in the same local virtual network, so they can communicate with each other via local IP addresses. We use the  local IP address of MySQL _**Server**_ to connect from  MySQL _**Client**_ . But for this connection to occur, we will need to create a new entry in **"Inbound rules"** in MySQL _**Server**_ Security Groups. We execute this by doing the following:
 
@@ -59,4 +83,4 @@ d. Choose **Save rules** at the bottom right corner of the page
 ![edit inbound rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f6d4240d-229e-4388-8cd7-1cd4957f12a9)
 
 
-### <br>Step 5: Configure **`mysql server`** to allow connections from remote hosts <br/>
+### <br>Step 6: Configure **`mysql server`** to allow connections from remote hosts <br/>
