@@ -27,7 +27,7 @@ We shall proceed with the by utilizing the following steps:
 ![mysql-server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/21156ca6-0d05-4df8-82c2-6cde82ccf4dc)
 
 
-### <br>Step 3: Configure **`mysql server`** and Create New User<br/>
+### <br>Step 3: Configure **`mysql server`** and Create a New User<br/>
 
 Next, we need to configure our MySQL Database System. To enable access from **`mysql client`**, we will need to create a dedicated user on **`mysql server`**. But first of all, we need to set a password for the root user and then we need to run a script that is preinstalled with MySQL to help prevent security exploits and secure access to our database system by modifying some less secure default settings. We do this by executing the following:
 
@@ -42,11 +42,27 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'P
 mysql> exit
 ```
 
+![set root mysql password and exit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3a5af8c1-32b6-42b9-9517-838f0b109d25)
+
 Next we run the MySQL interactive script by executing the following command:
 
 **`$ sudo mysql_secure_installation`**
 
 As shown in the output image below, we use the **`VALIDATE PASSWORD PLUGIN`** to set up a strong password for MySQL root user and we follow all the prompts to choose our preferences.
+
+![mysql script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0890ddb7-fbbc-4871-8786-bdf50d81e61e)
+
+Next we create a new user by executing the following:
+
+```
+# Log into MySQL Console
+$ sudo mysql
+
+# Create a New User
+ mysql> CREATE USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password8';
+
+# Exit MySQL Console
+mysql> exit
 
 
 ### <br>Step 4: Install MySQL *Client* Software on **`mysql client`** <br/>
