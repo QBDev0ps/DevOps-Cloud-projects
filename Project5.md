@@ -1,6 +1,6 @@
 ## DOCUMENTATION FOR SHELL SCRIPTING (HANDS ON) PROJECT
 
-This project shows to write shell scripts. It covers essential aspects of Shell Scripting from basic commands to advanced automation and it enables us learn how to streamline tasks and boost productivity.
+This project shows how to write shell scripts. It covers essential aspects of Shell Scripting from basic commands to advanced automation and it enables us learn how to streamline tasks and boost productivity.
 
 ### <br>Introduction to Shell Scripting and User Inputs<br/>
 
