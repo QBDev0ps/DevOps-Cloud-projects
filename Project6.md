@@ -4,7 +4,7 @@ This project demonstrates the implementation of a basic client-server setup usin
 
 In our set up, we shall establish connection over a Local Network between our Client Machine and our MySQL Server Database Engine. And we shall ascertain that we can perform SQL queries remotely on the SQL Database Server via our Client.
 
-We shall proceed with the by utilizing the following steps:
+We shall proceed by utilizing the following steps:
 
 
 ### <br>Step 1: Create and Configure two Linux Based Virtual Servers<br/>
