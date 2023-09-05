@@ -56,13 +56,34 @@ Next we create a new user by executing the following:
 
 ```
 # Log into MySQL Console
-$ sudo mysql
+$ sudo mysql -p
 
 # Create a New User
- mysql> CREATE USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Password8';
+ mysql> CREATE USER 'new_user'@'%' IDENTIFIED WITH mysql_native_password BY 'Password8@';
+```
+
+Then the next thing to do is to execute the following to grant requisite privileges to **`new_user`** and then flush privileges to free up cached server memory.
+
+```
+# Grant Privileges to created user
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'%' WITH GRANT OPTION;
+
+# Flush Privileges
+mysql> FLUSH PRIVILEGES;
 
 # Exit MySQL Console
 mysql> exit
+```
+
+Finally, we use the following to confirm our abilty to log into the MySQl console with our newly created user:
+
+```
+#Log in with newly created user
+$ sudo mysql -u new_user -p
+
+# Exit MySQL Console
+mysql> exit
+```
 
 
 ### <br>Step 4: Install MySQL *Client* Software on **`mysql client`** <br/>
