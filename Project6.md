@@ -62,7 +62,7 @@ As shown in the output image below, we use the **`VALIDATE PASSWORD PLUGIN`** to
 
 ![mysql script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0890ddb7-fbbc-4871-8786-bdf50d81e61e)
 
-Next we create a new user by executing the following:
+Next we create a new user (and we can also decide to create a new database) by executing the following:
 
 ```
 # Log into MySQL Console
@@ -70,12 +70,15 @@ $ sudo mysql -p
 
 # Create a New User
  mysql> CREATE USER 'new_user'@'%' IDENTIFIED WITH mysql_native_password BY 'Password8@';
+
+# Create a New database
+CREATE DATABASE project6_db;
 ```
 
 Then the next thing to do is to execute the following to grant requisite privileges to **`new_user`** and then flush privileges to free up cached server memory.
 
 ```
-# Grant Privileges to created user
+# Grant Privileges to created user on all Databases
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'%' WITH GRANT OPTION;
 
 # Flush Privileges
@@ -130,3 +133,24 @@ To implement this we enter the following command to open MySQL Config file:
 Then as shown in the image below, we change **"bind-address** from **‘127.0.0.1’** to **‘0.0.0.0’**.
 
 Afterwards, on our keyboard, we type **`:wq!`** and press **`enter`** to exit.
+
+
+### <br>Step 7: Connect Remotely from **`mysql client`** to **`mysql server`** Database Engine <br/>
+
+We perform this function from **`mysql client`**  without using **`SSH`**. Rather, we use the **`MySQL`** utility along with the private IP Address of **`mysql server`** by executing the following command:
+
+**`$ sudo mysql -h 172.31.25.87 -u new_user -p`**
+
+
+### <br>Step 8: Confirm Successful Connection <br/>
+
+To confirm that we have successfuly connected to the remote **`mysql server`**, we run the following SQL query:
+
+**`mysql> Show databases;`**
+
+The output image below shows that we were able to deploy a fully functional MySQL client-server set up.
+
+
+### CONCLUSION
+
+We have been able to successfully complete the project. We started our project implementation by creating and configuring two linux based virtual servers. Then we installed **`mysql server`** software on the first machine and **`mysql client`** software on the second machine respectively .The next thing we did was to configure our MySQL server by setting a root password, running a security script, creating a new user and creating a new database. After this we edited indound rules on MySQl server to enable connection from MySQL Client. In addition, we configured **`mysql server`** to allow connections from remote hosts. We subsequently initiated a remote connection from **`mysql client`** to **`mysql server`** Database Engine and we were able to successfully confirm the connection by running an SQL query.
