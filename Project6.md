@@ -160,11 +160,11 @@ To confirm that we have successfuly connected to the remote **`mysql server`**, 
 
 **`mysql> Show databases;`**
 
-The output image below shows that we were able to deploy a fully functional MySQL client-server set up.
+If we look closely at the output image below, we can see the database we created **`project6_db`** listed among other databases. This image shows that we were able to deploy a fully functional MySQL client-server set up.
 
 ![confirm connection](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a2e66f77-b904-4da4-8f2a-eea479cc655f)
 
 
-### CONCLUSION
+### <br>CONCLUSION<br/>
 
 We have been able to successfully complete the project. We started our project implementation by creating and configuring two linux based virtual servers. Then we installed MySQL _**Server**_ Software on the first machine designated as the MySQL Database Server and MySQL _**Client**_ Software on the second machine designated as the machine that will send connection requests. The next thing we did was to configure our **`mysql server`** by setting a root password, running a security script, creating a new user and creating a new database. After this we edited inbound rules on **`mysql server`** to enable connection from **`mysql client`**. In addition, we configured **`mysql server`** to allow connections from remote hosts. We subsequently initiated a remote connection from **`mysql client`** to **`mysql server`** Database Engine and we were able to successfully confirm the connection by running an SQL query.
