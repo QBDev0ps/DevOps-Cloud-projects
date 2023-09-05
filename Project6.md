@@ -149,7 +149,7 @@ To complete this process, we need to restart the MySQl service with the followin
 
 ### <br>Step 7: Connect Remotely from **`mysql client`** to **`mysql server`** Database Engine <br/>
 
-We perform this function from **`mysql client`**  without using **`SSH`**. Rather, we use the **`MySQL`** utility along with the private IP Address of **`mysql server`** by executing the following command:
+We perform this function from **`mysql client`**  without using **SSH**. Rather, we use the **MySQL** utility along with the private IP Address of **`mysql server`** by executing the following command:
 
 **`$ sudo mysql -h 172.31.25.87 -u new_user -p`**
 
