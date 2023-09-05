@@ -27,7 +27,17 @@ We shall proceed with the by utilizing the following steps:
 ![mysql-server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/21156ca6-0d05-4df8-82c2-6cde82ccf4dc)
 
 
-### <br>Step 3: Configure **`mysql server`** and Create a New User<br/>
+### <br>Step 3: Install MySQL *Client* Software on **`mysql client`** <br/>
+
+And then we install MySQL _**Client**_ Software on our "Client" by entering the following command:
+
+**`$ sudo apt install mysql-client -y`**
+
+![mysql-client installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/072942eb-73e3-4575-8a2a-8d065e2d4ec5)
+
+
+
+### <br>Step 4: Configure **`mysql server`** and Create a New User<br/>
 
 Next, we need to configure our MySQL Database System. To enable access from **`mysql client`**, we will need to create a dedicated user on **`mysql server`**. But first of all, we need to set a password for the root user and then we need to run a script that is preinstalled with MySQL to help prevent security exploits and secure access to our database system by modifying some less secure default settings. We do this by executing the following:
 
@@ -86,15 +96,6 @@ mysql> exit
 ```
 
 
-### <br>Step 4: Install MySQL *Client* Software on **`mysql client`** <br/>
-
-And then we install MySQL _**Client**_ Software on our "Client" by entering the following command:
-
-**`$ sudo apt install mysql-client -y`**
-
-![mysql-client installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/072942eb-73e3-4575-8a2a-8d065e2d4ec5)
-
-
 ### <br>Step 5: Edit Inbound rules on **`mysql server`** to enable access to **`mysql client`** traffic. <br/>
 
 By default, both of our running EC2 virtual servers are located in the same local virtual network, so they can communicate with each other via local IP addresses. We use the  local IP address of MySQL _**Server**_ to connect from  MySQL _**Client**_ . But for this connection to occur, we will need to create a new entry in **"Inbound rules"** in MySQL _**Server**_ Security Groups. We execute this by doing the following:
@@ -121,3 +122,11 @@ By default, both of our running EC2 virtual servers are located in the same loca
 
 
 ### <br>Step 6: Configure **`mysql server`** to allow connections from remote hosts <br/>
+
+To implement this we enter the following command to open MySQL Config file:
+
+**`$ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
+
+Then as shown in the image below, we change **"bind-address** from **‘127.0.0.1’** to **‘0.0.0.0’**.
+
+Afterwards, on our keyboard, we type **`:wq!`** and press **`enter`** to exit.
