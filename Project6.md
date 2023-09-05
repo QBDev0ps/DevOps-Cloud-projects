@@ -36,13 +36,13 @@ And then we install MySQL _**Client**_ Software on our "Client" by entering the 
 
 ### <br>Step 4: Edit Inbound rules on **`mysql server`** to enable access to **`mysql client`** traffic. <br/>
 
-By default, both of our running EC2 virtual servers are located in the same local virtual network, so they can communicate with each other via local IP addresses. We use the  local IP address of MySQL _**Server**_ to connect from  MySQL _**Client**_ . MySQL _**Server**_ uses TCP port **3306** by default, so we will have to open it by creating a new entry in **"Inbound rules"** in MySQL _**Server**_ Security Groups. For extra security, we shall not allow all IP addresses to reach **`mysql server`** we shall allow access only to the specific local IP address of **`mysql client`** . To execute this we do the following: 
+By default, both of our running EC2 virtual servers are located in the same local virtual network, so they can communicate with each other via local IP addresses. We use the  local IP address of MySQL _**Server**_ to connect from  MySQL _**Client**_ . But for this connection to occur, we will need to create a new entry in **"Inbound rules"** in MySQL _**Server**_ Security Groups. We execute this by doing the following:
 
-**i.** In the AWS navigation pane, we choose **Instances**.
+**i.** In the AWS  console navigation pane, we choose **Instances**.
 
 **ii.** We Select our **`mysql server`** instance and in bottom half of the screen, choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-**iii.** For the security group to which we will add the new rule, choose the security group ID link to open the security group.
+**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
 **iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
 
@@ -50,8 +50,13 @@ By default, both of our running EC2 virtual servers are located in the same loca
 
 a. Choose **Add rule**.
 
-b. For **Type**, choose **HTTP**.
+b. For **Port Range**, enter **3306** which is the default TCP port for MySQL _**Server**_.
 
-c. Under **Source**, leave it at **Custom** and select **0.0.0.0/0** in the space with the magnifying glass.
+c. In the space with the magnifying glass under **Source**, we type in the Private IP Address of **`mysql client`**. This gives an added layer of security by ensuring that no other IP addresses can reach **`mysql server`** except **`mysql client`**.
 
 d. Choose **Save rules** at the bottom right corner of the page
+
+![edit inbound rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f6d4240d-229e-4388-8cd7-1cd4957f12a9)
+
+
+### <br>Step 5: Configure **`mysql server`** to allow connections from remote hosts <br/>
