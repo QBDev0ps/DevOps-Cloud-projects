@@ -72,13 +72,13 @@ By default, both of our running EC2 virtual servers are located in the same loca
 
 **v.** On the **Edit inbound rules** page, we do the following:
 
-+. Choose **Add rule**.
++ Choose **Add rule**.
 
-b. For **Port Range**, enter **3306** which is the default TCP port for MySQL _**Server**_.
++ For **Port Range**, enter **3306** which is the default TCP port for MySQL _**Server**_.
 
-c. In the space with the magnifying glass under **Source**, we type in the Private IP Address of **`mysql client`**. This gives an added layer of security by ensuring that no other IP addresses can reach **`mysql server`** except **`mysql client`**.
++ In the space with the magnifying glass under **Source**, we type in the Private IP Address of **`mysql client`**. This gives an added layer of security by ensuring that no other IP addresses can reach **`mysql server`** except **`mysql client`**.
 
-d. Choose **Save rules** at the bottom right corner of the page
++ Choose **Save rules** at the bottom right corner of the page
 
 ![edit inbound rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f6d4240d-229e-4388-8cd7-1cd4957f12a9)
 
