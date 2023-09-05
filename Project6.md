@@ -72,7 +72,7 @@ $ sudo mysql -p
  mysql> CREATE USER 'new_user'@'%' IDENTIFIED WITH mysql_native_password BY 'Password8@';
 
 # Create a New database
-CREATE DATABASE project6_db;
+mysql> CREATE DATABASE project6_db;
 ```
 
 Then the next thing to do is to execute the following to grant requisite privileges to **`new_user`** and then flush privileges to free up cached server memory.
@@ -88,6 +88,10 @@ mysql> FLUSH PRIVILEGES;
 mysql> exit
 ```
 
+The output image for the above executed commands is shown below:
+
+![mysql server configuration_create user-db-privileges](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/941aa61e-85a9-422c-86fb-94cdba9f36d8)
+
 Finally, we use the following to confirm our abilty to log into the MySQl console with our newly created user:
 
 ```
@@ -97,6 +101,8 @@ $ sudo mysql -u new_user -p
 # Exit MySQL Console
 mysql> exit
 ```
+
+![confirm new user](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0cc95c6b-a265-4321-87f6-7d1f18c0cd41)
 
 
 ### <br>Step 5: Edit Inbound rules on **`mysql server`** to enable access to **`mysql client`** traffic. <br/>
@@ -130,9 +136,15 @@ To implement this we enter the following command to open MySQL Config file:
 
 **`$ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
 
-Then as shown in the image below, we change **"bind-address** from **‘127.0.0.1’** to **‘0.0.0.0’**.
+Then as shown in the image below, we press **`i`** to enter insert mode and change **"bind-address** from **‘127.0.0.1’** to **‘0.0.0.0’**.
 
-Afterwards, on our keyboard, we type **`:wq!`** and press **`enter`** to exit.
+![configure mysql config file to allow connection from remote hosts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/08e62559-c942-491f-9cf5-712b178ab820)
+
+Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+To complete this process, we need to restart the MySQl service with the following command:
+
+**`$sudo systemctl restart mysql`**
 
 
 ### <br>Step 7: Connect Remotely from **`mysql client`** to **`mysql server`** Database Engine <br/>
