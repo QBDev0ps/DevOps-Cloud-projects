@@ -72,7 +72,7 @@ By default, both of our running EC2 virtual servers are located in the same loca
 
 **v.** On the **Edit inbound rules** page, we do the following:
 
-a. Choose **Add rule**.
++. Choose **Add rule**.
 
 b. For **Port Range**, enter **3306** which is the default TCP port for MySQL _**Server**_.
 
