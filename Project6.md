@@ -16,10 +16,14 @@ We shall proceed with the by utilizing the following steps:
 
 ### <br>Step 2: Install MySQL *Server* Software on **`mysql server`** <br/>
 
-We install MySQL _**Server Software**_ on our "Server" by entering the following command:
+We install MySQL _**Server**_ Software on our "Server" by entering the following command:
 
 **`$ sudo apt install mysql-server -y`**
 
 
 
 ### <br>Step 3: Install MySQL *Client* Software on **`mysql client`** <br/>
+
+And then we install MySQL _**Client**_ Software on our "Client" by entering the following command:
+
+**`$ sudo apt install mysql-client -y`**
