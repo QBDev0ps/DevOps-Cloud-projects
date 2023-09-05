@@ -136,7 +136,7 @@ To implement this we enter the following command to open MySQL Config file:
 
 **`$ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
 
-Then as shown in the image below, we press **`i`** to enter insert mode and change **"bind-address** from **‘127.0.0.1’** to **‘0.0.0.0’**.
+Then as shown in the image below, we press **`i`** to enter insert mode and change **"bind-address"** from **‘127.0.0.1’** to **‘0.0.0.0’**.
 
 ![configure mysql config file to allow connection from remote hosts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/08e62559-c942-491f-9cf5-712b178ab820)
 
