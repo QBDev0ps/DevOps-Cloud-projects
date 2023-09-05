@@ -39,7 +39,7 @@ And then we install MySQL _**Client**_ Software on our "Client" by entering the 
 
 ### <br>Step 4: Configure **`mysql server`** and Create a New User<br/>
 
-Next, we need to configure our MySQL RDBMS. To enable access from **`mysql client`**, we will need to create a dedicated user on **`mysql server`**. But first of all, we need to set a password for the root user and then we need to run a script that is preinstalled with MySQL to help prevent security exploits and secure access to our database system by modifying some less secure default settings. We do this by executing the following:
+Next, we shall configure our MySQL RDBMS. To enable access from **`mysql client`**, we will need to create a dedicated user on **`mysql server`**. But first of all, we shall set a password for the root user and then we will proceed to run a script that is preinstalled with MySQL to help prevent security exploits and secure access to our database system by modifying some less secure default settings. We do this by executing the following:
 
 ```
 # Log into MySQL Console
