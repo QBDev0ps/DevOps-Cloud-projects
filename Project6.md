@@ -162,6 +162,8 @@ To confirm that we have successfuly connected to the remote **`mysql server`**, 
 
 The output image below shows that we were able to deploy a fully functional MySQL client-server set up.
 
+![confirm connection](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a2e66f77-b904-4da4-8f2a-eea479cc655f)
+
 
 ### CONCLUSION
 
