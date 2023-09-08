@@ -122,13 +122,21 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **`$ sudo vi /etc/apache2/ports.conf`**
 
-+  Add a new listen directive for Port 8000. As shown in the image below, we press **`i`** to enter insert mode and then we add the listen directive. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
++  Add a new listen directive for Port 8000. As shown in the image below, we press **`i`** to enter insert mode and then we add the listen directive.
+
+![listen directive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb0d956c-facc-4e2d-9791-08049a49685c)
+
++  Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
 + The next thing we do is to open the file /etc/apache2/sites-available/000-default.conf by entering the following command:
 
 **`$ sudo vi /etc/apache2/sites-available/000-default.conf`**
 
-+ Then, as shown in the image below, we press **`i`** to enter insert mode and change Port 80 on the virtual host to 8000. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
++ Then, as shown in the image below, we press **`i`** to enter insert mode and change Port 80 on the virtual host to 8000.
+
+![change port](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d72288d6-0b75-4131-9227-0a4bfa96c526)
+
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
 + To complete this process, we restart the Apache service with the command below:
 
@@ -141,7 +149,7 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **`$ sudo vi index.html`**
 
-+ We sitch the Vi editor to insert mode by pressing **`i`** and then we paste in the following block of code. We obtain the Public IP adress of our EC2 instance by copying it from the AWS management console.
++ We switch the Vi editor to insert mode by pressing **`i`** and then we paste in the following block of code. We obtain the Public IP adress of our EC2 instance by copying it from the AWS management console.
 
 ```
         <!DOCTYPE html>
@@ -151,7 +159,7 @@ In this step, we will commence by configuring **Apache** web server to serve con
         </head>
         <body>
             <h1>Welcome to my EC2 instance</h1>
-            <p>Public IP: YOUR_PUBLIC_IP</p>
+            <p>Public IP: 13.48.56.0</p>
         </body>
         </html>
 ```
@@ -173,9 +181,14 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 Then the next step is to go to our browser to open our website URL via our public IP address (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
 
-**`http://16.170.229.201:80`**
+**`http://13.48.56.0:8000`**
 
 The ouput from the browser is as shown in the image below:
 
+![browser output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e92dcc55-9280-496d-b6c9-f10d9ad6a213)
+
+<br>**iv.** **We repeat the whole of Step 4 for the second EC2 Instance**<br/>
+
 
 ### <br>Step 5: Configure Nginx as a Load Balancer<br/>
+
