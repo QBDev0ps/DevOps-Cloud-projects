@@ -83,19 +83,31 @@ After we have provisioned both of our servers and we have opened the necessary p
 
 +  To initiate connection to the webserver, we click on Instance ID. Then at the top of the page, we click on connect.
 
-+  Next, we copy the ssh command under **"Example:"** as shown in the image below:
+![Connect to Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/044430ee-72f6-4249-8db1-1b437d703b7b)
+
++  Next, we click on **"SSH Client"** tab and we copy the ssh command under **"Example:"** as shown in the image below:
+
+![copy ssh command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e7e4fc04-b354-40a3-b467-175a85620741)
 
 +  Next, we open a terminal on our ssh client in our local machine, then we change directory **`cd`** to the downloads folder and then we paste and execute the ssh command we copied in the previous step.
 
+  ![cd Downloads](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f199e640-a738-45d1-94d1-eca0bdbb5d94)
+
 +  We click on **Enter** and type **Yes** when prompted. This connects us to a terminal on our EC2 instance.
+
+  ![connection to instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/813e8bf9-7776-4a5b-922c-a99b4228c265)
 
 **iii.** The next thing to do is to install apache. However, before we install apache we need to firstly update our ubuntu web server. So we concatenate both the web server update and apache installation commands by executing the following: 
 
 **`$ sudo apt update -y &&  sudo apt install apache2 -y`**
 
+![install apache](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bc06ed4e-319c-4f2d-956c-8b0744a07bc4)
+
 To verify that the apache2 service is running on our server, we enter the following command:
 
 **`$ sudo systemctl status apache2`**
+
+![check apache status](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5264da13-fd9c-46bf-a7db-512a0e69a871)
 
 **iv.** We repeat **ii.** and **iii.** above for the second EC2 instance as well.
 
