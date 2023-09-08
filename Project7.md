@@ -189,6 +189,10 @@ The ouput from the browser is as shown in the image below:
 
 <br>**iv.** **We repeat the whole of Step 4 for the second EC2 Instance**<br/>
 
+The output image from the browser for our second Apache web server is as shown below:
+
+![browser output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ff274060-c229-429d-b6b6-72a950670d25)
+
 
 ### <br>Step 5: Configure Nginx as a Load Balancer<br/>
 
@@ -200,9 +204,13 @@ The ouput from the browser is as shown in the image below:
 
 **`$ sudo apt update -y && sudo apt install nginx -y`**
 
+![install nginx](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46f2eaeb-54e4-45fa-b50c-f2e798573966)
+
 **iv.** To verify that Nginx is installed and active, we run the command below:
 
 **`$ sudo systemctl status nginx`**
+
+
 
 **v.** Our next step is to open the Nginx configuration file with the following command:
 
@@ -255,7 +263,9 @@ Then the final step is to go to our browser to paste in the public IP address of
 
 **`http://13.48.56.0:8000`**
 
-As shown in the output image below, the pages we see are the same pages served by both of our webservers.
+As shown in the output images below, the pages we see are the same pages served by both of our webservers. When you reload the page the load balancer serves content from our webservers one after the other.
+
+
 
 
 
