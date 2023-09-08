@@ -162,3 +162,19 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **iii.** **Overriding the Default html file of Apache Web Server**
 
++ We execute the command below to replace the default html file with our new html file:
+
+ **`$ sudo cp -f ./index.html /var/www/html/index.html`**
+
++ And subsequently, we run the following command to restart the web server and load the new configuration:
+
+**`$ sudo systemctl restart apache2`**
+
+Then the next step is to go to our browser to open our website URL via our public IP address (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+
+**`http://16.170.229.201:80`**
+
+The ouput from the browser is as shown in the image below:
+
+
+### <br>Step 5: Configure Nginx as a Load Balancer<br/>
