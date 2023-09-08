@@ -210,8 +210,7 @@ The ouput from the browser is as shown in the image below:
 
 We copy and paste in the configuration file below to configure nginx to act as a load balancer. As can be seen in the file, necessary information like Public Ip and Port Number for our two web servers are provided.
 
-```
-        
+    ```
         upstream backend_servers {
 
             # your are to replace the public IP and Port to that of your webservers
