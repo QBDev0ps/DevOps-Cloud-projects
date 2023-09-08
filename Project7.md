@@ -181,7 +181,7 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **`$ sudo systemctl restart apache2`**
 
-Then the next step is to go to our browser to open our webpage URL via our public IP address (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+Then the next step is to go to our browser to open our webpage URL via our public IP address (syntax is: **`http://<Public-IP-Address>:8000`**). In our own use case, we enter the following url in our browser:
 
 **`http://13.48.56.0:8000`**
 
@@ -266,7 +266,7 @@ The following serves to break down the configuration file above and explain in m
 
 **`sudo systemctl restart nginx`**
 
-**viii.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+**viii.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:8000`**). In our own use case, we enter the following url in our browser:
 
 **`http://13.53.54.159:8000`**
 
