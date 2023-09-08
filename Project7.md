@@ -179,7 +179,7 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **`$ sudo systemctl restart apache2`**
 
-Then the next step is to go to our browser to open our website URL via our public IP address (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+Then the next step is to go to our browser to open our webpage URL via our public IP address (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
 
 **`http://13.48.56.0:8000`**
 
@@ -191,4 +191,73 @@ The ouput from the browser is as shown in the image below:
 
 
 ### <br>Step 5: Configure Nginx as a Load Balancer<br/>
+
+**i.** To begin, we provision a new EC2 instance of Ubuntu 22.04. Then we ensure Port 80 on this server is opened to accept traffic from anywhere. We follow **Step 1** and **Step 2** above to implement this.
+
+**ii.** Next we connect to our newly provisioned server via an SSH client. We follow **Step 3** above to carry this out.
+
+**iii.** The subsequent step is to install Nginx. But we need to first of all update the server. so we concatenate both actions by executing the following command:
+
+**`$ sudo apt update -y && sudo apt install nginx -y`**
+
+**iv.** To verify that Nginx is installed and active, we run the command below:
+
+**`$ sudo systemctl status nginx`**
+
+**v.** Our next step is to open the Nginx configuration file with the following command:
+
+**`$ sudo vi /etc/nginx/conf.d/loadbalancer.conf`**
+
+We copy and paste in the configuration file below to configure nginx to act as a load balancer. As can be seen in the file, necessary information like Public Ip and Port Number for our two web servers are provided.
+
+```
+        
+        upstream backend_servers {
+
+            # your are to replace the public IP and Port to that of your webservers
+            server 127.0.0.1:8000; # public IP and port for webserver 1
+            server 127.0.0.1:8000; # public IP and port for webserver 2
+
+        }
+
+        server {
+            listen 80;
+            server_name <your load balancer's public IP addres>; # provide your load balancers public IP address
+
+            location / {
+                proxy_pass http://backend_servers;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+        }
+    ```
+
+The following serves to break down the configuration file above and explain in more detail:
+
++ _**upstream backend_servers**_ defines a group of back end servers (our two web servers).
+
++ The **server** lines inside the **upstream** block lists the ports and public IP addresses of both of our backend webservers.
+
++ **proxy_pass** inside the location block sets up the load balancing, passing the request to the back end servers.
+
++ The **proxy_set_header** lines pass necessary headers to the backend servers to correctly haandle the requests.
+
+
+We proceed to execute the command below to test our configuration:
+
+**`$ sudo nginx -t`**
+
+Provided there are no errors, we execute the following command to restart the Nginx service and load our new configuration.
+
+**`sudo systemctl restart nginx`**
+
+Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+
+**`http://13.48.56.0:8000`**
+
+As shown in the output image below, the pages we see are the same pages served by both of our webservers.
+
+
+
 
