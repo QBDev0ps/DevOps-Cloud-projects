@@ -116,7 +116,7 @@ To verify that the apache2 service is running on our server, we enter the follow
 
 In this step, we will commence by configuring **Apache** web server to serve content on Port 8000 rather than on its default port which is Port 80. The next thing we'll do is to create a new **index.html** file. The file will contain code to display the public IP of the EC2 instance. We will then override Apache webserver's default html file with our new file. 
 
-**i.** **Configuring Apache to serve content on Port 8000**
+<br>**i.** **Configuring Apache to serve content on Port 8000**<br/>
 
 + We use the Vi editor to open the apache ports configuration file /etc/apache2/ports.conf by entering the following command: 
 
@@ -134,7 +134,8 @@ In this step, we will commence by configuring **Apache** web server to serve con
 
 **`$ sudo systemctl restart apache2`**
 
-**ii.** **Creating our New HTML File**
+
+<br>**ii.** **Creating our New HTML File**<br/>
 
 + We open a new index.html file by entering the following command:
 
@@ -160,7 +161,7 @@ In this step, we will commence by configuring **Apache** web server to serve con
 **`$ sudo chown www-data:www-data ./index.html`**
 
 
-**iii.** **Overriding the Default html file of Apache Web Server**
+<br>**iii.** **Overriding the Default html file of Apache Web Server**<br/>
 
 + We execute the command below to replace the default html file with our new html file:
 
