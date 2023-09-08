@@ -18,14 +18,26 @@ To execute our project, we will be provisioning two EC2 instances running Ubuntu
 
 We begin by spinning up 2 EC2 Instances of Ubuntu Server: We launch our EC2 instances by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
-**i.** Under **Name**, we provide a unique name for each of our web servers.
+**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+**ii.** Under **Name and tags**, we provide a unique name for each of our web servers.
+
+![Name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a28dd984-04f5-4dc9-bcf2-d9fc4a5812fb)
   
-**ii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 20.04 LTS (HVM).
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 20.04 LTS (HVM).
+
+![Application and OS Image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ae844641-2121-49de-99e3-67c8621c4027)
   
-**iii.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
   
-**iv.** And then finally, we click on **"Launch Instance"**
+**v.** And then finally, we click on **"Launch Instance"**
   
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
 
 ### <br>Step 2: Open Port 8000<br/>
 
