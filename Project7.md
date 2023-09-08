@@ -12,7 +12,7 @@ Nginx is a very versatile and efficient software that can act as a web server or
 
 ### <br>Setting up a Basic Load Balancer<br/>
 
-To execute our project, we will be provisioning two EC2 instances running Ubuntu 22.04 and then we will install apache web server in them. We will open port 8000 to allow traffic from anywhere and finally update the default page of the web servers to display their public IP address. Next, we shall provision another EC2 instance running Ubuntu 22.04, this time, we will install Nginx and configure it to act as a load balancer distributing traffic across the web servers. We will do these by implementing the following steps:
+To execute our project, we will be provisioning two EC2 instances running Ubuntu 22.04 and then we will install apache web server in them. We will open Port 8000 to allow traffic from anywhere and finally update the default page of the web servers to display their public IP address. Next, we shall provision another EC2 instance running Ubuntu 22.04, this time, we will install Nginx and configure it to act as a load balancer distributing traffic across the web servers. We will do these by implementing the following steps:
 
 
 ### <br>Step 1: Provisioning EC2 Instance<br/>
