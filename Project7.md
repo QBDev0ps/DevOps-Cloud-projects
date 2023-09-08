@@ -113,3 +113,52 @@ To verify that the apache2 service is running on our server, we enter the follow
 
 
 ### <br>Step 4: Configure Apache to Serve a Page Showing its Public IP<br/>
+
+In this step, we will commence by configuring **Apache** web server to serve content on Port 8000 rather than on its default port which is Port 80. The next thing we'll do is to create a new **index.html** file. The file will contain code to display the public IP of the EC2 instance. We will then override Apache webserver's default html file with our new file. 
+
+**i.** **Configuring Apache to serve content on Port 8000**
+
++ We use the Vi editor to open the apache ports configuration file /etc/apache2/ports.conf by entering the following command: 
+
+**`$ sudo vi /etc/apache2/ports.conf`**
+
++  Add a new listen directive for Port 8000. As shown in the image below, we press **`i`** to enter insert mode and then we add the listen directive. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
++ The next thing we do is to open the file /etc/apache2/sites-available/000-default.conf by entering the following command:
+
+**`$ sudo vi /etc/apache2/sites-available/000-default.conf`**
+
++ Then, as shown in the image below, we press **`i`** to enter insert mode and change Port 80 on the virtual host to 8000. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
++ To complete this process, we restart the Apache service with the command below:
+
+**`$ sudo systemctl restart apache2`**
+
+**ii.** **Creating our New HTML File**
+
++ We open a new index.html file by entering the following command:
+
+**`$ sudo vi index.html`**
+
++ We sitch the Vi editor to insert mode by pressing **`i`** and then we paste in the following block of code. We obtain the Public IP adress of our EC2 instance by copying it from the AWS management console.
+
+```
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>My EC2 Instance</title>
+        </head>
+        <body>
+            <h1>Welcome to my EC2 instance</h1>
+            <p>Public IP: YOUR_PUBLIC_IP</p>
+        </body>
+        </html>
+```
+
++ We change the file ownership rights of the index.html file by executing the following command:
+
+**`$ sudo chown www-data:www-data ./index.html`**
+
+
+**iii.** **Overriding the Default html file of Apache Web Server**
+
