@@ -77,4 +77,4 @@ To verify that the apache2 service is running on our server, we enter the follow
 **iv.** We repeat **ii.** and **iii.** above for the second EC2 instance as well.
 
 
-
+### <br>Step 4: Configure Apache to Serve a Page Showing its Public IP<br/>
