@@ -279,7 +279,7 @@ As shown in the output images below, the pages we see are the same pages served 
 When you reload the browser page the load balancer serves content from our webservers one after the other. This is due to the **Load Balancing Algorithm** which distributes requests sequentially to each server in our server pool to ensure efficient utilization of resources and improve overall system performance, reliability and availability.
 
 
-### CONCLUSION
+### <br>CONCLUSION<br/>
 
 We have been able to successfully complete this project. We started our project implementation by provisioning two EC2 instances of Ubuntu Linux Server 20.04 LTS (HVM). The next thing we did was to add a rule to the Security Group of both of our Web Servers to open Port 8000 to allow traffic from anywhere. We susequently connected to our servers via an SSH client and we installed Apache web server software on them. Next, on both of our web servers, we configured Apache to Serve a Page Showing its Public IP Address. We then provisioned a fresh EC2 instance of Ubuntu 22.04 and we ensured Port 80 on this server was opened to accept traffic from anywhere. We proceeded to open the Nginx configuration file and pasted in our Load Balancer configuration. We concluded the project by pasting in our Load Balancer Public IP Adresss into our browser and we were sucessfully served pages from both of our Apache web servers. Thank you.
 
