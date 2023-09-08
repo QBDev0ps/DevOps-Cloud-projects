@@ -14,6 +14,7 @@ Nginx is a very versatile and efficient software that can act as a web server or
 
 To execute our project, we will be provisioning two EC2 instances running Ubuntu 22.04 and then we will install apache web server in them. We will open port 8000 to allow traffic from anywhere and finally update the default page of the web servers to display their public IP address. Next, we shall provision another EC2 instance running Ubuntu 22.04, this time, we will install Nginx and configure it to act as a load balancer distributing traffic across the web servers. We will do these by implementing the following steps:
 
+
 ### <br>Step 1: Provisioning EC2 Instance<br/>
 
 We begin by spinning up 2 EC2 Instances of Ubuntu Server: We launch our EC2 instances by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
@@ -45,11 +46,19 @@ We will be running our Web Servers on Port 8000 while the Load Balancer will be 
 
 **i.** In the AWS  console navigation pane, we choose **Instances**.
 
+![Instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75d2208f-d030-4f44-9667-23521332607f)
+
 **ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
 
 **iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
 **iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
 
 **v.** On the **Edit inbound rules** page, we do the following:
 
@@ -61,7 +70,9 @@ We will be running our Web Servers on Port 8000 while the Load Balancer will be 
 
 + Click on **Save rules** at the bottom right corner of the page.
 
-  
+![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
+
+
 ### <br>Step 3: Install Apache Web Server<br/>
 
 After we have provisioned both of our servers and we have opened the necessary ports, we will proceed to install apache software on both servers. However, we must first connect to each of the web servers via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our web servers. We carry this out by doing the following:
