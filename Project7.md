@@ -164,6 +164,8 @@ In this step, we will commence by configuring **Apache** web server to serve con
         </html>
 ```
 
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+  
 + We change the file ownership rights of the index.html file by executing the following command:
 
 **`$ sudo chown www-data:www-data ./index.html`**
@@ -210,13 +212,13 @@ The output image from the browser for our second Apache web server is as shown b
 
 **`$ sudo systemctl status nginx`**
 
-
+![nginx status](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/af7693b6-c51f-4442-8c0d-6dad5c6923f6)
 
 **v.** Our next step is to open the Nginx configuration file with the following command:
 
 **`$ sudo vi /etc/nginx/conf.d/loadbalancer.conf`**
 
-We copy and paste in the configuration file below to configure nginx to act as a load balancer. As can be seen in the file, necessary information like Public Ip and Port Number for our two web servers are provided.
++ We copy and paste in the configuration file below to configure nginx to act as a load balancer. As can be seen in the file, necessary information like Public IP and Port Number for our two web servers are provided. We also need to provide the Public IP address of our Nginx Load Balancer
 
     ```
         upstream backend_servers {
@@ -240,6 +242,8 @@ We copy and paste in the configuration file below to configure nginx to act as a
         }
     ```
 
+![load balancer configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3510d76d-2e35-4a3d-b68d-5e0247877645)
+
 The following serves to break down the configuration file above and explain in more detail:
 
 + _**upstream backend_servers**_ defines a group of back end servers (our two web servers).
@@ -250,22 +254,34 @@ The following serves to break down the configuration file above and explain in m
 
 + The **proxy_set_header** lines pass necessary headers to the backend servers to correctly haandle the requests.
 
-
-We proceed to execute the command below to test our configuration:
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+  
+**vi.** We proceed to execute the command below to test our configuration:
 
 **`$ sudo nginx -t`**
 
-Provided there are no errors, we execute the following command to restart the Nginx service and load our new configuration.
+![test nginx](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/04d67601-33a2-47a6-8304-cda7ab75e818)
+
+**vii.** Provided there are no errors, we execute the following command to restart the Nginx service and load our new configuration.
 
 **`sudo systemctl restart nginx`**
 
-Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
+**viii.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **http://<Public-IP-Address>:8000**). In our own use case, we enter the following url in our browser:
 
-**`http://13.48.56.0:8000`**
+**`http://13.53.54.159:8000`**
 
 As shown in the output images below, the pages we see are the same pages served by both of our webservers. When you reload the page the load balancer serves content from our webservers one after the other.
 
+![load balancer output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ef913106-1e30-4839-b905-bce89253837c)
 
+![load balancer output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9e7ced46-4804-496c-9c24-8f29dfddb53a)
+
+When you reload the browser page the load balancer serves content from our webservers one after the other. This is due to the **Load Balancing Algorithm** which distributes requests sequentially to each server in our server pool to ensure efficient utilization of resources and improve overall system performance, reliability and availability.
+
+
+### CONCLUSION
+
+We have been able to successfully complete this project. We started our project implementation by provisioning two EC2 instances of Ubuntu Server.
 
 
 
