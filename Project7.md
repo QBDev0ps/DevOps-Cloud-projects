@@ -224,14 +224,14 @@ The output image from the browser for our second Apache web server is as shown b
         upstream backend_servers {
 
             # your are to replace the public IP and Port to that of your webservers
-            server 127.0.0.1:8000; # public IP and port for webserver 1
-            server 127.0.0.1:8000; # public IP and port for webserver 2
+            server 13.48.56.0:8000; # public IP and port for webserver 1
+            server 16.170.206.144:8000; # public IP and port for webserver 2
 
         }
 
         server {
             listen 80;
-            server_name <your load balancer's public IP addres>; # provide your load balancers public IP address
+            server_name 13.53.54.159; # provide your load balancers public IP address
 
             location / {
                 proxy_pass http://backend_servers;
