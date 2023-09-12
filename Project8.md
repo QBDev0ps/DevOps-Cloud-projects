@@ -50,7 +50,7 @@ We will be running our Web Server on Port 8000 while the Load Balancer will be r
 
 **ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/13c46f47-1bf7-4563-909a-7d2eb30ac749)
 
 **iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
@@ -82,20 +82,19 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 +  To initiate connection to the webserver, we click on Instance ID. Then at the top of the page, we click on connect.
 
-![Connect to Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/044430ee-72f6-4249-8db1-1b437d703b7b)
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/13c46f47-1bf7-4563-909a-7d2eb30ac749)
 
 +  Next, we click on **"SSH Client"** tab and we copy the ssh command under **"Example:"** as shown in the image below:
 
-![copy ssh command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e7e4fc04-b354-40a3-b467-175a85620741)
+![connect to instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cdcd7d88-efb6-475a-beea-836895b4e8e9)
 
 +  Next, we open a terminal on our ssh client in our local machine, then we change directory **`cd`** to the downloads folder and then we paste and execute the ssh command we copied in the previous step.
 
-  ![cd Downloads](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f199e640-a738-45d1-94d1-eca0bdbb5d94)
+  ![ssh to connect instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6592a5ce-f740-4b40-8328-0e8eb9a56562)
 
 +  We click on **Enter** and type **Yes** when prompted. This connects us to a terminal on our EC2 instance.
 
-  ![connection to instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/813e8bf9-7776-4a5b-922c-a99b4228c265)
-
+ ![instance connected](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2cb0cd87-3c12-420e-a126-4b0ebdd57f66)
 
  #### <br>Step 4: Prepare and Execute Script<br/>
 
