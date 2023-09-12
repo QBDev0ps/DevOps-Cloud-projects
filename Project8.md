@@ -101,7 +101,7 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 To prepare and execute our script, we shall carry out the actions below:
 
-**i.** We proceed to create and open a file called install.sh file by entering the following command:
+**i.** We proceed to create and open a file called _**install.sh**_ file by entering the following command:
 
 **`$ sudo vi install.sh`**
 
@@ -161,6 +161,93 @@ sudo systemctl restart apache2
 
   **`$ sudo ./install.sh PUBLIC_IP`**
 
-#### <br>Step 5: Prepare and Execute Script<br/>
+#### <br>Step 5: Provision, install and configure Second Web Server<br/>
+
+Now that we have completed the installation and configuration of our first Web Server, we repeat **Steps 1-4** above to deploy and configure our second Apache Web Server.
 
 ### <br>Automating the Deployment and Configuration of Nginx Load Balancer<br/>
+
+Having successfully deployed and configured our two backend web servers, we now move on to the set up of our Nginx Load Balancer. However, as a prerequisite, we need to provision an EC2 instance running Ubuntu Linux 22.04 after which we will add a rule to the Security group to open port 80 and allow access to anywhere. Then finally, we will initiate a connection to the Load Balancer via the terminal so that we can execute the script that will install Nginx and configure it as a load balancer for our two backend servers. To run our shell script, we will implement the following:
+
+**i.** To begin, we provision a new EC2 instance of Ubuntu 22.04. Then we ensure Port 80 on this server is opened to accept traffic from anywhere. We follow **Step 1** and **Step 2** above to implement this.
+
+**ii.** Next we connect to our newly provisioned server via an SSH client. We follow **Step 3** above to carry this out.
+
+**iii.** On the terminal, we create and open a file called _**nginx.sh**_ by entering the following command:
+
+**`$ sudo vi nginx.sh`**
+
+**iv.** We switch the Vi editor to insert mode by pressing **`i`** and then we copy and paste in the following script:
+
+```
+
+#!/bin/bash
+
+######################################################################################################################
+##### This automates the configuration of Nginx to act as a load balancer
+##### Usage: The script is called with 3 command line arguments. The public IP of the EC2 instance where Nginx is installed
+##### the webserver urls for which the load balancer distributes traffic. An example of how to call the script is shown below:
+##### ./configure_nginx_loadbalancer.sh PUBLIC_IP Webserver-1 Webserver-2
+#####  ./configure_nginx_loadbalancer.sh 127.0.0.1 192.2.4.6:8000  192.32.5.8:8000
+############################################################################################################# 
+
+PUBLIC_IP=$1
+firstWebserver=$2
+secondWebserver=$3
+
+[ -z "${PUBLIC_IP}" ] && echo "Please pass the Public IP of your EC2 instance as the argument to the script" && exit 1
+
+[ -z "${firstWebserver}" ] && echo "Please pass the Public IP together with its port number in this format: 127.0.0.1:8000 as the second argument to the script" && exit 1
+
+[ -z "${secondWebserver}" ] && echo "Please pass the Public IP together with its port number in this format: 127.0.0.1:8000 as the third argument to the script" && exit 1
+
+set -x # debug mode
+set -e # exit the script if there is an error
+set -o pipefail # exit the script when there is a pipe failure
+
+
+sudo apt update -y && sudo apt install nginx -y
+sudo systemctl status nginx
+
+if [[ $? -eq 0 ]]; then
+    sudo touch /etc/nginx/conf.d/loadbalancer.conf
+
+    sudo chmod 777 /etc/nginx/conf.d/loadbalancer.conf
+    sudo chmod 777 -R /etc/nginx/
+
+    
+    echo " upstream backend_servers {
+
+            # your are to replace the public IP and Port to that of your webservers
+            server  "${firstWebserver}"; # public IP and port for webserser 1
+            server "${secondWebserver}"; # public IP and port for webserver 2
+
+            }
+
+           server {
+            listen 80;
+            server_name "${PUBLIC_IP}";
+
+            location / {
+                proxy_pass http://backend_servers;   
+            }
+    } " > /etc/nginx/conf.d/loadbalancer.conf
+fi
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+```
+
+**v.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**vi.** We change permissions to make the file executable by running the command below:
+
+**`$ sudo chmod +x nginx.sh`**
+
+**vii.** We run our Shell Script by executing the following command:
+
+  **`$ ./nginx.sh PUBLIC_IP Webserver-1 Webserver-2`**
+
+
+  ### <br>CONCLUSION<br/>
