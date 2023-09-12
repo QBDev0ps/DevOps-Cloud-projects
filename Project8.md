@@ -24,7 +24,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
-**ii.** Under **Name and tags**, we provide a unique name for each of our web servers.
+**ii.** Under **Name and tags**, we provide a unique name for our web server.
 
 ![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/07d96d27-7f7a-4bca-898a-c3dd8370e19b)
   
@@ -156,13 +156,27 @@ sudo systemctl restart apache2
 
 **`$ sudo chmod +x user-input.sh`**
 
-**v.** We run our Shell Script by executing the following command:
+**v.** As stated before, running our shell script requires an argument which is the Public IP adress of the launched EC2 instance. We run our Shell Script by executing the following command:
 
-  **`$ sudo ./install.sh PUBLIC_IP`**
+  **`$ sudo ./install.sh 13.51.194.67`**
+
+ ![run script web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/209af177-e9d9-49aa-ae45-d271cfcc5b84)
+
+Then the next step is to go to our browser to open our webpage URL via our public IP address (syntax is: **`http://<Public-IP-Address>:8000`**). In our own use case, we enter the following url in our browser:
+
+**`http://13.51.194.67:8000`**
+  
+  As observed in the image below, our script runs successfully and we are able to see the desired output.
+
+  ![browser output webserver 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9276636d-471c-4c81-bdc0-600bddd26e12)
 
 #### <br>Step 5: Provision, install and configure Second Web Server<br/>
 
 Now that we have completed the installation and configuration of our first Web Server, we repeat **Steps 1-4** above to deploy and configure our second Apache Web Server.
+
+The image below shows that we were able to get the desired output in our browser after running our script on the second EC2 instance.
+
+![browser output web server 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/21d43870-ca56-4d3c-a837-3d3818a3003f)
 
 ### <br>Automating the Deployment and Configuration of Nginx Load Balancer<br/>
 
@@ -244,9 +258,12 @@ sudo systemctl restart nginx
 
 **`$ sudo chmod +x nginx.sh`**
 
-**vii.** We run our Shell Script by executing the following command:
+**vii.** Our shell script takes three arguments. The first argument is the Public IP address of the EC2 instance where our Nginx Load Balancer is installed. The second argument is the URL of our first backend Web Server while the third argument is the URL of our second backend Web Server. We run our Shell Script by executing the following command:
 
-  **`$ ./nginx.sh PUBLIC_IP Webserver-1 Webserver-2`**
+  **`$  ./nginx.sh 13.51.85.125 13.51.194.67:8000 13.48.193.97:8000`**
 
+Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:80`**). In our own use case, we enter the following URL in our browser:
+
+**`http://13.51.85.125:80`**
 
   ### <br>CONCLUSION<br/>
