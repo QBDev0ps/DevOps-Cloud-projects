@@ -97,6 +97,69 @@ After we have provisioned our server and we have opened the necessary port, we m
   ![connection to instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/813e8bf9-7776-4a5b-922c-a99b4228c265)
 
 
- ### <br>Step 3: Prepare and Execute Script<br/>
+ ### <br>Step 4: Prepare and Execute Script<br/>
 
- 
+To prepare and execute our script, we shall carry out the actions below:
+
+**i.** We proceed to create and open a file called install.sh file by entering the following command:
+
+**`$ sudo vi install.sh`**
+
+**ii.** We switch the Vi editor to insert mode by pressing **`i`** and then we copy and paste in the following script:
+
+```
+#!/bin/bash
+
+####################################################################################################################
+##### This automates the installation and configuring of apache webserver to listen on port 8000
+##### Usage: Call the script and pass in the Public_IP of your EC2 instance as the first argument as shown below:
+######## ./install_configure_apache.sh 127.0.0.1
+####################################################################################################################
+
+set -x # debug mode
+set -e # exit the script if there is an error
+set -o pipefail # exit the script when there is a pipe failure
+
+PUBLIC_IP=$1
+
+[ -z "${PUBLIC_IP}" ] && echo "Please pass the public IP of your EC2 instance as an argument to the script" && exit 1
+
+sudo apt update -y &&  sudo apt install apache2 -y
+
+sudo systemctl status apache2
+
+if [[ $? -eq 0 ]]; then
+    sudo chmod 777 /etc/apache2/ports.conf
+    echo "Listen 8000" >> /etc/apache2/ports.conf
+    sudo chmod 777 -R /etc/apache2/
+
+    sudo sed -i 's/<VirtualHost \*:80>/<VirtualHost *:8000>/' /etc/apache2/sites-available/000-default.conf
+
+fi
+sudo chmod 777 -R /var/www/
+echo "<!DOCTYPE html>
+        <html>
+        <head>
+            <title>My EC2 Instance</title>
+        </head>
+        <body>
+            <h1>Welcome to my EC2 instance</h1>
+            <p>Public IP: "${PUBLIC_IP}"</p>
+        </body>
+        </html>" > /var/www/html/index.html
+
+sudo systemctl restart apache2
+```
+
+**iii.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**iv.** We change permissions to make the file executable by running the command below:
+
+**`$ sudo chmod +x user-input.sh`**
+
+**v.** We run our Shell Script by executing the following command:
+
+  **`$ sudo ./install.sh PUBLIC_IP`**
+
+
+### <br>Automating the Deployment and Configuration of Nginx Load Balancer<br/>
