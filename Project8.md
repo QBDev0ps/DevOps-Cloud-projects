@@ -172,7 +172,7 @@ Then the next step is to go to our browser to open our webpage URL via our publi
 
   ![browser output webserver 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9276636d-471c-4c81-bdc0-600bddd26e12)
 
-#### <br>Step 5: Provision, install and configure Second Web Server<br/>
+#### <br>Step 5: Install and Configure Second Web Server<br/>
 
 Now that we have completed the installation and configuration of our first Web Server, we repeat **Steps 1-4** above to deploy and configure our second Apache Web Server.
 
