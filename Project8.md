@@ -150,6 +150,8 @@ echo "<!DOCTYPE html>
 sudo systemctl restart apache2
 ```
 
+![sudo install sh script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/52f05c63-14f1-4fa3-ab92-3321af3ee828)
+
 **iii.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
 **iv.** We change permissions to make the file executable by running the command below:
@@ -283,3 +285,5 @@ As shown in the output images below, the pages we see are the same pages served 
 With the power of scripting, we have been able to automate a simple Load Balancer set up. When you reload the browser page the load balancer serves content from our webservers one after the other. This is due to the **Load Balancing Algorithm** which distributes requests sequentially to each server in our server pool to ensure efficient utilization of resources and improve overall system performance, reliability and availability.
 
   ### <br>CONCLUSION<br/>
+
+We have been able to successfully complete this project. The goal of our project was to automate a simple Load Balancer configuration with Shell Scripting. We began our project implementation by provisioning two EC2 instances of Ubuntu Linux Server 20.04 LTS (HVM). The next thing we did was to add a rule to the Security Group of both of our Web Servers to open Port 8000 to allow traffic from anywhere. We subsequently connected to our servers via an SSH client and we ran our shell script to install and configure Apache Web Server to serve a page showing its Public IP Address. We then provisioned a fresh EC2 instance of Ubuntu 22.04 and we ensured Port 80 on this server was opened to accept traffic from anywhere. Next, we proceeded to run another shell sccript to install Nginx and configure it as a Load Balancer to serve content from both of our backend Apache Web Servers. We concluded the project by pasting our Load Balancer Public IP Adresss into our browser and we were sucessfully served pages from both of our Apache web servers one after the other. Thank you.
