@@ -184,7 +184,11 @@ Having successfully deployed and configured our two backend web servers, we now 
 
 **i.** To begin, we provision a new EC2 instance of Ubuntu 22.04. Then we ensure Port 80 on this server is opened to accept traffic from anywhere. We follow **Step 1** and **Step 2** above to implement this.
 
+![load balancer instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fa94b953-8e2c-4243-bcde-ac5285db2343)
+
 **ii.** Next we connect to our newly provisioned server via an SSH client. We follow **Step 3** above to carry this out.
+
+![ssh load balancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a399f1a2-1f43-46b5-90bd-d56b9c795391)
 
 **iii.** On the terminal, we create and open a file called _**nginx.sh**_ by entering the following command:
 
@@ -252,6 +256,8 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
+![load balancer shell script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1d8f1a62-0526-421f-918d-e1d52b10b690)
+
 **v.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
 **vi.** We change permissions to make the file executable by running the command below:
@@ -262,8 +268,18 @@ sudo systemctl restart nginx
 
   **`$  ./nginx.sh 13.51.85.125 13.51.194.67:8000 13.48.193.97:8000`**
 
+  ![execute nginx load balancer shell script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fa153f09-7966-4e35-b856-402b4a8607df)
+
 Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:80`**). In our own use case, we enter the following URL in our browser:
 
 **`http://13.51.85.125:80`**
+
+As shown in the output images below, the pages we see are the same pages served by both of our webservers. When you reload the page the load balancer serves content from our webservers one after the other.
+
+![load balancer browser output 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4edb2dc4-d268-40eb-a55b-f054fff06070)
+
+![load balancer browser output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/52fd74dc-cb9b-40ec-9b6b-3d9d96990811)
+
+With the power of scripting, we have been able to automate a simple Load Balancer set up. When you reload the browser page the load balancer serves content from our webservers one after the other. This is due to the **Load Balancing Algorithm** which distributes requests sequentially to each server in our server pool to ensure efficient utilization of resources and improve overall system performance, reliability and availability.
 
   ### <br>CONCLUSION<br/>
