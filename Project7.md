@@ -266,9 +266,9 @@ The following serves to break down the configuration file above and explain in m
 
 **`sudo systemctl restart nginx`**
 
-**viii.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:8000`**). In our own use case, we enter the following url in our browser:
+**viii.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:80`**). In our own use case, we enter the following url in our browser:
 
-**`http://13.53.54.159:8000`**
+**`http://13.53.54.159:80`**
 
 As shown in the output images below, the pages we see are the same pages served by both of our webservers. When you reload the page the load balancer serves content from our webservers one after the other.
 
