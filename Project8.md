@@ -16,7 +16,7 @@ In this project, we will be automating the entire process of deploying two back 
 
 To begin our project we need to deploy and configure two Apache Web Servers. To do this, we will provision an EC2 instance running Ubuntu 22.04 then we will execute a script that will update our EC2 instance and afterwards, the script will install apache web server on it. Subsequently, the script will configure apache to listen on Port 8000 and finally update the default page of the web servers to display their public IP address. Our script will pass one argument which will be the Public IP adress of the EC2 instance that is being provisioned. To run our script, we will implement the following steps:
 
-### <br>Step 1: Provisioning EC2 Instance<br/>
+#### <br>Step 1: Provisioning EC2 Instance<br/>
 
 We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
@@ -40,7 +40,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
-### <br>Step 2: Open Port 8000<br/>
+#### <br>Step 2: Open Port 8000<br/>
 
 We will be running our Web Server on Port 8000 while the Load Balancer will be running on Port 80. We will therefore need to open Port 8000 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Web Server:
 
@@ -72,7 +72,7 @@ We will be running our Web Server on Port 8000 while the Load Balancer will be r
 
 ![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
 
-### <br>Step 3: Connect to the Webserver via the Terminal using the SSH Client<br/>
+#### <br>Step 3: Connect to the Webserver via the Terminal using the SSH Client<br/>
 
 After we have provisioned our server and we have opened the necessary port, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our web server. We carry this out by doing the following:
 
@@ -97,7 +97,7 @@ After we have provisioned our server and we have opened the necessary port, we m
   ![connection to instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/813e8bf9-7776-4a5b-922c-a99b4228c265)
 
 
- ### <br>Step 4: Prepare and Execute Script<br/>
+ #### <br>Step 4: Prepare and Execute Script<br/>
 
 To prepare and execute our script, we shall carry out the actions below:
 
@@ -161,5 +161,6 @@ sudo systemctl restart apache2
 
   **`$ sudo ./install.sh PUBLIC_IP`**
 
+#### <br>Step 5: Prepare and Execute Script<br/>
 
 ### <br>Automating the Deployment and Configuration of Nginx Load Balancer<br/>
