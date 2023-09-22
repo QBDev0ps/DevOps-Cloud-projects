@@ -67,7 +67,7 @@ d. Choose **Save rules** at the bottom right corner of the page
 
 Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet.
 
-To verify that the apache2 webpage is accessible locally from our ubuntu machine, we run the following command:
+To verify that the nginx webpage is accessible locally from our ubuntu machine, we run the following command:
 
 **`$ curl http://localhost:80`**   or  **`$ curl http://127.0.0.1:80`**
 
