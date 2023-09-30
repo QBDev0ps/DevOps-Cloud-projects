@@ -17,3 +17,5 @@ In terms of deploying tiers of a web solution, the **Three-tier Architecture** i
 The **Three-tier Architecture** is a client-server architecture pattern that consists of three seperate layers.
 
 ![3 tier](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1ec51fa2-569f-4155-8310-1a24f9e80ef6)
+
+
