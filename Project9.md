@@ -9,3 +9,5 @@ This project sonsists of two parts:
 1. Configure storage infastructure on two Linux OS based (Web and Database) servers.
    
 2. Implement a basic web solution by installing WordPress and connecting it to a remote MySQL database server.
+
+WordPress is a free and open-source content management system written in **PHP** and paired with **MySQL** or **MariaDB** as its backend Relational Database Management System (RDBMS)
