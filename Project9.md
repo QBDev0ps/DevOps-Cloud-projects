@@ -36,7 +36,7 @@ In the execution of this project, our three tier architecture shall be:
 
 To begin our project we need to deploy and configure LVM for our Linux based Web and Database servers. We do this by implementing the following steps:
 
-#### <br>Step 1: Provisioning EC2 Instance<br/>
+#### <br>Step 1: Provision EC2 Instance<br/>
 
 We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our Web Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
@@ -59,3 +59,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 **v.** And then finally, we click on **"Launch Instance"**
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
+#### <br>Step 2: Create and attach EBS Volumes to EC2 Web Server Instance<br/>
+
+The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux Web Server instance and then we attach the EBS volumes to our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html) 
