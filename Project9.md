@@ -31,3 +31,31 @@ In the execution of this project, our three tier architecture shall be:
 2. An EC2 Linux Server to serve as a Web Server that will host our WordPress website.
    
 3. An EC2 Linux Server to serve as our Database Server.
+
+### <br>Implementing LVM on Linux Servers (Web and Database Servers)<br/>
+
+To begin our project we need to deploy and configure LVM for our Linux based Web and Database servers. We do this be implementing the following steps:
+
+#### <br>Step 1: Provisioning EC2 Instance<br/>
+
+We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our Web Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+**ii.** Under **Name and tags**, we provide a unique name for our web server.
+
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/07d96d27-7f7a-4bca-898a-c3dd8370e19b)
+  
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 22.04 LTS (HVM).
+
+![Application and OS Image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ae844641-2121-49de-99e3-67c8621c4027)
+
+**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+  
+**v.** And then finally, we click on **"Launch Instance"**
+  
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
