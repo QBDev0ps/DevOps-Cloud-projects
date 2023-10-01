@@ -95,3 +95,4 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 ![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
 
 **iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
+
