@@ -25,5 +25,9 @@ The **Three-tier Architecture** is a client-server architecture pattern that con
 **3. Data Access Layer (DAL)**: Also known as the Management Layeror Database Layer. This is where the information processed by the application is stored and managed. This can be a Database server such as PostgreSQL, MySQL, MariaDB etc. or  a File System Server such as FTP Server, NFS Server etc.
 
 In the execution of this project, our three tier architecture shall be:
+
 1. A Laptop or PC to serve as a Client.
-2. 
+   
+2. An EC2 Linux Server to serve as a Web Server that will host our WordPress website.
+   
+3. An EC2 Linux Server to serve as our Database Server.
