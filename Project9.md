@@ -34,7 +34,7 @@ In the execution of this project, our three tier architecture shall be:
 
 ### <br>Implementing LVM on Linux Servers (Web and Database Servers)<br/>
 
-To begin our project we need to deploy and configure LVM for our Linux based Web and Database servers. We do this be implementing the following steps:
+To begin our project we need to deploy and configure LVM for our Linux based Web and Database servers. We do this by implementing the following steps:
 
 #### <br>Step 1: Provisioning EC2 Instance<br/>
 
@@ -46,11 +46,11 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 
 **ii.** Under **Name and tags**, we provide a unique name for our web server.
 
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/07d96d27-7f7a-4bca-898a-c3dd8370e19b)
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a121b805-be6a-4e01-8be2-698e194d8909)
   
-**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 22.04 LTS (HVM).
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 9 (HVM).
 
-![Application and OS Image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ae844641-2121-49de-99e3-67c8621c4027)
+![Application and OS Images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/86ef4789-366a-4319-b4f2-709f305fa7f1)
 
 **iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
