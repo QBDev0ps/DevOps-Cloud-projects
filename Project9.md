@@ -60,7 +60,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
-#### <br>Step 2: Create and Attach EBS Volumes to EC2 Web Server Instance<br/>
+#### <br>Step 2: Create EBS Volumes<br/>
 
 The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) 
 
@@ -78,6 +78,8 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 **iv.** We repeat **i-iii** above twice to create two more Elastic Block Store (EBS) Volumes.
 
+#### <br>Step 3: Attach EBS Volumes to EC2 Web Server Instance<br/>
+
 After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll down in the navigation pane and click on **"Volumes"** under **"Elastic Block Store"**.
@@ -88,3 +90,8 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 ![Attach Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32ec447b-5d02-4328-8582-528573bb3667)
 
+**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Web Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
+
+![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
+
+**iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
