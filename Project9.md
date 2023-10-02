@@ -114,7 +114,7 @@ Subsequently, we inspect what block devices are attached to the web server with 
 
 **`$ lsblk`**
 
-As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVME port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
+As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
 
 The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage devivce attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** and as can be seen, they have no mount points because they are not yet mounted.
 
@@ -123,3 +123,11 @@ We also proceed to check the **/dev/** directory with the following command:
 **`$ ls /dev/`**
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** are listed.
+
+We also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to  install the NVMe command line package, **`nvme-cli`**. by executing the following command:
+
+**`$ sudo dnf install nvme-cli -y`**
+
+Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine.
+
+**`sudo nvme list`**
