@@ -142,9 +142,9 @@ We also obtain more important information such as name, serial number, size and 
 
 ![nvme cli](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48eb3eb1-8794-4c45-84ec-97364bfd9089)
 
-Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine.
+Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine:
 
-**`sudo nvme list`**
+**`$ sudo nvme list`**
 
 ![nvme list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633d4425-ed2c-4d0f-870f-b88f77e61023)
 
