@@ -96,3 +96,30 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 **iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
 
+#### <br>Step 4: Connect to the Webserver via the Terminal using the SSH Client<br/>
+
+After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our web server. We carry this out by doing the following:
+
+**i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
+
+**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+#### <br>Step 5:Update Webserver and Inspect Attached Block Devices<br/>
+
+After connecting to our server we must first update all installed packages and their dependencies before commecing configuration. We do this by executing the following command: 
+
+**`$ sudo yum update -y`**
+
+Subsequently, we inspect what block devices are attached to the web server with the following command:
+
+**`$ lsblk`**
+
+As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVME port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
+
+The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage devivce attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** and as can be seen, they have no mount points because they are not yet mounted.
+
+We also proceed to check the **/dev/** directory with the following command: 
+
+**`$ ls /dev/`**
+
+As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** are listed.
