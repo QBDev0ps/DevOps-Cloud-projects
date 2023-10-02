@@ -120,7 +120,7 @@ As can be seen in the image below, our EBS volumes are shown using the **`nvme`*
 
 ![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
 
-The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage devivce attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** and as can be seen, they have no mount points because they are not yet mounted.
+The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage devivce attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
 
 To see all mounts and free space on our Web Server, we run the command below.
 
@@ -134,7 +134,7 @@ We also proceed to check the **/dev/** directory with the following command:
 
 ![ls dev folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/958f72cb-9144-4a5d-bcc2-f26e8ad15795)
 
-As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme1n2** and **/dev/nvme1n3** are listed.
+As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
 
 We also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
 
@@ -148,3 +148,16 @@ Then we subsequently run the command below to see additional information about t
 
 ![nvme list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633d4425-ed2c-4d0f-870f-b88f77e61023)
 
+#### <br>Step 6:Partition Disks and Install lvm2 Package<br/>
+
+In this step, we proceed to create a single partition on each of the 3 Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
+
+**`$ sudo gdisk /dev/nvme1n1`**
+
+As shown in the output image below, we enter **`w`** when the system prompts **`Command (? for help):`** and then we enter **`y`** when the system requests for input with **`Do you want to proceed? (Y/N):`**
+
+![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb05ccbe-0c2a-401c-b299-555f7f530869)
+
+We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
+
+Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the 3 disks.
