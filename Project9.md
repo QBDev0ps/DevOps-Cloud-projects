@@ -150,7 +150,7 @@ Then we subsequently run the command below to see additional information about t
 
 #### <br>Step 6:Partition Disks and Install lvm2 Package<br/>
 
-In this step, we proceed to create a single partition on each of the 3 Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
+In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
 
 **`$ sudo gdisk /dev/nvme1n1`**
 
@@ -160,8 +160,31 @@ As shown in the output image below, we enter **`?`** to list out all the availab
 
 We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
 
-Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the 3 disks.
+Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
 
 ![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47df48a1-9c8b-4dbc-b1d9-1d0a8a2ff9a0)
 
-As can be seen in the image above, we have our newly configured partitions on each of the three disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
+As can be seen in the image above, we have our newly configured partitions on each of the three (3) disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
+
+The next course of action is to install the **`lvm2`** package using the following command:
+
+**`$ sudo yum install lvm2 -y`**
+
+![lvm2 installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc915321-9fab-4aaa-9d95-66c5b13dbdcd)
+
+Then we run the command below to check for available partitions:
+
+**`$ sudo lvmdiskscan`**
+
+![sudo lvmdiskscan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/caa1ef9d-5f06-42d2-8cc8-815dbad6037b)
+
+#### <br>Step 7:Create Physical and Logical Volumes<br/>
+
+For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes to be used by LVM:
+
+```
+$ sudo pvcreate nvme1n1p1
+$ sudo pvcreate nvme2n1p1
+$ sudo pvcreate nvme2n1p1
+```
+
