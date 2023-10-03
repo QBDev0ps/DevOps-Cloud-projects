@@ -232,3 +232,14 @@ Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and 
 **`$ sudo lsblk`**
 
 ![verify entire setup](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03a9e4c8-6ac9-486a-a81c-6626f91e5bbc)
+
+To complete the process, we use **`mkfs.ext4`** to format the logical volumes (LVs) with **ext4** filesystem.
+
+```
+$ sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
+$ sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
+```
+
+![format logical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dfc6a0a3-51e4-4187-80c3-acec38b92412)
+
+#### <br>Step 8: Create Directories and Mount on Logical Volumes<br/>
