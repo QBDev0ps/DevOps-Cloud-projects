@@ -104,7 +104,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
-#### <br>Step 5:Update Webserver and Inspect Attached Block Devices<br/>
+#### <br>Step 5: Update Webserver and Inspect Attached Block Devices<br/>
 
 After connecting to our server we must first update all installed packages and their dependencies before commecing configuration. We do this by executing the following command: 
 
@@ -148,7 +148,7 @@ Then we subsequently run the command below to see additional information about t
 
 ![nvme list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633d4425-ed2c-4d0f-870f-b88f77e61023)
 
-#### <br>Step 6:Partition Disks and Install lvm2 Package<br/>
+#### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
 
 In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
 
@@ -178,7 +178,7 @@ Then we run the command below to check for available partitions:
 
 ![sudo lvmdiskscan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/caa1ef9d-5f06-42d2-8cc8-815dbad6037b)
 
-#### <br>Step 7:Create Physical and Logical Volumes<br/>
+#### <br>Step 7: Create Physical and Logical Volumes<br/>
 
 For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes (PVs) to be used by LVM:
 
@@ -196,10 +196,16 @@ Then afterwards, we verify theat the physical volumes (PVs) have been created by
 
 ![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
 
-After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-VG**
+After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
 
 **`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+![create volume group](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/658856e7-46dc-4644-829a-43ad07cd3296)
 
 And then we confirm that our volume group (VG) has been created by successfully executing the following command:
 
 **`$ sudo vgs`**
+
+![sudo vgs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c5a00c5-b2ce-477c-b8f2-c9cfd963f6ab)
+
+The next step is to create two (2) logical volumes (LVs) **apps-lv** and **logs-lv** using the **`lvcreate`** utility. For **apps-lv**, we will be using half of the PV size and it will be used to store data for the website while for **logs-lv** we will be using the remaining space left of the PV size and it will be used to store data for logs.
