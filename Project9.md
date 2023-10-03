@@ -164,4 +164,4 @@ Afterwards, we run the **`lsblk`** utility to view the newly configured partitio
 
 ![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47df48a1-9c8b-4dbc-b1d9-1d0a8a2ff9a0)
 
-As can be seen in the image above, we have our newly created partitions listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
+As can be seen in the image above, we have our newly configured partitions on each of the three disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
