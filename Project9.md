@@ -246,6 +246,27 @@ $ sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
 
 In this step, we need to create the directory to hold our website files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **apps-lv** and **logs-lv**.
 
-We use the following command to create **/var/www/html** directory to store our website application files:
+We use the following command to create the **/var/www/html** directory to store our website application files:
 
 **`$ sudo mkdir -p /var/www/html`**
+
+We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
+
+**`$ sudo mkdir -p /home/recovery/logs`**
+
+Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
+
+**`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/**
+
+**/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
+
+**`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
+
+Then enter the command below to mount **/var/log** on **apps-lv** logical volume:
+
+**`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
+
+Next, we restore the log files back into the **/var/log** directory.
+
+**`$ sudo rsync -av /home/recovery/logs/log/. /var/log`**
+
