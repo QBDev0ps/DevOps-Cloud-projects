@@ -190,10 +190,16 @@ $ sudo pvcreate /dev/nvme3n1p1
 
 ![creating physical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4071f3c7-0ecf-454d-83e2-7840f50bd764)
 
-Then afterwards, we verify theat the physical volumes have been created by executing the command below:
+Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
 
 **`$ sudo pvs`**
 
 ![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
 
-After this, we proceed to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming webdata-VG
+After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-VG**
+
+**`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+And then we confirm that our volume group (VG) has been created by successfully executing the following command:
+
+**`$ sudo vgs`**
