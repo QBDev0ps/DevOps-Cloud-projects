@@ -215,6 +215,20 @@ $ sudo lvcreate -n apps-lv -L 14G webdata-vg
 $ sudo lvcreate -n logs-lv -L 14G webdata-vg
 ```
 
+![create logical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1f653f4e-1f3b-464c-83be-d0526683f467)
+
 And then we confirm that our logical volumes have been created by successfully executing the following command:
 
 **`$ sudo lvs`**
+
+![sudo lvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d14ad131-29a7-42b9-950c-e9dda18377e8)
+
+Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and Logical Volumes (LV) with the following commands:
+
+**`$ sudo vgdisplay -v`**
+
+![sudo vgdisplay](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5168c6ad-e71b-4d9f-868c-ec2728ec95ed)
+
+**`$ sudo lsblk`**
+
+![verify entire setup](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03a9e4c8-6ac9-486a-a81c-6626f91e5bbc)
