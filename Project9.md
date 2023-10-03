@@ -154,10 +154,14 @@ In this step, we proceed to create a single partition on each of the 3 Disks usi
 
 **`$ sudo gdisk /dev/nvme1n1`**
 
-As shown in the output image below, we enter **`w`** when the system prompts **`Command (? for help):`** and then we enter **`y`** when the system requests for input with **`Do you want to proceed? (Y/N):`**
+As shown in the output image below, we enter **`?`** to list out all the available commands in the gdisk console, we enter the **`p`** command to provide information about available space in hard disk to create a new partition. Subsequently we enter the **`n`** command to create a new partition, we follow through with the prompts and then we enter **`w`** to write the partition table to disk and exit the gdisk console. When the system requests for input with **`Do you want to proceed? (Y/N):`**,  we enter **`y`** to confirm our earlier operation.
 
-![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb05ccbe-0c2a-401c-b299-555f7f530869)
+![gdisk commands](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3aa2185-2005-4604-9af3-7ff03a426b5f)
 
 We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
 
 Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the 3 disks.
+
+![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47df48a1-9c8b-4dbc-b1d9-1d0a8a2ff9a0)
+
+As can be seen in the image above, we have our newly created partitions listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
