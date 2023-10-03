@@ -278,3 +278,18 @@ We copy the UUID as shown in the above image and we open the **/etc/fstab** file
 
 **`$ sudo vi /etc/fstab`**
 
+We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+
+We test our mount configuration with the following command:
+
+**`$ sudo mount -a`**
+
+Then we reload the daemon with the command below:
+
+**`$ sudo systemctl daemon-reload`**
+
+To complete our configuration process, we verify our entire setup by executing the following command:
+
+**`$ df -h`**
+
+The output must look like what we have in the image above.
