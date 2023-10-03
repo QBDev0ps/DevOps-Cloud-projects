@@ -266,7 +266,14 @@ Then enter the command below to mount **/var/log** on **apps-lv** logical volume
 
 **`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
 
-Next, we restore the log files back into the **/var/log** directory.
+Afterwards, we restore the log files back into the **/var/log** directory.
 
 **`$ sudo rsync -av /home/recovery/logs/log/. /var/log`**
 
+The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
+
+**`$ sudo blkid`**
+
+We copy the UUID as shown in the above image and we open the ****`$ sudo blkid`**** with the following command:
+
+**`$ sudo vi /etc/fstab`**
