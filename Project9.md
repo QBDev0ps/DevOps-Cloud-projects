@@ -274,6 +274,7 @@ The next step is to use the universally unique identifier (UUID) of the device t
 
 **`$ sudo blkid`**
 
-We copy the UUID as shown in the above image and we open the ****`$ sudo blkid`**** with the following command:
+We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
 
 **`$ sudo vi /etc/fstab`**
+
