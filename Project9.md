@@ -262,13 +262,17 @@ Then we execute the following command to mount **/var/www/html/** on **apps-lv**
 
 **`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
 
+![backup log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c8fabac-607a-49fd-a538-8abdb294d780)
+
 Then enter the command below to mount **/var/log** on **apps-lv** logical volume:
 
 **`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
 
 Afterwards, we restore the log files back into the **/var/log** directory.
 
-**`$ sudo rsync -av /home/recovery/logs/log/. /var/log`**
+**`$ sudo rsync -av /home/recovery/logs/. /var/log`**
+
+![restore log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/da7a0e22-0a8f-4729-8621-f9665e9d6167)
 
 The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
 
