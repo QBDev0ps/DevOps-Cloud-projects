@@ -243,3 +243,9 @@ $ sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
 ![format logical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dfc6a0a3-51e4-4187-80c3-acec38b92412)
 
 #### <br>Step 8: Create Directories and Mount on Logical Volumes<br/>
+
+In this step, we need to create the directory to hold our website files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **apps-lv** and **logs-lv**.
+
+We use the following command to create **/var/www/html** directory to store our website application files:
+
+**`$ sudo mkdir -p /var/www/html`**
