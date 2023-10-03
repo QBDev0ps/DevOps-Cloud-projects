@@ -209,3 +209,12 @@ And then we confirm that our volume group (VG) has been created by successfully 
 ![sudo vgs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c5a00c5-b2ce-477c-b8f2-c9cfd963f6ab)
 
 The next step is to create two (2) logical volumes (LVs) **apps-lv** and **logs-lv** using the **`lvcreate`** utility. For **apps-lv**, we will be using half of the PV size and it will be used to store data for the website while for **logs-lv** we will be using the remaining space left of the PV size and it will be used to store data for logs.
+
+```
+$ sudo lvcreate -n apps-lv -L 14G webdata-vg
+$ sudo lvcreate -n logs-lv -L 14G webdata-vg
+```
+
+And then we confirm that our logical volumes have been created by successfully executing the following command:
+
+**`$ sudo lvs`**
