@@ -286,7 +286,7 @@ We copy the UUID as shown in the above image and we open the **/etc/fstab** file
 
 We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
 
-![UUID mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6ef6a5d0-0779-4f65-8a72-92757d310c92)
+![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
 
 We test our mount configuration with the following command:
 
