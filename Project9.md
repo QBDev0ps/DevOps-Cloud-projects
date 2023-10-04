@@ -360,11 +360,11 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Database S
 
 **ii.** Select the Volume you wish to attach under the Volumes list then right click and select **"Attach Volume"**.
 
-![Attach Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32ec447b-5d02-4328-8582-528573bb3667)
+![attach volume db server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/391a7639-23ef-41f4-8689-4eba74456031)
 
 **iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Database Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
 
-![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
+![attach volume 2 DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6156c4d1-065d-4304-99b0-71b8f68f40ce)
 
 **iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Database Server Instance.
 
