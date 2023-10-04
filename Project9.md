@@ -475,3 +475,34 @@ As can be seen in the image above, we have our newly configured partitions on ea
 **`$ sudo vgs`**
 
 ![sudo vgs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5214ffc4-682a-4689-a772-ee96158c0c83)
+
+**v.** The next step is to create two (2) logical volumes (LVs) **db-lv** and **logs-lv** using the **`lvcreate`** utility. For **db-lv**, we will be using half of the PV size and it will be used for database storage while for **logs-lv** we will be using the remaining space left of the PV size and it will be used to store data for logs.
+
+```
+$ sudo lvcreate -n db-lv -L 14G dbdata-vg
+$ sudo lvcreate -n logs-lv -L 14G dbdata-vg
+```
+
+![create logical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/131a20e5-2b3b-407b-b59c-537e1888642d)
+
+**vi.** And then we confirm that our logical volumes have been created by successfully executing the following command:
+
+**`$ sudo lvs`**
+
+![sudo lvs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/56ba9b5e-4487-465e-92bd-68d3251524e0)
+
+**vii.** Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and Logical Volumes (LV) with the following commands:
+
+**`$ sudo vgdisplay -v`**
+
+![sudo vgdisplay db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55f8718d-2de8-44c2-a57d-afdf68310a9d)
+
+**`$ sudo lsblk`**
+
+![verify entire setup db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/257574ab-ca72-4cf9-a17a-82f252bedd05)
+
+**viii.** To complete the process, we use **`mkfs.ext4`** to format the logical volumes (LVs) with **ext4** filesystem.
+
+**`$ sudo mkfs -t ext4 /dev/dbdata-vg/db-lv && sudo mkfs -t ext4 /dev/dbdata-vg/logs-lv`**
+
+![format logical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/33c81e0f-b165-4d2a-8d8f-05da70479146)
