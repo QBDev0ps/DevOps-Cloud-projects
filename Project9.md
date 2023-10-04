@@ -106,7 +106,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 #### <br>Step 5: Update Webserver and Inspect Attached Block Devices<br/>
 
-**i.** After connecting to our server we must first update all installed packages and their dependencies before commecing configuration. We do this by executing the following command: 
+**i.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
 
 **`$ sudo yum update -y`**
 
@@ -375,3 +375,47 @@ After we have provisioned our server and we have created and attached our EBS vo
 **i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+#### <br>Step 5: Update Database Server and Inspect Attached Block Devices<br/>
+
+**i.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
+
+**`$ sudo yum update -y`**
+
+![sudo yum update db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6d9eed39-54cb-4243-b7bb-2a7bb08727ca)
+
+**ii.** Subsequently, we inspect what block devices are attached to the DB server with the following command:
+
+**`$ lsblk`**
+
+As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
+
+![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
+
+The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage device attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
+
+**iii.** To see all mounts and free space on our Database Server, we run the command below.
+
+**`$ df -h`**
+
+![df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63742891-1c19-4932-8d8a-d5f4b98c7876)
+
+**iv.** We also proceed to check the **/dev/** directory with the following command: 
+
+**`$ ls /dev/`**
+
+![ls dev folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/958f72cb-9144-4a5d-bcc2-f26e8ad15795)
+
+As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
+
+**v.** We can also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
+
+**`$ sudo dnf install nvme-cli -y`**
+
+![nvme cli](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48eb3eb1-8794-4c45-84ec-97364bfd9089)
+
+**vi.** Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine:
+
+**`$ sudo nvme list`**
+
+![nvme list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633d4425-ed2c-4d0f-870f-b88f77e61023)
