@@ -284,7 +284,7 @@ In this step, we need to create the directory to hold our website files and then
 
 **`$ sudo vi /etc/fstab`**
 
-**ix.** We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+**ix.** We paste in the copied UUID whilst removing the leading and ending quotes and update the **/etc/fstab** file as shown in the image below:
 
 ![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
 
@@ -509,19 +509,19 @@ $ sudo lvcreate -n logs-lv -L 14G dbdata-vg
 
 #### <br>Step 8: Create Directories and Mount on Logical Volumes<br/>
 
-In this step, we need to create the directory to hold our website files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **apps-lv** and **logs-lv**.
+In this step, we need to create the directory to hold our database files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **db-lv** and **logs-lv**.
 
-**i.** We use the following command to create the **/var/www/html** directory to store our website application files:
+**i.** We use the following command to create the **/db** directory to store our database files:
 
-**`$ sudo mkdir -p /var/www/html`**
+**`$ sudo mkdir -p /db`**
 
 **ii.** We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
 
 **`$ sudo mkdir -p /home/recovery/logs`**
 
-**iii.** Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
+**iii.** Then we execute the following command to mount **/db** on **db-lv** logical volume:
 
-**`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/**
+**`$ sudo mount /dev/dbdata-vg/db-lv /db**
 
 **iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
 
@@ -531,7 +531,7 @@ In this step, we need to create the directory to hold our website files and then
 
 **v.** Then we enter the command below to mount **/var/log** on **apps-lv** logical volume:
 
-**`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
+**`$ sudo mount /dev/dbdata-vg/logs-lv /var/log`**
 
 **vi.** Afterwards, we restore the log files back into the **/var/log** directory.
 
@@ -549,7 +549,7 @@ In this step, we need to create the directory to hold our website files and then
 
 **`$ sudo vi /etc/fstab`**
 
-**ix.** We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+**ix.** We paste in the copied UUID whilst removing the leading and ending quotes and update the **/etc/fstab** file as shown in the image below:
 
 ![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
 
