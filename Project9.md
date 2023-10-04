@@ -74,7 +74,7 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 **iii.** On the **"Volume Settings"** page, we select the **"Volume Type"**, set **"Size"** as 10GB, we select the **"Availability Zone"** of our EC2 Web Server and the we click on **"Create Volume"** at the bottom right corner of the page. 
 
-![Create Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b37c54cf-22c0-4a45-827a-e58b4b7651b8)
+![Volume Settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc5ac363-e6f6-45af-9e5a-19cf3342a6ed)
 
 **iv.** We repeat **i-iii** above twice to create two more Elastic Block Store (EBS) Volumes.
 
@@ -96,7 +96,7 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 **iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
 
-#### <br>Step 4: Connect to the Webserver via the Terminal using the SSH Client<br/>
+#### <br>Step 4: Connect to the Web Server via the Terminal using the SSH Client<br/>
 
 After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our web server. We carry this out by doing the following:
 
@@ -346,11 +346,11 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 **iii.** On the **"Volume Settings"** page, we select the **"Volume Type"**, set **"Size"** as 10GB, we select the **"Availability Zone"** of our EC2 Database Server and the we click on **"Create Volume"** at the bottom right corner of the page. 
 
-![Create Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b37c54cf-22c0-4a45-827a-e58b4b7651b8)
+![Volume Settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc5ac363-e6f6-45af-9e5a-19cf3342a6ed)
 
 **iv.** We repeat **i-iii** above twice to create two more Elastic Block Store (EBS) Volumes.
 
-#### <br>Step 3: Attach EBS Volumes to EC2 Web Server Instance<br/>
+#### <br>Step 3: Attach EBS Volumes to EC2 Database Server Instance<br/>
 
 After creating the 3 EBS volumes we proceed to attach them to our EC2 Database Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 
@@ -368,7 +368,7 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Database S
 
 **iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Database Server Instance.
 
-#### <br>Step 4: Connect to the Webserver via the Terminal using the SSH Client<br/>
+#### <br>Step 4: Connect to the Database Server via the Terminal using the SSH Client<br/>
 
 After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the Database server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our Database server. We carry this out by doing the following:
 
