@@ -278,11 +278,15 @@ The next step is to use the universally unique identifier (UUID) of the device t
 
 **`$ sudo blkid`**
 
+![uuid](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8ce173d-4db6-4f0c-b7bb-b0b56349af4d)
+
 We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
 
 **`$ sudo vi /etc/fstab`**
 
 We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+
+![UUID mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6ef6a5d0-0779-4f65-8a72-92757d310c92)
 
 We test our mount configuration with the following command:
 
@@ -295,5 +299,7 @@ Then we reload the daemon with the command below:
 To complete our configuration process, we verify our entire setup by executing the following command:
 
 **`$ df -h`**
+
+![df -h final output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ca686a1-58f5-47e7-a41f-cffcab726981)
 
 The output must look like what we have in the image above.
