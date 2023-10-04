@@ -406,7 +406,7 @@ The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage dev
 
 ![ls dev folder db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55cde77f-f5a7-4581-be52-1c3b61ce979f)
 
-As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
+As can be seen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
 
 **v.** We can also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
 
@@ -456,22 +456,22 @@ As can be seen in the image above, we have our newly configured partitions on ea
 
 **`$ sudo pvcreate /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
 
-![creating physical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4071f3c7-0ecf-454d-83e2-7840f50bd764)
+![creating physical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/846dab7e-6029-46b9-8c24-181c75609f91)
 
 **ii.** Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
 
 **`$ sudo pvs`**
 
-![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
+![sudo pvs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb86fd81-9823-4244-aa23-0776c7f72a56)
 
-**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
+**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **dbdata-vg**
 
-**`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+**`$ sudo vgcreate dbdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
 
-![create volume group](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/658856e7-46dc-4644-829a-43ad07cd3296)
+![create volume group db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55905165-0d23-457c-9ef1-01aeb1c3e50c)
 
 **iv.** And then we confirm that our volume group (VG) has been created by successfully executing the following command:
 
 **`$ sudo vgs`**
 
-![sudo vgs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c5a00c5-b2ce-477c-b8f2-c9cfd963f6ab)
+![sudo vgs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5214ffc4-682a-4689-a772-ee96158c0c83)
