@@ -32,9 +32,9 @@ In the execution of this project, our three tier architecture shall be:
    
 3. An EC2 Linux Server to serve as our Database Server.
 
-### <br>Implementing LVM on Linux Servers (Web and Database Servers)<br/>
+### <br>Implementing LVM on Linux Web Server<br/>
 
-To begin our project we need to deploy and configure LVM for our Linux based Web and Database servers. We do this by implementing the following steps:
+To begin our project we need to deploy and configure LVM for our Linux based Web server. We do this by implementing the following steps:
 
 #### <br>Step 1: Provision EC2 Instance<br/>
 
@@ -303,3 +303,7 @@ In this step, we need to create the directory to hold our website files and then
 ![df -h final output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ca686a1-58f5-47e7-a41f-cffcab726981)
 
 The output must look like what we have in the image above.
+
+### <br>Implementing LVM on Linux Database Server<br/>
+
+The next phase of this project involves preparing the database server. We shall launch a second RedHat EC2 instance that will have a role as our **‘DB Server’**. We shall be repeating the same steps as for the Web Server, but instead of **`apps-lv`** we will create **`db-lv`** and mount it to **`/db`** directory instead of **`/var/www/html/`**.
