@@ -527,9 +527,9 @@ In this step, we need to create the directory to hold our database files and the
 
 **`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
 
-![backup log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c8fabac-607a-49fd-a538-8abdb294d780)
+![backup log files db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3431073b-23ba-4c14-9624-e92d602b6b29)
 
-**v.** Then we enter the command below to mount **/var/log** on **apps-lv** logical volume:
+**v.** Then we enter the command below to mount **/var/log** on **logs-lv** logical volume:
 
 **`$ sudo mount /dev/dbdata-vg/logs-lv /var/log`**
 
@@ -537,13 +537,13 @@ In this step, we need to create the directory to hold our database files and the
 
 **`$ sudo rsync -av /home/recovery/logs/. /var/log`**
 
-![restore log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/da7a0e22-0a8f-4729-8621-f9665e9d6167)
+![restore log files db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/39277e2e-f067-4c1b-bc61-42aade92704f)
 
 **vii.** The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
 
 **`$ sudo blkid`**
 
-![uuid](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8ce173d-4db6-4f0c-b7bb-b0b56349af4d)
+![uuid db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/10b6f02e-7d5d-405e-84c7-c9533cbd694e)
 
 **viii.** We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
 
@@ -551,7 +551,7 @@ In this step, we need to create the directory to hold our database files and the
 
 **ix.** We paste in the copied UUID whilst removing the leading and ending quotes and update the **/etc/fstab** file as shown in the image below:
 
-![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
+![Mounts for Database Server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dbac1c4c-5178-4824-b00d-82418309dd4c)
 
 **x.** We test our mount configuration with the following command:
 
@@ -565,6 +565,6 @@ In this step, we need to create the directory to hold our database files and the
 
 **`$ df -h`**
 
-![df -h final output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ca686a1-58f5-47e7-a41f-cffcab726981)
+![df -h final output db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00cc610d-137e-4eab-b98f-1f6ef2df09e0)
 
 The output must look like what we have in the image above.
