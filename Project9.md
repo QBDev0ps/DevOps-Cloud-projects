@@ -506,3 +506,65 @@ $ sudo lvcreate -n logs-lv -L 14G dbdata-vg
 **`$ sudo mkfs -t ext4 /dev/dbdata-vg/db-lv && sudo mkfs -t ext4 /dev/dbdata-vg/logs-lv`**
 
 ![format logical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/33c81e0f-b165-4d2a-8d8f-05da70479146)
+
+#### <br>Step 8: Create Directories and Mount on Logical Volumes<br/>
+
+In this step, we need to create the directory to hold our website files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **apps-lv** and **logs-lv**.
+
+**i.** We use the following command to create the **/var/www/html** directory to store our website application files:
+
+**`$ sudo mkdir -p /var/www/html`**
+
+**ii.** We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
+
+**`$ sudo mkdir -p /home/recovery/logs`**
+
+**iii.** Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
+
+**`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/**
+
+**iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
+
+**`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
+
+![backup log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c8fabac-607a-49fd-a538-8abdb294d780)
+
+**v.** Then we enter the command below to mount **/var/log** on **apps-lv** logical volume:
+
+**`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
+
+**vi.** Afterwards, we restore the log files back into the **/var/log** directory.
+
+**`$ sudo rsync -av /home/recovery/logs/. /var/log`**
+
+![restore log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/da7a0e22-0a8f-4729-8621-f9665e9d6167)
+
+**vii.** The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
+
+**`$ sudo blkid`**
+
+![uuid](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8ce173d-4db6-4f0c-b7bb-b0b56349af4d)
+
+**viii.** We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
+
+**`$ sudo vi /etc/fstab`**
+
+**ix.** We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+
+![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
+
+**x.** We test our mount configuration with the following command:
+
+**`$ sudo mount -a`**
+
+**xi.** Then we reload the daemon with the command below:
+
+**`$ sudo systemctl daemon-reload`**
+
+**xii.** To complete our configuration process, we verify our entire setup by executing the following command:
+
+**`$ df -h`**
+
+![df -h final output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ca686a1-58f5-47e7-a41f-cffcab726981)
+
+The output must look like what we have in the image above.
