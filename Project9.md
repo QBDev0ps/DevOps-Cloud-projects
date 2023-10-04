@@ -288,15 +288,17 @@ In this step, we need to create the directory to hold our website files and then
 
 ![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
 
-**x.** We test our mount configuration with the following command:
+**x.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**xi.** We test our mount configuration with the following command:
 
 **`$ sudo mount -a`**
 
-**xi.** Then we reload the daemon with the command below:
+**xii.** Then we reload the daemon with the command below:
 
 **`$ sudo systemctl daemon-reload`**
 
-**xii.** To complete our configuration process, we verify our entire setup by executing the following command:
+**xiii.** To complete our configuration process, we verify our entire setup by executing the following command:
 
 **`$ df -h`**
 
@@ -553,18 +555,22 @@ In this step, we need to create the directory to hold our database files and the
 
 ![Mounts for Database Server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dbac1c4c-5178-4824-b00d-82418309dd4c)
 
-**x.** We test our mount configuration with the following command:
+**x.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**xi.** We test our mount configuration with the following command:
 
 **`$ sudo mount -a`**
 
-**xi.** Then we reload the daemon with the command below:
+**xii.** Then we reload the daemon with the command below:
 
 **`$ sudo systemctl daemon-reload`**
 
-**xii.** To complete our configuration process, we verify our entire setup by executing the following command:
+**xiii.** To complete our configuration process, we verify our entire setup by executing the following command:
 
 **`$ df -h`**
 
 ![df -h final output db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00cc610d-137e-4eab-b98f-1f6ef2df09e0)
 
 The output must look like what we have in the image above.
+
+### <br>Install WordPress on EC2 Web Server Instance<br/>
