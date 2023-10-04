@@ -318,7 +318,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 
 **ii.** Under **Name and tags**, we provide a unique name for our Database server.
 
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a121b805-be6a-4e01-8be2-698e194d8909)
+![Name and tags DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4a139fcb-1ace-478f-abb9-7e27c3e48704)
   
 **iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 9 (HVM).
 
