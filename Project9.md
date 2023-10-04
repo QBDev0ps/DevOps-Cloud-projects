@@ -419,3 +419,33 @@ As can be seeen in the above image, the executed command lists all Linux devices
 **`$ sudo nvme list`**
 
 ![sudo nvme list db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a6be523-3dab-4d1f-848b-7a78e200b5fe)
+
+#### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
+
+**i.** In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
+
+**`$ sudo gdisk /dev/nvme1n1`**
+
+As shown in the output image below, we enter **`?`** to list out all the available commands in the gdisk console, we enter the **`p`** command to provide information about available space in hard disk to create a new partition. Subsequently we enter the **`n`** command to create a new partition, we follow through with the prompts and then we enter **`w`** to write the partition table to disk and exit the gdisk console. When the system requests for input with **`Do you want to proceed? (Y/N):`**,  we enter **`y`** to confirm our earlier operation.
+
+![gdisk commands](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3aa2185-2005-4604-9af3-7ff03a426b5f)
+
+We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
+
+**ii.** Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
+
+![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47df48a1-9c8b-4dbc-b1d9-1d0a8a2ff9a0)
+
+As can be seen in the image above, we have our newly configured partitions on each of the three (3) disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
+
+**iii.** The next course of action is to install the **`lvm2`** package using the following command:
+
+**`$ sudo yum install lvm2 -y`**
+
+![lvm2 installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc915321-9fab-4aaa-9d95-66c5b13dbdcd)
+
+**iv.** Then we run the command below to check for available partitions:
+
+**`$ sudo lvmdiskscan`**
+
+![sudo lvmdiskscan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/caa1ef9d-5f06-42d2-8cc8-815dbad6037b)
