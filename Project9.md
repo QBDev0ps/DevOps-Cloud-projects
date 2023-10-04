@@ -136,7 +136,7 @@ The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage dev
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
 
-**v.** We also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
+**v.** We can also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
 
 **`$ sudo dnf install nvme-cli -y`**
 
@@ -384,13 +384,13 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 ![sudo yum update db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6d9eed39-54cb-4243-b7bb-2a7bb08727ca)
 
-**ii.** Subsequently, we inspect what block devices are attached to the DB server with the following command:
+**ii.** Subsequently, we inspect what block devices are attached to the Database server with the following command:
 
 **`$ lsblk`**
 
 As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
 
-![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
+![lsblk db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/91272424-2c1f-47c5-9041-4f89a76e0ea1)
 
 The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage device attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
 
@@ -398,13 +398,13 @@ The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage dev
 
 **`$ df -h`**
 
-![df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63742891-1c19-4932-8d8a-d5f4b98c7876)
+![df-h db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2302ce7d-a7bd-45cd-b600-95cc1804436c)
 
 **iv.** We also proceed to check the **/dev/** directory with the following command: 
 
 **`$ ls /dev/`**
 
-![ls dev folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/958f72cb-9144-4a5d-bcc2-f26e8ad15795)
+![ls dev folder db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55cde77f-f5a7-4581-be52-1c3b61ce979f)
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
 
@@ -412,10 +412,10 @@ As can be seeen in the above image, the executed command lists all Linux devices
 
 **`$ sudo dnf install nvme-cli -y`**
 
-![nvme cli](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48eb3eb1-8794-4c45-84ec-97364bfd9089)
+![sudo dnf install db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/874557d2-cd22-4753-905f-41d7780cc608)
 
 **vi.** Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine:
 
 **`$ sudo nvme list`**
 
-![nvme list](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633d4425-ed2c-4d0f-870f-b88f77e61023)
+![sudo nvme list db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a6be523-3dab-4d1f-848b-7a78e200b5fe)
