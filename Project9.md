@@ -331,9 +331,10 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 **v.** And then finally, we click on **"Launch Instance"**
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
 #### <br>Step 2: Create EBS Volumes<br/>
 
-The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) 
+The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux Database Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) 
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll down in the navigation pane and click on **"Volumes"** under **"Elastic Block Store"**.
 
@@ -343,7 +344,7 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 ![Create Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9e710712-916e-4543-8b37-b2dc3a357c12)
 
-**iii.** On the **"Volume Settings"** page, we select the **"Volume Type"**, set **"Size"** as 10GB, we select the **"Availability Zone"** of our EC2 Web Server and the we click on **"Create Volume"** at the bottom right corner of the page. 
+**iii.** On the **"Volume Settings"** page, we select the **"Volume Type"**, set **"Size"** as 10GB, we select the **"Availability Zone"** of our EC2 Database Server and the we click on **"Create Volume"** at the bottom right corner of the page. 
 
 ![Create Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b37c54cf-22c0-4a45-827a-e58b4b7651b8)
 
@@ -351,7 +352,7 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 #### <br>Step 3: Attach EBS Volumes to EC2 Web Server Instance<br/>
 
-After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
+After creating the 3 EBS volumes we proceed to attach them to our EC2 Database Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll down in the navigation pane and click on **"Volumes"** under **"Elastic Block Store"**.
 
@@ -361,15 +362,15 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 ![Attach Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32ec447b-5d02-4328-8582-528573bb3667)
 
-**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Web Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
+**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Database Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
 
 ![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
 
-**iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
+**iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Database Server Instance.
 
 #### <br>Step 4: Connect to the Webserver via the Terminal using the SSH Client<br/>
 
-After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our web server. We carry this out by doing the following:
+After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the Database server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our Database server. We carry this out by doing the following:
 
 **i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
 
