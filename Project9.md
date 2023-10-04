@@ -307,3 +307,27 @@ The output must look like what we have in the image above.
 ### <br>Implementing LVM on Linux Database Server<br/>
 
 The next phase of this project involves preparing the database server. We shall launch a second RedHat EC2 instance that will have a role as our **‘DB Server’**. We shall be repeating the same steps as for the Web Server, but instead of **`apps-lv`** we will create **`db-lv`** and mount it to **`/db`** directory instead of **`/var/www/html/`**.
+
+#### <br>Step 1: Provision EC2 Instance<br/>
+
+We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our Database Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+**ii.** Under **Name and tags**, we provide a unique name for our Database server.
+
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a121b805-be6a-4e01-8be2-698e194d8909)
+  
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 9 (HVM).
+
+![Application and OS Images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/86ef4789-366a-4319-b4f2-709f305fa7f1)
+
+**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+  
+**v.** And then finally, we click on **"Launch Instance"**
+  
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
