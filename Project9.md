@@ -106,13 +106,13 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 #### <br>Step 5: Update Webserver and Inspect Attached Block Devices<br/>
 
-After connecting to our server we must first update all installed packages and their dependencies before commecing configuration. We do this by executing the following command: 
+**i.** After connecting to our server we must first update all installed packages and their dependencies before commecing configuration. We do this by executing the following command: 
 
 **`$ sudo yum update -y`**
 
 ![sudo yum update](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/67ea0933-1e20-4e1d-aede-a1e29e51fe67)
 
-Subsequently, we inspect what block devices are attached to the web server with the following command:
+**ii.** Subsequently, we inspect what block devices are attached to the web server with the following command:
 
 **`$ lsblk`**
 
@@ -120,15 +120,15 @@ As can be seen in the image below, our EBS volumes are shown using the **`nvme`*
 
 ![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
 
-The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage devivce attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
+The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage device attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
 
-To see all mounts and free space on our Web Server, we run the command below.
+**iii.** To see all mounts and free space on our Web Server, we run the command below.
 
 **`$ df -h`**
 
 ![df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63742891-1c19-4932-8d8a-d5f4b98c7876)
 
-We also proceed to check the **/dev/** directory with the following command: 
+**iv.** We also proceed to check the **/dev/** directory with the following command: 
 
 **`$ ls /dev/`**
 
@@ -136,13 +136,13 @@ We also proceed to check the **/dev/** directory with the following command:
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
 
-We also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
+**v.** We also obtain more important information such as name, serial number, size and LBA format about all the NVMe devices attached to our machine. However, a prerequisite for this is to install the NVMe command line package, **`nvme-cli`** by executing the following command:
 
 **`$ sudo dnf install nvme-cli -y`**
 
 ![nvme cli](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48eb3eb1-8794-4c45-84ec-97364bfd9089)
 
-Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine:
+**vi.** Then we subsequently run the command below to see additional information about the EBS volumes attached to our Linux Machine:
 
 **`$ sudo nvme list`**
 
@@ -150,7 +150,7 @@ Then we subsequently run the command below to see additional information about t
 
 #### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
 
-In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
+**i.** In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
 
 **`$ sudo gdisk /dev/nvme1n1`**
 
@@ -160,19 +160,19 @@ As shown in the output image below, we enter **`?`** to list out all the availab
 
 We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
 
-Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
+**ii.** Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
 
 ![gdisk partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47df48a1-9c8b-4dbc-b1d9-1d0a8a2ff9a0)
 
 As can be seen in the image above, we have our newly configured partitions on each of the three (3) disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
 
-The next course of action is to install the **`lvm2`** package using the following command:
+**iii.** The next course of action is to install the **`lvm2`** package using the following command:
 
 **`$ sudo yum install lvm2 -y`**
 
 ![lvm2 installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc915321-9fab-4aaa-9d95-66c5b13dbdcd)
 
-Then we run the command below to check for available partitions:
+**iv.** Then we run the command below to check for available partitions:
 
 **`$ sudo lvmdiskscan`**
 
@@ -180,7 +180,7 @@ Then we run the command below to check for available partitions:
 
 #### <br>Step 7: Create Physical and Logical Volumes<br/>
 
-For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes (PVs) to be used by LVM:
+**i.** For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes (PVs) to be used by LVM:
 
 ```
 $ sudo pvcreate /dev/nvme1n1p1
@@ -190,25 +190,25 @@ $ sudo pvcreate /dev/nvme3n1p1
 
 ![creating physical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4071f3c7-0ecf-454d-83e2-7840f50bd764)
 
-Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
+**ii.** Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
 
 **`$ sudo pvs`**
 
 ![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
 
-After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
+**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
 
 **`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
 
 ![create volume group](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/658856e7-46dc-4644-829a-43ad07cd3296)
 
-And then we confirm that our volume group (VG) has been created by successfully executing the following command:
+**iv.** And then we confirm that our volume group (VG) has been created by successfully executing the following command:
 
 **`$ sudo vgs`**
 
 ![sudo vgs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c5a00c5-b2ce-477c-b8f2-c9cfd963f6ab)
 
-The next step is to create two (2) logical volumes (LVs) **apps-lv** and **logs-lv** using the **`lvcreate`** utility. For **apps-lv**, we will be using half of the PV size and it will be used to store data for the website while for **logs-lv** we will be using the remaining space left of the PV size and it will be used to store data for logs.
+**v.** The next step is to create two (2) logical volumes (LVs) **apps-lv** and **logs-lv** using the **`lvcreate`** utility. For **apps-lv**, we will be using half of the PV size and it will be used to store data for the website while for **logs-lv** we will be using the remaining space left of the PV size and it will be used to store data for logs.
 
 ```
 $ sudo lvcreate -n apps-lv -L 14G webdata-vg
@@ -217,13 +217,13 @@ $ sudo lvcreate -n logs-lv -L 14G webdata-vg
 
 ![create logical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1f653f4e-1f3b-464c-83be-d0526683f467)
 
-And then we confirm that our logical volumes have been created by successfully executing the following command:
+**vi.** And then we confirm that our logical volumes have been created by successfully executing the following command:
 
 **`$ sudo lvs`**
 
 ![sudo lvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d14ad131-29a7-42b9-950c-e9dda18377e8)
 
-Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and Logical Volumes (LV) with the following commands:
+**vii.** Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and Logical Volumes (LV) with the following commands:
 
 **`$ sudo vgdisplay -v`**
 
@@ -233,7 +233,7 @@ Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and 
 
 ![verify entire setup](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03a9e4c8-6ac9-486a-a81c-6626f91e5bbc)
 
-To complete the process, we use **`mkfs.ext4`** to format the logical volumes (LVs) with **ext4** filesystem.
+**viii.** To complete the process, we use **`mkfs.ext4`** to format the logical volumes (LVs) with **ext4** filesystem.
 
 ```
 $ sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
@@ -246,57 +246,57 @@ $ sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
 
 In this step, we need to create the directory to hold our website files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **apps-lv** and **logs-lv**.
 
-We use the following command to create the **/var/www/html** directory to store our website application files:
+**i.** We use the following command to create the **/var/www/html** directory to store our website application files:
 
 **`$ sudo mkdir -p /var/www/html`**
 
-We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
+**ii.** We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
 
 **`$ sudo mkdir -p /home/recovery/logs`**
 
-Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
+**iii.** Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
 
 **`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/**
 
-**/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
+**iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
 
 **`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
 
 ![backup log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c8fabac-607a-49fd-a538-8abdb294d780)
 
-Then enter the command below to mount **/var/log** on **apps-lv** logical volume:
+**v.** Then we enter the command below to mount **/var/log** on **apps-lv** logical volume:
 
 **`$ sudo mount /dev/webdata-vg/logs-lv /var/log`**
 
-Afterwards, we restore the log files back into the **/var/log** directory.
+**vi.** Afterwards, we restore the log files back into the **/var/log** directory.
 
 **`$ sudo rsync -av /home/recovery/logs/. /var/log`**
 
 ![restore log files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/da7a0e22-0a8f-4729-8621-f9665e9d6167)
 
-The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
+**vii.** The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
 
 **`$ sudo blkid`**
 
 ![uuid](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e8ce173d-4db6-4f0c-b7bb-b0b56349af4d)
 
-We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
+**viii.** We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
 
 **`$ sudo vi /etc/fstab`**
 
-We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
+**ix.** We paste in the copied UUID and update the **/etc/fstab** file as shown in the image below:
 
 ![mounts for wordpress server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc378217-afc5-41ea-ac3a-306d2390f186)
 
-We test our mount configuration with the following command:
+**x.** We test our mount configuration with the following command:
 
 **`$ sudo mount -a`**
 
-Then we reload the daemon with the command below:
+**xi.** Then we reload the daemon with the command below:
 
 **`$ sudo systemctl daemon-reload`**
 
-To complete our configuration process, we verify our entire setup by executing the following command:
+**xii.** To complete our configuration process, we verify our entire setup by executing the following command:
 
 **`$ df -h`**
 
