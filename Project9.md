@@ -450,4 +450,28 @@ As can be seen in the image above, we have our newly configured partitions on ea
 
 ![sudo lvmdiskscan db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/578ac557-94ef-4091-ba56-5c6f1061557c)
 
+#### <br>Step 7: Create Physical and Logical Volumes<br/>
 
+**i.** For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes (PVs) to be used by LVM:
+
+**`$ sudo pvcreate /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+![creating physical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4071f3c7-0ecf-454d-83e2-7840f50bd764)
+
+**ii.** Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
+
+**`$ sudo pvs`**
+
+![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
+
+**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
+
+**`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+![create volume group](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/658856e7-46dc-4644-829a-43ad07cd3296)
+
+**iv.** And then we confirm that our volume group (VG) has been created by successfully executing the following command:
+
+**`$ sudo vgs`**
+
+![sudo vgs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c5a00c5-b2ce-477c-b8f2-c9cfd963f6ab)
