@@ -624,10 +624,37 @@ As shown in the error message in the above image, **system-release(releasever) =
 
 We surmised that we had two options to resolve this issue:
 
-**1.** We attempt to downgrade our Operating System to Red Hat Enterprise Linux 8.
+**1.** We attempt to downgrade our Operating System version to Red Hat Enterprise Linux 8.
+
 **2.** We install the latest version of the remi-release dependency that is compatible with Red Hat Enterprise Linux 9.
 
-We decide to go with option **2**. However, we encountered another error as shown in the image below:
+We decide to go with option **2** by executing the following command: 
+
+**`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
+
+However, we encountered another error as shown in the image below:
+
+![remi-release error1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c21f8966-2f1e-4a8a-9131-72a29832fa8b)
+
+**epel-release = 9 needed by remi-release-9.2-1.el9.remi.noarch** indicates that the version 9 of the remi-release dependency requires an equivalent version 9 of epel-release and we are getting the error because the command that successfully ran in **iv** above **`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpmdependency`** installed version 8 of epel-release instead.
+
+So we decide to install the latest version 9 of epel-release by executing the following command:
+
+**`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm`**
+
+![epel-release successful installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c9f114be-046f-4966-96ed-830192cff584)
+
+As can be seen in the above image, the installation was successful.
+
+Now that the compatible epel-release dependency has been installed, we proceed to install the latest version of the remi-release dependency with the following command:
+
+**`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
+
+But as shown in the image below, we again encounter an error albeit different this time.
+
+![remi-release killed](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5b4a1b39-9210-48f2-8f97-39ba34a191fe)
+
+
 
 **v.** After completing the installations, we run the following command to restart Apache:
 
