@@ -678,6 +678,47 @@ We also use the **`free -m`** command which gives us information gives us inform
 
 As seen in the above image, the command confirms that we have 425MB of free memory. For context, our EC2 Red Hat Linux instance has a total of 1GB RAM. So we can see the reason OOM Killer swung in to action as **`yum`** was using 473.708MB of RAM which is more than the free or available space as indicated in our memory diagnostics.
 
+Considering the situation we were presented with, we surmised that we had two options to resolve this issue:
+
+**1.** We add additional RAM to our Red Hat Enterprise Linux EC2 instance.
+
+**2.** We create and enable **SWAP** on our Red Hat Enterprise Linux EC2 instance.
+
+After discovering that the free tier AWS instance is limited to 1GB of RAM and adding additional RAM will incur expensive costs, we decided to go with option **2**. **SWAP**, also known as virtual RAM, is used in Linux to support storing data in hard disk memory when when a system is running out of physical memory (RAM).
+
+To begin the process of creating **SWAP** we check for free disk space on our default EBS volume by running the following command:
+
+**`$ sudo df -h`**
+
+![check for free space](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3256c75a-a4b1-4a9f-b602-0655700cbe3a)
+
+Next, we create a 1GB swap file with the use of the **`dd`** command:
+
+**`$ sudo dd if=/dev/zero of=/mnt/swapfile bs=1024 count=1048k`**
+
+![create swap file sudo dd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f0751ee6-1a5f-4550-96be-293adfaf915b)
+
+After this, we create a swap partition by executing the following command:
+
+**`$ sudo mkswap /mnt/swapfile`**
+
+![create swap partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/db17a1c5-5014-4cf1-b13f-e15e84af3fe0)
+
+Then we enable **SWAP** and check its status with the commands below:
+
+```
+sudo swapon /mnt/swapfile
+swapon -s
+```
+
+Next, we need to set up the Swap partition to automatically activate after rebooting the system by updating **/etc/fstab**
+
+**`$ sudo vi /etc/fstab`**
+
+
+
+
+
 
 
 **v.** After completing the installations, we run the following command to restart Apache:
