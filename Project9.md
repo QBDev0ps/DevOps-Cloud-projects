@@ -523,7 +523,7 @@ In this step, we need to create the directory to hold our database files and the
 
 **iii.** Then we execute the following command to mount **/db** on **db-lv** logical volume:
 
-**`$ sudo mount /dev/dbdata-vg/db-lv /db**
+**`$ sudo mount /dev/dbdata-vg/db-lv /db`**
 
 **iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
 
