@@ -631,3 +631,5 @@ sudo cp -R wordpress /var/www/html/
  sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
  sudo setsebool -P httpd_can_network_connect=1
 ```
+
+#### <br>Step 2: Install MySQL on EC2 Database Server Instance<br/>
