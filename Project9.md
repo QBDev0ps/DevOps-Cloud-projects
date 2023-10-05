@@ -794,4 +794,30 @@ sudo cp -R wordpress /var/www/html/
 
 #### <br>Step 2: Install MySQL on EC2 Database Server Instance<br/>
 
+**i.** We begin this step by updating the repository if we have not already done so:
+
+**`$ sudo yum -y update`**
+
+![sudo yum update db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb1ab85b-8f10-4a06-aac1-3eb5c75953d8)
+
+**ii** Next, we execute the following command to install Mysql:
+
+**`$ sudo yum install mysql-server`**
+
+![MySQL server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/096dc9e5-5f62-49ef-985d-7979fd287857)
+
+**ii** After installation, we check if the service is up and running with the command below:
+
+**`$ sudo systemctl status mysqld`**
+
+![mysql inactive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2f33e693-a975-4468-89df-9f70d85646d4)
+
+As shown in the image above, MySQL server is currently inactive. So we execute the following commands to restart the service and enable it so that it will be running even after a system reboot:
+
+```
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
+```
+
+
 
