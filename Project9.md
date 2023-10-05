@@ -573,4 +573,9 @@ In this step, we need to create the directory to hold our database files and the
 
 The output must look like what we have in the image above.
 
-### <br>Install WordPress on EC2 Web Server Instance<br/>
+### <br>WordPress Installation and Configuration to Use MySQL Database<br/>
+
+To deploy WordPress, we will need to first of all install Apache Web Server software on our Web Server machine and then install MySQL on our Database machine after which we will proceed to configure our database to work with WordPress. We do this with the following steps:
+
+#### <br>Step 1: Install WordPress on EC2 Web Server Instance<br/>
+ 
