@@ -611,100 +611,100 @@ sudo yum module enable php:remi-7.4
 sudo yum install php php-opcache php-gd php-curl php-mysqlnd
 sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
-setsebool -P httpd_execmem 1
+sudo setsebool -P httpd_execmem 1
 ```
 
 #### BLOCKER❗
 
-After concatenating and running the nine (9) commands above, the first command ran and the installation of **epel-release-latest-8.noarch.rpm** was completed successfully. However, as shown in the image below, we encountered an error when the second command was being executed:
++ After concatenating and running the nine (9) commands above, the first command ran and the installation of **epel-release-latest-8.noarch.rpm** was completed successfully. However, as shown in the image below, we encountered an error when the second command was being executed:
 
 ![blocker 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/389f0ef7-d37a-49ed-a52b-065006f12cfa)
 
-As shown in the error message in the above image, **system-release(releasever) = 8 needed by remi-release-8.8-1.el8.remi.noarch** is basically saying that the dependency we were trying to install **remi-release-8.rpm** encountered an error because our Operating system version is **Red Hat Enterprise Linux 9** whereas it requires **Red Hat Enterprise Linux 8** as referenced by **system-release(releasever) = 8**
++ As shown in the error message in the above image, **system-release(releasever) = 8 needed by remi-release-8.8-1.el8.remi.noarch** is basically saying that the dependency we were trying to install **remi-release-8.rpm** encountered an error because our Operating system version is **Red Hat Enterprise Linux 9** whereas it requires **Red Hat Enterprise Linux 8** as referenced by **system-release(releasever) = 8**
 
-We surmised that we had two options to resolve this issue:
++ We surmised that we had two options to resolve this issue:
 
 **1.** We attempt to downgrade our Operating System version to Red Hat Enterprise Linux 8.
 
 **2.** We install the latest version of the remi-release dependency that is compatible with Red Hat Enterprise Linux 9.
 
-remi-release RPM repository is a free and stable YUM repository mainly for the PHP stack. It contains packages for the latest versions of PHP.
++ remi-release RPM repository is a free and stable YUM repository mainly for the PHP stack. It contains packages for the latest versions of PHP.
 
-We decide to go with option **2** by executing the following command: 
++ We decide to go with option **2** by executing the following command: 
 
 **`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
 
-However, we encountered another error as shown in the image below:
++ However, we encountered another error as shown in the image below:
 
 ![remi-release error1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c21f8966-2f1e-4a8a-9131-72a29832fa8b)
 
-**epel-release = 9 needed by remi-release-9.2-1.el9.remi.noarch** indicates that the version 9 of the remi-release dependency requires an equivalent version 9 of epel-release and we are getting the error because the command that successfully ran in **iv** above **`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpmdependency`** installed version 8 of epel-release instead.
++ **epel-release = 9 needed by remi-release-9.2-1.el9.remi.noarch** indicates that the version 9 of the remi-release dependency requires an equivalent version 9 of epel-release and we are getting the error because the command that successfully ran in **iv** above **`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpmdependency`** installed version 8 of epel-release instead.
 
-epel release is a repository that is well known for bringing a high-quality set of additional packages for Red Hat Enterprise Linux and other Linux flavours.
++ epel release is a repository that is well known for bringing a high-quality set of additional packages for Red Hat Enterprise Linux and other Linux flavours.
 
-So we decide to install the latest version 9 of epel-release by executing the following command:
++ So we decide to install the latest version 9 of epel-release by executing the following command:
 
 **`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm`**
 
 ![epel-release successful installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c9f114be-046f-4966-96ed-830192cff584)
 
-As can be seen in the above image, the installation was successful.
++ As can be seen in the above image, the installation was successful.
 
-Now that the compatible epel-release dependency has been installed, we proceed to install the latest version of the remi-release dependency with the following command:
++ Now that the compatible epel-release dependency has been installed, we proceed to install the latest version of the remi-release dependency with the following command:
 
 **`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
 
-But as shown in the image below, we again encounter an error albeit different this time.
++ But as shown in the image below, we again encounter an error albeit a different one this time.
 
 ![remi-release killed](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5b4a1b39-9210-48f2-8f97-39ba34a191fe)
 
-As can be seen in the image above, the kernel sent a SIGKILL signal to kill off our process. So we decide to investigate the relevant logs with the use of the **`dmesg`** utility:
++ As can be seen in the image above, the kernel sent a SIGKILL signal to kill off our process. So we decide to investigate the relevant logs with the use of the **`dmesg`** utility:
 
 **`$ sudo dmesg | tail -7`**
 
 ![dmesg utility](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2e1b51f8-1ae3-42a2-889f-fb36ea50e5d6)
 
-As shown in the output image above, OOM sent a signal to kill the process employed by **`yum`** which is the tool we were using to install the remi-release dependency. The OOM Killer or Out Of Memory Killer is a process that the linux kernel employs when the system is critically low on memory. This situation occurs because the linux kernel has over allocated memory to its processes.
++ As shown in the output image above, OOM sent a signal to kill the process employed by **`yum`** which is the tool we were using to install the remi-release dependency. The OOM Killer or Out Of Memory Killer is a process that the linux kernel employs when the system is critically low on memory. This situation occurs because the linux kernel has over allocated memory to its processes.
 As can be seen in the above image, **anon-rss:473708kB** indicates that **`yum`** was using 473.708MB of RAM.
 
-To investigate further we execute the **`top`** command which is used for memory monitoring in Linux.
++ To investigate further we execute the **`top`** command which is used for memory monitoring in Linux.
 
 ![top memory monitoring command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89761542-ab0b-418f-a7b6-42bb3fe93103)
 
-From the above image we can see that we have 419MB of free memory and 425.3MB of total available memory. 
++ From the above image we can see that we have 419MB of free memory and 425.3MB of total available memory. 
 We also use the **`free -m`** command which gives us information gives us information about used and unused memory usage.
 
 ![free -m memory command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca3a2b2d-ffb1-40da-971c-c32c9563327c)
 
-As seen in the above image, the command confirms that we have 425MB of free memory. For context, our EC2 Red Hat Linux instance has a total of 1GB RAM. So we can see the reason OOM Killer swung in to action as **`yum`** was using 473.708MB of RAM which is more than the free or available space as indicated in our memory diagnostics.
++ As seen in the above image, the command confirms that we have 425MB of free memory. For context, our EC2 Red Hat Linux instance has a total of 1GB RAM. So we can see the reason OOM Killer swung in to action as **`yum`** was using 473.708MB of RAM which is more than the free or available space as indicated in our memory diagnostics.
 
-Considering the situation we were presented with, we surmised that we had two options to resolve this issue:
++ Considering the situation we were presented with, we surmised that we had two options to resolve this issue:
 
 **1.** We add additional RAM to our Red Hat Enterprise Linux EC2 instance.
 
 **2.** We create and enable **SWAP** on our Red Hat Enterprise Linux EC2 instance.
 
-After discovering that the free tier AWS instance is limited to 1GB of RAM and adding additional RAM will incur expensive costs, we decided to go with option **2**. **SWAP**, also known as virtual RAM, is used in Linux to support storing data in hard disk memory when when a system is running out of physical memory (RAM).
++ After discovering that the free tier AWS instance is limited to 1GB of RAM and adding additional RAM will incur expensive costs, we decided to go with option **2**. **SWAP**, also known as virtual RAM, is used in Linux to support storing data in hard disk memory when when a system is running out of physical memory (RAM).
 
-To begin the process of creating **SWAP** we check for free disk space on our default EBS volume by running the following command:
++ To begin the process of creating **SWAP** we check for free disk space on our default EBS volume by running the following command:
 
 **`$ sudo df -h`**
 
 ![check for free space](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3256c75a-a4b1-4a9f-b602-0655700cbe3a)
 
-Next, we create a 1GB swap file with the use of the **`dd`** command:
++ Next, we create a 1GB swap file with the use of the **`dd`** command:
 
 **`$ sudo dd if=/dev/zero of=/mnt/swapfile bs=1024 count=1048k`**
 
 ![create swap file sudo dd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f0751ee6-1a5f-4550-96be-293adfaf915b)
 
-After this, we create a swap partition by executing the following command:
++ After this, we create a swap partition by executing the following command:
 
 **`$ sudo mkswap /mnt/swapfile`**
 
 ![create swap partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/db17a1c5-5014-4cf1-b13f-e15e84af3fe0)
 
-Then we enable **SWAP** and check its status with the commands below:
++ Then we enable **SWAP** and check its status with the commands below:
 
 ```
 sudo swapon /mnt/swapfile
@@ -713,31 +713,54 @@ swapon -s
 
 ![enable swap](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2c3e70a0-4ce0-4c94-b995-fa63f1e07af6)
 
-Next, we need to set up the Swap partition to automatically activate after rebooting the system by updating **/etc/fstab**
++ Next, we need to set up the Swap partition to automatically activate after rebooting the system by updating **/etc/fstab**
 
 **`$ sudo vi /etc/fstab`**
 
 ![mount for swap partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d575846e-5a96-4427-997e-e572b7bb21e6)
 
-To complete the process  we need to configure Swappiness. Swappiness is the priority of using Swap of Linux system. When the amount of free RAM remaining equals the value of Swappiness that is set as a percentage, the Linux server will switch to use. For instance, if our server has only 10% free RAM and Swappiness is set to 10, the server will switch to using Swap. To proceed we check the current swappiness parameter of our Server by running the command below:
++ To complete the process  we need to configure Swappiness. Swappiness is the priority of using Swap of Linux system. When the amount of free RAM remaining equals the value of Swappiness that is set as a percentage, the Linux server will switch to use. For instance, if our server has only 10% free RAM and Swappiness is set to 10, the server will switch to using Swap. To proceed we check the current swappiness parameter of our Server by running the command below:
 
 **`$ cat /proc/sys/vm/swappiness`**
 
 ![current swappiness](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/68437cad-53ed-4c1e-a5f1-3668f870a59d)
 
-The output image above shows that Linux switches to using Swap when the amount of physical RAM reaches 30%. We change this parameter to 10 by executing the following command:
++ The output image above shows that Linux switches to using Swap when the amount of physical RAM reaches 30%. We change this parameter to 10 by executing the following command:
 
 **`$ sudo sysctl vm.swappiness=10`**
 
 ![change swappiness](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8f766f9-d74c-4c78-9f75-e5a580aedded)
 
-As shown in the image above, we are able to confirm that swappiness has been changed to 10. We also verify that our whole **SWAP** setup is enable by running the command below:
++ As shown in the image above, we are able to confirm that swappiness has been changed to 10. We also verify that our whole **SWAP** setup is enable by running the commands below:
+  
+```
+$ cat /proc/swaps
+$ free
+```
 
-**`$ cat /proc/swaps`**
+![swap complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cf9966f6-f1d8-47e2-9800-ed406070cd07)
 
++ With the creation and configuration of **SWAP** complete as refelected in the above image, we proceed to install the compatible version of the remi-release dependency with the following command:
 
+**`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
 
+![remi dependency successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3ccc7694-f1b2-4858-9790-758c01e67a62)
 
++ As shown in the image above, the installation was successful and we were able to overcome our **BLOCKER**
+
++ We proceed to run the remainder of the commands from iv without any issues:
+
+```
+sudo yum module list php
+sudo yum module reset php
+sudo yum module enable php:remi-7.4
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+sudo setsebool -P httpd_execmem 1
+```
+
+![installed remaining commands](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b9ddaaa8-8511-4cd7-9691-4b830559c3f4)
 
 **v.** After completing the installations, we run the following command to restart Apache:
 
