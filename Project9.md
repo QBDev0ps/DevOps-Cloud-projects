@@ -711,11 +711,29 @@ sudo swapon /mnt/swapfile
 swapon -s
 ```
 
+![enable swap](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2c3e70a0-4ce0-4c94-b995-fa63f1e07af6)
+
 Next, we need to set up the Swap partition to automatically activate after rebooting the system by updating **/etc/fstab**
 
 **`$ sudo vi /etc/fstab`**
 
+![mount for swap partition](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d575846e-5a96-4427-997e-e572b7bb21e6)
 
+To complete the process  we need to configure Swappiness. Swappiness is the priority of using Swap of Linux system. When the amount of free RAM remaining equals the value of Swappiness that is set as a percentage, the Linux server will switch to use. For instance, if our server has only 10% free RAM and Swappiness is set to 10, the server will switch to using Swap. To proceed we check the current swappiness parameter of our Server by running the command below:
+
+**`$ cat /proc/sys/vm/swappiness`**
+
+![current swappiness](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/68437cad-53ed-4c1e-a5f1-3668f870a59d)
+
+The output image above shows that Linux switches to using Swap when the amount of physical RAM reaches 30%. We change this parameter to 10 by executing the following command:
+
+**`$ sudo sysctl vm.swappiness=10`**
+
+![change swappiness](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8f766f9-d74c-4c78-9f75-e5a580aedded)
+
+As shown in the image above, we are able to confirm that swappiness has been changed to 10. We also verify that our whole **SWAP** setup is enable by running the command below:
+
+**`$ cat /proc/swaps`**
 
 
 
