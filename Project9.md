@@ -256,7 +256,7 @@ In this step, we need to create the directory to hold our website files and then
 
 **iii.** Then we execute the following command to mount **/var/www/html/** on **apps-lv** logical volume:
 
-**`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/**
+**`$ sudo mount /dev/webdata-vg/apps-lv /var/www/html/`**
 
 **iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
 
