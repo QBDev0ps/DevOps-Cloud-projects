@@ -658,6 +658,26 @@ But as shown in the image below, we again encounter an error albeit different th
 
 ![remi-release killed](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5b4a1b39-9210-48f2-8f97-39ba34a191fe)
 
+As can be seen in the image above, the kernel sent a SIGKILL signal to kill off our process. So we decide to investigate the relevant logs with the use of the **`dmesg`** utility:
+
+**`$ sudo dmesg | tail -7`**
+
+![dmesg utility](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2e1b51f8-1ae3-42a2-889f-fb36ea50e5d6)
+
+As shown in the output image above, OOM sent a signal to kill the process employed by **`yum`** which is the tool we were using to install the remi-release dependency. The OOM Killer or Out Of Memory Killer is a process that the linux kernel employs when the system is critically low on memory. This situation occurs because the linux kernel has over allocated memory to its processes.
+As can be seen in the above image, **anon-rss:473708kB** indicates that **`yum`** was using 473.708MB of RAM.
+
+To investigate further we execute the **`top`** command which is used for memory monitoring in Linux.
+
+![top memory monitoring command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/89761542-ab0b-418f-a7b6-42bb3fe93103)
+
+From the above image we can see that we have 419MB of free memory and 425.3MB of total available memory. 
+We also use the **`free -m`** command which gives us information gives us information about used and unused memory usage.
+
+![free -m memory command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca3a2b2d-ffb1-40da-971c-c32c9563327c)
+
+As seen in the above image, the command confirms that we have 425MB of free memory. For context, our EC2 Red Hat Linux instance has a total of 1GB RAM. So we can see the reason OOM Killer swung in to action as **`yum`** was using 473.708MB of RAM which is more than the free or available space as indicated in our memory diagnostics.
+
 
 
 **v.** After completing the installations, we run the following command to restart Apache:
