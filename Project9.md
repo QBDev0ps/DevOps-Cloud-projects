@@ -583,9 +583,13 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 
 **`$ sudo yum -y update`**
 
+![sudo yum update 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/648f1b2d-cad9-49b0-8d37-e78b7a58f16f)
+
 **ii.** Then we proceed to install wget, Apache and its dependencies by executing the following command:
 
 **`$ sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`**
+
+![install wget apache dependencies](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/798aea09-ab60-41fc-bc2e-b1e074f76bb8)
 
 **iii.** After successfully completing the installation, we start the apache service with the commands below:
 
@@ -593,6 +597,8 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 sudo systemctl enable httpd
 sudo systemctl start httpd
 ```
+
+![enable and start apache httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9be56846-0af1-4c00-baa5-5efd984569fd)
 
 **iv.** The next course of action is to install PHP and its dependencies with the following set of commands:
 
@@ -607,6 +613,21 @@ sudo systemctl start php-fpm
 sudo systemctl enable php-fpm
 setsebool -P httpd_execmem 1
 ```
+
+#### BLOCKER❗
+
+After concatenating and running the nine (9) commands above, the first command ran and the installation of **epel-release-latest-8.noarch.rpm** was completed successfully. However, as shown in the image below, we encountered an error when the second command was being executed:
+
+![blocker 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/389f0ef7-d37a-49ed-a52b-065006f12cfa)
+
+As shown in the error message in the above image, **system-release(releasever) = 8 needed by remi-release-8.8-1.el8.remi.noarch** is basically saying that the dependency we were trying to install **remi-release-8.rpm** encountered an error because our Operating system version is **Red Hat Enterprise Linux 9** whereas it requires **Red Hat Enterprise Linux 8** as referenced by **system-release(releasever) = 8**
+
+We surmised that we had two options to resolve this issue:
+
+**1.** We attempt to downgrade our Operating System to Red Hat Enterprise Linux 8.
+**2.** We install the latest version of the remi-release dependency that is compatible with Red Hat Enterprise Linux 9.
+
+We decide to go with option **2**. However, we encountered another error as shown in the image below:
 
 **v.** After completing the installations, we run the following command to restart Apache:
 
