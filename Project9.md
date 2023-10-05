@@ -579,3 +579,32 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 
 #### <br>Step 1: Install WordPress on EC2 Web Server Instance<br/>
  
+**i.** We begin this part of our project by updating the repository if we have not already done so:
+
+**`$ sudo yum -y update`**
+
+**ii.** Then we proceed to install wget, Apache and its dependencies by executing the following command:
+
+**`$ sudo yum -y install wget httpd php php-mysqlnd php-fpm php-json`**
+
+**iii.** After successfully completing the installation, we start the apache service with the commands below:
+
+```
+sudo systemctl enable httpd
+sudo systemctl start httpd
+```
+
+**iv.** The next course of action is to install PHP and its dependencies with the following set of commands:
+
+```
+sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+sudo yum module list php
+sudo yum module reset php
+sudo yum module enable php:remi-7.4
+sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+sudo systemctl start php-fpm
+sudo systemctl enable php-fpm
+setsebool -P httpd_execmem 1
+```
+
