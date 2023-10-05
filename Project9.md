@@ -590,8 +590,8 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 **iii.** After successfully completing the installation, we start the apache service with the commands below:
 
 ```
-$ sudo systemctl enable httpd
-$ sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
 ```
 
 **iv.** The next course of action is to install PHP and its dependencies with the following set of commands:
@@ -622,4 +622,12 @@ sudo tar xzvf latest.tar.gz
 sudo rm -rf latest.tar.gz
 sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
 sudo cp -R wordpress /var/www/html/
+```
+
+**vi.** We complete the WordPress installation process by configuring SELinux policies with the set of commands below:
+
+```
+ sudo chown -R apache:apache /var/www/html/wordpress
+ sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+ sudo setsebool -P httpd_can_network_connect=1
 ```
