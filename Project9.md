@@ -628,6 +628,8 @@ We surmised that we had two options to resolve this issue:
 
 **2.** We install the latest version of the remi-release dependency that is compatible with Red Hat Enterprise Linux 9.
 
+remi-release RPM repository is a free and stable YUM repository mainly for the PHP stack. It contains packages for the latest versions of PHP.
+
 We decide to go with option **2** by executing the following command: 
 
 **`$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-9.rpm`**
@@ -637,6 +639,8 @@ However, we encountered another error as shown in the image below:
 ![remi-release error1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c21f8966-2f1e-4a8a-9131-72a29832fa8b)
 
 **epel-release = 9 needed by remi-release-9.2-1.el9.remi.noarch** indicates that the version 9 of the remi-release dependency requires an equivalent version 9 of epel-release and we are getting the error because the command that successfully ran in **iv** above **`$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpmdependency`** installed version 8 of epel-release instead.
+
+epel release is a repository that is well known for bringing a high-quality set of additional packages for Red Hat Enterprise Linux and other Linux flavours.
 
 So we decide to install the latest version 9 of epel-release by executing the following command:
 
