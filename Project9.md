@@ -590,8 +590,8 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 **iii.** After successfully completing the installation, we start the apache service with the commands below:
 
 ```
-sudo systemctl enable httpd
-sudo systemctl start httpd
+$ sudo systemctl enable httpd
+$ sudo systemctl start httpd
 ```
 
 **iv.** The next course of action is to install PHP and its dependencies with the following set of commands:
@@ -608,3 +608,18 @@ sudo systemctl enable php-fpm
 setsebool -P httpd_execmem 1
 ```
 
+**v.** After completing the installations, we run the following command to restart Apache:
+
+**`$ sudo systemctl restart httpd`**
+
+**vi.** Next, we create a directory for Wordpress, we enter the created directory and we download WordPress in its compressed format. Then we decompress WordPress and we copy it to **/var/www/html/** We implement these by executing the following set of commands:
+
+```
+mkdir wordpress
+cd   wordpress
+sudo wget http://wordpress.org/latest.tar.gz
+sudo tar xzvf latest.tar.gz
+sudo rm -rf latest.tar.gz
+sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
+sudo cp -R wordpress /var/www/html/
+```
