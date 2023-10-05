@@ -748,7 +748,7 @@ $ free
 
 + As shown in the image above, the installation was successful and we were able to overcome our **BLOCKER**
 
-+ We proceed to run the remainder of the commands from iv without any issues:
++ We proceed to run the remainder of the commands from **iv** without any issues:
 
 ```
 sudo yum module list php
@@ -761,6 +761,8 @@ sudo setsebool -P httpd_execmem 1
 ```
 
 ![installed remaining commands](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b9ddaaa8-8511-4cd7-9691-4b830559c3f4)
+
+<br> <br/>
 
 **v.** After completing the installations, we run the following command to restart Apache:
 
@@ -778,6 +780,8 @@ sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
 sudo cp -R wordpress /var/www/html/
 ```
 
+![worpress installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4bc24590-6987-4903-9ade-18043f95e37e)
+
 **vi.** We complete the WordPress installation process by configuring SELinux policies with the set of commands below:
 
 ```
@@ -786,4 +790,8 @@ sudo cp -R wordpress /var/www/html/
  sudo setsebool -P httpd_can_network_connect=1
 ```
 
+![configure selinux](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/caa6f297-0f2b-471b-ac5f-e267ee09cf3f)
+
 #### <br>Step 2: Install MySQL on EC2 Database Server Instance<br/>
+
+
