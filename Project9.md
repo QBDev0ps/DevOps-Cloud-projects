@@ -190,7 +190,7 @@ $ sudo pvcreate /dev/nvme3n1p1
 
 ![creating physical volumes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4071f3c7-0ecf-454d-83e2-7840f50bd764)
 
-**ii.** Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
+**ii.** Then afterwards, we verify that the physical volumes (PVs) have been created by executing the command below:
 
 **`$ sudo pvs`**
 
