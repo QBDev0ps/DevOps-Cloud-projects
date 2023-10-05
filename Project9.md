@@ -460,7 +460,7 @@ As can be seen in the image above, we have our newly configured partitions on ea
 
 ![creating physical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/846dab7e-6029-46b9-8c24-181c75609f91)
 
-**ii.** Then afterwards, we verify theat the physical volumes (PVs) have been created by executing the command below:
+**ii.** Then afterwards, we verify that the physical volumes (PVs) have been created by executing the command below:
 
 **`$ sudo pvs`**
 
