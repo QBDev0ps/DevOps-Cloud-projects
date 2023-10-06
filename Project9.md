@@ -874,10 +874,11 @@ mysql> exit
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
 
-And then we test that we can connect from our Web Server to our DB server using mysql-client:
+And then we test that we can connect from our Web Server to our Database server using mysql-client:
 
-**`$ sudo mysql -u admin -p -h <DB-Server-Private-IP-address>`**
+**`$ sudo mysql -u qbuser -p -h 172.31.22.52`**
 
+As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the <DB-Server-Private-IP-address>.
 
 
 
