@@ -800,19 +800,19 @@ sudo cp -R wordpress /var/www/html/
 
 ![sudo yum update db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb1ab85b-8f10-4a06-aac1-3eb5c75953d8)
 
-**ii** Next, we execute the following command to install Mysql:
+**ii.** Next, we execute the following command to install Mysql:
 
 **`$ sudo yum install mysql-server`**
 
 ![MySQL server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/096dc9e5-5f62-49ef-985d-7979fd287857)
 
-**iii** After installation, we check if the service is up and running with the command below:
+**iii.** After installation, we check if the service is up and running with the command below:
 
 **`$ sudo systemctl status mysqld`**
 
 ![mysql inactive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2f33e693-a975-4468-89df-9f70d85646d4)
 
-**iv** The above image shows that MySQL server is currently inactive. So we execute the following commands to restart the service and enable it so that it will be running even after a system reboot:
+**iv.** The above image shows that MySQL server is currently inactive. So we execute the following commands to restart the service and enable it so that it will be running even after a system reboot:
 
 **`$ sudo systemctl restart mysqld && sudo systemctl enable mysqld`**
 
@@ -871,13 +871,13 @@ mysql> exit
 
 #### <br>Step 5: Configure WordPress to connect to Remote Database<br/>
 
-**i** Next, on the Web Server, we execute the following command to install MySQL client: 
+**i.** Next, on the Web Server, we execute the following command to install MySQL client: 
 
 **`$ sudo yum install mysql`**
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
 
-**ii** And then we test that we can connect from our Web Server to our Database server using mysql-client:
+**ii.** And then we test that we can connect from our Web Server to our Database server using mysql-client:
 
 **`$ sudo mysql -u qbuser -p -h 172.31.22.52`**
 
@@ -885,11 +885,11 @@ mysql> exit
 
 As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the <DB-Server-Private-IP-address>.
 
-**iii** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
+**iii.** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
 
 ![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b562b26-2b09-4060-a667-daf10bb75440)
 
-**iv** The next thing we need to do is change the requisite permissions and configuration so that Apache can use WordPress.
+**iv.** The next thing we need to do is change the requisite permissions and configuration so that Apache can use WordPress.
 To implement this, we need to create a configuration file for wordpress in order to point client requests to the wordpress directory.
 
 **`$ sudo vi /etc/httpd/conf.d/wordpress.conf`**
@@ -913,13 +913,13 @@ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and qui
 
 ![wordpress configuration file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fc12da8-a30e-4c20-8da0-bc142aadd3ad)
 
-**v** To apply the changes, we restart Apache with the following command:
+**v.** To apply the changes, we restart Apache with the following command:
 
 **`$ sudo systemctl restart httpd`**
 
 ![system restart httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/64c45637-3c31-4aa4-a5dd-bd1d307afee3)
 
-**vi** Next, we edit the **wp-confg** file with the command below:
+**vi.** Next, we edit the **wp-confg** file with the command below:
 
 **`$ sudo vi /var/www/html/wordpress/wp-config.php`**
 
@@ -940,19 +940,56 @@ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and qui
 
 As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>.
 
-**vii**  Red Hat Enterprise Linux usually comes with SELinux enabled. This can be an issue, especially during the installation of web applications. We therefore need to configure the right SELinux context to the **/var/www/html/wordpress** directory.
+**vii.**  Red Hat Enterprise Linux usually comes with SELinux enabled. This can be an issue, especially during the installation of web applications. We therefore need to configure the right SELinux context to the **/var/www/html/wordpress** directory.
 
 **`$ sudo semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/wordpress(/.*)?"`**
 
-**viii** And for the changes to take effect, we execute the following command:
+**viii.** And for the changes to take effect, we execute the following command:
 
 **`$ sudo restorecon -Rv /var/www/html/wordpress`**
 
 ![semange](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fad1ac08-3c70-4994-a428-43e21c8366f3)
 
-And then we reboot our instance.
+After executing the two commands as shown in the image above, we then reboot our instance.
 
-**ix** 
+#### <br>Step 6: Open Port 80 on EC2 Web Server Instance<br/>
+
+**The next step is to open TCP Port 80 on our Web Server machine. Port 80 is the defualt port used by web browsers to access web pages. So we implement this by adding a rule to our EC2 configuration to allow http traffic via port 80. The steps are listed below:
+
+**i.** Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/](https://console.aws.amazon.com/ec2/).
+
+**ii.** In the navigation pane, choose **Instances**.
+
+![AWS navigation pane](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb88a0b7-15c4-43e3-8187-e9f61aa26fbe)
+
+**iii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![web server instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e6a2cd33-8550-4998-b08a-2309a9aea800)
+
+**iv.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
+**v.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
+
+**vi.** On the **Edit inbound rules** page, we do the following:
+
++ Choose **Add rule**.
+
++ For **Type**, choose **HTTP**. 
+
++ In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet
+
++ Click on **Save rules** at the bottom right corner of the page.
+
+![save rules port 80](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3aacbbe5-d7e1-4cfa-8226-50584756e108)
+
+#### <br>Step 7: Complete WordPress Installation on the Browser<br/>
+
+
+.
 
 
 
