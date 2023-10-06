@@ -822,7 +822,7 @@ As shown in the above image, after restarting and enabling MySQL we reconirm the
 
 #### <br>Step 3: Configure MySQL Database to Work with WordPress<br/>
 
-We configure MySQl to work with WordPress by first of all acessing the MySQL console and creating the WordPress Database. Next, we create a user and assign the user password. Then we grant the database privileges to the newly created user.  After this we flush the privileges. The IP address used when creating the user and flushing the user privileges must be the **<Web-Server-Private-IP-Address>**. We conclude by viewing the database to confirm our configuration and then we exit. We implement all of these by executing the following:
+We configure MySQL to work with WordPress by first of all accessing the MySQL console and creating the WordPress Database. Next, we create a user and assign the user password. Then we grant the database privileges to the newly created user.  After this, we flush the privileges. The IP address used when creating the user and flushing the user privileges must be the **`<Web-Server-Private-IP-Address>`**. We conclude by viewing the database to confirm our configuration and then we exit. We implement all of these by executing the following:
 
 ```
 $ sudo mysql
@@ -838,25 +838,25 @@ mysql> exit
 
 #### <br>Step 4: Open Port 3306 on EC2 Database Instance<br/>
 
-**i** In this step, we need to ensure we open MySQL port **3306** on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s private IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
+**i.** In this step, we need to ensure we open MySQL port **3306** on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s private IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
 
-**ii** In the AWS console navigation pane, we choose **Instances**.
+**ii.** In the AWS console navigation pane, we choose **Instances**.
 
 ![AWS navigation pane](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb88a0b7-15c4-43e3-8187-e9f61aa26fbe)
 
-**ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+**iii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
 ![AWS Instance summary DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9c9054ad-12c2-4613-b261-e388b80778e2)
 
-**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+**iv.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
 ![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
 
-**iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+**v.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
 
 ![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
 
-**v.** On the **Edit inbound rules** page, we do the following:
+**vi.** On the **Edit inbound rules** page, we do the following:
 
 + Choose **Add rule**.
 
@@ -877,7 +877,7 @@ mysql> exit
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
 
-**ii.** And then we test that we can connect from our Web Server to our Database server using mysql-client:
+**ii.** And then we test that we can connect from our Web Server to our Database server using MySQL client:
 
 **`$ sudo mysql -u qbuser -p -h 172.31.22.52`**
 
