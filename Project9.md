@@ -831,7 +831,10 @@ mysql> CREATE USER `qbuser`@`172.31.22.239` IDENTIFIED BY 'password123';
 mysql> GRANT ALL ON wordpress.* TO `qbuser`@`172.31.22.239`;
 mysql> FLUSH PRIVILEGES;
 mysql> SHOW DATABASES;
-exit
+mysql> exit
 ```
+
+![configure mysql database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48a6a3ae-73d2-4281-89aa-965f40f503f0)
+
 
 
