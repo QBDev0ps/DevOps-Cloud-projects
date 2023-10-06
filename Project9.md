@@ -836,5 +836,37 @@ mysql> exit
 
 ![configure mysql database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48a6a3ae-73d2-4281-89aa-965f40f503f0)
 
+#### <br>Step 4: Configure WordPress to connect to Remote Database<br/>
+
+**i** The initial thing to do in this step is to ensure we open MySQL port 3306 on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
+
+**i.** In the AWS  console navigation pane, we choose **Instances**.
+
+![Instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75d2208f-d030-4f44-9667-23521332607f)
+
+**ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
+
+**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
+**iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
+
+**v.** On the **Edit inbound rules** page, we do the following:
+
++ Choose **Add rule**.
+
++ For **Port Range**, enter **8000** 
+
++ In the space with the magnifying glass under **Source**, choose **Anywhere**.
+
++ Click on **Save rules** at the bottom right corner of the page.
+
+![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
+
 
 
