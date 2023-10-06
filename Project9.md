@@ -768,7 +768,7 @@ sudo setsebool -P httpd_execmem 1
 
 **`$ sudo systemctl restart httpd`**
 
-**vi.** Next, we create a directory for Wordpress, we enter the created directory and we download WordPress in its compressed format. Then we decompress WordPress and we copy it to **/var/www/html/** We implement these by executing the following set of commands:
+**vi.** Next, we create a directory for Wordpress, we enter the created directory and we download WordPress in its compressed format. Then we decompress WordPress and we copy the wp-config-sample.php file to wp-config.php from where WordPress derives its base configuration. Afterwards we copy wordpress directory to **/var/www/html/** We implement these by executing the following set of commands:
 
 ```
 mkdir wordpress
@@ -871,13 +871,13 @@ mysql> exit
 
 #### <br>Step 5: Configure WordPress to connect to Remote Database<br/>
 
-**vi** Next, on the Web Server, we execute the following command to install MySQL client: 
+**i** Next, on the Web Server, we execute the following command to install MySQL client: 
 
 **`$ sudo yum install mysql`**
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
 
-**vii** And then we test that we can connect from our Web Server to our Database server using mysql-client:
+**ii** And then we test that we can connect from our Web Server to our Database server using mysql-client:
 
 **`$ sudo mysql -u qbuser -p -h 172.31.22.52`**
 
@@ -885,11 +885,53 @@ mysql> exit
 
 As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the <DB-Server-Private-IP-address>.
 
-**viii** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
+**iii** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
 
 ![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b562b26-2b09-4060-a667-daf10bb75440)
 
-**ix** The next thing we need to do is Change the requisite permissions and configuration so that Apache can use WordPress.
+**iv** The next thing we need to do is change the requisite permissions and configuration so that Apache can use WordPress.
 To implement this, we need to create a configuration file for wordpress in order to point client requests to the wordpress directory.
 
+**`$ sudo vi /etc/httpd/conf.d/wordpress.conf`**
 
+```
+<VirtualHost *:80>
+ServerAdmin admin@localhost
+DocumentRoot /var/www/html/wordpress
+
+<Directory "/var/www/html/wordpress">
+Options Indexes FollowSymLinks
+AllowOverride all
+Require all granted
+</Directory>
+
+ErrorLog /var/log/httpd/wordpress_error.log
+CustomLog /var/log/httpd/wordpress_access.log common
+</VirtualHost>
+```
+Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+![wordpress configuration file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7900bec6-bdb6-48e2-91f7-1addf1eecc28)
+
+**v** To apply the changes, we restart Apache with the following command:
+
+**`$ sudo systemctl restart httpd`**
+
+![system restart httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/64c45637-3c31-4aa4-a5dd-bd1d307afee3)
+
+**vi** Next, we edit the **wp-confg** file with the command below:
+
+**`$ sudo vi /var/www/html/wordpress/wp-config.php`**
+
+And we add the following configuration:
+
+```
+define('DB_NAME', 'wordpress');
+define('DB_USER', 'qbuser');
+define('DB_PASSWORD', 'password123');
+define('DB_HOST', '172.31.22.52');
+define('DB_CHARSET', 'utf8mb4');
+define('DB_COLLATE', '');
+```
+
+As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>.
