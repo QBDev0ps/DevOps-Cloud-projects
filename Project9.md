@@ -896,7 +896,7 @@ To implement this, we need to create a configuration file for wordpress in order
 
 ```
 <VirtualHost *:80>
-ServerAdmin qbuser@172.31.22.239
+ServerAdmin qbuser@172.31.22.52
 DocumentRoot /var/www/html/wordpress
 
 <Directory "/var/www/html/wordpress">
