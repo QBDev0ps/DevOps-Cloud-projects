@@ -806,18 +806,32 @@ sudo cp -R wordpress /var/www/html/
 
 ![MySQL server installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/096dc9e5-5f62-49ef-985d-7979fd287857)
 
-**ii** After installation, we check if the service is up and running with the command below:
+**iii** After installation, we check if the service is up and running with the command below:
 
 **`$ sudo systemctl status mysqld`**
 
 ![mysql inactive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2f33e693-a975-4468-89df-9f70d85646d4)
 
-As shown in the image above, MySQL server is currently inactive. So we execute the following commands to restart the service and enable it so that it will be running even after a system reboot:
+**iv** The above image shows that MySQL server is currently inactive. So we execute the following commands to restart the service and enable it so that it will be running even after a system reboot:
+
+**`$ sudo systemctl restart mysqld && sudo systemctl enable mysqld`**
+
+![mysql active](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4393fc1-2819-4fb6-82de-9c5aee6e94f0)
+
+As shown in the above image, after restarting and enabling MySQL we reconirm the service status and we can see that the service is active and running.
+
+#### <br>Step 3: Configure MySQL Database to Work with WordPress<br/>
+
+We configure MySQl to work with WordPress by first of all acessing the MySQL console and creating the WordPress Database. Next, we create a user and assign the user password. Then we grant the database privileges to the newly created user.  After this we flush the privileges. The IP address used when creating the user and flushing the user privileges must be the **<Web-Server-Private-IP-Address>**. We conclude by viewing the database to confirm our configuration and then we exit. We implement all of these by executing the following:
 
 ```
-sudo systemctl restart mysqld
-sudo systemctl enable mysqld
+$ sudo mysql
+mysql> CREATE DATABASE wordpress;
+mysql> CREATE USER `qbuser`@`172.31.22.239` IDENTIFIED BY 'password123';
+mysql> GRANT ALL ON wordpress.* TO `qbuser`@`172.31.22.239`;
+mysql> FLUSH PRIVILEGES;
+mysql> SHOW DATABASES;
+exit
 ```
-
 
 
