@@ -90,7 +90,7 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 ![Attach Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32ec447b-5d02-4328-8582-528573bb3667)
 
-**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Web Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
+**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Web Server Instance, under **"Device name"** the name can be changed from **/dev/sdf** through **/dev/sdp** depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
 
 ![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
 
@@ -116,7 +116,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 **`$ lsblk`**
 
-As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
+As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are **/dev/nvme0n1**, **/dev/nvme1n1**, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
 
 ![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
 
@@ -196,7 +196,7 @@ $ sudo pvcreate /dev/nvme3n1p1
 
 ![sudo pvs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc0aacd8-ac5f-415f-acfb-9a4d96c290eb)
 
-**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**
+**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **webdata-vg**.
 
 **`$ sudo vgcreate webdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
 
@@ -308,7 +308,7 @@ The output must look like what we have in the image above.
 
 ### <br>Implementing LVM on Linux Database Server<br/>
 
-The next phase of this project involves preparing the database server. We shall launch a second RedHat EC2 instance that will have a role as our **‘DB Server’**. We shall be repeating the same steps as for the Web Server, but instead of **`apps-lv`** we will create **`db-lv`** and mount it to **`/db`** directory instead of **`/var/www/html/`**.
+The next phase of this project involves preparing the Database Server. We shall launch a second RedHat EC2 instance that will have a role as our **‘DB Server’**. We shall be repeating the same steps as for the Web Server, but instead of **`apps-lv`** we will create **`db-lv`** and mount it to **`/db`** directory instead of **`/var/www/html/`**.
 
 #### <br>Step 1: Provision EC2 Instance<br/>
 
@@ -364,7 +364,7 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Database S
 
 ![attach volume db server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/391a7639-23ef-41f4-8689-4eba74456031)
 
-**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Database Server Instance, under **"Device name"** the name can be changed from /dev/sdf through /dev/sdp depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
+**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Database Server Instance, under **"Device name"** the name can be changed from **/dev/sdf** through **/dev/sdp** depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
 
 ![attach volume 2 DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6156c4d1-065d-4304-99b0-71b8f68f40ce)
 
@@ -390,7 +390,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 **`$ lsblk`**
 
-As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are /dev/nvme0n1, /dev/nvme1n1, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
+As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are **/dev/nvme0n1**, **/dev/nvme1n1**, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
 
 ![lsblk db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/91272424-2c1f-47c5-9041-4f89a76e0ea1)
 
@@ -594,8 +594,8 @@ To deploy WordPress, we will need to first of all install Apache Web Server soft
 **iii.** After successfully completing the installation, we start the apache service with the commands below:
 
 ```
-sudo systemctl enable httpd
-sudo systemctl start httpd
+$ sudo systemctl enable httpd
+$ sudo systemctl start httpd
 ```
 
 ![enable and start apache httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9be56846-0af1-4c00-baa5-5efd984569fd)
@@ -603,15 +603,15 @@ sudo systemctl start httpd
 **iv.** The next course of action is to install PHP and its dependencies with the following set of commands:
 
 ```
-sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-sudo yum module list php
-sudo yum module reset php
-sudo yum module enable php:remi-7.4
-sudo yum install php php-opcache php-gd php-curl php-mysqlnd
-sudo systemctl start php-fpm
-sudo systemctl enable php-fpm
-sudo setsebool -P httpd_execmem 1
+$ sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+$ sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+$ sudo yum module list php
+$ sudo yum module reset php
+$ sudo yum module enable php:remi-7.4
+$ sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+$ sudo systemctl start php-fpm
+$ sudo systemctl enable php-fpm
+$ sudo setsebool -P httpd_execmem 1
 ```
 
 #### BLOCKER❗
