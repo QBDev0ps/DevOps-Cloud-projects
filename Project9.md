@@ -988,30 +988,36 @@ After executing the two commands as shown in the image above, we then reboot our
 
 #### <br>Step 7: Complete WordPress Installation on the Browser<br/>
 
-The last step is to complete the installation from a web browser. We Launch our browser and browse our web server’s IP address using the following syntax:
+**i.** The last step is to complete the installation from a web browser. We Launch our browser and browse our web server’s IP address using the following syntax:
 
 **`http://<Web-Server-Public-IP-Address>/`**
 .
-We enter our web server’s IP addressg into our browser as shown below:
+**ii.** We enter our web server’s IP addressg into our browser as shown below:
 
 **`http://13.53.122.139`**
 
-The page we see is as shown in the image below, so we select our preferred installation language and we click on the **Continue** button at the buttom of the page. 
+**iii.** The page we see is as shown in the image below, so we select our preferred installation language and we click on the **Continue** button at the buttom of the page. 
 
 ![browser output webserver](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3aeef39a-4187-4abd-9712-a5f13a0485ca)
 
-In the next step, we fill in our site's details, then we scroll down the page and click on **Install WordPress**.
+**iv.** In the next step, we fill in our site's details, then we scroll down the page and click on **Install WordPress**.
 
 ![wordpress welcome page](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5858b437-dbb0-4f21-ac5f-899690bf442e)
 
-The next page we see is the installation success page which tells us WordPress has been installed. To log in, we click the **Login** button at the bottom of the page.
+**v.** The next page we see is the installation success page which tells us WordPress has been installed. To log in, we click the **Login** button at the bottom of the page.
 
 ![Wordpress successful installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e6a2d7ba-a982-4a42-9ccf-02cab0406ec4)
 
-On the login page, we provide the username and password that we provided when filling in our site's details and then we click **Log In**.
+**vi.** On the login page, we provide the username and password that we provided when filling in our site's details and then we click **Log In**.
 
 ![Word press log in](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32fc91a8-977c-423e-8c04-209045c8330e)
 
-Finally, we get to see the WordPress Dashboard as shown in the image below:
+**vii.** Finally, we get to see the WordPress Dashboard as shown in the image below:
 
 ![WordPress complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ee0be44-c3f5-4dc7-acf1-091746d93596)
+
+### <br>CONCLUSION<br/>
+
+We have been able to successfully complete this project. The goal of our project was to to build and manage a scalable WordPress website using AWS EC2 and LVM (Logical Volume Management) storage. We began our project implementation by provisioning an EC2 Instance of Red Hat Linux to serve as our Web Server. And then we deployed and configured LVM for our Linux based Web server. We subsequently launched a second RedHat EC2 instance that was given a role as our Database (DB) Server. We then repeated the same steps as for the Web Server, but with some important differences such as creating **db-lv** logical volume instead of **apps-lv** that we created on the web server and mounting it to **/db** directory instead of **/var/www/html/**. The next thing we did was to install WordPress on our Web Server and configure it to use MySQL Database. This required us to install the Apache web server and its dependencies and it was at this point that we encountered some **Blockers**. Fortunately, we were able to resolve the issues and then we proceeded successfully to install MySQL on our EC2 Database Server instance and then create and configure MySQL database to work with WordPress. Next, on our Web Server, we configured WordPress to be able to connect to our remote database on the DB server. We concluded our project by opening the requisite ports on both our Web and Database servers and then we accessed WordPress through the browser with our Web server's public IP address and proceeded to complete the WordPress installation process. Thank you.
+
+
