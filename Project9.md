@@ -938,7 +938,7 @@ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and qui
 
 ![configure wp-config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d61b08f9-5608-4e1d-8436-43aad6b33893)
 
-As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>.
+As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>
 
 **vii.**  Red Hat Enterprise Linux usually comes with SELinux enabled. This can be an issue, especially during the installation of web applications. We therefore need to configure the right SELinux context to the **/var/www/html/wordpress** directory.
 
@@ -980,7 +980,7 @@ After executing the two commands as shown in the image above, we then reboot our
 
 + For **Type**, choose **HTTP**. 
 
-+ In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet
++ In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet.
 
 + Click on **Save rules** at the bottom right corner of the page.
 
@@ -988,7 +988,7 @@ After executing the two commands as shown in the image above, we then reboot our
 
 #### <br>Step 7: Complete WordPress Installation on the Browser<br/>
 
-**i.** The last step is to complete the installation from a web browser. We Launch our browser and enter our web server’s Public IP address using the following syntax:
+**i.** The last step is to complete the installation from a web browser. We launch our browser and enter our web server’s Public IP address using the following syntax:
 
 **`http://<Web-Server-Public-IP-Address>/`**
 
