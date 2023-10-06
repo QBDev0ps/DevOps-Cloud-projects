@@ -896,7 +896,7 @@ To implement this, we need to create a configuration file for wordpress in order
 
 ```
 <VirtualHost *:80>
-ServerAdmin admin@localhost
+ServerAdmin qbuser@172.31.22.239
 DocumentRoot /var/www/html/wordpress
 
 <Directory "/var/www/html/wordpress">
@@ -934,4 +934,26 @@ define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
 ```
 
+Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+![configure wp-config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/51a44884-32b2-4e8f-bd23-27d2069e5de4)
+
 As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>.
+
+**vii**  Red Hat Enterprise Linux usually comes with SELinux enabled. This can be an issue, especially during the installation of web applications. We therefore need to configure the right SELinux context to the **/var/www/html/wordpress** directory.
+
+**`$ sudo semanage fcontext -a -t httpd_sys_rw_content_t "/var/www/html/wordpress(/.*)?"`**
+
+**viii** And for the changes to take effect, we execute the following command:
+
+**`$ sudo restorecon -Rv /var/www/html/wordpress`**
+
+![semange](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fad1ac08-3c70-4994-a428-43e21c8366f3)
+
+And then we rebbot our instance.
+
+**ix** 
+
+
+
+http://13.53.122.139
