@@ -838,15 +838,15 @@ mysql> exit
 
 #### <br>Step 4: Configure WordPress to connect to Remote Database<br/>
 
-**i** The initial thing to do in this step is to ensure we open MySQL port 3306 on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
+**i** The initial thing to do in this step is to ensure we open MySQL port **3306** on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s private IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
 
-**i.** In the AWS  console navigation pane, we choose **Instances**.
+**ii** In the AWS console navigation pane, we choose **Instances**.
 
-![Instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75d2208f-d030-4f44-9667-23521332607f)
+![AWS navigation pane](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb88a0b7-15c4-43e3-8187-e9f61aa26fbe)
 
 **ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
+![AWS Instance summary DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9c9054ad-12c2-4613-b261-e388b80778e2)
 
 **iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
@@ -860,13 +860,25 @@ mysql> exit
 
 + Choose **Add rule**.
 
-+ For **Port Range**, enter **8000** 
++ For **Port Range**, enter **3306** 
 
-+ In the space with the magnifying glass under **Source**, choose **Anywhere**.
++ In the space with the magnifying glass under **Source**, we enter our Web Server’s private IP address **172.31.22.239/32**
 
 + Click on **Save rules** at the bottom right corner of the page.
 
-![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
+![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc836d6a-f277-4ded-b4e8-9319a78bae23)
+
+**vi** Next, on the Web Server, we execute the following command to install MySQL client: 
+
+**`$ sudo yum install mysql`**
+
+![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
+
+And then we test that we can connect from our Web Server to our DB server using mysql-client:
+
+**`$ sudo mysql -u admin -p -h <DB-Server-Private-IP-address>`**
+
+
 
 
 
