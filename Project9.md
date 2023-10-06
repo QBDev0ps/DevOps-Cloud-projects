@@ -938,7 +938,7 @@ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and qui
 
 ![configure wp-config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d61b08f9-5608-4e1d-8436-43aad6b33893)
 
-As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>
+As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our **`<DB-Server-Private-IP-Address>`**
 
 **vii.**  Red Hat Enterprise Linux usually comes with SELinux enabled. This can be an issue, especially during the installation of web applications. We therefore need to configure the right SELinux context to the **/var/www/html/wordpress** directory.
 
