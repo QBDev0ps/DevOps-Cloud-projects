@@ -911,7 +911,7 @@ CustomLog /var/log/httpd/wordpress_access.log common
 ```
 Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
-![wordpress configuration file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7900bec6-bdb6-48e2-91f7-1addf1eecc28)
+![wordpress configuration file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fc12da8-a30e-4c20-8da0-bc142aadd3ad)
 
 **v** To apply the changes, we restart Apache with the following command:
 
@@ -930,13 +930,13 @@ define('DB_NAME', 'wordpress');
 define('DB_USER', 'qbuser');
 define('DB_PASSWORD', 'password123');
 define('DB_HOST', '172.31.22.52');
-define('DB_CHARSET', 'utf8mb4');
+define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 ```
 
 Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
-![configure wp-config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/51a44884-32b2-4e8f-bd23-27d2069e5de4)
+![configure wp-config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d61b08f9-5608-4e1d-8436-43aad6b33893)
 
 As indicated in the above image, we modify the values to correspond to our database name, database user, password and DB host which will be our <DB-Server-Private-IP-Address>.
 
@@ -950,7 +950,7 @@ As indicated in the above image, we modify the values to correspond to our datab
 
 ![semange](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fad1ac08-3c70-4994-a428-43e21c8366f3)
 
-And then we rebbot our instance.
+And then we reboot our instance.
 
 **ix** 
 
