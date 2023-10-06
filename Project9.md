@@ -883,14 +883,14 @@ mysql> exit
 
 ![connect to mysql from web server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a6b72332-fa6a-4229-a5c3-caed9f461c3f)
 
-As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the <DB-Server-Private-IP-address>.
+As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the **`<DB-Server-Private-IP-address>`**.
 
 **iii.** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
 
 ![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b562b26-2b09-4060-a667-daf10bb75440)
 
 **iv.** The next thing we need to do is change the requisite permissions and configuration so that Apache can use WordPress.
-To implement this, we need to create a configuration file for wordpress in order to point client requests to the wordpress directory.
+To implement this, we need to create a configuration file for wordpress in order to point client requests to the WordPress directory.
 
 **`$ sudo vi /etc/httpd/conf.d/wordpress.conf`**
 
