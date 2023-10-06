@@ -988,11 +988,11 @@ After executing the two commands as shown in the image above, we then reboot our
 
 #### <br>Step 7: Complete WordPress Installation on the Browser<br/>
 
-**i.** The last step is to complete the installation from a web browser. We Launch our browser and browse our web server’s IP address using the following syntax:
+**i.** The last step is to complete the installation from a web browser. We Launch our browser and enter our web server’s Public IP address using the following syntax:
 
 **`http://<Web-Server-Public-IP-Address>/`**
-.
-**ii.** We enter our web server’s IP addressg into our browser as shown below:
+
+**ii.** We enter our web server’s IP address into our browser as shown below:
 
 **`http://13.53.122.139`**
 
@@ -1018,6 +1018,6 @@ After executing the two commands as shown in the image above, we then reboot our
 
 ### <br>CONCLUSION<br/>
 
-We have been able to successfully complete this project. The goal of our project was to to build and manage a scalable WordPress website using AWS EC2 and LVM (Logical Volume Management) storage. We began our project implementation by provisioning an EC2 Instance of Red Hat Linux to serve as our Web Server. And then we deployed and configured LVM for our Linux based Web server. This involed creating and attaching 3 EBS volumes, partitioning disks and then creating and configuring physical and logical volumes. Next, we created the relevant directories which we mounted on the logical volumes. We subsequently launched a second RedHat EC2 instance that was given a role as our Database (DB) Server. We then repeated the same steps as for the Web Server, but with some important differences such as creating **db-lv** logical volume instead of **apps-lv** that we created on the web server and mounting it to **/db** directory instead of **/var/www/html/**. The next thing we did was to install WordPress on our Web Server and configure it to use MySQL Database. This required us to install the Apache web server and its dependencies and it was at this point that we encountered some **Blockers**. Fortunately, we were able to resolve the issues and then we proceeded successfully to install MySQL on our EC2 Database Server instance and then create and configure MySQL database to work with WordPress. Next, on our Web Server, we configured WordPress to be able to connect to our remote database on the DB server. We concluded our project by opening the requisite ports on both our Web and Database servers and then we accessed WordPress through the browser with our Web server's public IP address and proceeded to complete the WordPress installation process. Thank you.
+We have been able to successfully complete this project. The goal of our project was to to build and manage a scalable WordPress website using AWS EC2 and LVM (Logical Volume Management) storage. We began our project implementation by provisioning an EC2 Instance of Red Hat Linux to serve as our Web Server. And then we deployed and configured LVM for our Linux based Web server. This involved creating and attaching 3 EBS volumes, partitioning disks and then creating and configuring physical and logical volumes. Next, we created the relevant directories which we mounted on the logical volumes. We subsequently launched a second RedHat EC2 instance that was given a role as our Database (DB) Server. We then repeated the same steps as for the Web Server, but with some important differences such as creating **db-lv** logical volume instead of **apps-lv** that we created on the web server and mounting it to **/db** directory instead of **/var/www/html/**. The next thing we did was to install WordPress on our Web Server and configure it to use MySQL Database. This required us to install the Apache web server and its dependencies and it was at this point that we encountered some **Blockers**. Fortunately, we were able to resolve the issues and then we proceeded successfully to install MySQL on our EC2 Database Server instance and then create and configure MySQL database to work with WordPress. Next, on our Web Server, we configured WordPress to be able to connect to our remote database on the DB server. We concluded our project by opening the requisite ports on both our Web and Database servers and then we accessed WordPress through the browser with our Web server's public IP address and proceeded to complete the WordPress installation process. Thank you.
 
 
