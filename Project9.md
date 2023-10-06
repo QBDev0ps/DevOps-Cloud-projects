@@ -836,9 +836,9 @@ mysql> exit
 
 ![configure mysql database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/48a6a3ae-73d2-4281-89aa-965f40f503f0)
 
-#### <br>Step 4: Configure WordPress to connect to Remote Database<br/>
+#### <br>Step 4: Open Port 3306 on EC2 Database Instance<br/>
 
-**i** The initial thing to do in this step is to ensure we open MySQL port **3306** on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s private IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
+**i** In this step, we need to ensure we open MySQL port **3306** on DB Server EC2. For extra security, we will allow access to the DB server **ONLY** from our Web Server’s private IP address, so in the Inbound Rule configuration source will be specified as **/32**. We do this by following the steps below:
 
 **ii** In the AWS console navigation pane, we choose **Instances**.
 
@@ -868,18 +868,28 @@ mysql> exit
 
 ![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc836d6a-f277-4ded-b4e8-9319a78bae23)
 
+
+#### <br>Step 5: Configure WordPress to connect to Remote Database<br/>
+
 **vi** Next, on the Web Server, we execute the following command to install MySQL client: 
 
 **`$ sudo yum install mysql`**
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b8721f3-0083-4175-9689-a495fd1c293a)
 
-And then we test that we can connect from our Web Server to our Database server using mysql-client:
+**vii** And then we test that we can connect from our Web Server to our Database server using mysql-client:
 
 **`$ sudo mysql -u qbuser -p -h 172.31.22.52`**
 
+![connect to mysql from web server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a6b72332-fa6a-4229-a5c3-caed9f461c3f)
+
 As shown in the output image above, we connected to the DB Server successfully. Note that the user we used in connecting is the same user we created in Mysql server on the Database (DB) Server. It should also be noted that the IP address we used in connecting is the <DB-Server-Private-IP-address>.
 
+**viii** We verify that we can successfully execute **`mysql> SHOW DATABASES;`** command and see a list of existing databases.
 
+![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b562b26-2b09-4060-a667-daf10bb75440)
+
+**ix** The next thing we need to do is Change the requisite permissions and configuration so that Apache can use WordPress.
+To implement this, we need to create a configuration file for wordpress in order to point client requests to the wordpress directory.
 
 
