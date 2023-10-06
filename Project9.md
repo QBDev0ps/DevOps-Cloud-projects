@@ -686,7 +686,7 @@ We also use the **`free -m`** command which gives us information gives us inform
 
 + After discovering that the free tier AWS instance is limited to 1GB of RAM and adding additional RAM will incur expensive costs, we decided to go with option **2**. **SWAP**, also known as virtual RAM, is used in Linux to support storing data in hard disk memory when when a system is running out of physical memory (RAM).
 
-+ To begin the process of creating **SWAP** we check for free disk space on our default EBS volume by running the following command:
++ To begin the process of creating **SWAP**, we check for free disk space on our default EBS volume by running the following command:
 
 **`$ sudo df -h`**
 
@@ -731,7 +731,7 @@ swapon -s
 
 ![change swappiness](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8f766f9-d74c-4c78-9f75-e5a580aedded)
 
-+ As shown in the image above, we are able to confirm that swappiness has been changed to 10. We also verify that our whole **SWAP** setup is enable by running the commands below:
++ As shown in the image above, we are able to confirm that swappiness has been changed to 10. We also verify that our whole **SWAP** setup is enabled by running the commands below:
   
 ```
 $ cat /proc/swaps
@@ -751,13 +751,13 @@ $ free
 + We proceed to run the remainder of the commands from **iv** without any issues:
 
 ```
-sudo yum module list php
-sudo yum module reset php
-sudo yum module enable php:remi-7.4
-sudo yum install php php-opcache php-gd php-curl php-mysqlnd
-sudo systemctl start php-fpm
-sudo systemctl enable php-fpm
-sudo setsebool -P httpd_execmem 1
+$ sudo yum module list php
+$ sudo yum module reset php
+$ sudo yum module enable php:remi-7.4
+$ sudo yum install php php-opcache php-gd php-curl php-mysqlnd
+$ sudo systemctl start php-fpm
+$ sudo systemctl enable php-fpm
+$ sudo setsebool -P httpd_execmem 1
 ```
 
 ![installed remaining commands](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b9ddaaa8-8511-4cd7-9691-4b830559c3f4)
@@ -771,13 +771,13 @@ sudo setsebool -P httpd_execmem 1
 **vi.** Next, we create a directory for Wordpress, we enter the created directory and we download WordPress in its compressed format. Then we decompress WordPress and we copy the wp-config-sample.php file to wp-config.php from where WordPress derives its base configuration. Afterwards we copy wordpress directory to **/var/www/html/** We implement these by executing the following set of commands:
 
 ```
-mkdir wordpress
-cd   wordpress
-sudo wget http://wordpress.org/latest.tar.gz
-sudo tar xzvf latest.tar.gz
-sudo rm -rf latest.tar.gz
-sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
-sudo cp -R wordpress /var/www/html/
+$ mkdir wordpress
+$ cd wordpress
+$ sudo wget http://wordpress.org/latest.tar.gz
+$ sudo tar xzvf latest.tar.gz
+$ sudo rm -rf latest.tar.gz
+$ sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
+$ sudo cp -R wordpress /var/www/html/
 ```
 
 ![worpress installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4bc24590-6987-4903-9ade-18043f95e37e)
@@ -785,9 +785,9 @@ sudo cp -R wordpress /var/www/html/
 **vi.** We complete the WordPress installation process by configuring SELinux policies with the set of commands below:
 
 ```
- sudo chown -R apache:apache /var/www/html/wordpress
- sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
- sudo setsebool -P httpd_can_network_connect=1
+ $ sudo chown -R apache:apache /var/www/html/wordpress
+ $ sudo chcon -t httpd_sys_rw_content_t /var/www/html/wordpress -R
+ $ sudo setsebool -P httpd_can_network_connect=1
 ```
 
 ![configure selinux](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/caa6f297-0f2b-471b-ac5f-e267ee09cf3f)
@@ -800,7 +800,7 @@ sudo cp -R wordpress /var/www/html/
 
 ![sudo yum update db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb1ab85b-8f10-4a06-aac1-3eb5c75953d8)
 
-**ii.** Next, we execute the following command to install Mysql:
+**ii.** Next, we execute the following command to install MySQL:
 
 **`$ sudo yum install mysql-server`**
 
@@ -818,7 +818,7 @@ sudo cp -R wordpress /var/www/html/
 
 ![mysql active](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4393fc1-2819-4fb6-82de-9c5aee6e94f0)
 
-As shown in the above image, after restarting and enabling MySQL we reconirm the service status and we can see that the service is active and running.
+As shown in the above image, after restarting and enabling MySQL we reconfirm the service status and we can see that the service is active and running.
 
 #### <br>Step 3: Configure MySQL Database to Work with WordPress<br/>
 
