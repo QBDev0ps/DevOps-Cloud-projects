@@ -22,7 +22,7 @@ Based on the infrastructure to be used and the goal of this project, it shall co
 
 **1.** Configure Network File Server (NFS) Server with storage infastructure.
 
-**2.** Configure Database Server.
+**2.** Configure Backend Database Server.
 
 **3.** Configure Web Servers.
 
