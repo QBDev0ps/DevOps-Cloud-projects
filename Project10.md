@@ -131,6 +131,7 @@ The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage dev
 
 **`$ ls /dev/`**
 
+#### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
 ![ls dev folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/958f72cb-9144-4a5d-bcc2-f26e8ad15795)
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
