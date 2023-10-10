@@ -7,8 +7,13 @@ In the [previous project](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob
 The goal of this project is to build a tooling website solution which will enable easy access to DevOps tools within the corporate organisation. The solution we will implement will consist of the following components:
 
 **1.** **Infrastructure**: Amazon Web Services (AWS)
+
 **2.** **Web Server**: Red Hat Enterprise Linux 8
+
 **3.** **Database Server**: Ubuntu 20.04 + MySQL
+
 **4.** **Storage Server**: Enterprise Linux 8 + NFS Server
+
 **5.** **Programming Language**: PHP
+
 **6.** **Code Repository**: GitHub
