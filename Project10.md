@@ -310,3 +310,9 @@ The output must look like what we have in the image above.
  **`$ sudo systemctl status nfs-server.service`**
 
  ![status NFS service](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7ca6c7e3-b832-4913-846f-250ff332472f)
+
+#### <br>Step 10: Export the Mounts for Webservers' Subnet CIDR to Connect as Clients<br/>
+
+We will keep things simple in this project by installing all three webservers inside the same subnet, but in production set ups in real world scenarios, we would have had to seperate each tier in its own subnet to mainatain higher levels of security.
+
+**i** To check the subnet cidr, we open the properties of our EC2 instance on the AWS console and then we click on the “Network” tab, open the “Subnet ID” link in a new tab, and locate “IPv4 CIDR
