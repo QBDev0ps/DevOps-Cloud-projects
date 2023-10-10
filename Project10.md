@@ -37,7 +37,7 @@ To begin our project we need to deploy and configure LVM for our Linux based NFS
 
 #### <br>Step 1: Provision EC2 Instance<br/>
 
-We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our Web Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our NFS Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
 
@@ -45,11 +45,11 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 
 **ii.** Under **Name and tags**, we provide a unique name for our web server.
 
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a121b805-be6a-4e01-8be2-698e194d8909)
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/04cf9f94-d41c-44ca-a108-346911a7a646)
   
 **iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
 
-![Application and OS Images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/86ef4789-366a-4319-b4f2-709f305fa7f1)
+![application and OS images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2beaaf89-c746-4ed5-a434-f0989bfb3db1)
 
 **iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
