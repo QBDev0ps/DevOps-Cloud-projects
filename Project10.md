@@ -43,7 +43,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
-**ii.** Under **Name and tags**, we provide a unique name for our web server.
+**ii.** Under **Name and tags**, we provide a unique name for our server.
 
 ![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/04cf9f94-d41c-44ca-a108-346911a7a646)
   
@@ -61,7 +61,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux that will serve as our 
 
 #### <br>Step 2: Create EBS Volumes<br/>
 
-The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) 
+The next course of action is to create 3 EBS volumes of 10GB each in the same Availability Zone as our EC2 Linux NFS Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html) 
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll down in the navigation pane and click on **"Volumes"** under **"Elastic Block Store"**.
 
@@ -77,9 +77,9 @@ The next course of action is to create 3 EBS volumes of 10GB each in the same Av
 
 **iv.** We repeat **i-iii** above twice to create two more Elastic Block Store (EBS) Volumes.
 
-#### <br>Step 3: Attach EBS Volumes to EC2 Web Server Instance<br/>
+#### <br>Step 3: Attach EBS Volumes to EC2 NFS Server Instance<br/>
 
-After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
+After creating the 3 EBS volumes we proceed to attach them to our EC2 NFS Server instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll down in the navigation pane and click on **"Volumes"** under **"Elastic Block Store"**.
 
@@ -89,21 +89,21 @@ After creating the 3 EBS volumes we proceed to attach them to our EC2 Web Server
 
 ![Attach Volume](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32ec447b-5d02-4328-8582-528573bb3667)
 
-**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux Web Server Instance, under **"Device name"** the name can be changed from **/dev/sdf** through **/dev/sdp** depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
+**iii.** In the **"Attach Volume"** page, under **"Instance"**, we select our EC2 Linux NFS Server Instance, under **"Device name"** the name can be changed from **/dev/sdf** through **/dev/sdp** depending on preferences, then we click on **"Attach Volume"** at the bottom right corner of the page.
 
 ![Attach Volume 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36039f97-ae1c-4eb8-85ae-8239b16f5e32)
 
-**iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux Web Server Instance.
+**iv.** We repeat **i-iii** above twice to attach the remaining two Elastic Block Store (EBS) Volumes to our EC2 Linux NFS Server Instance.
 
-#### <br>Step 4: Connect to the Web Server via the Terminal using the SSH Client<br/>
+#### <br>Step 4: Connect to the NFS Server via the Terminal using the SSH Client<br/>
 
-After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our web server. We carry this out by doing the following:
+After we have provisioned our server and we have created and attached our EBS volumes, we must next connect to the NFS server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our NFS server. We carry this out by doing the following:
 
 **i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
-#### <br>Step 5: Update Webserver and Inspect Attached Block Devices<br/>
+#### <br>Step 5: Update NFS Server and Inspect Attached Block Devices<br/>
 
 **i.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
 
@@ -280,3 +280,33 @@ $ sudo mount /dev/nfsdata-vg/lv-opt /mnt/opt
 ![df -h final output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5650411d-f55e-4a4f-8e8c-827c19e1ca5d)
 
 The output must look like what we have in the image above.
+
+#### <br>Step 9: Install NFS Server<br/>
+
+**i** Firstly, we update the server machine if we have not already done so:
+
+**`$ sudo yum -y update`**
+
+![Sudo yum update -y](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c5f2681a-141f-4dc7-8d8a-ac527184a9e3)
+
+**ii.** The next course of action is to install the NFS server using the nfs-utils package as shown in the command below:
+
+**`$ sudo yum install -y nfs-utils`**
+
+![install NFS server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/605821d1-650a-4ca0-9df2-a547f414208c)
+
+**iii.** After the installation is complete, we start the NFS service with the following command:
+
+**`$ sudo systemctl start nfs-server.service`**
+
+**iv.** Next, we execute the command below to configure NFS to always start on system reboot:
+
+**`$ sudo systemctl enable nfs-server.service`**
+
+![enabls nfs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2baa542e-058d-49df-9def-207cb9f2251b)
+
+**v.** And then to conclude, we check the status of the NFS service to verify that it is active and enabled:
+
+ **`$ sudo systemctl status nfs-server.service`**
+
+ ![status NFS service](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7ca6c7e3-b832-4913-846f-250ff332472f)
