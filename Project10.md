@@ -165,4 +165,124 @@ As can be seen in the image above, we have our newly configured partitions on ea
 
 ![sudo lvmdiskscan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e40db3a8-5549-483e-bc44-401aefb6143e)
 
+#### <br>Step 7: Create Physical and Logical Volumes<br/>
 
+**i.** For the next step, we use the **`pvcreate`** utility to mark each of our three (3) partitioned disks as physical volumes (PVs) to be used by LVM:
+
+**`$ sudo pvcreate /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+![creating physical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/846dab7e-6029-46b9-8c24-181c75609f91)
+
+**ii.** Then afterwards, we verify that the physical volumes (PVs) have been created by executing the command below:
+
+**`$ sudo pvs`**
+
+![sudo pvs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb86fd81-9823-4244-aa23-0776c7f72a56)
+
+**iii.** After this, we proceed to use the **`vgcreate`** utility to add all three (3) physical volumes (PVs) to a volume group (VG) that we will be naming **nfsdata-vg**
+
+**`$ sudo vgcreate nfsdata-vg /dev/nvme1n1p1 /dev/nvme2n1p1 /dev/nvme3n1p1`**
+
+![create volume group db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55905165-0d23-457c-9ef1-01aeb1c3e50c)
+
+**iv.** And then we confirm that our volume group (VG) has been created by successfully executing the following command:
+
+**`$ sudo vgs`**
+
+![sudo vgs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5214ffc4-682a-4689-a772-ee96158c0c83)
+
+**v.** The next step is to create three (3) logical volumes (LVs) **lv-opt**, **lv-apps** and **lv-logs** using the **`lvcreate`** utility. 
+
+```
+$ sudo lvcreate -n lv-opt -L 9G nfsdata-vg
+$ sudo lvcreate -n lv-apps -L 9G nfsdata-vg
+$ sudo lvcreate -n lv-logs -L 9G nfsdata-vg
+```
+
+![create logical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/131a20e5-2b3b-407b-b59c-537e1888642d)
+
+**vi.** And then we confirm that our logical volumes have been created by successfully executing the following command:
+
+**`$ sudo lvs`**
+
+![sudo lvs db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/56ba9b5e-4487-465e-92bd-68d3251524e0)
+
+**vii.** Then we verify our entire setup of Volume Group (VG), Physical Volumes (PV) and Logical Volumes (LV) with the following commands:
+
+**`$ sudo vgdisplay -v`**
+
+![sudo vgdisplay db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/55f8718d-2de8-44c2-a57d-afdf68310a9d)
+
+**`$ sudo lsblk`**
+
+![verify entire setup db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/257574ab-ca72-4cf9-a17a-82f252bedd05)
+
+**viii.** To complete the process, we use **`mkfs.xfs`** to format the logical volumes (LVs) with **xfs** filesystem.
+
+**`$ sudo mkfs -t xfs /dev/nfsdata-vg/lv-opt && sudo mkfs -t xfs /dev/nfsdata-vg/lv-apps && sudo mkfs -t xfs /dev/nfsdata-vg/lv-logs`**
+
+![format logical volumes db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/33c81e0f-b165-4d2a-8d8f-05da70479146)
+
+#### <br>Step 8: Create Directories and Mount on Logical Volumes<br/>
+
+In this step, we need to create the directory to hold our database files and then another directory to store backup of log data after which we will respectively mount these directories on the created logical volumes **db-lv** and **logs-lv**.
+
+**i.** We use the following command to create the **/db** directory to store our database files:
+
+**`$ sudo mkdir -p /db`**
+
+**ii.** We use the command below to create the **/home/recovery/logs** directory to store backup of log data:
+
+**`$ sudo mkdir -p /home/recovery/logs`**
+
+**iii.** Then we execute the following command to mount **/db** on **db-lv** logical volume:
+
+**`$ sudo mount /dev/dbdata-vg/db-lv /db`**
+
+**iv.** **/var/log** is the default directory where Linux stores all log files. This is the directory that we need to mount on our **logs-lv** volume. However, mounting this directory will delete all the files contained in it so before we carry out this action, we need to use the **`rsync`** utility to backup all the files in the log directory **/var/log** into the **/home/recovery/logs** directory we created. We do this by executing the command below:
+
+**`$ sudo rsync -av /var/log/. /home/recovery/logs/`**
+
+![backup log files db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3431073b-23ba-4c14-9624-e92d602b6b29)
+
+**v.** Then we enter the command below to mount **/var/log** on **logs-lv** logical volume:
+
+**`$ sudo mount /dev/dbdata-vg/logs-lv /var/log`**
+
+**vi.** Afterwards, we restore the log files back into the **/var/log** directory.
+
+**`$ sudo rsync -av /home/recovery/logs/. /var/log`**
+
+![restore log files db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/39277e2e-f067-4c1b-bc61-42aade92704f)
+
+**vii.** The next step is to use the universally unique identifier (UUID) of the device to update the **/etc/fstab** file so that the mount configuration will persist after the restart of the server. We check the UUID of the device by entering the command below:
+
+**`$ sudo blkid`**
+
+![uuid db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/10b6f02e-7d5d-405e-84c7-c9533cbd694e)
+
+**viii.** We copy the UUID as shown in the above image and we open the **/etc/fstab** file with the following command:
+
+**`$ sudo vi /etc/fstab`**
+
+**ix.** We paste in the copied UUID whilst removing the leading and ending quotes and update the **/etc/fstab** file as shown in the image below:
+
+![Mounts for Database Server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dbac1c4c-5178-4824-b00d-82418309dd4c)
+
+**x.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**xi.** We test our mount configuration with the following command:
+
+**`$ sudo mount -a`**
+
+**xii.** Then we reload the daemon with the command below:
+
+**`$ sudo systemctl daemon-reload`**
+
+**xiii.** To complete our configuration process, we verify our entire setup by executing the following command:
+
+**`$ df -h`**
+
+![df -h final output db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00cc610d-137e-4eab-b98f-1f6ef2df09e0)
+
+The output must look like what we have in the image above.
