@@ -117,7 +117,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 As can be seen in the image below, our EBS volumes are shown using the **`nvme`** naming convention rather than **`xvdf`**. This is because our block devices are connected through an NVMe port which uses the nvme driver on Linux. It should also be noted that EBS volumes are typically exposed as NVMe block devices on instances built on the Nitro System. The device names are **/dev/nvme0n1**, **/dev/nvme1n1**, and so on. The Nitro System is a collection of hardware and software components built by AWS that enable high performance, high availability, and high security.
 
-![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b312e15c-f0cc-4813-9f6c-e057471f90e9)
+![lsblk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e3f43630-958c-4c6d-b4a5-eebf08ab4e1c)
 
 The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage device attached to our EC2 instance and has four partitions **/dev/nvme0n1p1-4** with **/dev/nvme0n1p4** mounted as the root device. The block devices we created are listed as **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** and as can be seen, they have no mount points because they are not yet mounted.
 
@@ -125,13 +125,42 @@ The **`lsblk`** command reveals that **/dev/nvme0n1** is the default storage dev
 
 **`$ df -h`**
 
-![df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63742891-1c19-4932-8d8a-d5f4b98c7876)
+![df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2cfe8778-107c-48b8-a68e-878eed860816)
 
 **iv.** We also proceed to check the **/dev/** directory with the following command: 
 
 **`$ ls /dev/`**
 
-#### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
-![ls dev folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/958f72cb-9144-4a5d-bcc2-f26e8ad15795)
+![ls dev](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/079bef77-e12b-49db-b0a5-58c308771c2b)
 
 As can be seeen in the above image, the executed command lists all Linux devices and we can see that our attached block devices  **/dev/nvme1n1**, **/dev/nvme2n1** and **/dev/nvme3n1** are listed.
+
+#### <br>Step 6: Partition Disks and Install lvm2 Package<br/>
+
+**i.** In this step, we proceed to create a single partition on each of the three (3) Disks using the **`gdisk`** utility. We partition **/dev/nvme1n1** by executing the following command: 
+
+**`$ sudo gdisk /dev/nvme1n1`**
+
+As shown in the output image below, we enter **`?`** to list out all the available commands in the gdisk console, we enter the **`p`** command to provide information about available space in hard disk to create a new partition. Subsequently we enter the **`n`** command to create a new partition, we follow through with the prompts and then we enter **`w`** to write the partition table to disk and exit the gdisk console. When the system requests for input with **`Do you want to proceed? (Y/N):`**,  we enter **`y`** to confirm our earlier operation.
+
+![gdisk commands db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/161cbb61-3082-4c8b-98c6-e4394c1af797)
+
+We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
+
+**ii.** Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
+
+![gdisk partition db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0c080c79-3d60-4bfc-bf58-14702b18224f)
+
+As can be seen in the image above, we have our newly configured partitions on each of the three (3) disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
+
+**iii.** The next course of action is to install the **`lvm2`** package using the following command:
+
+**`$ sudo yum install lvm2 -y`**
+
+![lvm2 installation db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b78d8cec-9596-48a9-903e-1d90269618b2)
+
+**iv.** Then we run the command below to check for available partitions:
+
+**`$ sudo lvmdiskscan`**
+
+![sudo lvmdiskscan db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/578ac557-94ef-4091-ba56-5c6f1061557c)
