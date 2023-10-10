@@ -17,3 +17,18 @@ The goal of this project is to build a tooling website solution which will enabl
 **5.** **Programming Language**: PHP
 
 **6.** **Code Repository**: GitHub
+
+Based on the infrastructure to be used and the goal of this project, it shall consist of three parts:
+
+**1.** Configure Network File Server (NFS) Server with storage infastructure.
+
+**2.** Configure Database Server.
+
+**3.** Configure Web Servers.
+
+As shown in the diagram below, we shall implement a solution where three stateless Web Servers will share a common database and also access the same files using Network File Sytem (NFS) as a shared file storage. Even though the NFS server might be located on a completely separate hardware – for the Web Servers it would look like a local file system from where they can serve the same files.
+
+![3 TIER Tooling-Website-Infrastructure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/61a271c9-4efd-45ff-a71e-94e62340faf8)
+
+### <br>Configure Network File Server (NFS) Server with storage infastructure<br/>
+
