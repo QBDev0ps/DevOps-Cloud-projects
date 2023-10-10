@@ -109,7 +109,7 @@ After we have provisioned our server and we have created and attached our EBS vo
 
 **`$ sudo yum update -y`**
 
-![sudo yum update](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/67ea0933-1e20-4e1d-aede-a1e29e51fe67)
+![Sudo yum update -y](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c5f2681a-141f-4dc7-8d8a-ac527184a9e3)
 
 **ii.** Subsequently, we inspect what block devices are attached to the web server with the following command:
 
