@@ -143,13 +143,13 @@ As can be seeen in the above image, the executed command lists all Linux devices
 
 As shown in the output image below, we enter **`?`** to list out all the available commands in the gdisk console, we enter the **`p`** command to provide information about available space in hard disk to create a new partition. Subsequently we enter the **`n`** command to create a new partition, we follow through with the prompts and then we enter **`w`** to write the partition table to disk and exit the gdisk console. When the system requests for input with **`Do you want to proceed? (Y/N):`**,  we enter **`y`** to confirm our earlier operation.
 
-![gdisk commands db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/161cbb61-3082-4c8b-98c6-e4394c1af797)
+![sudo gdisk](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a5b37c83-2f90-4748-a090-abd71d005a33)
 
 We repeat the same process above to create a single partition on **/dev/nvme2n1** and **/dev/nvme3n1**.
 
 **ii.** Afterwards, we run the **`lsblk`** utility to view the newly configured partition on each of the three (3) disks.
 
-![gdisk partition db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0c080c79-3d60-4bfc-bf58-14702b18224f)
+![lsblk 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/23676904-26bb-4cb3-84d2-2bd6e51bf49f)
 
 As can be seen in the image above, we have our newly configured partitions on each of the three (3) disks listed as **`nvme1n1p1`**, **`nvme2n1p1`** and **`nvme3n1p1`**
 
@@ -157,10 +157,12 @@ As can be seen in the image above, we have our newly configured partitions on ea
 
 **`$ sudo yum install lvm2 -y`**
 
-![lvm2 installation db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b78d8cec-9596-48a9-903e-1d90269618b2)
+![install lvm2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/450cf513-5859-42b5-8bbc-636d9b2560ae)
 
 **iv.** Then we run the command below to check for available partitions:
 
 **`$ sudo lvmdiskscan`**
 
-![sudo lvmdiskscan db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/578ac557-94ef-4091-ba56-5c6f1061557c)
+![sudo lvmdiskscan](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e40db3a8-5549-483e-bc44-401aefb6143e)
+
+
