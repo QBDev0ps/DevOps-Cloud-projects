@@ -544,7 +544,7 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 
 **viii.** Then we copy and paste in the following line of configuration: 
 
-<NFS-Server-Private-IP>:/mnt/apps /var/www nfs defaults 0 0
+**`<NFS-Server-Private-IP>:/mnt/apps /var/www nfs defaults 0 0`**
 
 **ix.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
