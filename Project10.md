@@ -315,10 +315,50 @@ The output must look like what we have in the image above.
 
 We will keep things simple in this project by installing all three webservers inside the same subnet, but in production set ups in real world scenarios, we would have had to seperate each tier in its own subnet to mainatain higher levels of security. To check the subnet cidr, we do the following:
 
-**i** We open the AWS console and click on **"EC2"**, then we click on **"Instances"**. 
+**i.** We open the AWS console and click on **"EC2"**, then we click on **"Instances"**. 
 
-**ii** Then we scroll to our instance and click on the link under **"Instance ID"** to reveal the **"Instance summary"** page.
+![instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8806a332-0fb1-446e-af06-6f67362facd5)
 
-**iii** 
+**ii.** Then we scroll to our instance and click on the link under **"Instance ID"** to reveal the **"Instance summary"** page.
 
-To check the subnet cidr, we open the properties of our EC2 instance on the AWS console and then we click on the “Network” tab, open the “Subnet ID” link in a new tab, and locate “IPv4 CIDR
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3c03fd0-c60a-4d15-a94e-65247fa08f6a)
+
+**iii.** Next, we scroll down and under the **"Networking"** tab, we click on the subnet link under **"Subnet ID"**.
+
+![subnet ID](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9efb3a04-c873-4c59-87f1-b740fafd66b3)
+
+**iv** In the **"Subnets"** page we proceed to locate the subnet cidr under **"IPv4 CIDR"**
+
+![subnet cidr](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1524fd70-92fd-479c-952f-ca5eab3950c4)
+
+**v.** Next, we execute the following set of commands to set up permissions that will allow our Web Servers to read, write, and execute files on NFS:
+
+```
+sudo chown -R nobody: /mnt/apps
+sudo chown -R nobody: /mnt/logs
+sudo chown -R nobody: /mnt/opt
+
+sudo chmod -R 777 /mnt/apps
+sudo chmod -R 777 /mnt/logs
+sudo chmod -R 777 /mnt/opt
+
+sudo systemctl restart nfs-server.service
+```
+
+**vi.** Afterwards, we edit the **`/etc/exports`** file to configure access to NFS for clients within the same subnet:
+
+We open /etc/exports with the following command:
+
+**`$ sudo vi /etc/exports`**
+
+We paste in the following configuration whilst including our subnet cidr:
+
+```
+/mnt/apps 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
+/mnt/logs 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
+/mnt/opt 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
+```
+
+To export all file system paths we have specified in the /etc/exports file, we enter the following command:
+
+sudo exportfs -arv
