@@ -602,4 +602,20 @@ $ sudo setsebool -P httpd_execmem 1
 
 **xi.** We repeat steps **i** to **x** for an additional two (2) Web Servers.
 
+**xii.** Next, we have to verify that Apache files and directories are available on the Web Server in **/var/www** and also on the NFS server in /mnt/apps. To do this, we create a new file **`test.txt`** from one Web Server and check if the same file is accessible from other Web Servers. If we see the same files, then it means NFS is mounted correctly. We proceed by executing the following command on **WebServer1**:
+
+**`$ sudo touch /var/www/test.txt`**
+
+And on the other Web Servers we enter the command below to check if the same file is accessible from their **/var/www** directory:
+
+**`$ sudo ls /var/www`**
+
+![view test 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5af742ff-6f25-4f6c-b811-2b7537dc9051)
+
+![view test 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fda5a51-cbda-4729-9890-65acc8193984)
+
+As can be seen in the above output images, we are able to access the **`test.txt`** file we created in **WebServer1** from **WebServer2** and **Webserver3**.
+
+
+
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
