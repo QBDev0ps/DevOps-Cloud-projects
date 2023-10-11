@@ -449,9 +449,13 @@ $ sudo mysql
 mysql> CREATE DATABASE tooling;
 ```
 
+![create database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4436b0bb-8de9-42d6-91bd-8bab543f726a)
+
 **ii.** Next, using the subnet cidr of our web servers, we create a database user that we name **"webaccess"** and we set the user password:
 
 **`mysql> CREATE USER 'webaccess'@'172.31.16.0/20' IDENTIFIED BY 'password';`**
+
+![create user db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fc819a40-fb63-4937-be7f-074311fe8df3)
 
 **iii.** After creating the user, we need to grant user **"webaccess"** full privileges on the **"tooling"** and then we flush privileges to free up cached server memory.
 
@@ -463,16 +467,50 @@ mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'172.31.16.0/20';
 mysql> FLUSH PRIVILEGES;
 ```
 
+![grant flush privileges](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0cc5bad7-20d0-4ff1-858f-cd910c15472a)
+
 **iv.** Next, we use the following command to confirm that the created database is in the list of databases:
 
 **`mysql> SHOW DATABASES;`**
 
-**v.** Finally, we confirm our abilty to log into the MySQl console with our newly created user **"webaccess"**:
+![show databases](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3cd0b679-a18e-4cc2-94d8-66513b76e805)
+
+**v.** Finally, we confirm our abilty to remotely log into the MySQl console with our newly created user **"webaccess"**:
 
 ```
-#Log in with newly created user
-$ sudo mysql -u webaccess -p
+#Log in with newly created user from a remote server
+$ sudo mysql -h 172.31.17.182 -u webaccess -p
 
 # Exit MySQL Console
 mysql> exit
 ```
+
+### <br>Configure Web Servers<br/>
+
+In this step, we will be launching three web servers. We need to ensure that the web servers can serve the same content from shared storage solutions, which in our case are the MySQL Database and NFS Server.
+
+For storing shared files that our Web Servers will use, we will utilize NFS and mount previously created logical Volume **`lv-apps`** to the **/var/www** folder where Apache stores files to be served to the users.
+
+This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved. We proceed by implementing the following steps:
+
+#### <br>Step 1: Configure NFS Client<br/>
+
+We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+**ii.** Under **Name and tags**, we provide a unique name for our server.
+
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/04cf9f94-d41c-44ca-a108-346911a7a646)
+  
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
+
+![application and OS images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2beaaf89-c746-4ed5-a434-f0989bfb3db1)
+
+**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+  
+**v.** And then finally, we click on **"Launch Instance"**
