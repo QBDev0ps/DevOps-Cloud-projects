@@ -345,13 +345,11 @@ sudo chmod -R 777 /mnt/opt
 sudo systemctl restart nfs-server.service
 ```
 
-**vi.** Afterwards, we edit the **`/etc/exports`** file to configure access to NFS for clients within the same subnet:
-
-We open /etc/exports with the following command:
+**vi.** Afterwards, we edit the **`/etc/exports`** file to configure access to NFS for clients within the same subnet. We open /etc/exports with the following command:
 
 **`$ sudo vi /etc/exports`**
 
-We paste in the following configuration whilst including our subnet cidr:
+**vii.** We paste in the following configuration whilst including our subnet cidr:
 
 ```
 /mnt/apps 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
@@ -359,6 +357,10 @@ We paste in the following configuration whilst including our subnet cidr:
 /mnt/opt 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
 ```
 
-To export all file system paths we have specified in the /etc/exports file, we enter the following command:
 
-sudo exportfs -arv
+**viii** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**ix** To export all file system paths we have specified in the /etc/exports file, we enter the following command:
+
+**`$ sudo exportfs -arv`**
+
