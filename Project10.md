@@ -564,7 +564,7 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 
 **`$ sudo systemctl daemon-reload`**
 
-**x** Next, we install [Remi Repository](http://www.servermom.org/how-to-enable-remi-repo-on-centos-7-6-and-5/2790/), Apache and PHP by executing the following set of commands:
+**x.** Next, we install [Remi Repository](http://www.servermom.org/how-to-enable-remi-repo-on-centos-7-6-and-5/2790/), Apache and PHP by executing the following set of commands:
 
 **`$ sudo yum install httpd -y`**
 
@@ -600,6 +600,6 @@ $ sudo setsebool -P httpd_execmem 1
 
 ![sudo systemctl start and enable php](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/565941d6-6338-4ee8-bc56-28e5fe1b5f1d)
 
-**xi** We repeat steps **i** to **x** for an additional two (2) Web Servers.
+**xi.** We repeat steps **i** to **x** for an additional two (2) Web Servers.
 
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
