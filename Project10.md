@@ -503,7 +503,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 inst
 
 **ii.** Under **Name and tags**, we provide a unique name for our server.
 
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/04cf9f94-d41c-44ca-a108-346911a7a646)
+![Name and tags web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/345f3147-6b01-4f1c-8fde-0cbf3accb81f)
   
 **iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
 
@@ -514,3 +514,5 @@ We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 inst
 ![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
   
 **v.** And then finally, we click on **"Launch Instance"**
+
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
