@@ -554,23 +554,39 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 
 **`<NFS-Server-Private-IP>:/mnt/apps /var/www nfs defaults 0 0`**
 
-**ix.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+![configure etc fstab](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f6131a98-cbcf-447c-a3fa-799c2325ad90)
+
+**ix.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we reload the Daemon with the command below:
+
+**`$ sudo systemctl daemon-reload`**
 
 **x** Next, we install [Remi Repository](http://www.servermom.org/how-to-enable-remi-repo-on-centos-7-6-and-5/2790/), Apache and PHP by executing the following set of commands:
 
-```
-$ sudo yum install httpd -y
+**`$ sudo yum install httpd -y`**
+
+![sudo yum install httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c22305e-3465-43ce-9fa7-2a1714bbbe92)
 
 $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
+![epel release installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b92189c-9aec-4651-ab92-ce7b5661bd7f)
+
 $ sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+![remi release installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c529046-4bb0-410c-9b03-7d12aed6955f)
 
 $ sudo dnf module reset php
 
+![sudo dnf module reset](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/56371aa3-7ba9-4479-a16d-de72d99ae5d0)
+
 $ sudo dnf module enable php:remi-7.4
+
+![sudo dnf module enable](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/184533e4-7163-4627-b206-f58a10e14c63)
 
 $ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
 
+![sudo dnf php opcache](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a60b15d-b6f6-4bc1-acc1-e093f31c39f6)
+
+```
 $ sudo systemctl start php-fpm
 
 $ sudo systemctl enable php-fpm
@@ -578,6 +594,8 @@ $ sudo systemctl enable php-fpm
 $ sudo setsebool -P httpd_execmem 1
 ```
 
-**xi** We repeat **i** to **x** for an additional two (2) Web Servers.
+![sudo systemctl start and enable php](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/565941d6-6338-4ee8-bc56-28e5fe1b5f1d)
+
+**xi** We repeat steps **i** to **x** for an additional two (2) Web Servers.
 
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
