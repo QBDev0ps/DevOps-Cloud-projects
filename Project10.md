@@ -567,6 +567,9 @@ $ sudo systemctl start php-fpm
 
 $ sudo systemctl enable php-fpm
 
-$ setsebool -P httpd_execmem 1
+$ sudo setsebool -P httpd_execmem 1
 ```
 
+**xi** We repeat **i** to **x** for an additional two (2) Web Servers.
+
+#### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
