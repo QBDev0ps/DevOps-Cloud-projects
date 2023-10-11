@@ -602,7 +602,7 @@ $ sudo setsebool -P httpd_execmem 1
 
 **xi.** We repeat steps **i** to **x** for an additional two (2) Web Servers.
 
-**xii.** Next, we have to verify that Apache files and directories are available on the Web Server in **/var/www** and also on the NFS server in /mnt/apps. To do this, we create a new file **`test.txt`** from one Web Server and check if the same file is accessible from other Web Servers. If we see the same files, then it means NFS is mounted correctly. We proceed by executing the following command on **WebServer1**:
+**xii.** Next, we have to verify that Apache files and directories are available on the Web Server in **/var/www** and also on the NFS server in **/mnt/apps**. To do this, we create a new file **`test.txt`** from one Web Server and check if the same file is accessible from other Web Servers. If we see the same files, then it means NFS is mounted correctly. We proceed by executing the following command on **WebServer1**:
 
 **`$ sudo touch /var/www/test.txt`**
 
