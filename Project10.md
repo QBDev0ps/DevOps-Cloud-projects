@@ -313,6 +313,12 @@ The output must look like what we have in the image above.
 
 #### <br>Step 10: Export the Mounts for Webservers' Subnet CIDR to Connect as Clients<br/>
 
-We will keep things simple in this project by installing all three webservers inside the same subnet, but in production set ups in real world scenarios, we would have had to seperate each tier in its own subnet to mainatain higher levels of security.
+We will keep things simple in this project by installing all three webservers inside the same subnet, but in production set ups in real world scenarios, we would have had to seperate each tier in its own subnet to mainatain higher levels of security. To check the subnet cidr, we do the following:
 
-**i** To check the subnet cidr, we open the properties of our EC2 instance on the AWS console and then we click on the “Network” tab, open the “Subnet ID” link in a new tab, and locate “IPv4 CIDR
+**i** We open the AWS console and click on **"EC2"**, then we click on **"Instances"**. 
+
+**ii** Then we scroll to our instance and click on the link under **"Instance ID"** to reveal the **"Instance summary"** page.
+
+**iii** 
+
+To check the subnet cidr, we open the properties of our EC2 instance on the AWS console and then we click on the “Network” tab, open the “Subnet ID” link in a new tab, and locate “IPv4 CIDR
