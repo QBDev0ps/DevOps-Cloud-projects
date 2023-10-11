@@ -331,7 +331,7 @@ We will keep things simple in this project by installing all three webservers in
 
 ![subnet cidr](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1524fd70-92fd-479c-952f-ca5eab3950c4)
 
-**v.** Next, we execute the following set of commands to set up permissions that will allow our Web Servers to read, write, and execute files on NFS:
+**v.** Next, we execute the following set of commands to set up and apply permissions that will allow our Web Servers to read, write, and execute files on NFS:
 
 ```
 sudo chown -R nobody: /mnt/apps
@@ -345,6 +345,8 @@ sudo chmod -R 777 /mnt/opt
 sudo systemctl restart nfs-server.service
 ```
 
+![change permissions](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6815b6db-a72c-4b08-8896-d93b002fa419)
+
 **vi.** Afterwards, we edit the **`/etc/exports`** file to configure access to NFS for clients within the same subnet. We open /etc/exports with the following command:
 
 **`$ sudo vi /etc/exports`**
@@ -357,6 +359,7 @@ sudo systemctl restart nfs-server.service
 /mnt/opt 172.31.16.0/20(rw,sync,no_all_squash,no_root_squash)
 ```
 
+![sudo vi etc exports](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e7d2d0c8-29d2-4858-974f-46f96606b3b8)
 
 **viii** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
@@ -364,3 +367,44 @@ sudo systemctl restart nfs-server.service
 
 **`$ sudo exportfs -arv`**
 
+![sudo exportfs arv](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fa1f3364-f234-4cd6-af82-c00ca56279db)
+
+#### <br>Step 11: Check Port used by NFS and open it using Security Groups<br/>
+
+In order for NFS server to be accessible from our client, we must check which port it is using and open it in the Inbound rules settings for security groups. We must also open the following ports: TCP 111, UDP 111, UDP 2049 in addition to the NFS port.
+
+**i** To check the port which is in use by NFS, we run the following command:
+
+**`$ rpcinfo -p | grep nfs`**
+
+![nfs port](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/11cafc51-a37d-49c8-8294-abcd6767d09b)
+
+**i.** Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/](https://console.aws.amazon.com/ec2/).
+
+**ii.** In the navigation pane, choose **Instances**.
+
+![AWS navigation pane](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb88a0b7-15c4-43e3-8187-e9f61aa26fbe)
+
+**iii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![web server instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e6a2cd33-8550-4998-b08a-2309a9aea800)
+
+**iv.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
+**v.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
+
+**vi.** On the **Edit inbound rules** page, we do the following:
+
++ Choose **Add rule**.
+
++ For **Type**, choose **HTTP**. 
+
++ In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet.
+
++ Click on **Save rules** at the bottom right corner of the page.
+
+![save rules port 80](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3aacbbe5-d7e1-4cfa-8226-50584756e108)
