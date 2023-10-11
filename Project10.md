@@ -401,10 +401,13 @@ In order for NFS server to be accessible from our client, we must check which po
 
 + Choose **Add rule**.
 
-+ For **Type**, choose **HTTP**. 
++ For **Type**, choose **NFS**. 
 
 + In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet.
+
++  Add custom rules for TCP 111, UDP 111, UDP 2049.
 
 + Click on **Save rules** at the bottom right corner of the page.
 
 ![save rules ports](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a77d527a-c6af-4b1b-9082-bcad7b5d9c20)
+
