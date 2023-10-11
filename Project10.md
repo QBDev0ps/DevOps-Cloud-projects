@@ -495,13 +495,13 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 #### <br>Step 1: Configure NFS Client<br/>
 
-We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+**i.** We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
-**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+ + We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
-**ii.** Under **Name and tags**, we provide a unique name for our server.
+ Under **Name and tags**, we provide a unique name for our server.
 
 ![Name and tags web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/345f3147-6b01-4f1c-8fde-0cbf3accb81f)
   
@@ -513,6 +513,25 @@ We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 inst
 
 ![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
   
-**v.** And then finally, we click on **"Launch Instance"**
+**v.** And then, we click on **"Launch Instance"**
 
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
+**vi.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+**vii.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
+
+**`$ sudo yum update -y`**
+
+**viii.** Next we execute the command below to install NFS Client:
+
+**`$ sudo yum install -y nfs-utils nfs4-acl-tools`**
+
+**ix** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps.
+
+```
+sudo mkdir /var/www
+sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
+```
+
+**x** Subsequently, we verify that NFS was mounted successfully by running df -h.
