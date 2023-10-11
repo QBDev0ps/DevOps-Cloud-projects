@@ -527,7 +527,7 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 **`$ sudo yum install -y nfs-utils nfs4-acl-tools`**
 
-**v** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps.
+**v** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_ 
 
 ```
 $ sudo mkdir /var/www
@@ -537,4 +537,36 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 **vi** Subsequently, we verify that NFS was mounted successfully by running the command below:
 
 **`$ sudo df -h`**
+
+**vii.** The next step is to edit the **/etc/fstab** file to ensure the changes will persist after the reboot of the server. We open the **/etc/fstab** file with the following command:
+
+**`$ sudo vi /etc/fstab`**
+
+**viii.** Then we copy and paste in the following line of configuration: 
+
+<NFS-Server-Private-IP>:/mnt/apps /var/www nfs defaults 0 0
+
+**ix.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**x** Next, we install [Remi Repository](http://www.servermom.org/how-to-enable-remi-repo-on-centos-7-6-and-5/2790/), Apache and PHP by executing the following set of commands:
+
+```
+$ sudo yum install httpd -y
+
+$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+$ sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+$ sudo dnf module reset php
+
+$ sudo dnf module enable php:remi-7.4
+
+$ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
+
+$ sudo systemctl start php-fpm
+
+$ sudo systemctl enable php-fpm
+
+$ setsebool -P httpd_execmem 1
+```
 
