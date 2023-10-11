@@ -616,6 +616,33 @@ And on the other Web Servers we enter the command below to check if the same fil
 
 As can be seen in the above output images, we are able to access the **`test.txt`** file we created in **WebServer1** from **WebServer2** and **Webserver3**.
 
+**xiii.** Now we need to locate the log folder for Apache on the Web Server and mount it to the NFS server's export for logs. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_
 
+```
+$ sudo mkdir /var/log/httpd
+$ sudo mount -t nfs -o rw, nosuid 172.31.23.65:/mnt/logs /var/log/httpd
+```
+
+![create and mount var www](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/19028c30-6fa4-4767-8738-5068f5edb568)
+
+**vi** Subsequently, we verify that the mount was successful by running the command below:
+
+**`$ sudo df -h`**
+
+![verify NFS mount sudo df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b1de4e2e-8483-46e7-bb53-fde0352a79cb)
+
+**vii.** The next step is to edit the **/etc/fstab** file to ensure the changes will persist after the reboot of the server. We open the **/etc/fstab** file with the following command:
+
+**`$ sudo vi /etc/fstab`**
+
+**viii.** Then we copy and paste in the following line of configuration: 
+
+**`<NFS-Server-IP>:/mnt/logs /var/log/httpd nfs defaults 0 0`**
+
+![configure etc fstab](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f6131a98-cbcf-447c-a3fa-799c2325ad90)
+
+**ix.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we reload the Daemon with the command below:
+
+**`$ sudo systemctl daemon-reload`**
 
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
