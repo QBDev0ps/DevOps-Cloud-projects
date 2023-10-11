@@ -383,11 +383,11 @@ In order for NFS server to be accessible from our client, we must check which po
 
 **ii.** In the navigation pane, choose **Instances**.
 
-![AWS navigation pane](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eb88a0b7-15c4-43e3-8187-e9f61aa26fbe)
+![instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8806a332-0fb1-446e-af06-6f67362facd5)
 
 **iii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-![web server instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e6a2cd33-8550-4998-b08a-2309a9aea800)
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3c03fd0-c60a-4d15-a94e-65247fa08f6a)
 
 **iv.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
@@ -407,4 +407,4 @@ In order for NFS server to be accessible from our client, we must check which po
 
 + Click on **Save rules** at the bottom right corner of the page.
 
-![save rules port 80](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3aacbbe5-d7e1-4cfa-8226-50584756e108)
+![save rules ports](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a77d527a-c6af-4b1b-9082-bcad7b5d9c20)
