@@ -411,3 +411,68 @@ In order for NFS server to be accessible from our client, we must check which po
 
 ![save rules ports](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a77d527a-c6af-4b1b-9082-bcad7b5d9c20)
 
+### <br>Configure Backend Database Server<br/>
+
+After completing configuration for he NFS Sever, we need to deploy and configure our Database Server. We do this with the following steps:
+
+#### <br>Step 1: Provision and connect to EC2 Instance<br/>
+
+**i.** We launch an EC2 instance of Ubuntu Linux that we will name as **`DB server`** by following [these steps](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) __IMPORTANT: From the Amazon Machine Image (AMI Image) tab, be sure to select the free tier eligible version of Ubuntu Linux Server 20.04 LTS (HVM) rather than the HVM version of Amazon Linux 2 Server as directed in the link.__
+
+![Deploy DB server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2798d398-3c0f-4faf-8a42-ba74ada879b2)
+
+**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+**iii.** It is especially important and good practice to keep software up to date for security purposes. Packages in a Linux distribution are updated frequently to fix bugs, add features, and protect against security exploits. So after launching our server we run the following command to update it:
+
+**`$ sudo apt update -y`**
+
+![sudo apt update -y db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6ab7d7d1-4123-4163-8e2a-79428a3918af)
+
+### <br>Step 2: Install MySQL RDBMS on **`DB server`** <br/>
+
+ We install MySQL _**Server**_ Software on our "Server" by entering the following command:
+
+**`$ sudo apt install mysql-server -y`**
+
+![sudo apt install mysql server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7ce01f6f-1095-4b49-9a92-c7b0bc1ffd65)
+
+### <br>Step 3: Configure MySQL Database Server`** <br/>
+
+**i.** We start by creating a database that will be called **"tooling"**:
+
+```
+# Log into MySQL Console
+$ sudo mysql
+
+# Create Database
+mysql> CREATE DATABASE tooling;
+```
+
+**ii.** Next, using the subnet cidr of our web servers, we create a database user that we name **"webaccess"** and we set the user password:
+
+**`mysql> CREATE USER 'webaccess'@'172.31.16.0/20' IDENTIFIED BY 'password';`**
+
+**iii.** After creating the user, we need to grant user **"webaccess"** full privileges on the **"tooling"** and then we flush privileges to free up cached server memory.
+
+```
+# Grant Privileges to created user on all Databases
+mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'172.31.16.0/20';
+
+# Flush Privileges
+mysql> FLUSH PRIVILEGES;
+```
+
+**iv.** Next, we use the following command to confirm that the created database is in the list of databases:
+
+**`mysql> SHOW DATABASES;`**
+
+**v.** Finally, we confirm our abilty to log into the MySQl console with our newly created user **"webaccess"**:
+
+```
+#Log in with newly created user
+$ sudo mysql -u webaccess -p
+
+# Exit MySQL Console
+mysql> exit
+```
