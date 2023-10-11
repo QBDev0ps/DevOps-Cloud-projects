@@ -523,9 +523,13 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 **`$ sudo yum update -y`**
 
+![web server update ](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/860e8f0f-527e-443a-981a-67085f7ed561)
+
 **iv.** Next we execute the command below to install NFS Client:
 
 **`$ sudo yum install -y nfs-utils nfs4-acl-tools`**
+
+![NFS client installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c0ce39b0-78ad-406d-9913-6f36278a6b05)
 
 **v** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_ 
 
@@ -534,9 +538,13 @@ $ sudo mkdir /var/www
 $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 ```
 
+![create and mount var www](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/19028c30-6fa4-4767-8738-5068f5edb568)
+
 **vi** Subsequently, we verify that NFS was mounted successfully by running the command below:
 
 **`$ sudo df -h`**
+
+![verify NFS mount sudo df -h](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b1de4e2e-8483-46e7-bb53-fde0352a79cb)
 
 **vii.** The next step is to edit the **/etc/fstab** file to ensure the changes will persist after the reboot of the server. We open the **/etc/fstab** file with the following command:
 
