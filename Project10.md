@@ -501,37 +501,40 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
- Under **Name and tags**, we provide a unique name for our server.
+ + Under **Name and tags**, we provide a unique name for our server.
 
 ![Name and tags web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/345f3147-6b01-4f1c-8fde-0cbf3accb81f)
   
-**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
++ From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
 
 ![application and OS images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2beaaf89-c746-4ed5-a434-f0989bfb3db1)
 
-**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
++ Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
 ![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
   
-**v.** And then, we click on **"Launch Instance"**
++ And then, we click on **"Launch Instance"**
 
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
-**vi.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
-**vii.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
+**iii.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
 
 **`$ sudo yum update -y`**
 
-**viii.** Next we execute the command below to install NFS Client:
+**iv.** Next we execute the command below to install NFS Client:
 
 **`$ sudo yum install -y nfs-utils nfs4-acl-tools`**
 
-**ix** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps.
+**v** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps.
 
 ```
-sudo mkdir /var/www
-sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
+$ sudo mkdir /var/www
+$ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 ```
 
-**x** Subsequently, we verify that NFS was mounted successfully by running df -h.
+**vi** Subsequently, we verify that NFS was mounted successfully by running the command below:
+
+**`$ sudo df -h`**
+
