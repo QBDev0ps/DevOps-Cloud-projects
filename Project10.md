@@ -800,6 +800,6 @@ As can be seen in the above image, we successfully executed the command without 
 
 #### <br>Step 5: Create in MySQL a new admin user<br/>
 
-**i.**  To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. To implement this, we connect to MySQL from the Web Server using the ‘webaccess’ user created earlier and the private IP of the DB server:
+**i.**  To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. To implement this, we connect to MySQL from the Web Server using the **"webaccess"** user created earlier and the private IP of the Database server:
 
 **`$ sudo mysql -h 172.31.17.182 -u webaccess -p`**
