@@ -767,11 +767,27 @@ $ sudo systemctl status httpd
 
 ![configure connection to database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5db98b29-712b-4dff-90d8-fca6530c22ae)
 
-As shown in the image above, we update the config file with the Private IP address of our Database server, the username for our database, the password and the name of the database.
+**ii.** As shown in the image above, we update the config file with the Private IP address of our Database server, the username for our database, the password and the name of the database. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. 
 
-**ii.** Next we need to apply tooling-db.sql script (which can be found in the repository we cloned)  to our database. But before we do this we need to install MySQL Client with the following command:
+**iii.** Next we need to apply **`tooling-db.sql`** script (which can be found in the repository we cloned)  to our database. But before we do this we need to install MySQL Client with the following command:
 
 **`$ sudo yum install mysql`**
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/169ebc2a-3fcc-4787-a2f7-313737770af4)
 
+**iv.** To ensure that we are able to access our database remotely we need to edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by commenting out **bind-address = 127.0.0.1** with **#**
+
+**`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
+
+**v.** And afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we apply the **`tooling-db.sql`** script to our database using the commands below:
+
+```
+$ cd tooling
+$ sudo mysql -h 172.31.17.182 -u webaccess -p tooling < tooling-db.sql
+```
+
+![apply tooling script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/235931cc-0540-463b-bc7f-a618d2250f19)
+
+#### <br>Step 5: Create in MySQL a new admin user<br/>
+
+ To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. 
