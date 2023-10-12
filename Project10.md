@@ -800,6 +800,14 @@ As can be seen in the above image, we successfully executed the command without 
 
 #### <br>Step 5: Create in MySQL a new admin user<br/>
 
-**i.**  To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. To implement this, we connect to MySQL from the Web Server using the **"webaccess"** user created earlier and the private IP of the Database server:
+**i.** To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. To implement this, we connect to MySQL from the Web Server using the **"webaccess"** user and the private IP Address of the Database server:
 
 **`$ sudo mysql -h 172.31.17.182 -u webaccess -p`**
+
+![sql connection successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b47e7cc-502a-4f64-a76a-ac5b74dbdd59)
+
+**ii.** We run the following query to create a new admin user:
+
+```
+INSERT INTO tooling.users (id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
+```
