@@ -765,7 +765,7 @@ $ sudo systemctl status httpd
 
 **`$ sudo vi /var/www/html/functions.php`**
 
-![configure connection to database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5db98b29-712b-4dff-90d8-fca6530c22ae)
+![connect to database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f1f5f389-88d0-4ffb-a6f4-4b827afcaef4)
 
 **ii.** As shown in the image above, we update the config file with the Private IP address of our Database server, the username for our database, the password and the name of the database. Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. 
 
@@ -773,7 +773,7 @@ $ sudo systemctl status httpd
 
 **`$ sudo yum install mysql`**
 
-![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/169ebc2a-3fcc-4787-a2f7-313737770af4)
+![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4d019161-314b-47c2-b84c-1c2216659624)
 
 **iv.** To ensure that we are able to access our database remotely we need to edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by commenting out **bind-address = 127.0.0.1** with **#**
 
