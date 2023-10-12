@@ -761,7 +761,9 @@ $ sudo systemctl status httpd
 
 #### <br>Step 4: Update the website’s configuration to Connect to the Database<br/>
 
+Update the website’s configuration file (/var/www/html/functions.php) to connect to the database.
 
+sudo nano /var/www/html/functions.php
 
 
 
