@@ -721,6 +721,32 @@ We need to open Port 80 as this is the port number assigned to commonly used int
 
 ![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4062c8ba-edfb-453a-8ea3-c5b48c250bde)
 
+**vi.** Afterwards we the try to confirm apache is active and running with the following commands:
+
+```
+$ sudo systemctl restart httpd
+
+$ sudo systemctl status httpd
+```
+
+![httpd error](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2edc13e0-88eb-4dee-93b4-1a27d1affa10)
+
+**vii.** But as can be seen in the output image above, our attempt failed as the httpd service is unable to write to the log directory. To fix this issue, we proceed to give apache permissions to the **`/var/www/html`** directory with the following command:
+
+**`$ sudo chown -R apache:apache /var/www/html`**
+
++ And then we disable SELinux policies with the following command:
+
+**`$ sudo setenforce 0`**
+
++ To make this change permanent, open the **`/etc/sysconfig/selinux`** config file with the command below and set **`SELINUX=disabled`**
+
+**`$ sudo vi /etc/sysconfig/selinux`**
+
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we restart httpd with the command below:
+
+**`$ sudo systemctl restart httpd`**
+
 #### <br>Step 4: Open TCP Port 80 on EC2 Web Server Instance<br/>
 
 
