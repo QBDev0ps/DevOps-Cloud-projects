@@ -731,7 +731,9 @@ $ sudo systemctl status httpd
 
 ![httpd error](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2edc13e0-88eb-4dee-93b4-1a27d1affa10)
 
-**vii.** But as can be seen in the output image above, our attempt failed as the httpd service is unable to write to the log directory. To fix this issue, we proceed to give apache permissions to the **`/var/www/html`** directory with the following command:
+But as can be seen in the output image above, our attempt failed as the httpd service is unable to write to the log directory. 
+
+**vii.** To fix the above issue, we proceed to give apache permissions to the **`/var/www/html`** directory with the following command:
 
 **`$ sudo chown -R apache:apache /var/www/html`**
 
@@ -739,15 +741,25 @@ $ sudo systemctl status httpd
 
 **`$ sudo setenforce 0`**
 
+![change apache rights](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/25f6138f-2e69-41fa-97ab-a3a575919285)
+
 + To make this change permanent, open the **`/etc/sysconfig/selinux`** config file with the command below and set **`SELINUX=disabled`**
 
 **`$ sudo vi /etc/sysconfig/selinux`**
 
-+ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we restart httpd with the command below:
+![selinux disabled](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/44269f0b-1132-44a0-be0f-eacabfeba41b)
 
-**`$ sudo systemctl restart httpd`**
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we restart httpd and confirm that it is active and running:
 
-#### <br>Step 4: Open TCP Port 80 on EC2 Web Server Instance<br/>
+```
+$ sudo systemctl restart httpd
+
+$ sudo systemctl status httpd
+```
+
+![httpd active and running](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8642dfcf-81f6-4b44-857c-105b6dcda9ab)
+
+#### <br>Step 4: Update the website’s configuration to Connect to the Database<br/>
 
 
 
