@@ -689,5 +689,41 @@ $ sudo cp -r html/* /var/www/html/
 
 ![verify copy tooling](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/35a2ce1b-46ce-47d3-b64c-e0584b064cc6)
 
+#### <br>Step 3: Open TCP Port 80 on EC2 Web Server Instance<br/>
+
+We need to open Port 80 as this is the port number assigned to commonly used internet communication protocol, Hypertext Transfer Protocol (HTTP). It is the default network port used to send and receive web pages.
+
+**i.** In the AWS  console navigation pane, we choose **Instances**.
+
+![instances web server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b06060c-15e8-4bab-99a4-4771f320b10d)
+
+**ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![instance summary web server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/be53ce38-03d8-41f4-b5af-226e10db9d5b)
+
+**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
+**iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
+
+**v.** On the **Edit inbound rules** page, we do the following:
+
++ Choose **Add rule**.
+
++ Under **Type**, click on the drop down and select **HTTP**. **Port Range** automatically defaults to **80** when this is done.
+
++ In the space with the magnifying glass under **Source**, choose **Anywhere**.
+
++ Click on **Save rules** at the bottom right corner of the page.
+
+![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4062c8ba-edfb-453a-8ea3-c5b48c250bde)
+
+#### <br>Step 4: Open TCP Port 80 on EC2 Web Server Instance<br/>
+
+
+
 
 
