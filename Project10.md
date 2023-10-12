@@ -775,9 +775,17 @@ $ sudo systemctl status httpd
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4d019161-314b-47c2-b84c-1c2216659624)
 
-**iv.** To ensure that we are able to access our database remotely we need to edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by commenting out **bind-address = 127.0.0.1** with **#**
+#### BLOCKER❗
+
++ We encountered the error shown in the output image below when we tried to access our database remotely.
+
+![blocker](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a558b2f8-8096-4a47-806f-3304a74d5166)
+  
+**iv.** To fix the blocker and ensure that we are able to access our database remotely we need to go to the Database Server and edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by commenting out **bind-address = 127.0.0.1** with **#**
 
 **`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
+
+![remove bind address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6089cef4-aad5-4b16-a742-8761eec6a962)
 
 **v.** And afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we apply the **`tooling-db.sql`** script to our database using the commands below:
 
@@ -788,6 +796,10 @@ $ sudo mysql -h 172.31.17.182 -u webaccess -p tooling < tooling-db.sql
 
 ![apply tooling script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/235931cc-0540-463b-bc7f-a618d2250f19)
 
+As can be seen in the above image, we successfully executed the command without any errors which indicates that we successfully initated a remote connection to the database. 
+
 #### <br>Step 5: Create in MySQL a new admin user<br/>
 
- To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. 
+**i.**  To complete our configuration we need to create in MySQL, a new admin user with the username: **myuser** and password: **password**. To implement this, we connect to MySQL from the Web Server using the ‘webaccess’ user created earlier and the private IP of the DB server:
+
+**`$ sudo mysql -h 172.31.17.182 -u webaccess -p`**
