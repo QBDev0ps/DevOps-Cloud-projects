@@ -761,7 +761,7 @@ $ sudo systemctl status httpd
 
 #### <br>Step 4: Update the Website’s Configuration to Connect to the Database<br/>
 
-This step requires us to update the website’s configuration file **`/var/www/html/functions.php`** to connect to the database. We do this by running the following command: 
+**i.** This step requires us to update the website’s configuration file **`/var/www/html/functions.php`** to connect to the database. We do this by running the following command: 
 
 **`$ sudo vi /var/www/html/functions.php`**
 
@@ -769,5 +769,9 @@ This step requires us to update the website’s configuration file **`/var/www/h
 
 As shown in the image above, we update the config file with the Private IP address of our Database server, the username for our database, the password and the name of the database.
 
+**ii.** Next we need to apply tooling-db.sql script (which can be found in the repository we cloned)  to our database. But before we do this we need to install MySQL Client with the following command:
 
+**`$ sudo yum install mysql`**
+
+![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/169ebc2a-3fcc-4787-a2f7-313737770af4)
 
