@@ -642,11 +642,11 @@ As can be seen in the above output images, we are able to access the **`test.txt
 
 **`$ sudo systemctl daemon-reload`**
 
-**xviii** We repeat steps xiii to xvii for our other two (2) Web Servers.
+**xviii.** We repeat steps xiii to xvii for our other two (2) Web Servers.
 
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
 
-**i** We begin by forking the tooling source code from [Darey.io Github Account](https://github.com/darey-io/tooling) to our own Github account. To do this, we follow the steps described [here](https://www.youtube.com/watch?v=f5grYMXbAV0):
+**i.** We begin by forking the tooling source code from [Darey.io Github Account](https://github.com/darey-io/tooling) to our own Github account. To do this, we follow the steps described [here](https://www.youtube.com/watch?v=f5grYMXbAV0):
 
 +  We click on the fork icon at the top of the [Darey.io Github Account](https://github.com/darey-io/tooling)
 
@@ -656,13 +656,13 @@ As can be seen in the above output images, we are able to access the **`test.txt
 
  ![Create fork](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c03921ab-820b-4530-8604-92de7cf81cdf)
 
-**ii** The next step is to deploy the tooling website code to our Web server and ensure that the html file from the repository is deployed into **/var/www/html**. To however do this, we need to first of all install git on the web server:
+**ii.** The next step is to deploy the tooling website code to our Web server and ensure that the html file from the repository is deployed into **/var/www/html**. To however do this, we need to first of all install git on the web server:
 
 **`$ sudo yum install git -y`**
 
 ![sudo yum install git](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d285c1fd-9a98-4362-a658-c93c7e6bef45)
 
-**iii** After completing the git installation, we proceed to clone the repository from GitHub to the web server:
+**iii.** After completing the git installation, we proceed to clone the repository from GitHub to the web server:
 
 + On the Github **tooling** page, we click on **Code** and then under **HTTPS** we copy the URL.
 
@@ -674,9 +674,20 @@ As can be seen in the above output images, we are able to access the **`test.txt
 
   ![git clone command](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/40a3ca48-ec52-4045-aa05-5e089b187a3d)
 
-**iv**
+**iv.** Next, we change to the tooling directory and copy the files from the html folder in the repository to the **/var/www/html** directory:
 
+```
+$ cd tooling
+$ sudo cp -r html/* /var/www/html/
+```
 
+![copy tooling](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fbcdad12-1c49-4bfe-93ee-7fb700685f93)
+
+**v.** Subsequently we execute the following command to verify that the files were successfully copied:
+
+**`$ sudo ls /var/www/html/`**
+
+![verify copy tooling](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/35a2ce1b-46ce-47d3-b64c-e0584b064cc6)
 
 
 
