@@ -622,7 +622,7 @@ As can be seen in the above output images, we are able to access the **`test.txt
 
 ![mount var log](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/144e2ecf-66a6-493b-8e94-e84572aa0e12)
 
-**xiv** Subsequently, we verify that the mount was successful by running the command below:
+**xiv.** Subsequently, we verify that the mount was successful by running the command below:
 
 **`$ sudo df -h`**
 
