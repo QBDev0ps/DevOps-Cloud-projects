@@ -759,11 +759,15 @@ $ sudo systemctl status httpd
 
 ![httpd active and running](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8642dfcf-81f6-4b44-857c-105b6dcda9ab)
 
-#### <br>Step 4: Update the website’s configuration to Connect to the Database<br/>
+#### <br>Step 4: Update the Website’s Configuration to Connect to the Database<br/>
 
-Update the website’s configuration file (/var/www/html/functions.php) to connect to the database.
+This step requires us to update the website’s configuration file **`/var/www/html/functions.php`** to connect to the database. We do this by running the following command: 
 
-sudo nano /var/www/html/functions.php
+**`$ sudo vi /var/www/html/functions.php`**
+
+![configure connection to database](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5db98b29-712b-4dff-90d8-fca6530c22ae)
+
+As shown in the image above, we update the config file with the Private IP address of our Database server, the username for our database, the password and the name of the database.
 
 
 
