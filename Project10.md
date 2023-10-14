@@ -781,11 +781,11 @@ $ sudo systemctl status httpd
 
 ![blocker](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a558b2f8-8096-4a47-806f-3304a74d5166)
   
-**iv.** To fix the blocker and ensure that we are able to access our database remotely we need to go to the Database Server and edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by commenting out **bind-address = 127.0.0.1** with **#**
+**iv.** To fix the blocker and ensure that we are able to access our database remotely we need to go to the Database Server and edit **/etc/mysql/mysql.conf.d/mysqld.cnf** by changing **bind-address = 127.0.0.1** to **0.0.0.0**
 
 **`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
 
-![remove bind address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6089cef4-aad5-4b16-a742-8761eec6a962)
+![bind address edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/865add66-c185-4757-9fc5-f144c4bf328f)
 
 **v.** And afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we apply the **`tooling-db.sql`** script to our database using the commands below:
 
@@ -796,7 +796,7 @@ $ sudo mysql -h 172.31.17.182 -u webaccess -p tooling < tooling-db.sql
 
 ![apply tooling script](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/235931cc-0540-463b-bc7f-a618d2250f19)
 
-As can be seen in the above image, we successfully executed the command without any errors which indicates that we successfully initated a remote connection to the database. 
+The script creates a table **users** in database **tooling** and creates an entry for admin. As can be seen in the above image, we successfully executed the command without any errors which indicates that we successfully initated a remote connection to the database. 
 
 #### <br>Step 5: Create in MySQL a new admin user<br/>
 
@@ -809,5 +809,15 @@ As can be seen in the above image, we successfully executed the command without 
 **ii.** We run the following query to create a new admin user:
 
 ```
-INSERT INTO tooling.users (id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
+mysql> INSERT INTO tooling.users (id, username, password, email, user_type, status) VALUES (2, 'myuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'user@mail.com', 'admin', '1');
 ```
+
+![insert new admin user](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/78cb0f8c-d08b-47be-af34-9621b47899d2)
+
+**iii.** Next we view our users in the database for additional confirmations:
+
+**`mysql> SELECT * FROM tooling.users;`**
+
+![show database users](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f52b1afa-766f-4388-aa0b-51adad81364f)
+
+The output image above shows that we have in the **tooling.users** table the new entry **myuser** as well as the **admin** user we added with **`tooling-db.sql`** script.
