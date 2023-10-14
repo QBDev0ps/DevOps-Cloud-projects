@@ -785,7 +785,7 @@ $ sudo systemctl status httpd
 
 **`sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf`**
 
-![bind address edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/865add66-c185-4757-9fc5-f144c4bf328f)
+![bind address edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/56436326-2a49-499d-bca4-b2170b41e49a)
 
 **v.** And afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we apply the **`tooling-db.sql`** script to our database using the commands below:
 
@@ -820,7 +820,7 @@ mysql> INSERT INTO tooling.users (id, username, password, email, user_type, stat
 
 ![show database users](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f52b1afa-766f-4388-aa0b-51adad81364f)
 
-The output image above shows that we have in the **tooling.users** table the new entry **myuser** as well as the **admin** user we added with **`tooling-db.sql`** script.
+The output image above shows that we have in the **tooling.users** table, the new entry **myuser** as well as the **admin** user we added with **`tooling-db.sql`** script.
 
 **iv.** Then we proceed to open the website in our browser using the following syntax:
 
@@ -828,11 +828,11 @@ The output image above shows that we have in the **tooling.users** table the new
 
 #### BLOCKER 2❗
 
-+ We encountered the error shown in the output image below when we tried to access the web page.
++ We encountered the error shown in the output image below when we tried to access the index page of our tooling website.
 
  ![Screenshot 2023-10-13 115648 browser error](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/433f7545-3300-4fc4-806f-490d4cb5c4b8)
 
-+ As seen in the browser output above, rather than serving the webpage of our website, the functions configuration being called from functions.php along with the HTML code in our index.php file was being displayed onto the browser screen.
++ As seen in the browser output above, rather than serving the webpage of our website, the code of the functions configuration that was being called from **functions.php** and the HTML code in our **index.php** file, were being displayed onto the browser screen.
 
 + To fix this, we decided to inspect the **functions.php** file with the following command:
 
@@ -844,17 +844,17 @@ The output image above shows that we have in the **tooling.users** table the new
 
 + And then afterwards on our keyboard, we pressed on **`esc`**, typed **`:wq!`** to save and quit immediately and pressed **`enter`** to confirm exit.
 
-+ To open the tooling website we used the syntax as stated in **iv** above and we entered the following:
++ To open the tooling website we used the syntax as stated in **iv.** above and we entered the following:
 
   **`http://13.51.170.40/index.php`**
 
   ![browser access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1bfbdbbd-266a-40b4-bd6b-5d759c935069)
 
-+ As shown in the image above, the webpage was rendered correctly thus solvingour **Blocker**. Next we attempt to log in.
++ As shown in the image above, the webpage was rendered correctly thus solving our **Blocker**. Next we attempt to log in.
 
 #### BLOCKER 3❗
 
-+ We encountered an issue when we tried to log into the tooling website. As shown below, the tooling website required us to enter a password to be four (4) characters only. This posed a problem for us. Because our password was in a long hash string as was seen when we viewed our users in the **tooling** database (in **Step 5** **iii**).
++ We encountered an issue when we tried to log into the tooling website. As shown below, the tooling website required us to enter a password to be four (4) characters only. This posed a problem for us. Because our password was in a long hash string as was seen when we viewed our users in the **tooling** database (in **Step 5.** **iii.**).
 
   ![blocker 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/647bea69-3fe6-42e2-b4c2-714d5ad7fe43)
 
@@ -865,6 +865,8 @@ The output image above shows that we have in the **tooling.users** table the new
 + And then we look for **`$password = md5($password);`** which is a bit of code that is responsible for hashing passwords before they are saved in the database. We comment this code out with **`//`** as shown in the image below:
 
 ![md password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8f5b8a60-1a94-4523-955b-80d0f57be1c3)
+
++ And afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
 + Next, we add a new admin user in MySQL with the query below:
 
@@ -877,7 +879,7 @@ mysql> INSERT INTO tooling.users (id, username, password, email, user_type, stat
 
 **`mysql> SELECT * FROM tooling.users;`**
 
-+ As can be seen in the output image below our the password for **User id 3** (the new user we just added) is not hashed. This means our 'slight' change worked.
++ As can be seen in the output image below the password for **User id 3** (the new user we just added) is not hashed. This means our 'slight' change worked.
 
 ![create new user](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7ba49585-1c3c-47ee-806c-edf0db6694a6)
 
