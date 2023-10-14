@@ -570,23 +570,23 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 
 ![sudo yum install httpd](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c22305e-3465-43ce-9fa7-2a1714bbbe92)
 
-$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+**`$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`**
 
 ![epel release installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b92189c-9aec-4651-ab92-ce7b5661bd7f)
 
-$ sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+**`$ sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm`**
 
 ![remi release installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c529046-4bb0-410c-9b03-7d12aed6955f)
 
-$ sudo dnf module reset php
+**`$ sudo dnf module reset php`**
 
 ![sudo dnf module reset](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/56371aa3-7ba9-4479-a16d-de72d99ae5d0)
 
-$ sudo dnf module enable php:remi-7.4
+**`$ sudo dnf module enable php:remi-7.4`**
 
 ![sudo dnf module enable](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/184533e4-7163-4627-b206-f58a10e14c63)
 
-$ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
+**`$ sudo dnf install php php-opcache php-gd php-curl php-mysqlnd`**
 
 ![sudo dnf php opcache](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a60b15d-b6f6-4bc1-acc1-e093f31c39f6)
 
@@ -600,13 +600,13 @@ $ sudo setsebool -P httpd_execmem 1
 
 ![sudo systemctl start and enable php](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/565941d6-6338-4ee8-bc56-28e5fe1b5f1d)
 
-**xi.** We repeat steps **i** to **x** for an additional two (2) Web Servers.
+**xi.** We repeat steps **i.** to **x.** for an additional two (2) Web Servers.
 
 **xii.** Next, we have to verify that Apache files and directories are available on the Web Server in **/var/www** and also on the NFS server in **/mnt/apps**. To do this, we create a new file **`test.txt`** from one Web Server and check if the same file is accessible from other Web Servers. If we see the same files, then it means NFS is mounted correctly. We proceed by executing the following command on **WebServer1**:
 
 **`$ sudo touch /var/www/test.txt`**
 
-And on the other Web Servers we enter the command below to check if the same file is accessible from their **/var/www** directory:
+**xiii.** And on the other Web Servers we enter the command below to check if the same file is accessible from their **/var/www** directory:
 
 **`$ sudo ls /var/www`**
 
@@ -616,33 +616,33 @@ And on the other Web Servers we enter the command below to check if the same fil
 
 As can be seen in the above output images, we are able to access the **`test.txt`** file we created in **WebServer1** from **WebServer2** and **Webserver3**.
 
-**xiii.** Now we need to locate the log folder for Apache on the Web Server and mount it to the NFS server's export for logs. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_
+**xiv.** Now we need to locate the log folder for Apache on the Web Server and mount it to the NFS server's export for logs. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_
 
 **`$ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/logs /var/log/httpd`**
 
 ![mount var log](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/144e2ecf-66a6-493b-8e94-e84572aa0e12)
 
-**xiv.** Subsequently, we verify that the mount was successful by running the command below:
+**xv.** Subsequently, we verify that the mount was successful by running the command below:
 
 **`$ sudo df -h`**
 
 ![df -h mount var log](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d3543fc5-e5c3-4fab-9d5e-155d7f7871c3)
 
-**xv.** The next step is to edit the **/etc/fstab** file to ensure the changes will persist after the reboot of the server. We open the **/etc/fstab** file with the following command:
+**xvi.** The next step is to edit the **/etc/fstab** file to ensure the changes will persist after the reboot of the server. We open the **/etc/fstab** file with the following command:
 
 **`$ sudo vi /etc/fstab`**
 
-**xvi.** Then we copy and paste in the following line of configuration: 
+**xvii.** Then we copy and paste in the following line of configuration: 
 
 **`<NFS-Server-Private-IP>:/mnt/logs /var/log/httpd nfs defaults 0 0`**
 
 ![etc fstab var log configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4105b668-d8ae-4bd7-943a-a8e1daa87fc7)
 
-**xvii.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we reload the Daemon with the command below:
+**xviii.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit. Then we reload the Daemon with the command below:
 
 **`$ sudo systemctl daemon-reload`**
 
-**xviii.** We repeat steps xiii to xvii for our other two (2) Web Servers.
+**xix.** We repeat steps **xiii.** to **xvii.** for our other two (2) Web Servers.
 
 #### <br>Step 2: Deploy a Tooling Application to Web Servers into Shared NFS Folder<br/>
 
