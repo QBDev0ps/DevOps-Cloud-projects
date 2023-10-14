@@ -850,6 +850,8 @@ The output image above shows that we have in the **tooling.users** table the new
 
   ![browser access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1bfbdbbd-266a-40b4-bd6b-5d759c935069)
 
++ As shown in the image above, the webpage was rendered correctly thus solvingour **Blocker**. Next we attempt to log in.
+
 #### BLOCKER 3❗
 
 + We encountered an issue when we tried to log into the tooling website. As shown below, the tooling website required us to enter a password to be four (4) characters only. This posed a problem for us. Because our password was in a long hash string as was seen when we viewed our users in the **tooling** database (in **Step 5** **iii**).
@@ -860,12 +862,27 @@ The output image above shows that we have in the **tooling.users** table the new
 
 **`$ sudo vi /var/www/html/functions.php`**
 
-And then we look for **`$password = md5($password);`** which is a bit of code that is responsible for hashing passwords before they are saved in the database. We comment this code out with **`//`** as shown in the image below:
++ And then we look for **`$password = md5($password);`** which is a bit of code that is responsible for hashing passwords before they are saved in the database. We comment this code out with **`//`** as shown in the image below:
 
 ![md password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8f5b8a60-1a94-4523-955b-80d0f57be1c3)
 
-Next, we add a new admin user with the query below:
++ Next, we add a new admin user in MySQL with the query below:
 
 ```
 mysql> INSERT INTO tooling.users (id, username, password, email, user_type, status) VALUES (3, 'myuser', 'pass', 'user@mail.com', 'admin', '1');
 ```
+![add new user query](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2f729a50-c6af-4053-84d6-d34b455c03f4)
+
++ And then we view our users in the database for confirmations:
+
+**`mysql> SELECT * FROM tooling.users;`**
+
++ As can be seen in the output image below our the password for **User id 3** (the new user we just added) is not hashed. This means our 'slight' change worked.
+
+![create new user](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7ba49585-1c3c-47ee-806c-edf0db6694a6)
+
+**v.** We log in to our tooling website with our four character password as shown below:
+
+![enter password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/78cf7180-d141-43f2-ad7d-b82cfab7c6a7)
+
+**vi.** The log in was successful, we are now able to access our tooling applications from our three webservers via the shared NFS file **var/www**
