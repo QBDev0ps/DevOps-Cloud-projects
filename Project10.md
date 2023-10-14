@@ -775,7 +775,7 @@ $ sudo systemctl status httpd
 
 ![install mysql client](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4d019161-314b-47c2-b84c-1c2216659624)
 
-#### BLOCKER❗
+#### BLOCKER 1❗
 
 + We encountered the error shown in the output image below when we tried to access our database remotely.
 
@@ -826,7 +826,7 @@ The output image above shows that we have in the **tooling.users** table the new
 
 **`http://<WebServerPublicIP>/index.php`**
 
-#### BLOCKER❗
+#### BLOCKER 2❗
 
 + We encountered the error shown in the output image below when we tried to access the web page.
 
@@ -834,7 +834,7 @@ The output image above shows that we have in the **tooling.users** table the new
 
 + As seen in the browser output above, rather than serving the webpage of our website, the functions configuration being called from functions.php along with the HTML code in our index.php file was being displayed onto the browser screen.
 
-+ To fix this, we decided to inspect the functions.php file with the following command:
++ To fix this, we decided to inspect the **functions.php** file with the following command:
 
   **`$ sudo vi /var/www/html/functions.php`**
 
@@ -850,4 +850,22 @@ The output image above shows that we have in the **tooling.users** table the new
 
   ![browser access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1bfbdbbd-266a-40b4-bd6b-5d759c935069)
 
-**iv.**
+#### BLOCKER 3❗
+
++ We encountered an issue when we tried to log into the tooling website. As shown below, the tooling website required us to enter a password to be four (4) characters only. This posed a problem for us. Because our password was in a long hash string as was seen when we viewed our users in the **tooling** database (in **Step 5** **iii**).
+
+  ![blocker 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/647bea69-3fe6-42e2-b4c2-714d5ad7fe43)
+
++ To fix this issue we are required to do a slight configuration change in the **functions.php** file. We enter the following command:
+
+**`$ sudo vi /var/www/html/functions.php`**
+
+And then we look for **`$password = md5($password);`** which is a bit of code that is responsible for hashing passwords before they are saved in the database. We comment this code out with **`//`** as shown in the image below:
+
+![md password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8f5b8a60-1a94-4523-955b-80d0f57be1c3)
+
+Next, we add a new admin user with the query below:
+
+```
+mysql> INSERT INTO tooling.users (id, username, password, email, user_type, status) VALUES (3, 'myuser', 'pass', 'user@mail.com', 'admin', '1');
+```
