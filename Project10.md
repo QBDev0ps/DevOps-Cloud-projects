@@ -283,7 +283,7 @@ The output must look like what we have in the image above.
 
 #### <br>Step 9: Install NFS Server<br/>
 
-**i** Firstly, we update the server machine if we have not already done so:
+**i.** First of all, we update the server machine if we have not already done so:
 
 **`$ sudo yum -y update`**
 
@@ -347,7 +347,7 @@ sudo systemctl restart nfs-server.service
 
 ![change permissions](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6815b6db-a72c-4b08-8896-d93b002fa419)
 
-**vi.** Afterwards, we edit the **`/etc/exports`** file to configure access to NFS for clients within the same subnet. We open /etc/exports with the following command:
+**vi.** Afterwards, we edit the **/etc/exports** file to configure access to NFS for clients within the same subnet. We open **/etc/exports** with the following command:
 
 **`$ sudo vi /etc/exports`**
 
@@ -361,9 +361,9 @@ sudo systemctl restart nfs-server.service
 
 ![sudo vi etc exports](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e7d2d0c8-29d2-4858-974f-46f96606b3b8)
 
-**viii** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+**viii.** Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
 
-**ix** To export all file system paths we have specified in the /etc/exports file, we enter the following command:
+**ix.** To export all file system paths we have specified in the /etc/exports file, we enter the following command:
 
 **`$ sudo exportfs -arv`**
 
@@ -371,33 +371,33 @@ sudo systemctl restart nfs-server.service
 
 #### <br>Step 11: Check Port used by NFS and open it using Security Groups<br/>
 
-In order for NFS server to be accessible from our client, we must check which port it is using and open it in the Inbound rules settings for security groups. We must also open the following ports: TCP 111, UDP 111, UDP 2049 in addition to the NFS port.
+In order for NFS server to be accessible from our client, we must check which port it is using and open it in the Inbound rules settings for security groups. We must also open the following ports: **TCP 111**, **UDP 111**, **UDP 2049** in addition to the NFS port.
 
-**i** To check the port which is in use by NFS, we run the following command:
+**i.** To check the port which is in use by NFS, we run the following command:
 
 **`$ rpcinfo -p | grep nfs`**
 
 ![nfs port](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/11cafc51-a37d-49c8-8294-abcd6767d09b)
 
-**i.** Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/](https://console.aws.amazon.com/ec2/).
+**ii.** Open the Amazon EC2 console at [https://console.aws.amazon.com/ec2/](https://console.aws.amazon.com/ec2/).
 
-**ii.** In the navigation pane, choose **Instances**.
+**iii.** In the navigation pane, choose **Instances**.
 
 ![instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8806a332-0fb1-446e-af06-6f67362facd5)
 
-**iii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+**iv.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
 ![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a3c03fd0-c60a-4d15-a94e-65247fa08f6a)
 
-**iv.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+**v.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
 ![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
 
-**v.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+**vi.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
 
 ![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
 
-**vi.** On the **Edit inbound rules** page, we do the following:
+**vii.** On the **Edit inbound rules** page, we do the following:
 
 + Choose **Add rule**.
 
@@ -405,7 +405,7 @@ In order for NFS server to be accessible from our client, we must check which po
 
 + In the space with the magnifying glass under **Source**, we leave it at **Custom** and select **0.0.0.0/0** Selecting the **Source** setting as **0.0.0.0/0** means we can access our server from any IP address. i.e. both locally and from the internet.
 
-+  Add custom rules for TCP 111, UDP 111, UDP 2049.
++  Add custom rules for **TCP 111**, **UDP 111**, **UDP 2049**.
 
 + Click on **Save rules** at the bottom right corner of the page.
 
@@ -413,7 +413,7 @@ In order for NFS server to be accessible from our client, we must check which po
 
 ### <br>Configure Backend Database Server<br/>
 
-After completing configuration for he NFS Sever, we need to deploy and configure our Database Server. We do this with the following steps:
+After completing configuration for the NFS Sever, we need to deploy and configure our Database Server. We do this with the following steps:
 
 #### <br>Step 1: Provision and connect to EC2 Instance<br/>
 
@@ -535,7 +535,7 @@ This approach will make our Web Servers stateless, which means we will be able t
 
 ![NFS client installation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c0ce39b0-78ad-406d-9913-6f36278a6b05)
 
-**v** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_ 
+**v.** Our next course of action is to create the **/var/www/** directory, mount it and target the NFS server's export for apps. _**The IP address in the command below must be replaced with the Private IP Address of the NFS Server**_ 
 
 ```
 $ sudo mkdir /var/www
@@ -544,7 +544,7 @@ $ sudo mount -t nfs -o rw,nosuid 172.31.23.65:/mnt/apps /var/www
 
 ![create and mount var www](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/19028c30-6fa4-4767-8738-5068f5edb568)
 
-**vi** Subsequently, we verify that NFS was mounted successfully by running the command below:
+**vi.** Subsequently, we verify that NFS was mounted successfully by running the command below:
 
 **`$ sudo df -h`**
 
@@ -893,4 +893,12 @@ mysql> INSERT INTO tooling.users (id, username, password, email, user_type, stat
 
 ### <br>CONCLUSION<br/>
 
-We have been able to successfully complete this project. The goal of our project was to to build and manage a scalable WordPress website using AWS EC2 and LVM (Logical Volume Management) storage. We began our project implementation by provisioning an EC2 Instance of Red Hat Linux to serve as our Web Server. And then we deployed and configured LVM for our Linux based Web server. This involved creating and attaching 3 EBS volumes, partitioning disks and then creating and configuring physical and logical volumes. Next, we created the relevant directories which we mounted on the logical volumes. We subsequently launched a second RedHat EC2 instance that was given a role as our Database (DB) Server. We then repeated the same steps as for the Web Server, but with some important differences such as creating **db-lv** logical volume instead of **apps-lv** that we created on the web server and mounting it to **/db** directory instead of **/var/www/html/**. The next thing we did was to install WordPress on our Web Server and configure it to use MySQL Database. This required us to install the Apache web server and its dependencies and it was at this point that we encountered some **Blockers**. Fortunately, we were able to resolve the issues and then we proceeded successfully to install MySQL on our EC2 Database Server instance and then create and configure MySQL database to work with WordPress. Next, on our Web Server, we configured WordPress to be able to connect to our remote database on the DB server. We concluded our project by opening the requisite ports on both our Web and Database servers and then we accessed WordPress through the browser with our Web server's public IP address and proceeded to complete the WordPress installation process. Thank you.
+We have been able to successfully complete this project. The goal of our project was to implement a tooling website solution that will integrate various DevOps tools and technologies to enhance collaboration, automation and efficiency for DevOps teams. To do this we had to implement a solution where three stateless Web Servers will share a common database and also access the same files using Network File Sytem (NFS) as a shared file storage. 
+
+We began our project implementation by deploying and configuring a Network File Server (NFS) Server with storage infastructure. This involved provisioning an EC2 Instance of Red Hat Linux to serve as our NFS Server after which we deployed and configured LVM on the server. This process required creating and attaching 3 EBS volumes, partitioning disks and then creating and configuring physical and logical volumes. Next, we created the relevant directories which we mounted on the logical volumes. And then we installed the NFS Server software.To complete this process, we exported the mounts for Webservers' Subnet CIDR to connect as clients and then opened the ports used by NFS in security groups.
+
+We subsequently launched a second EC2 instance (but this time with Ubuntu Linux) that was given a role as our Database (DB) Server. We then installed and configured MySQL Relational Database Management System (RDBMS). The configuration required us to create a database and then a database user using the subnet cidr of our web servers. We also granted the newly created user full privileges on the database we created.
+
+The final step required us to install three web servers and ensure that the web servers could serve the same content from shared storage solutions, which in our case are the MySQL Database and NFS Server. We spun up up three EC2 Instances of Red Hat Linux and installed and configured NFS Client on them.
+
+the Apache web server and its dependencies and it was at this point that we encountered some **Blockers**. Fortunately, we were able to resolve the issues and then we proceeded successfully to install MySQL on our EC2 Database Server instance and then create and configure MySQL database to work with WordPress. Next, on our Web Server, we configured WordPress to be able to connect to our remote database on the DB server. We concluded our project by opening the requisite ports on both our Web and Database servers and then we accessed WordPress through the browser with our Web server's public IP address and proceeded to complete the WordPress installation process. Thank you.
