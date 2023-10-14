@@ -821,3 +821,33 @@ mysql> INSERT INTO tooling.users (id, username, password, email, user_type, stat
 ![show database users](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f52b1afa-766f-4388-aa0b-51adad81364f)
 
 The output image above shows that we have in the **tooling.users** table the new entry **myuser** as well as the **admin** user we added with **`tooling-db.sql`** script.
+
+**iv.** Then we proceed to open the website in our browser using the following syntax:
+
+**`http://<WebServerPublicIP>/index.php`**
+
+#### BLOCKER❗
+
++ We encountered the error shown in the output image below when we tried to access the web page.
+
+ ![Screenshot 2023-10-13 115648 browser error](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/433f7545-3300-4fc4-806f-490d4cb5c4b8)
+
++ As seen in the browser output above, rather than serving the webpage of our website, the functions configuration being called from functions.php along with the HTML code in our index.php file was being displayed onto the browser screen.
+
++ To fix this, we decided to inspect the functions.php file with the following command:
+
+  **`$ sudo vi /var/www/html/functions.php`**
+
++ There, we noticed the opening **`<?php`** tag was missing so we replaced it as shown in the image below:
+
+![blocker 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/581d2eb2-877d-4567-837c-f0b5ded7ac5d)
+
++ And then afterwards on our keyboard, we pressed on **`esc`**, typed **`:wq!`** to save and quit immediately and pressed **`enter`** to confirm exit.
+
++ To open the tooling website we used the syntax as stated in **iv** above and we entered the following:
+
+  **`http://13.51.170.40/index.php`**
+
+  ![browser access](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1bfbdbbd-266a-40b4-bd6b-5d759c935069)
+
+**iv.**
