@@ -21,10 +21,10 @@ On the diagram below, the Virtual Private Network (VPC) is divided into [two sub
 
 ![bastion host](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7edfe278-2217-45c4-b35d-ac05bfd8ff47)
 
-Further on in our future projects, we will implement a proper Bastion Host but for now, we will make do with developing Ansible scripts to simulate the use of a Jump Box/Bastion Host to access our Web Servers. Therefore, based on the infrastructure to be used and the goal of this project, it shall consist of three parts:
+Further on in our future projects, we will implement a proper Bastion Host. But for now, we will make do with developing Ansible scripts to simulate the use of a Jump Box/Bastion Host to access our Web Servers. Therefore, based on the infrastructure to be used and the goal of this project, it shall consist of three parts:
 
-**1.** Configure Network File Server (NFS) Server with storage infastructure.
+**1.** Install and Configure Jenkins on EC2 Instance.
 
-**2.** Configure Backend Database Server.
+**2.** Install and Configure Ansible to act as a Jump Server/Bastion Host.
 
-**3.** Configure Web Servers.
+**3.** Create a Simple Ansible Playbook to Automate Server Configuration.
