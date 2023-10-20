@@ -196,7 +196,7 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 ### <br>Install and Configure Ansible to act as a Jump Server/Bastion Host<br/>
 
-The next phase of our project involves the installation and configuration of Ansible. We shall do this by implementing the following steps:
+The next phase of our project involves the installation and configuration of Ansible as a Jump Server/Bastion Host. An SSH Jump Server/Bastion Host is a regular Linux server, accessible from the Internet, which is used as a gateway to access other Linux machines on a private network using the SSH protocol. The purpose of an SSH jump server is to be the only gateway for access to our infrastructure reducing the size of any potential attack surface. We shall proceed to implement this with the following steps:
 
 #### <br>Step 1: Create New Repository in GitHub<br/>
 
