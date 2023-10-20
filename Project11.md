@@ -158,7 +158,13 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 ![skip and continue as admin](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/82c59719-18a2-49b5-b1aa-610527076f30)
 
-**x.** 
+**x.** In the instance configuration page, we paste in our elastic ip address and click on **"Save and Finish"**.
+
+![instance configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7a0e7627-7661-4af4-b270-d9efbca0207f)
+
+**xi.** At this point the set-up is complete and Jenkins is ready to be used. We click on **"Start using Jenkins"** to move into the main Jenkins Environment.
+
+![installation complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b725826c-ef8b-4906-b6ac-02d37cca0d43)
 
 From the EC2 cockpit, click on Elastic Ips
 
@@ -167,3 +173,7 @@ Next, click on Allocate Elastic IP Address
 In the elastic IP address settings page you snsure you choose the same network border group as your EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on ALLOCATE.
 
 In the next page which shows us that the elastic IP has been allocated successfully, we click on the Actions drob down tab and we select Associate Elastic IP address.
+
+In the Associate Elastic IP Address page, we scroll down to instance and we select our EC2 instance. After this, we click on the ASSOCIATE button at the bottom of the page. 
+
+As can be seen in the output image below, the elastic IP was successfully asssociated with our EC2 instance.
