@@ -97,9 +97,34 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
-#### <br>Step 4: Install Jenkins<br/>
+#### <br>Step 4: Jenkins Installation and Set-up<br/>
 
 **i.** After connecting to our server we must first update all installed packages and their dependencies before commencing other installations or configurations. We do this by executing the following command: 
 
 **`$ sudo apt update -y`**
 
+**ii.** Next, we execute the following set of commands to install Jenkins and its dependencies:
+
+```
+$ sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \ https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+$ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+$ sudo apt-get update
+
+$ sudo apt-get install fontconfig openjdk-11-jre
+
+$ sudo apt-get install jenkins
+```
+
+**iii.** To ensure Jenkins is up and running, we enter the command below:
+
+**`$ sudo systemctl status jenkins`**
+
+**iv** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
+
+**`http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080`**
+
+**v.** As shown in the output image above, we are prompted to rpovide an admin password. To retriev this from the Jenkins Server, we enter the following command: 
+
+**`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`**
