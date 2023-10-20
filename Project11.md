@@ -308,13 +308,13 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 + On the Webhooks/Add webhook page, under **Payload URL**, we input our elastic IP address using the following syntax:
 
-  **`http://<Jenkins server IP address>/github-webhook`**
+  **`http://<Jenkins server IP address>/github-webhook/`**
 
 + Under **Content type**, we select **application/json**
 
 + Then we click on the green **Add webhook** button at the bottom of the page.
 
-![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8be29f97-d903-422c-8a4d-185643d1874a)
+![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fe8a0ec-06c5-48f6-bec1-a157cc1fd4cb)
 
 + In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **Configure**.
 
