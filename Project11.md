@@ -336,6 +336,16 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![apply and save 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63f35033-c852-4ed0-b036-cd3219c9640f)
   
-**iii.**  
++ To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
 
+ ![readme edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75f1440b-879a-48e3-bd0d-162da9897e23)
 
++ Our build started automatically and Jenkins saved the files (build artifacts). We enter the following commands to further confirm this:
+
+```
+$ ls /var/lib/jenkins/jobs/ansible/builds/5/archive/
+
+$ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
+```
+
+![config confirmation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41d11f65-fba5-40f7-8221-bf225c3f30f7)
