@@ -41,7 +41,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
-**ii.** Under **Name and tags**, we provide a unique name for our web server.
+**ii.** Under **Name and tags**, we provide a unique name for our server.
 
 ![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/07d96d27-7f7a-4bca-898a-c3dd8370e19b)
   
@@ -57,9 +57,9 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
-#### <br>Step 2: Open Port 8000<br/>
+#### <br>Step 2: Open Port 8080<br/>
 
-We will be running our Web Server on Port 8000 while the Load Balancer will be running on Port 80. We will therefore need to open Port 8000 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Web Server:
+**Jenkins** uses TCP Port 8080 by default and as this will be our first installation, we will therefore need to open Port 8080 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Web Server:
 
 **i.** In the AWS  console navigation pane, we choose **Instances**.
 
@@ -81,7 +81,7 @@ We will be running our Web Server on Port 8000 while the Load Balancer will be r
 
 + Choose **Add rule**.
 
-+ For **Port Range**, enter **8000** 
++ For **Port Range**, enter **8080** 
 
 + In the space with the magnifying glass under **Source**, choose **Anywhere**.
 
@@ -92,8 +92,10 @@ We will be running our Web Server on Port 8000 while the Load Balancer will be r
 
 #### <br>Step 3: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
 
-After we have provisioned our server and we have opened the necessary port, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our web server. We carry this out by doing the following:
+After we have provisioned our server and we have opened the necessary port, we must next connect to the server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our server. We carry this out by doing the following:
 
 **i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+#### <br>Step 4: Install Jenkins<br/>
