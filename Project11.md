@@ -288,7 +288,7 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![console output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b820be16-8557-4255-b0b7-3519c696e679)
 
-**ii.** After creating and configuring a freestyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
+**ii.** After creating and configuring the **`ansible`** freestyle project, we had to trigger it manually for it to run. But we can go a step further. To enable our build run automatically whenever there is a change in our Git repository, we need to enable Webhooks in our GitHub repository settings and configure it to trigger **`ansible`** build:
 
 + From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
@@ -315,6 +315,16 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 + Then we click on the green **Add webhook** button at the bottom of the page.
 
 ![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8be29f97-d903-422c-8a4d-185643d1874a)
+
++ In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **Configure**.
+
+![configure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b0896307-fd4c-495a-ba04-f2a1a3d0c2fc)
+
++ Under **Build Triggers**, we check the box for **GitHub hook trigger for GITScm polling**
+
+![build trigger](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/baa66a8c-bce9-4659-9258-19d6c6fa6254)
+
++ 
 
 **iii.**  
 
