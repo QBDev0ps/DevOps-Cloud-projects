@@ -89,7 +89,24 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 ![open port 8080](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d41b3f43-59c9-4c78-8a80-0fa40515399a)
 
-#### <br>Step 3: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
+#### <br>Step 3: Create and Allocate Elastic IP Address to Jenkins-Ansible Server<br/>
+
+**i.** From the EC2 cockpit, we click on **"Elastic Ips"**.
+
+![elastic IPs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2bd8c559-b18f-4db9-9446-84eed4c34c81)
+
+**ii.** Next, we click on Allocate Elastic IP Address. 
+
+**iii.** In the elastic IP address settings page you snsure you choose the same network border group as your EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on ALLOCATE.
+
+In the next page which shows us that the elastic IP has been allocated successfully, we click on the Actions drob down tab and we select Associate Elastic IP address.
+
+In the Associate Elastic IP Address page, we scroll down to instance and we select our EC2 instance. After this, we click on the ASSOCIATE button at the bottom of the page. 
+
+As can be seen in the output image below, the elastic IP was successfully asssociated with our EC2 instance.
+
+
+#### <br>Step 4: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
 
 After we have provisioned our server and we have opened the necessary port, we must next connect to the server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our server. We carry this out by doing the following:
 
@@ -97,7 +114,7 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
-#### <br>Step 4: Jenkins Installation and Set-up<br/>
+#### <br>Step 5: Jenkins Installation and Set-up<br/>
 
 **i.** After connecting to our server we must first update all installed packages and their dependencies before commencing other installations or configurations. We do this by executing the following command: 
 
@@ -136,7 +153,7 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 **`http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080`**
 
-![unlock Jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3db60f3a-56de-4ddb-9a8c-559cf566d15f)
+![unlock Jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/730aadd0-bfb3-4774-b009-c7c7de539a2d)
 
 **vi.** As shown in the output image above, we are prompted to provide an Administrator password to unlock Jenkins. To retrieve the password from the Jenkins Server, we enter the following command: 
 
@@ -146,7 +163,7 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 **vii.** Next, from the server, we copy the password as seen in the image above and we paste it in the dialogue box in the **"Unlock Jenkins"** page after which we click on **"Continue"**.
 
-![unlock jenkins 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d4639afb-de57-49aa-b4de-0f2083c6f493)
+![unlock jenkins 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce0044ef-005e-498d-adc1-620b9a1f1e92)
 
 **viii.** This brings us to the **"Customize Jenkins"** page. Here we select and click on **"Install Suggested Plugins"**.
 
@@ -166,14 +183,4 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 ![installation complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b725826c-ef8b-4906-b6ac-02d37cca0d43)
 
-From the EC2 cockpit, click on Elastic Ips
 
-Next, click on Allocate Elastic IP Address
-
-In the elastic IP address settings page you snsure you choose the same network border group as your EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on ALLOCATE.
-
-In the next page which shows us that the elastic IP has been allocated successfully, we click on the Actions drob down tab and we select Associate Elastic IP address.
-
-In the Associate Elastic IP Address page, we scroll down to instance and we select our EC2 instance. After this, we click on the ASSOCIATE button at the bottom of the page. 
-
-As can be seen in the output image below, the elastic IP was successfully asssociated with our EC2 instance.
