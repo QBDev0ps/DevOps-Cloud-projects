@@ -276,7 +276,19 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f559ba5-61b1-4118-a161-f18db45a0f84)
 
-**ii.** After creating and configuring the a freestyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
++ In the Jenkins web console, we go to the left pane and click on **Build Now** and if the build is successful, we will see it under **Build History** as seen in the image below:
+
+![build now](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f07b56f1-b67e-45b4-bbc8-773304e9fc33)
+
++ To view more details about the successful build, we click on the drop down icon beside the build and we select **Console Output**.
+
+![console output 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1e66a2a1-1427-4011-962d-22752b912e60)
+
++ The Console Output shows us the complete text log of output from the build execution:
+
+![console output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b820be16-8557-4255-b0b7-3519c696e679)
+
+**ii.** After creating and configuring a freestyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
 
 + From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
