@@ -240,73 +240,75 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![ansible version](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3c1796d7-7424-423c-a0ce-b079ef6cf2c5)
 
-#### <br>Step 3: Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
+#### <br>Step 3: Create and Configure Jenkins Freestyle Build Job<br/>
 
-**i.** In the Jenkins web console, we create a new freestyle project that we will name **`ansible`** and point it to our GitHub **`ansible-config-mgt`** repository. We do this with the following steps:
+In the Jenkins web console, we create a new freestyle project that we will name **`ansible`** and point it to our GitHub **`ansible-config-mgt`** repository. We do this with the following steps:
 
-+ From the Jenkins web console, we click on **New item**
+**i.** From the Jenkins web console, we click on **New item**
 
 ![jenkins new item](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6dd5ad81-1d92-4908-813f-eecce8717871)
 
-+ In the next page under **Enter an item name** we type in **`ansible`**, then we select **Freestyle project** and we click on **Ok** at the bottom of the page.
+**ii.** In the next page under **Enter an item name** we type in **`ansible`**, then we select **Freestyle project** and we click on **Ok** at the bottom of the page.
 
 ![enter item name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9677dbe2-4cf7-40a9-a4c3-7fe379ef3d11)
 
-+ We go to our GitHub repository page and we copy the URL of the webpage.
+**iii.** We go to our GitHub repository page and we copy the URL of the webpage.
 
 ![project url](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0d2828b3-3690-467e-a720-898428f2617e)
 
-+ Then in the Jenkins configuration page, we click on the **GitHub project** check box and we paste in the **project URL**.
+**iv.** Then in the Jenkins configuration page, we click on the **GitHub project** check box and we paste in the **project URL**.
 
 ![github project](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/38961a2f-2d6d-4881-a479-e7f7844eaf03)
 
-+ Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green 'Code' button and copying the https link.
+**v.** Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green 'Code' button and copying the https link.
 
 ![copy repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca80b0ad-6ed9-43c2-bbf6-b9e95656863a)
   
-+ In the Jenkins configuration page, under **Soure Code Management** we click on **Repository URL** and we paste in the remote link for our GitHub repository.
+**vi.** In the Jenkins configuration page, under **Soure Code Management** we click on **Repository URL** and we paste in the remote link for our GitHub repository.
 
  ![Repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8dc2a7c5-add4-4ec4-82e7-a757804d0f84)
 
-+ Under **Branch Specifier**, we change ***/master** to ***/main**
+**vii.** Under **Branch Specifier**, we change ***/master** to ***/main**
 
 ![branch specifier](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/431e7d41-41f8-4056-a56d-b892fa40fe64)
 
-+ Then we click on **Apply** and **Save** at the bottom of the page.
+**viii.** Then we click on **Apply** and **Save** at the bottom of the page.
 
 ![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f559ba5-61b1-4118-a161-f18db45a0f84)
 
-+ In the Jenkins web console, we go to the left pane and click on **Build Now** and if the build is successful, we will see it under **Build History** as seen in the image below:
+**ix.** In the Jenkins web console, we go to the left pane and click on **Build Now** and if the build is successful, we will see it under **Build History** as seen in the image below:
 
 ![build now](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f07b56f1-b67e-45b4-bbc8-773304e9fc33)
 
-+ To view more details about the successful build, we click on the drop down icon beside the build and we select **Console Output**.
+**x.** To view more details about the successful build, we click on the drop down icon beside the build and we select **Console Output**.
 
 ![console output 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1e66a2a1-1427-4011-962d-22752b912e60)
 
-+ The Console Output shows us the complete text log of output from the build execution:
+**xi.** The Console Output shows us the complete text log of output from the build execution:
 
 ![console output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b820be16-8557-4255-b0b7-3519c696e679)
 
-**ii.** After creating and configuring the **`ansible`** freestyle project, we had to trigger it manually for it to run. But we can go a step further. To enable our build run automatically whenever there is a change in our Git repository, we need to enable Webhooks in our GitHub repository settings and configure it to trigger **`ansible`** build:
+#### <br> Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
 
-+ From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
+After creating and configuring the **`ansible`** freestyle project, we had to trigger it manually for it to run. But we can go a step further. To enable our build run automatically whenever there is a change in our Git repository, we need to enable Webhooks in our GitHub repository settings and configure it to trigger **`ansible`** build:
+
+**i.** From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
 ![repositories](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c720509-1936-44cb-ab34-d109d12aaf50)
 
-+ Next on the repository page we click on the **Settings** tab.
+**ii.** Next on the repository page we click on the **Settings** tab.
 
 ![repository settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/79517652-2336-40be-b457-90a010c780be)
 
-+ On the Settings page, on the left panel, we click on **Webhooks**
+**iii.** On the Settings page, on the left panel, we click on **Webhooks**
 
 ![Webhooks](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36403a01-81b6-44d2-b9fe-1da4378685bf)
 
-+ In the Webhooks page, we click on **Add webhook**
+**iv.** In the Webhooks page, we click on **Add webhook**
 
 ![add webhook](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4974fca2-0fba-44ca-8190-a56f2cfdf8a8)
 
-+ On the Webhooks/Add webhook page, under **Payload URL**, we input our elastic IP address using the following syntax:
+**v.** On the Webhooks/Add webhook page, under **Payload URL**, we input our elastic IP address using the following syntax:
 
   **`http://<Jenkins server IP address>/github-webhook/`**
 
@@ -316,31 +318,31 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fe8a0ec-06c5-48f6-bec1-a157cc1fd4cb)
 
-+ In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **Configure**.
+**vi.** In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **Configure**.
 
 ![configure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b0896307-fd4c-495a-ba04-f2a1a3d0c2fc)
 
-+ Under **Build Triggers**, we check the box for **GitHub hook trigger for GITScm polling**
+**vii.** Under **Build Triggers**, we check the box for **GitHub hook trigger for GITScm polling**
 
 ![build trigger](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/baa66a8c-bce9-4659-9258-19d6c6fa6254)
 
-+ Next to ensure Jenkins saves all files also known as **Build Artifacts**, we go under Post-build Actions, we click on Add post-build Action and we select **Archive the artifacts**
+**viii.** Next to ensure Jenkins saves all files also known as **Build Artifacts**, we go under Post-build Actions, we click on Add post-build Action and we select **Archive the artifacts**
 
 ![archive the artifacts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32e764f8-755d-4ac8-810f-6aca5df90a4c)
 
-+  In the dialogue box under **Files to archive**, we simply enter __**__ which refers to all available paths in the working space.
+**ix.**  In the dialogue box under **Files to archive**, we simply enter __**__ which refers to all available paths in the working space.
 
 ![files to archive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4eb146f-ae55-4bda-9844-1ad3daba75d0)
 
-+ Then we click on **Apply** and **Save** at the bottom of the page.
+**x.** Then we click on **Apply** and **Save** at the bottom of the page.
 
 ![apply and save 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63f35033-c852-4ed0-b036-cd3219c9640f)
   
-+ To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
+**xi.** To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
 
  ![readme edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75f1440b-879a-48e3-bd0d-162da9897e23)
 
-+ Our build started automatically and Jenkins saved the files (build artifacts). We enter the following commands to further confirm this:
+**xii.** Our build started automatically and Jenkins saved the files (build artifacts). We enter the following commands to further confirm this:
 
 ```
 $ ls /var/lib/jenkins/jobs/ansible/builds/5/archive/
