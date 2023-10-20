@@ -105,7 +105,7 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 ![sudo apt update -y](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c7ab738-cee6-4385-b1f1-9ddff8f263af)
 
-**ii.** Next, we execute the following set of commands to install Jenkins and its dependencies:
+**ii.** Next, we run the following set of commands to [install dependencies for Jenkins](https://pkg.jenkins.io/debian-stable/):
 
 ```
 $ sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \ https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
@@ -116,17 +116,47 @@ $ sudo apt-get update
 
 $ sudo apt-get install fontconfig openjdk-11-jre
 
-$ sudo apt-get install jenkins
 ```
 
-**iii.** To ensure Jenkins is up and running, we enter the command below:
+![jenkins installation 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4e9df2c4-1a6c-41a8-9d51-18289cae592d)
+
+**iii.** Then we execute the command below to install Jenkins:
+
+**`$ sudo apt-get install jenkins`**
+
+![jenkins installation 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4a53c019-5a7c-4d84-8999-4cb0ec297313)
+
+**iv.** To ensure Jenkins is up and running, we enter the command below:
 
 **`$ sudo systemctl status jenkins`**
 
-**iv.** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
+![sudo systemctl jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d401bbae-7a7b-4e94-bbe6-08f8302dc06c)
+
+**v.** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
 
 **`http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080`**
 
-**v.** As shown in the output image above, we are prompted to provide an admin password. To retrieve this from the Jenkins Server, we enter the following command: 
+![unlock Jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3db60f3a-56de-4ddb-9a8c-559cf566d15f)
+
+**vi.** As shown in the output image above, we are prompted to provide an Administrator password to unlock Jenkins. To retrieve the password from the Jenkins Server, we enter the following command: 
 
 **`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`**
+
+![initial admin password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4b11c70-6079-4fef-a5bd-996b8959fc5a)
+
+**vii.** Next, from the server, we copy the password as seen in the image above and we paste it in the dialogue box in the **"Unlock Jenkins"** page after which we click on **"Continue"**.
+
+![unlock jenkins 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d4639afb-de57-49aa-b4de-0f2083c6f493)
+
+**viii.** This brings us to the **"Customize Jenkins"** page. Here we select and click on **"Install Suggested Plugins"**.
+
+![jenkins install suggested plugins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7b78280e-b378-4529-86db-be2804b09de0)
+
+![installing plugins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4dd246cf-eb66-42e0-ac53-f038475ca8ca)
+
+**ix.** As shown in the above image, we were able to successfully install the plugins. After completion, Jenkins prompts us to **"Create a First Admin User"** we can either fill in our details to do this or we just choose to **"Skip and continue as admin"**. We decide to go with the latter option.
+
+![skip and continue as admin](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/82c59719-18a2-49b5-b1aa-610527076f30)
+
+**x.** 
+
