@@ -240,3 +240,23 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![ansible version](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3c1796d7-7424-423c-a0ce-b079ef6cf2c5)
 
+#### <br>Step 3: Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
+
+To achieve our objectives in this step, the first thing we do is to enable Web Hooks in our GitHub repository settings.
+
+**i.** From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
+
+**ii.** Next on the repository page we click on the **Settings** tab.
+
+**iii.** On the Settings page, on the left panel, we click on **Webhooks**
+
+**iv.** In the Webhooks page, we click on **Add webhook**
+
+**v.** On the webhooks page, under **Payload URL**, we input our elastic IP address using the following syntax:
+
+  **`http://<Jenkins server IP address>/github-webhook`**
+
+**vi.** 
+
+
+
