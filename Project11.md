@@ -67,7 +67,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 **ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/13c46f47-1bf7-4563-909a-7d2eb30ac749)
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ee3841b0-95f1-43be-94b1-6210d7bea296)
 
 **iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
