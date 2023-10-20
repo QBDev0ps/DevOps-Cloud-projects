@@ -91,20 +91,31 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 #### <br>Step 3: Create and Allocate Elastic IP Address to Jenkins-Ansible Server<br/>
 
+Considering that we'll be using Jenkins with Github and configuring Web Hooks in this project, it will make our job easier to create and allocate an elastic IP adress to our Jenkins-Ansible Server. This is beacuse everytime we stop/start the server, there will be a need to keep reconfiguring Github Web Hooks to a new IP address. Having an elastic IP address (which will not change when we stop/start the server) is the 
+
 **i.** From the EC2 cockpit, we click on **"Elastic Ips"**.
 
 ![elastic IPs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2bd8c559-b18f-4db9-9446-84eed4c34c81)
 
-**ii.** Next, we click on Allocate Elastic IP Address. 
+**ii.** In the next page displayed, we click on **"Allocate Elastic IP Address"**.
 
-**iii.** In the elastic IP address settings page you snsure you choose the same network border group as your EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on ALLOCATE.
+![Allocate elastic IP address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633bb57d-7414-425e-ba73-66faa341eeb1)
 
-In the next page which shows us that the elastic IP has been allocated successfully, we click on the Actions drob down tab and we select Associate Elastic IP address.
+**iii.** In the elastic IP address settings page we ensure to choose the same network border group as our EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on **"Allocate"**.
 
-In the Associate Elastic IP Address page, we scroll down to instance and we select our EC2 instance. After this, we click on the ASSOCIATE button at the bottom of the page. 
+![elastic IP address settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b22c080-2bfa-4b8f-aa59-808fc7d1ba9f)
 
-As can be seen in the output image below, the elastic IP was successfully asssociated with our EC2 instance.
+**iv.** In the next page which shows us that the elastic IP has been allocated successfully, we click on the **"Actions'** drop down tab and we select **"Associate Elastic IP address"**.
 
+![associate elatic ip 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00c69fbe-bea1-435c-ba5a-37323e19ccc7)
+
+**v.** In the Associate Elastic IP Address page, we scroll down to **"Instance"** and we select our EC2 instance. After this, we click on the **"Associate"** button at the bottom of the page.
+
+![Associate Elastic IP address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a8ee57a4-991e-4505-9fb8-9b7132353d8a)
+
+**vi.** As can be seen in the output image below, the elastic IP address was successfully asssociated with our EC2 instance.
+
+![Elastic IP successfully associated](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a6dba97b-2953-485e-a13f-ecbe8ac62dd4)
 
 #### <br>Step 4: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
 
