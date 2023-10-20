@@ -87,8 +87,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 + Click on **Save rules** at the bottom right corner of the page.
 
-![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
-
+![open port 8080](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d41b3f43-59c9-4c78-8a80-0fa40515399a)
 
 #### <br>Step 3: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
 
@@ -99,3 +98,8 @@ After we have provisioned our server and we have opened the necessary port, we m
 **ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
 
 #### <br>Step 4: Install Jenkins<br/>
+
+**i.** After connecting to our server we must first update all installed packages and their dependencies before commencing other installations or configurations. We do this by executing the following command: 
+
+**`$ sudo apt update -y`**
+
