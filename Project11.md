@@ -324,8 +324,18 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![build trigger](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/baa66a8c-bce9-4659-9258-19d6c6fa6254)
 
-+ 
++ Next to ensure Jenkins saves all files also known as **Build Artifacts**, we go under Post-build Actions, we click on Add post-build Action and we select **Archive the artifacts**
 
+![archive the artifacts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32e764f8-755d-4ac8-810f-6aca5df90a4c)
+
++  In the dialogue box under **Files to archive**, we simply enter __**__ which refers to all available paths in the working space.
+
+![files to archive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4eb146f-ae55-4bda-9844-1ad3daba75d0)
+
++ Then we click on **Apply** and **Save** at the bottom of the page.
+
+![apply and save 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63f35033-c852-4ed0-b036-cd3219c9640f)
+  
 **iii.**  
 
 
