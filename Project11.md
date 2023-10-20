@@ -103,6 +103,8 @@ After we have provisioned our server and we have opened the necessary port, we m
 
 **`$ sudo apt update -y`**
 
+![sudo apt update -y](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c7ab738-cee6-4385-b1f1-9ddff8f263af)
+
 **ii.** Next, we execute the following set of commands to install Jenkins and its dependencies:
 
 ```
@@ -121,10 +123,10 @@ $ sudo apt-get install jenkins
 
 **`$ sudo systemctl status jenkins`**
 
-**iv** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
+**iv.** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
 
 **`http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080`**
 
-**v.** As shown in the output image above, we are prompted to rpovide an admin password. To retriev this from the Jenkins Server, we enter the following command: 
+**v.** As shown in the output image above, we are prompted to provide an admin password. To retrieve this from the Jenkins Server, we enter the following command: 
 
 **`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`**
