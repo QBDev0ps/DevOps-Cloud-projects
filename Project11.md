@@ -43,7 +43,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 **ii.** Under **Name and tags**, we provide a unique name for our server.
 
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/07d96d27-7f7a-4bca-898a-c3dd8370e19b)
+![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e9c2dc00-0a59-433a-ab2d-6136183f190f)
   
 **iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 22.04 LTS (HVM).
 
