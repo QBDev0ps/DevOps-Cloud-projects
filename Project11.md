@@ -242,7 +242,25 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 #### <br>Step 3: Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
 
-**i.** To achieve our objectives in this step, the first thing we do is to enable Web Hooks in our GitHub repository settings:
+**i.** In the Jenkins web console, we create a new freestyle project that we will name **`ansible`** and point it to our GitHub **`ansible-config-mgt`** repository. We do this with the following steps:
+
++ From the Jenkins web console, we click on **New item**
+
++ In the next page under **Enter an item name** we type in **`ansible`**, then we select **Freestyle project** and we click on **Ok** at the bottom of the page.
+
++ We go to our GitHub repository page and we copy the URL of the webpage.
+
++ Then in the Jenkins configuration page, we click on the **GitHub project** check box and we paste in the **project URL**.
+
++ Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green 'Code' button and copying the https link.
+  
++ In the Jenkins configuration page, under **Soure Code Management** we click on **Repository URL** and we paste in the remote link for our GitHub repository.
+
++ Under **Branch Specifier**, we change ***/master** to ***/main**
+
++ 
+
+**ii.** After creating and configuring the a freestuyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
 
 + From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
@@ -270,6 +288,6 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 ![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8be29f97-d903-422c-8a4d-185643d1874a)
 
-**ii.**  
+**iii.**  
 
 
