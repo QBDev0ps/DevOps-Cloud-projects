@@ -288,7 +288,7 @@ In the Jenkins web console, we create a new freestyle project that we will name 
 
 ![console output 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b820be16-8557-4255-b0b7-3519c696e679)
 
-#### <br> Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
+#### <br>Step 4: Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
 
 After creating and configuring the **`ansible`** freestyle project, we had to trigger it manually for it to run. But we can go a step further. To enable our build run automatically whenever there is a change in our Git repository, we need to enable Webhooks in our GitHub repository settings and configure it to trigger **`ansible`** build:
 
@@ -351,3 +351,5 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 ```
 
 ![config confirmation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41d11f65-fba5-40f7-8221-bf225c3f30f7)
+
+#### <br>Step 5: <br/>
