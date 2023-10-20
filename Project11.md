@@ -160,3 +160,10 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 **x.** 
 
+From the EC2 cockpit, click on Elastic Ips
+
+Next, click on Allocate Elastic IP Address
+
+In the elastic IP address settings page you snsure you choose the same network border group as your EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on ALLOCATE.
+
+In the next page which shows us that the elastic IP has been allocated successfully, we click on the Actions drob down tab and we select Associate Elastic IP address.
