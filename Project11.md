@@ -242,21 +242,34 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 #### <br>Step 3: Configure Jenkins Build Job to Archive Repository Content everytime there are changes<br/>
 
-To achieve our objectives in this step, the first thing we do is to enable Web Hooks in our GitHub repository settings.
+**i.** To achieve our objectives in this step, the first thing we do is to enable Web Hooks in our GitHub repository settings:
 
-**i.** From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
++ From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
-**ii.** Next on the repository page we click on the **Settings** tab.
+![repositories](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c720509-1936-44cb-ab34-d109d12aaf50)
 
-**iii.** On the Settings page, on the left panel, we click on **Webhooks**
++ Next on the repository page we click on the **Settings** tab.
 
-**iv.** In the Webhooks page, we click on **Add webhook**
+![repository settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/79517652-2336-40be-b457-90a010c780be)
 
-**v.** On the webhooks page, under **Payload URL**, we input our elastic IP address using the following syntax:
++ On the Settings page, on the left panel, we click on **Webhooks**
+
+![Webhooks](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36403a01-81b6-44d2-b9fe-1da4378685bf)
+
++ In the Webhooks page, we click on **Add webhook**
+
+![add webhook](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4974fca2-0fba-44ca-8190-a56f2cfdf8a8)
+
++ On the Webhooks/Add webhook page, under **Payload URL**, we input our elastic IP address using the following syntax:
 
   **`http://<Jenkins server IP address>/github-webhook`**
 
-**vi.** 
++ Under **Content type**, we select **application/json**
 
++ Then we click on the green **Add webhook** button at the bottom of the page.
+
+![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8be29f97-d903-422c-8a4d-185643d1874a)
+
+**ii.**  
 
 
