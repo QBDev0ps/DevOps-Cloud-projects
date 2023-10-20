@@ -213,3 +213,26 @@ To create a new repository, we carry out the following steps:
 **iii.** We click the green **"Create repository"** button at the bottom of the page to create our repository.
 
 ![create repository button](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2672317f-6cac-4411-ac17-319f512e2e10)
+
+**iv.** As can be seen in the image below, we were able to successfuly create the repository.
+
+![succesful create repository](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8f358b9f-1417-4c5d-a5f3-d629a91651e6)
+
+#### <br>Step 2: Ansible Installation<br/>
+
+In this step, we are going to install Ansible on the same server (Jenkins-Ansible Server) where we have Jenkins installed.
+
+**i.** First of all, we update the server machine if we have not already done so:
+
+**`$ sudo apt update -y`**
+
+**ii.** Then we install Ansible by executing the command below:
+
+**`$ sudo apt install ansible`**
+
+**iii.** Next we check our ansible version by running the following command:
+
+**`$ ansible --version`**
+
+**iv.** 
+
