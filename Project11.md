@@ -91,7 +91,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 #### <br>Step 3: Create and Allocate Elastic IP Address to Jenkins-Ansible Server<br/>
 
-Considering that we'll be using Jenkins with Github and configuring Web Hooks in this project, it will make our job easier to create and allocate an elastic IP adress to our Jenkins-Ansible Server. This is beacuse everytime we stop/start the server, there will be a need to keep reconfiguring Github Web Hooks to a new IP address. Having an elastic IP address (which will not change when we stop/start the server) is the 
+Considering that we'll be using Jenkins with Github and configuring Web Hooks in this project, it will make our job easier to create and allocate an elastic IP adress to our Jenkins-Ansible Server. This is beacuse everytime we stop/start the server, there will be a need to keep reconfiguring Github Web Hooks to a new IP address. Having an elastic IP address (which will not change when we stop/start the server) is the ideal way to overcome this issue.
 
 **i.** From the EC2 cockpit, we click on **"Elastic Ips"**.
 
@@ -194,4 +194,22 @@ $ sudo apt-get install fontconfig openjdk-11-jre
 
 ![installation complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b725826c-ef8b-4906-b6ac-02d37cca0d43)
 
+### <br>Install and Configure Ansible to act as a Jump Server/Bastion Host<br/>
 
+The next phase of our project involves the installation and configuration of Ansible. We shall do this by implementing the following steps:
+
+#### <br>Step 1: Create New Repository in GitHub<br/>
+
+To create a new repository, we carry out the following steps:
+
+**i.** We click on the plus sign **(+)** at the top right corner of our github account. A dropdown menu box appears and we select **"New repository"**.
+
+![plus sign](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b8fdf5ae-6f7a-4396-9bbc-aadaea9bfd2d)
+
+**ii.** We fill out the form by entering **`ansible-config-mgt`** as name for our repository. We enter a description and then we check the box to add a README.md file. Afterwards, we leave every other box or button in their default state.
+
+![create new repository](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0f08b401-d40f-40a9-ae32-93757fa8c10d)
+
+**iii.** We click the green **"Create repository"** button at the bottom of the page to create our repository.
+
+![create repository button](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2672317f-6cac-4411-ac17-319f512e2e10)
