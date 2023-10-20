@@ -226,13 +226,17 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 **`$ sudo apt update -y`**
 
+![update machine](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d6bd2879-c06f-4cd5-b27a-38022f4d213b)
+
 **ii.** Then we install Ansible by executing the command below:
 
-**`$ sudo apt install ansible`**
+**`$ sudo apt install ansible -y`**
+
+![install ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/99407114-aac0-4120-beca-d38584d79121)
 
 **iii.** Next we check our ansible version by running the following command:
 
 **`$ ansible --version`**
 
-**iv.** 
+![ansible version](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3c1796d7-7424-423c-a0ce-b079ef6cf2c5)
 
