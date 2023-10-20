@@ -246,21 +246,37 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 + From the Jenkins web console, we click on **New item**
 
+![jenkins new item](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6dd5ad81-1d92-4908-813f-eecce8717871)
+
 + In the next page under **Enter an item name** we type in **`ansible`**, then we select **Freestyle project** and we click on **Ok** at the bottom of the page.
+
+![enter item name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9677dbe2-4cf7-40a9-a4c3-7fe379ef3d11)
 
 + We go to our GitHub repository page and we copy the URL of the webpage.
 
+![project url](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0d2828b3-3690-467e-a720-898428f2617e)
+
 + Then in the Jenkins configuration page, we click on the **GitHub project** check box and we paste in the **project URL**.
 
+![github project](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/38961a2f-2d6d-4881-a479-e7f7844eaf03)
+
 + Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green 'Code' button and copying the https link.
+
+![copy repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca80b0ad-6ed9-43c2-bbf6-b9e95656863a)
   
 + In the Jenkins configuration page, under **Soure Code Management** we click on **Repository URL** and we paste in the remote link for our GitHub repository.
 
+ ![Repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8dc2a7c5-add4-4ec4-82e7-a757804d0f84)
+
 + Under **Branch Specifier**, we change ***/master** to ***/main**
 
-+ 
+![branch specifier](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/431e7d41-41f8-4056-a56d-b892fa40fe64)
 
-**ii.** After creating and configuring the a freestuyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
++ Then we click on **Apply** and **Save** at the bottom of the page.
+
+![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f559ba5-61b1-4118-a161-f18db45a0f84)
+
+**ii.** After creating and configuring the a freestyle project, the next thing we do is to enable Webhooks in our GitHub repository settingsnand configure it to trigger **`ansible`** build:
 
 + From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
 
