@@ -352,4 +352,6 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 ![config confirmation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41d11f65-fba5-40f7-8221-bf225c3f30f7)
 
-#### <br>Step 5: <br/>
+#### <br>Step 5: Configure Jenkins to Connect and Copy Files to NFS Server <br/>
+
+In this step we will proceed to configure jenkins to connect via SSH and copy files to the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
