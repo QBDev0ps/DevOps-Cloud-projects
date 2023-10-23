@@ -354,14 +354,24 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 #### <br>Step 5: Configure Jenkins to Connect and Copy Files to NFS Server <br/>
 
- In step 4 above, we concluded with Jenkins successfully saving our build artifacts. Now in this step, we will proceed to configure jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
+ In **Step 4** above, we concluded with Jenkins successfully saving our build artifacts. Now in this step, we will proceed to configure Jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
 
 **i.** To begin this implementation, we will require a plugin called **"Publish Over SSH"**. We install this by doing the following:
 
-+ 
++ From the main Jenkins Environment, we click on **Manage Jenkins**.
 
-Install "Publish Over SSH" plugin.
++ On the System Configuration page, we click on **Plugins**.
 
-Navigate to the dashboard select Manage Jenkins and choose Manage Plugins menu item.
++ On the Plugins page, we click on Available plugins, then we type **Publish Over SSH** in the search box.
 
-On Available tab search for Publish Over SSH plugin and install it
++ From here, we can see the **"Publish Over SSH"** plugin we wish to install, so we check the **"Install"** checkbox beside it and we click on the **"Install"** button.
+
+**ii.** The next step is to configure the **"Publish Over SSH"** plugin and our **`ansible`** job/project to copy our build artifacts to the NFS server. We do this by carrying out the following:
+
++ From the main Jenkins Environment, we click on **Manage Jenkins**.
+
++ On the System Configuration page, we click on **System**.
+
++ Then we scroll down to the configuration section for the  **"Publish Over SSH"** plugin configuration section. 
+
+
