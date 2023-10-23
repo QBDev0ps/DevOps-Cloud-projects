@@ -354,4 +354,14 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 #### <br>Step 5: Configure Jenkins to Connect and Copy Files to NFS Server <br/>
 
-In this step we will proceed to configure jenkins to connect via SSH and copy files to the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
+ In step 4 above, we concluded with Jenkins successfully saving our build artifacts. Now in this step, we will proceed to configure jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
+
+**i.** To begin this implementation, we will require a plugin called **"Publish Over SSH"**. We install this by doing the following:
+
++ 
+
+Install "Publish Over SSH" plugin.
+
+Navigate to the dashboard select Manage Jenkins and choose Manage Plugins menu item.
+
+On Available tab search for Publish Over SSH plugin and install it
