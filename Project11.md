@@ -390,7 +390,9 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + Next, under **"Key"**, we put in the content of .pem file that we used in connecting to to the NFS server via SSH.
 
-**iii** Now we need to input configuration more configuration to enable connection to the NFS Server. Under **"SSH Servers"**, we click on the **Add** button and then we input the following: 
+![publish over ssh ey](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f7168f5f-3400-4d3f-bc39-3f197f9de66f)
+
+**iii.** Now we need to input configuration more configuration to enable connection to the NFS Server. Under **"SSH Servers"**, we click on the **Add** button and then we input the following: 
 
 + **Name**: This can be any arbitrary name.
 
@@ -400,4 +402,18 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + **Remote directory**: Here, we will use the **/mnt/opt** directory which we specified we will be using for Jenkins in our [Tooling Website Solution project.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
 
-+ Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
++ Next is to test the configuration and ensure the connection returns **"Success"**. We should note that TCP Port 22 on our NFS server must be open to receive SSH connections.
+
+![ssh servers](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6fab555f-e524-4cfe-9791-17fca96205f4)
+
++ As we can see from the image above, the connection is successful, so we save the configuration by clicking on **Apply** and **Save**.
+
+**iv.** The next step is to add another Post-build Action to our **`ansible`** project. We do this by implementing the following:
+
++ From the main Jenkins Environment, we click on the project **ansible**.
+
++ Then in the next page we click on **Configure** in the left hand pane.
+
+
+
+
