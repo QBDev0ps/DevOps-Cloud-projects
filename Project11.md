@@ -582,3 +582,14 @@ The following serves to break down the configuration file above and explain in m
 ![nginx architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5aa4052c-ae28-4e56-8050-46b4f6613295)
 
 #### <br>Step 8: Prepare Development Environment <br/>
+
+The first part of ‘DevOps’ is ‘Dev’, which means we will be required to write some codes and to make coding and debugging comfortable, we will need an Integrated development environment (IDE) or Source-code Editor. There is a plethora of different IDEs and Source-code Editors for different languages with their own advantages and drawbacks. We however decided to use one free and universal editor that will fully satisfy our needs – **Visual Studio Code (VSC)**.
+
+**i.** To proceed, we download and install [Visual Studio Code (VSC)](https://code.visualstudio.com/download)
+
+**ii.** After you have successfully installed VSC, we configure it to connect to our newly created GitHub repository that we named **ansible-config-mgt**.
+
+**iii.** 
+
+
+Clone down your ansible-config-mgt repo to your Jenkins-Ansible instance: git clone <ansible-config-mgt repo link>
