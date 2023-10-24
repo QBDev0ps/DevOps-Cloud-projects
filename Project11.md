@@ -378,8 +378,26 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + From the main Jenkins Environment, we click on **Manage Jenkins**.
 
+ ![manage jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/490e07d7-4916-493e-bb16-f541914e99ff)
+
 + On the System Configuration page, we click on **System**.
+
+ ![configure system](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03afe719-f9d4-4b1f-a8a8-fc0ddf64e2b1)
 
 + Then we scroll down to the configuration section for the  **"Publish Over SSH"** plugin configuration section. 
 
+![publish over ssh configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce6f319a-8f2e-4d2c-aaa6-f0653328bbb1)
 
++ Next, under **"Key"**, we put in the content of .pem file that we used in connecting to to the NFS server via SSH.
+
+**iii** Now we need to input configuration more configuration to enable connection to the NFS Server. Under **"SSH Servers"**, we click on the **Add** button and then we input the following: 
+
++ **Name**: This can be any arbitrary name.
+
++ **Hostname**: This will be the private IP address of the NFS server.
+
++ **Username**: For this we will use **ec2-user** which is the username used for Red Hat Enterprise Linux based servers such as our NFS Server.
+
++ **Remote directory**: Here, we will use the **/mnt/opt** directory which we specified we will be using for Jenkins in our [Tooling Website Solution project.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
+
++ Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
