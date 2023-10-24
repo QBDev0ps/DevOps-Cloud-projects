@@ -430,8 +430,18 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
  ![apply and save 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47a5fc3e-cdfc-401f-ac1d-04028bebed9f)
 
-+ **xi.** To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
++ To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
 
+ ![changes to readme](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f982026d-f9f8-4cf3-ba09-4b21cc5f3afd)
 
++ As we can see in the console output below, our build ran successfully. Connection was made with the NFS Server via SSH and the build artifacts were successfully copied.
 
+![console output 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d83c17ff-e372-4af2-a89c-669e2e909a8c)
 
++ To also confirm that the files in /mnt/opt directory have been updated we connect to the NFS server via our SSH client and execute the following command:
+
+**`cat /mnt/opt/README.md`**
+
+![confirmation in NFS server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d14f6de4-2f4b-4e76-8dee-a20dd36514bb)
+
+#### <br>Step 6:  <br/>
