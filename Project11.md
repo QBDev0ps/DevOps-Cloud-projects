@@ -412,13 +412,23 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + From the main Jenkins Environment, we click on the project **ansible**.
 
+ ![project ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c171b6b-efe8-49f8-9a12-aae9207939ac)
+
 + Then in the  **ansible** project page we click on **Configure** in the left hand pane.
+
+ ![configure ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/98c06eec-50f4-481c-a3e5-16ea8f0f2dc7)
 
 + In the Configuration page, we select **Post-build Actions** in the left hand pane, then we click on the **Add Post-build Action** drop down button and we select **"Send build artifacts over SSH"**.
 
+ ![add post build action](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4b45b3b3-2969-4fea-8332-4d1ee9848dff)
+
 + To ensure that all files produced by the build are sent to the **/mnt/opt** directory, under **Transfers** section, we enter __**__ under **"Source Files"**.
 
+ ![source files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb3bae51-b45c-46b0-a46c-36a907dc5241)
+
 + Then we click on **Apply** and **Save** at the bottom of the page.
+
+ ![apply and save 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47a5fc3e-cdfc-401f-ac1d-04028bebed9f)
 
 + **xi.** To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
 
