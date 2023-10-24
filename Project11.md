@@ -412,7 +412,15 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + From the main Jenkins Environment, we click on the project **ansible**.
 
-+ Then in the next page we click on **Configure** in the left hand pane.
++ Then in the  **ansible** project page we click on **Configure** in the left hand pane.
+
++ In the Configuration page, we select **Post-build Actions** in the left hand pane, then we click on the **Add Post-build Action** drop down button and we select **"Send build artifacts over SSH"**.
+
++ To ensure that all files produced by the build are sent to the **/mnt/opt** directory, under **Transfers** section, we enter __**__ under **"Source Files"**.
+
++ Then we click on **Apply** and **Save** at the bottom of the page.
+
++ **xi.** To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
 
 
 
