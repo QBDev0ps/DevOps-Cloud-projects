@@ -444,14 +444,11 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 ![confirmation in NFS server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d14f6de4-2f4b-4e76-8dee-a20dd36514bb)
 
-#### <br>Step 6: Set up a Load Balancer to distribute traffic across Web Servers <br/>
+#### <br>Step 6: Deploy EC2 Instance to act as Load Balancer <br/>
 
-To get our set up to look like the one in the diagram below, we will need to deploy and configure Nginx as a load balancer to distribute traffic across our web servers.
+To get our set up to look like the one in the diagram below, we will need to deploy a load balancer to distribute traffic across our web servers.
 
 ![nginx architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5aa4052c-ae28-4e56-8050-46b4f6613295)
-
-
-### <br>Step 1: Provisioning EC2 Instance<br/>
 
 We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
@@ -461,7 +458,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 
 **ii.** Under **Name and tags**, we provide a unique name for our web server.
 
-![Name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a28dd984-04f5-4dc9-bcf2-d9fc4a5812fb)
+![Name and tags 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/af3ac793-67a3-46fa-bb19-b7dbc2255518)
   
 **iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 20.04 LTS (HVM).
 
@@ -469,41 +466,119 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
   
 **iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
-![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+![KP](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d0c8f5c4-d0ca-46a1-9316-0438618551c8)
   
 **v.** And then finally, we click on **"Launch Instance"**
   
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
-
-### <br>Step 2: Open Port 80<br/>
-
-We will be running our Load Balancer on TCP Port 80. We will therefore need to open Port 80 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Load Balancer:
-
-**i.** In the AWS  console navigation pane, we choose **Instances**.
+**vi.** We will be running our Load Balancer on TCP Port 8080. We will therefore need to open Port 8080 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Load Balancer. In the AWS  console navigation pane, we choose **Instances**.
 
 ![Instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75d2208f-d030-4f44-9667-23521332607f)
 
-**ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+**vii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
 
-![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
+![instance summary 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cd84ec18-4072-42c6-aee7-94921bf803e3)
 
-**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+**viii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
 
 ![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
 
-**iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+**ix.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
 
 ![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
 
-**v.** On the **Edit inbound rules** page, we do the following:
+**x.** On the **Edit inbound rules** page, we do the following:
 
 + Choose **Add rule**.
 
-+ For **Port Range**, enter **80** 
++ For **Port Range**, enter **8080** 
 
 + In the space with the magnifying glass under **Source**, choose **Anywhere**.
 
 + Click on **Save rules** at the bottom right corner of the page.
 
-![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
+![port 8080](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/183e37d3-2b35-430c-b22b-dc7d7e19b029)
+
+**xi.** After we have provisioned our server and we have opened the necessary port, we must next connect to the server via an SSH client.  Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
+
+**xii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+#### <br>Step 7: Configure Load Balancer to distribute traffic across Web Servers <br/>
+
+**i.** The subsequent step is to install Nginx and configure it to effectively distribute traffic across our three Web Servers. But we need to first of all update the server. So we concatenate the update and installation actions by executing the following command:
+
+**`$ sudo apt update -y && sudo apt install nginx -y`**
+
+![install nginx](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/beae01c8-cb86-4b8e-8c97-d9d9926b4ad2)
+
+**ii.** To verify that Nginx is installed and active, we run the command below:
+
+**`$ sudo systemctl status nginx`**
+
+![systemctl status nginx](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b00ddbaf-1ec4-4a32-b76a-70f3e9c16e4a)
+
+**iii.** Our next step is to open the Nginx configuration file with the following command:
+
+**`$ sudo vi /etc/nginx/conf.d/loadbalancer.conf`**
+
++ We copy and paste in the configuration file below to configure nginx to act as a load balancer. As can be seen in the file, necessary information like Public IP and Port Number for our three web servers are provided. We also need to provide the Public IP address of our Nginx Load Balancer.
+
+```
+        upstream backend_servers {
+
+            # your are to replace the public IP and Port to that of your webservers
+            server 51.20.82.142:80; # public IP and port for webserver 1
+            server 51.20.131.231:80; # public IP and port for webserver 2
+            server 51.20.122.38:80; # public IP and port for webserver 3
+
+        }
+
+        server {
+            listen 8080;
+            server_name 51.20.190.36; # provide your load balancers public IP address
+
+            location / {
+                proxy_pass http://backend_servers;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+        }
+```
+
+![load balancer configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/87f67b78-e276-4f71-a664-a93ca0175d12)
+
+The following serves to break down the configuration file above and explain in more detail:
+
++ _**upstream backend_servers**_ defines a group of back end servers (our two web servers).
+
++ The **server** lines inside the **upstream** block lists the ports and public IP addresses of both of our backend webservers.
+
++ **proxy_pass** inside the location block sets up the load balancing, passing the request to the back end servers.
+
++ The **proxy_set_header** lines pass necessary headers to the backend servers to correctly haandle the requests.
+
++ Afterwards, on our keyboard, we press **`esc`**, type **`:wq!`** to save and quit immediately and press **`enter`** to confirm exit.
+
+**iv.** We proceed to execute the command below to test our configuration:
+
+**`$ sudo nginx -t`**
+
+![test configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e5f7b940-33c7-487d-b6fb-5bb7bb3ec4c6)
+
+**v.** Provided there are no errors, we execute the following command to restart the Nginx service and load our new configuration.
+
+**`sudo systemctl restart nginx`**
+
+**vi.** Then the final step is to go to our browser to paste in the public IP address of our Nginx loadbalancer (syntax is: **`http://<Public-IP-Address>:8080`**). In our own use case, we enter the following url in our browser:
+
+**`http://51.20.190.36:8080`**
+
+![nginx browser](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b7d03bd3-5e47-4630-a5fb-de6f8a679d3c)
+
+**vii.** As shown in the output image above, our load balancer is able to serve content from the tooling website on our web servers so we have somewhat acheived the setup architecture shown in the diagram below:
+
+![nginx architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5aa4052c-ae28-4e56-8050-46b4f6613295)
+
+#### <br>Step 8: Prepare Development Environment <br/>
