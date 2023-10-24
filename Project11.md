@@ -444,4 +444,66 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 ![confirmation in NFS server](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d14f6de4-2f4b-4e76-8dee-a20dd36514bb)
 
-#### <br>Step 6:  <br/>
+#### <br>Step 6: Set up a Load Balancer to distribute traffic across Web Servers <br/>
+
+To get our set up to look like the one in the diagram below, we will need to deploy and configure Nginx as a load balancer to distribute traffic across our web servers.
+
+![nginx architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5aa4052c-ae28-4e56-8050-46b4f6613295)
+
+
+### <br>Step 1: Provisioning EC2 Instance<br/>
+
+We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+**i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+**ii.** Under **Name and tags**, we provide a unique name for our web server.
+
+![Name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a28dd984-04f5-4dc9-bcf2-d9fc4a5812fb)
+  
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 20.04 LTS (HVM).
+
+![Application and OS Image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ae844641-2121-49de-99e3-67c8621c4027)
+  
+**iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+  
+**v.** And then finally, we click on **"Launch Instance"**
+  
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
+
+### <br>Step 2: Open Port 8000<br/>
+
+We will be running our Load Balancer on TCP Port 80. We will therefore need to open Port 80 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Load Balancer:
+
+**i.** In the AWS  console navigation pane, we choose **Instances**.
+
+![Instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75d2208f-d030-4f44-9667-23521332607f)
+
+**ii.** We click on our Instance ID to get the details of our EC2 instance and in the bottom half of the screen, we choose the **Security** tab. **Security groups** lists the security groups that are associated with the instance. Inbound rules displays a list of the **inbound rules** that are in effect for the instance.
+
+![instance summary](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/401e3b80-6b6b-4fff-a754-f9fecd97852e)
+
+**iii.** For the security group to which we will add the new rule, we choose the security group ID link to open the security group.
+
+![security groups](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f4453010-cf80-4e64-aab5-d6ac89c2a5fc)
+
+**iv.** On the **Inbound rules** tab, we choose **Edit inbound rules**.
+
+![Edit Inbound Rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca7e7378-eba1-455e-a439-f91dd34cc038)
+
+**v.** On the **Edit inbound rules** page, we do the following:
+
++ Choose **Add rule**.
+
++ For **Port Range**, enter **80** 
+
++ In the space with the magnifying glass under **Source**, choose **Anywhere**.
+
++ Click on **Save rules** at the bottom right corner of the page.
+
+![save rules](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4bb985a-04dc-4463-998a-07b047e49207)
