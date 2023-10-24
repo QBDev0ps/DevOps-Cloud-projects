@@ -476,7 +476,7 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
 
-### <br>Step 2: Open Port 8000<br/>
+### <br>Step 2: Open Port 80<br/>
 
 We will be running our Load Balancer on TCP Port 80. We will therefore need to open Port 80 to allow traffic from anywhere. To implement this, we need to add a rule to the Security Group of our Load Balancer:
 
