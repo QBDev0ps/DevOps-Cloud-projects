@@ -632,7 +632,6 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 #### <br>Step 1: Begin Ansible Development <br/>
 
-
 **i.** To begin Ansible development we go to our ansible-config-mgt GitHub repository in VS Code and we create a new branch **"new-feature"** that will be used for development of a new feature. We do this by following the steps below:
 
 + From the VS Code environment we go to the bottom of the page and we click on **"main"**.
@@ -649,9 +648,39 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 ![branch name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ea9cf21d-a8ed-4abd-80ab-bfb8db0c09ed)
 
-**ii.** Checkout the newly created feature branch to your local machine and start building your code and directory structure
+**ii.** Next, we enter the command below to checkout the newly created branch **"new-feature"** to our local machine and start building our code and directory structure:
 
-Create a playbooks directory for storing playbooks
-Create an inventory directory for storing inventory files
-In the playbooks folder, create a common.yml file
-In the inventory folder, create dev.yml, prod.yml, staging.yml and uat.yml for dev, prod, staging and uat environments respectively.
+**`$ git checkout new-feature`**
+
+![git checkout](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dfccdbc5-a0a9-4df0-9604-207c67fa5711)
+ 
+**iii.** We use the following command to create a directory that will be used to store all our playbooks files and we name it **`playbooks`**.
+
+**`$ mkdir playbooks`**
+
+**iv.** We also create a directory that will be used to keep our hosts organised and we name this **``inventory** 
+
+**`$ mkdir inventory`**
+
+**v.** Within the playbooks folder, we create our first playbook and name it **common.yml**:
+
+```
+$ cd playbooks
+
+$ touch common.yml
+```
+
+**vi.** And within the inventory folder, we create **`dev.yml`**, **`prod.yml`**, **`staging.yml`** and **`uat.yml`** for development, production, staging and user acceptance testing environments respectively.
+
+```
+$ cd inventory
+
+$ touch dev.yml
+
+$ touch prod.yml
+
+$ touch staging.yml
+
+$ touch uat.yml
+```
+
