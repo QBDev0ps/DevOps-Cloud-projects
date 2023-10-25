@@ -587,9 +587,34 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 **i.** To proceed, we download and install [Visual Studio Code (VSC)](https://code.visualstudio.com/download)
 
-**ii.** After you have successfully installed VSC, we configure it to connect to our newly created GitHub repository that we named **ansible-config-mgt**.
+**ii.** After successfully installing VSC, we configure it to connect to our newly created GitHub repository that we named **ansible-config-mgt**. We do this by implementing the following:
 
-**iii.** 
++ We open the VS code application and in on the left hand pane we click on **Extensions**
 
++ Next, we search for SSH in the **Extensions** search bar and then among the results, we install three (3) extensions namely:
+**Remote - SSH**, **Remote - SSH: Editing Configuration Files** and **SSHExtension**. 
 
-Clone down your ansible-config-mgt repo to your Jenkins-Ansible instance: git clone <ansible-config-mgt repo link>
+![vs code extensions](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36e58ca0-b4f8-4e62-8394-c5c7e7959d4b)
+
++ Next, we click on the **Manage** button in the left hand pane and we select **Command Palette**.
+
++ Then in the search box, we search for and select **Remote SSH:Open Configuration File**
+
++ Then we select the first option **C:\Users\USER\.ssh\config**
+
++  Then we edit the configuration file as shown below:
+
+```
+Host jenkins-ansible-ssh
+    HostName ec2-16-171-91-213.eu-north-1.compute.amazonaws.com
+    User ubuntu
+    IdentityFile C:\Users\USER\Downloads\QB-ECII.pem
+```
+
++ For **Host**, we enter an arbitrary name, for **Hostname**, we paste in the Public DNS of our Jenkins-Ansible Server. Then for **User**, we use **"ubuntu"** and for **IdentityFile** we input the file path for the .pem key we used in accessing our instance.
+
++ Next, we press Ctrl+S to save and then again, we click on the **Manage** button in the left hand pane and we select **Command Palette**.
+
++ We search for and click on **Connect to Host** and the we click on **jenkins-ansible-ssh**
+
+**iii.** Clone down your ansible-config-mgt repo to your Jenkins-Ansible instance: git clone <ansible-config-mgt repo link>
