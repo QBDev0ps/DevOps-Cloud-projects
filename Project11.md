@@ -626,6 +626,14 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 **`git clone <ansible-config-mgt repo link>`**
 
+![git clone](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a014233a-1034-4c74-ad0c-8fa2335d59c8)
 
 ### <br>Begin Ansible Development, Set up an Inventory and Create a Simple Ansible Playbook to Automate Server Configuration<br/>
 
+**i.** In your ansible-config-mgt GitHub repository, create a new branch that will be used for development of a new feature.
+
+Checkout the newly created feature branch to your local machine and start building your code and directory structure
+Create a playbooks directory for storing playbooks
+Create an inventory directory for storing inventory files
+In the playbooks folder, create a common.yml file
+In the inventory folder, create dev.yml, prod.yml, staging.yml and uat.yml for dev, prod, staging and uat environments respectively.
