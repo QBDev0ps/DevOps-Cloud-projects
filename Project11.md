@@ -27,7 +27,7 @@ Further on in our future projects, we will implement a proper Bastion Host. But 
 
 **2.** Install and Configure Ansible to act as a Jump Server/Bastion Host.
 
-**3.** Create a Simple Ansible Playbook to Automate Server Configuration.
+**3.** Begin Ansible Development, Set up an Inventory and Create a Simple Ansible Playbook to Automate Server Configuration.
 
 ### <br>Install and Set-up Jenkins on EC2 Instance<br/>
 
@@ -589,32 +589,43 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 **ii.** After successfully installing VSC, we configure it to connect to our newly created GitHub repository that we named **ansible-config-mgt**. We do this by implementing the following:
 
-+ We open the VS code application and in on the left hand pane we click on **Extensions**
++ We open the VS code application and in on the left hand pane we click on **Source Control**
 
-+ Next, we search for SSH in the **Extensions** search bar and then among the results, we install three (3) extensions namely:
-**Remote - SSH**, **Remote - SSH: Editing Configuration Files** and **SSHExtension**. 
+![clone repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/73c22477-db2b-4944-82c0-d5e5e4ccb37f)
 
-![vs code extensions](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36e58ca0-b4f8-4e62-8394-c5c7e7959d4b)
++ Next, we click on the **Clone Repository** button and under the search bar, we click on **"Clone from Github"**. 
 
-+ Next, we click on the **Manage** button in the left hand pane and we select **Command Palette**.
+![clone from github](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/44aea80c-0294-4333-9209-ffb1bd35e80b)
 
-+ Then in the search box, we search for and select **Remote SSH:Open Configuration File**
++ This takes us to our browser and we get a prompt to log into our GitHub account so we click on **Sign in**.
 
-+ Then we select the first option **C:\Users\USER\.ssh\config**
+![github sign in](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ff9b4cf1-b93a-4de2-b487-0a4e9ae51229)
 
-+  Then we edit the configuration file as shown below:
++ Next, we get to the Authorization page where we **Authorize GitHub for VS Code**.
 
-```
-Host jenkins-ansible-ssh
-    HostName ec2-16-171-91-213.eu-north-1.compute.amazonaws.com
-    User ubuntu
-    IdentityFile C:\Users\USER\Downloads\QB-ECII.pem
-```
+ ![Authorize github for vscode](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/be4717f2-efd5-408d-8b86-c66895f1e6d8)
 
-+ For **Host**, we enter an arbitrary name, for **Hostname**, we paste in the Public DNS of our Jenkins-Ansible Server. Then for **User**, we use **"ubuntu"** and for **IdentityFile** we input the file path for the .pem key we used in accessing our instance.
++ Then back in VSC, we select our **ansible-config-mgt** repository.
 
-+ Next, we press Ctrl+S to save and then again, we click on the **Manage** button in the left hand pane and we select **Command Palette**.
+![vsc ansible-config-mgt](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/90488c4d-ac0e-441a-8d65-64f2b494124f)
 
-+ We search for and click on **Connect to Host** and the we click on **jenkins-ansible-ssh**
++  This prompts us to select a folder to use as the repository destination. So we create a folder for our repo and select it.
 
-**iii.** Clone down your ansible-config-mgt repo to your Jenkins-Ansible instance: git clone <ansible-config-mgt repo link>
+![create new folder](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0d0cec14-95da-4e2c-91db-e103149b03c9)
+
++  Then we get a dialogue box to open the cloned repository.
+
+ ![open cloned repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8d6ba6b9-4c13-47e6-bd7e-77650efcc756)
+
++  As we can see in the image below, the **ansible-config-mgt** repository has been cloned to VS Code.
+
+![repo cloned](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f7d6b699-d42f-4f63-9b36-a94bf0f0eda5)
+
+
+**iii.** Next, we clone down the **ansible-config-mgt** repository to our Jenkins-Ansible instance with the following command:
+
+**`git clone <ansible-config-mgt repo link>`**
+
+
+### <br>Begin Ansible Development, Set up an Inventory and Create a Simple Ansible Playbook to Automate Server Configuration<br/>
+
