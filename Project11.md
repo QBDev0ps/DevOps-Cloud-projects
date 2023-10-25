@@ -630,9 +630,27 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 ### <br>Begin Ansible Development, Set up an Inventory and Create a Simple Ansible Playbook to Automate Server Configuration<br/>
 
-**i.** In your ansible-config-mgt GitHub repository, create a new branch that will be used for development of a new feature.
+#### <br>Step 1: Begin Ansible Development <br/>
 
-Checkout the newly created feature branch to your local machine and start building your code and directory structure
+
+**i.** To begin Ansible development we go to our ansible-config-mgt GitHub repository in VS Code and we create a new branch **"new-feature"** that will be used for development of a new feature. We do this by following the steps below:
+
++ From the VS Code environment we go to the bottom of the page and we click on **"main"**.
+
++ Next, under the dialogue box, we select **"Create new branch from.."** and we choose **"main"**.
+
+![create new branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/659f1c32-4fa4-4d80-a97f-1c53bb1d70a1)
+
++ Then we subsequently click on the **"Publish Branch"** button.
+
+ ![publish branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f3a6dad0-134c-40dd-a3b8-f7c37dba12ac)
+
++ Afterwards, we enter the new branch name **"new-feature"** and we press **Enter**.
+
+![branch name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ea9cf21d-a8ed-4abd-80ab-bfb8db0c09ed)
+
+**ii.** Checkout the newly created feature branch to your local machine and start building your code and directory structure
+
 Create a playbooks directory for storing playbooks
 Create an inventory directory for storing inventory files
 In the playbooks folder, create a common.yml file
