@@ -662,6 +662,8 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 **`$ mkdir inventory`**
 
+![mkdir playbooks inventory](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3997bcc9-6095-449e-bd05-1c43531ec6c4)
+
 **v.** Within the playbooks folder, we create our first playbook and name it **common.yml**:
 
 ```
@@ -669,6 +671,8 @@ $ cd playbooks
 
 $ touch common.yml
 ```
+
+![create common-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/06666aab-0de2-48b5-8138-bb599473de78)
 
 **vi.** And within the inventory folder, we create **`dev.yml`**, **`prod.yml`**, **`staging.yml`** and **`uat.yml`** for development, production, staging and user acceptance testing environments respectively.
 
@@ -683,4 +687,8 @@ $ touch staging.yml
 
 $ touch uat.yml
 ```
+
+![devprodstaginguat-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8ff6d91c-1875-4e9e-a48d-487e5949c944)
+
+#### <br>Step 2: Setting up Ansible Inventory <br/>
 
