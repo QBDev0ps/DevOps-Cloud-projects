@@ -692,5 +692,8 @@ $ touch uat.yml
 
 #### <br>Step 2: Setting up Ansible Inventory <br/>
 
-An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since the intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an inventory.
+An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs, it is important to have a way to organize our hosts in such an inventory. We shall save the below inventory structure in the **`inventory/dev`** file to start configuring our development servers. We will also ensure to replace the IP addresses according to our own setup.
 
+**i.** Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host. For this, implement the concept of ssh-agent. To install and configure Openssh server and agent for Windows 11, we follow these [instructions.](https://windowsloop.com/install-openssh-server-windows-11/)
+
+**ii.** Next, we need to import our key into ssh-agent by executing the following command:
