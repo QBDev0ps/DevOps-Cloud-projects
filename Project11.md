@@ -692,3 +692,5 @@ $ touch uat.yml
 
 #### <br>Step 2: Setting up Ansible Inventory <br/>
 
+An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since the intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an inventory.
+
