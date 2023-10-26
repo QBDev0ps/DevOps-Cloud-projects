@@ -354,19 +354,19 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 #### <br>Step 5: Configure Jenkins to Connect and Copy Files to NFS Server <br/>
 
- In **Step 4** above, we concluded with Jenkins successfully saving our build artifacts. Now in this step, we will proceed to configure Jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
+ In **Step 4** above, we concluded with Jenkins successfully saving our build artifacts. Now in this step, we will proceed to configure Jenkins to connect via SSH and copy files to the **`/mnt/opt`** directory in the NFS server we deployed for the [Tooling Website Solution](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
 
 **i.** To begin this implementation, we will require a plugin called **"Publish Over SSH"**. We install this by doing the following:
 
-+ From the main Jenkins Environment, we click on **Manage Jenkins**.
++ From the main Jenkins Environment, we click on **"Manage Jenkins"**.
 
  ![manage jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/490e07d7-4916-493e-bb16-f541914e99ff)
 
-+ On the System Configuration page, we click on **Plugins**.
++ On the System Configuration page, we click on **"Plugins"**.
 
  ![plugins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9f23b0ef-46e5-43ae-a876-ffb499a7896d)
 
-+ On the Plugins page, we click on Available plugins, then we type **Publish Over SSH** in the search box.
++ On the Plugins page, we click on Available plugins, then we type **"Publish Over SSH"** in the search box.
 
  ![Available plugins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c6d11722-53d4-42d1-8b39-9c7770004227)
 
@@ -376,11 +376,11 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 **ii.** The next step is to configure the **"Publish Over SSH"** plugin and our **`ansible`** job/project to copy our build artifacts to the NFS server. We do this by carrying out the following:
 
-+ From the main Jenkins Environment, we click on **Manage Jenkins**.
++ From the main Jenkins Environment, we click on **"Manage Jenkins"**.
 
  ![manage jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/490e07d7-4916-493e-bb16-f541914e99ff)
 
-+ On the System Configuration page, we click on **System**.
++ On the System Configuration page, we click on **"System"**.
 
  ![configure system](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03afe719-f9d4-4b1f-a8a8-fc0ddf64e2b1)
 
@@ -392,7 +392,7 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 ![publish over ssh ey](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f7168f5f-3400-4d3f-bc39-3f197f9de66f)
 
-**iii.** Now we need to input configuration more configuration to enable connection to the NFS Server. Under **"SSH Servers"**, we click on the **Add** button and then we input the following: 
+**iii.** Now we need to input configuration more configuration to enable connection to the NFS Server. Under **"SSH Servers"**, we click on the **"Add"** button and then we input the following: 
 
 + **Name**: This can be any arbitrary name.
 
@@ -400,21 +400,21 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 + **Username**: For this we will use **ec2-user** which is the username used for Red Hat Enterprise Linux based servers such as our NFS Server.
 
-+ **Remote directory**: Here, we will use the **/mnt/opt** directory which we specified we will be using for Jenkins in our [Tooling Website Solution project.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
++ **Remote directory**: Here, we will use the **`/mnt/opt`** directory which we specified we will be using for Jenkins in our [Tooling Website Solution project.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md)
 
 + Next is to test the configuration and ensure the connection returns **"Success"**. We should note that TCP Port 22 on our NFS server must be open to receive SSH connections.
 
 ![ssh servers](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6fab555f-e524-4cfe-9791-17fca96205f4)
 
-+ As we can see from the image above, the connection is successful, so we save the configuration by clicking on **Apply** and **Save**.
++ As we can see from the image above, the connection is successful, so we save the configuration by clicking on **"Apply"** and **"Save"**.
 
 **iv.** The next step is to add another Post-build Action to our **`ansible`** project. We do this by implementing the following:
 
-+ From the main Jenkins Environment, we click on the project **ansible**.
++ From the main Jenkins Environment, we click on the project **`ansible`**.
 
  ![project ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7c171b6b-efe8-49f8-9a12-aae9207939ac)
 
-+ Then in the  **ansible** project page we click on **Configure** in the left hand pane.
++ Then in the  **`ansible`** project page we click on **"Configure"** in the left hand pane.
 
  ![configure ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/98c06eec-50f4-481c-a3e5-16ea8f0f2dc7)
 
@@ -422,15 +422,15 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
  ![add post build action](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4b45b3b3-2969-4fea-8332-4d1ee9848dff)
 
-+ To ensure that all files produced by the build are sent to the **/mnt/opt** directory, under **Transfers** section, we enter __**__ under **"Source Files"**.
++ To ensure that all files produced by the build are sent to the **`/mnt/opt`** directory, under **Transfers** section, we enter __**__ under **"Source Files"**.
 
  ![source files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb3bae51-b45c-46b0-a46c-36a907dc5241)
 
-+ Then we click on **Apply** and **Save** at the bottom of the page.
++ Then we click on **"Apply"** and **"Save"** at the bottom of the page.
 
  ![apply and save 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/47a5fc3e-cdfc-401f-ac1d-04028bebed9f)
 
-+ To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
++ To test our set up, we made some changes to the **README.md** file in our **`ansible-config-mgt`** GitHub repository.
 
  ![changes to readme](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f982026d-f9f8-4cf3-ba09-4b21cc5f3afd)
 
@@ -438,7 +438,7 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
 ![console output 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d83c17ff-e372-4af2-a89c-669e2e909a8c)
 
-+ To also confirm that the files in /mnt/opt directory have been updated we connect to the NFS server via our SSH client and execute the following command:
++ To also confirm that the files in **`/mnt/opt`** directory have been updated we connect to the NFS server via our SSH client and execute the following command:
 
 **`cat /mnt/opt/README.md`**
 
