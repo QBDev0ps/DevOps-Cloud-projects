@@ -741,3 +741,38 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 ![input code dev-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4b5992e-5f92-4d5a-9d46-49447265ce91)
 
 #### <br>Step 3: Create a Common Playbook <br/>
+
+Ansible Playbooks are lists of tasks that automatically execute for a specified inventory or groups of hosts. Now we proceed to give Ansible the instructions on what we need to be performed on all servers listed in **`inventory/dev`**. In the **`common.yml`** playbook, we will write configuration for repeatable, re-usable, and multi-machine tasks that are common to systems within the infrastructure.
+
+**i.** We begin by updating our **`playbooks/common.yml`** file with following code:
+
+```
+---
+- name: update web and nfs servers
+  hosts: webservers, nfs
+  become: yes
+  tasks:
+    - name: ensure wireshark is at the latest version
+      yum:
+        name: wireshark
+        state: latest
+   
+
+- name: update LB and db servers
+  hosts: lb, db
+  become: yes
+  tasks:
+    - name: Update apt repo
+      apt: 
+        update_cache: yes
+
+    - name: ensure wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
+```
+
+
+
+
+
