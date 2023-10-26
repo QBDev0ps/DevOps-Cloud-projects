@@ -792,5 +792,16 @@ $ git commit -m "commit message"
 
 **ii.** The next thing we do is to create a **Pull Request** in GitHub by following [these steps:](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) 
 
++ From the **`ansible-config-mgt`** repository page, we click on the **"Pull requests"** tab and then in the next page we click on the **"New pull request"** button.
+
+![pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a27f564c-53f7-49c8-9905-aa7e440fc17b)
+
+![new pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46e0162b-0cb7-4ff4-8514-6fd0c8ab0a7c)
+
++ This takes us to the **"Compare changes"** page where we choose the **new-feature** branch to set up a comparison with the **main** branch.
+
+![compare changes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8994c81-ac90-49bd-8f0e-f0b2784928df)
+
++ 
 + 
 
