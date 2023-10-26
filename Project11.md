@@ -824,3 +824,16 @@ $ git commit -m "commit message"
 
 **vi.** Now we head back to the terminal, and we checkout from the **`new-feature`** branch into the **`main`** branch, and then we pull down the latest changes.
 
+```
+$ git checkout main
+
+$ git pull
+```
+
+![checkout and git pull](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/66fe3dd6-e712-41e4-b4e9-19b14a128dc4)
+
+**vi.** As seen in the image below, once our code changes appear in the **`main`** branch, Jenkins does its job and saves all the build artifacts (files) to /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on the Jenkins-Ansible server.
+
+![ansible builds](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eac4dd3b-4763-46d3-863c-2ac56baa5fbe)
+
+
