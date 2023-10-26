@@ -105,7 +105,7 @@ Considering that we'll be using Jenkins with Github and configuring Web Hooks in
 
 ![elastic IP address settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b22c080-2bfa-4b8f-aa59-808fc7d1ba9f)
 
-**iv.** In the next page which shows us that the elastic IP has been allocated successfully, we click on the **"Actions'** drop down tab and we select **"Associate Elastic IP address"**.
+**iv.** In the next page which shows us that the elastic IP has been allocated successfully, we click on the **"Actions"** drop down tab and we select **"Associate Elastic IP address"**.
 
 ![associate elatic ip 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00c69fbe-bea1-435c-ba5a-37323e19ccc7)
 
@@ -206,7 +206,7 @@ To create a new repository, we carry out the following steps:
 
 ![plus sign](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b8fdf5ae-6f7a-4396-9bbc-aadaea9bfd2d)
 
-**ii.** We fill out the form by entering **`ansible-config-mgt`** as name for our repository. We enter a description and then we check the box to add a README.md file. Afterwards, we leave every other box or button in their default state.
+**ii.** We fill out the form by entering **`ansible-config-mgt`** as name for our repository. We enter a description and then we check the box to add a **README.md** file. Afterwards, we leave every other box or button in their default state.
 
 ![create new repository](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0f08b401-d40f-40a9-ae32-93757fa8c10d)
 
@@ -244,11 +244,11 @@ In this step, we are going to install Ansible on the same server (Jenkins-Ansibl
 
 In the Jenkins web console, we create a new freestyle project that we will name **`ansible`** and point it to our GitHub **`ansible-config-mgt`** repository. We do this with the following steps:
 
-**i.** From the Jenkins web console, we click on **New item**
+**i.** From the Jenkins web console, we click on **"New item"**
 
 ![jenkins new item](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6dd5ad81-1d92-4908-813f-eecce8717871)
 
-**ii.** In the next page under **Enter an item name** we type in **`ansible`**, then we select **Freestyle project** and we click on **Ok** at the bottom of the page.
+**ii.** In the next page under **"Enter an item name"** we type in **`ansible`**, then we select **"Freestyle project"** and we click on **"Ok"** at the bottom of the page.
 
 ![enter item name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9677dbe2-4cf7-40a9-a4c3-7fe379ef3d11)
 
@@ -256,31 +256,31 @@ In the Jenkins web console, we create a new freestyle project that we will name 
 
 ![project url](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0d2828b3-3690-467e-a720-898428f2617e)
 
-**iv.** Then in the Jenkins configuration page, we click on the **GitHub project** check box and we paste in the **project URL**.
+**iv.** Then in the Jenkins configuration page, we click on the **"GitHub project"** check box and we paste in the **"project URL"**.
 
 ![github project](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/38961a2f-2d6d-4881-a479-e7f7844eaf03)
 
-**v.** Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green 'Code' button and copying the https link.
+**v.** Next, we go to our GitHub repository and we obtain the remote link for our **`ansible-config-mgt`** repository by clicking the green **"Code"** button and copying the https link.
 
 ![copy repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca80b0ad-6ed9-43c2-bbf6-b9e95656863a)
   
-**vi.** In the Jenkins configuration page, under **Soure Code Management** we click on **Repository URL** and we paste in the remote link for our GitHub repository.
+**vi.** In the Jenkins configuration page, under **"Soure Code Management"** we click on **"Repository URL"** and we paste in the remote link for our GitHub repository.
 
  ![Repository URL](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8dc2a7c5-add4-4ec4-82e7-a757804d0f84)
 
-**vii.** Under **Branch Specifier**, we change ***/master** to ***/main**
+**vii.** Under **"Branch Specifier"**, we change ***/master** to ***/main**
 
 ![branch specifier](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/431e7d41-41f8-4056-a56d-b892fa40fe64)
 
-**viii.** Then we click on **Apply** and **Save** at the bottom of the page.
+**viii.** Then we click on **"Apply"** and **"Save"** at the bottom of the page.
 
 ![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f559ba5-61b1-4118-a161-f18db45a0f84)
 
-**ix.** In the Jenkins web console, we go to the left pane and click on **Build Now** and if the build is successful, we will see it under **Build History** as seen in the image below:
+**ix.** In the Jenkins web console, we go to the left pane and click on **"Build Now"** and if the build is successful, we will see it under **"Build History"** as seen in the image below:
 
 ![build now](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f07b56f1-b67e-45b4-bbc8-773304e9fc33)
 
-**x.** To view more details about the successful build, we click on the drop down icon beside the build and we select **Console Output**.
+**x.** To view more details about the successful build, we click on the drop down icon beside the build and we select **"Console Output"**.
 
 ![console output 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1e66a2a1-1427-4011-962d-22752b912e60)
 
