@@ -292,53 +292,53 @@ In the Jenkins web console, we create a new freestyle project that we will name 
 
 After creating and configuring the **`ansible`** freestyle project, we had to trigger it manually for it to run. But we can go a step further. To enable our build run automatically whenever there is a change in our Git repository, we need to enable Webhooks in our GitHub repository settings and configure it to trigger **`ansible`** build:
 
-**i.** From our GitHub account, we click on **Repositories** tab and then we select the **`ansible-config-mgt`** repository.
+**i.** From our GitHub account, we click on **"Repositories"** tab and then we select the **`ansible-config-mgt`** repository.
 
 ![repositories](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c720509-1936-44cb-ab34-d109d12aaf50)
 
-**ii.** Next on the repository page we click on the **Settings** tab.
+**ii.** Next on the repository page we click on the **"Settings"** tab.
 
 ![repository settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/79517652-2336-40be-b457-90a010c780be)
 
-**iii.** On the Settings page, on the left panel, we click on **Webhooks**
+**iii.** On the Settings page, on the left panel, we click on **"Webhooks"**
 
 ![Webhooks](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/36403a01-81b6-44d2-b9fe-1da4378685bf)
 
-**iv.** In the Webhooks page, we click on **Add webhook**
+**iv.** In the Webhooks page, we click on **"Add webhook"**
 
 ![add webhook](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4974fca2-0fba-44ca-8190-a56f2cfdf8a8)
 
-**v.** On the Webhooks/Add webhook page, under **Payload URL**, we input our elastic IP address using the following syntax:
+**v.** On the Webhooks/Add webhook page, under **"Payload URL"**, we input our elastic IP address using the following syntax:
 
   **`http://<Jenkins server IP address>/github-webhook/`**
 
-+ Under **Content type**, we select **application/json**
++ Under **"Content type"**, we select **"application/json"**
 
-+ Then we click on the green **Add webhook** button at the bottom of the page.
++ Then we click on the green **"Add webhook"** button at the bottom of the page.
 
 ![add webhook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2fe8a0ec-06c5-48f6-bec1-a157cc1fd4cb)
 
-**vi.** In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **Configure**.
+**vi.** In Jenkins, on our **`ansible`** project page, we go to the left pane and click on **"Configure"**.
 
 ![configure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b0896307-fd4c-495a-ba04-f2a1a3d0c2fc)
 
-**vii.** Under **Build Triggers**, we check the box for **GitHub hook trigger for GITScm polling**
+**vii.** Under **"Build Triggers"**, we check the box for **"GitHub hook trigger for GITScm polling"**
 
 ![build trigger](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/baa66a8c-bce9-4659-9258-19d6c6fa6254)
 
-**viii.** Next to ensure Jenkins saves all files also known as **Build Artifacts**, we go under Post-build Actions, we click on Add post-build Action and we select **Archive the artifacts**
+**viii.** Next to ensure Jenkins saves all files also known as **"Build Artifacts"**, we go under Post-build Actions, we click on Add post-build Action and we select **"Archive the artifacts"**
 
 ![archive the artifacts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/32e764f8-755d-4ac8-810f-6aca5df90a4c)
 
-**ix.**  In the dialogue box under **Files to archive**, we simply enter __**__ which refers to all available paths in the working space.
+**ix.**  In the dialogue box under **"Files to archive"**, we simply enter __**__ which refers to all available paths in the working space.
 
 ![files to archive](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4eb146f-ae55-4bda-9844-1ad3daba75d0)
 
-**x.** Then we click on **Apply** and **Save** at the bottom of the page.
+**x.** Then we click on **"Apply"** and **"Save"** at the bottom of the page.
 
 ![apply and save 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63f35033-c852-4ed0-b036-cd3219c9640f)
   
-**xi.** To test our set up, we made some changes to the README.md file in our **`ansible-config-mgt`** GitHub repository.
+**xi.** To test our set up, we made some changes to the **README.md** file in our **`ansible-config-mgt`** GitHub repository.
 
  ![readme edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/75f1440b-879a-48e3-bd0d-162da9897e23)
 
@@ -380,7 +380,7 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
  ![manage jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/490e07d7-4916-493e-bb16-f541914e99ff)
 
-+ On the System Configuration page, we click on **"System"**.
++ On the **"System Configuration"** page, we click on **"System"**.
 
  ![configure system](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/03afe719-f9d4-4b1f-a8a8-fc0ddf64e2b1)
 
@@ -418,11 +418,11 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/5/archive/README.md
 
  ![configure ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/98c06eec-50f4-481c-a3e5-16ea8f0f2dc7)
 
-+ In the Configuration page, we select **Post-build Actions** in the left hand pane, then we click on the **Add Post-build Action** drop down button and we select **"Send build artifacts over SSH"**.
++ In the Configuration page, we select **"Post-build Actions"** in the left hand pane, then we click on the **"Add Post-build Action"** drop down button and we select **"Send build artifacts over SSH"**.
 
  ![add post build action](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4b45b3b3-2969-4fea-8332-4d1ee9848dff)
 
-+ To ensure that all files produced by the build are sent to the **`/mnt/opt`** directory, under **Transfers** section, we enter __**__ under **"Source Files"**.
++ To ensure that all files produced by the build are sent to the **`/mnt/opt`** directory, under **"Transfers"** section, we enter __**__ under **"Source Files"**.
 
  ![source files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bb3bae51-b45c-46b0-a46c-36a907dc5241)
 
