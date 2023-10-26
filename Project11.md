@@ -1,4 +1,4 @@
-![image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/794f6440-f857-4d14-8c2b-629691096dab)## DOCUMENTATION FOR ANSIBLE-AUTOMATE PROJECT
+## DOCUMENTATION FOR ANSIBLE-AUTOMATE PROJECT
 
 In this project, we will be working on automating routine IT operations with [Ansible Configuration Management](https://www.redhat.com/en/topics/automation/what-is-configuration-management#:~:text=Configuration%20management%20is%20a%20process,in%20a%20desired%2C%20consistent%20state.&text=Managing%20IT%20system%20configurations%20involves,building%20and%20maintaining%20those%20systems.). The project will show how deploying Ansible will help to simplify complex tasks and streamline IT infastructure. We will also work with Jenkins to configure and execute build jobs whilst writing code using declarative language such as **`YAML`**.
  
@@ -891,3 +891,7 @@ $ wireshark --version
 ![wireshark web server 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eac63571-5fdb-4755-9de2-5cfe9c5e3ad5)
 
 ![wireshark webserver 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/94167d29-6375-4d75-b313-fc0767f7e4e3)
+
+### <br>Conclusion<br/>
+
+We have been able to successfuly automate routine tasks by completing the implementation of our first Ansible project.
