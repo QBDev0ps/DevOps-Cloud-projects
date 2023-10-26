@@ -632,11 +632,11 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 #### <br>Step 1: Begin Ansible Development <br/>
 
-**i.** To begin Ansible development we go to our ansible-config-mgt GitHub repository in VS Code and we create a new branch **"new-feature"** that will be used for development of a new feature. We do this by following the steps below:
+**i.** To begin Ansible development we go to our ansible-config-mgt GitHub repository in VS Code and we create a new branch **`new-feature`** that will be used for development of a new feature. We do this by following the steps below:
 
-+ From the VS Code environment we go to the bottom of the page and we click on **"main"**.
++ From the VS Code environment we go to the bottom of the page and we click on **`main`**.
 
-+ Next, under the dialogue box, we select **"Create new branch from.."** and we choose **"main"**.
++ Next, under the dialogue box, we select **"Create new branch from.."** and we choose **`main`**.
 
 ![create new branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/659f1c32-4fa4-4d80-a97f-1c53bb1d70a1)
 
@@ -644,11 +644,11 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
  ![publish branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f3a6dad0-134c-40dd-a3b8-f7c37dba12ac)
 
-+ Afterwards, we enter the new branch name **"new-feature"** and we press **Enter**.
++ Afterwards, we enter the new branch name **`new-feature`** and we press **Enter**.
 
 ![branch name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ea9cf21d-a8ed-4abd-80ab-bfb8db0c09ed)
 
-**ii.** Next, we enter the command below to checkout the newly created branch **"new-feature"** to our local machine and start building our code and directory structure:
+**ii.** Next, we enter the command below to checkout the newly created branch **`new-feature`** to our local machine and start building our code and directory structure:
 
 **`$ git checkout new-feature`**
 
@@ -658,7 +658,7 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
 **`$ mkdir playbooks`**
 
-**iv.** We also create a directory that will be used to keep our hosts organised and we name this **``inventory** 
+**iv.** We also create a directory that will be used to keep our hosts organised and we name this **`inventory`**. 
 
 **`$ mkdir inventory`**
 
@@ -772,7 +772,7 @@ Ansible Playbooks are lists of tasks that automatically execute for a specified 
 
 ![playbook common-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7708b464-d2c1-4695-98f3-7d2d2fabf85c)
 
-+ The code as seen in the playbook image above is divided into two parts with each of them intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on our RHEL 8 (Web, NFS) and Ubuntu (LB, DB) servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
++ The code as seen in the playbook image above is divided into two parts with each of them intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on our RHEL 8 (Web, NFS) and Ubuntu (LB, DB) servers. It uses root user to perform this task and respective package manager: **`yum`** for RHEL 8 and **`apt`** for Ubuntu.
 
 #### <br>Step 4: Update GIT with latest Code <br/>
 
