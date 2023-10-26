@@ -894,4 +894,8 @@ $ wireshark --version
 
 ### <br>Conclusion<br/>
 
-We have been able to successfuly automate routine tasks by completing the implementation of our first Ansible project.
+We have been able to successfuly automate routine tasks by completing the implementation of our first Ansible project and our setup looks somewhat like what we have in the image below.
+
+![complete architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c98a71ff-b96d-4481-a5fc-0d3876402fb7)
+
+The goal of this project was to demonstrate Ansible's powerful automation capabilities and we have been able to do just that. We began the project by installing and setting up Jenkins which we would be using for running build jobs and then we installed and configured Ansible (on the same server as Jenkins) to serve as a Jump Server/Bastion Host. Next, we used GitHub webhooks to configure a Jenkins build job to archive content to a repository any time there are changes. With our server's new status as a Jenkins-Ansible server, we made sure to create and allocate an Elastic IP address to it so that everytime we stop/start the server, there will be no need to keep reconfiguring Github Web Hooks to a new IP address. 
