@@ -852,4 +852,8 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/7/archive/inventory/dev.yml
 
 #### <br>Step 5: Run First Ansible Test <br/>
 
+Now, it is time to execute the **`ansible-playbook`** command and verify if our playbook actually works. We proceed by implementing the following steps:
 
+**i.** We connect to our **`Jenkins-Ansible`** server via VScode:
+
+**ii.** 
