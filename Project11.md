@@ -740,4 +740,4 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 
 ![input code dev-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4b5992e-5f92-4d5a-9d46-49447265ce91)
 
-#### <br>Step 3: Setting up Ansible Inventory <br/>
+#### <br>Step 3: Create a Common Playbook <br/>
