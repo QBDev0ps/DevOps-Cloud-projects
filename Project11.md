@@ -700,17 +700,25 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 
 **`$ eval `ssh-agent -s``**
 
+![eval ssh agent](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/12190653-f8a0-4ef9-8b56-5f1c2c26e560)
+
 **iii.** Then we import our key into ssh-agent by executing the following command:
 
 **`$ ssh-add <path-to-private-key>`**
+
+![ssh-add](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5fea854d-2c76-49ff-b134-1025bebb8c73)
 
 **iv.** Afterwards, we confirm the key has been added with the command below:
 
 **`$ ssh-add -l`**
 
+![ssh-add-l](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b7898a9-6ece-46ee-ba42-caf0ee1a68a7)
+
 **v.** Now we proceed to ssh into our **Jenkins-Ansible** server using the ssh-agent:
 
 **`ssh -A ubuntu@public-ip`**
+
+![ssh -A ubuntu](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/674f0c64-3c4f-47aa-a3b3-88ef15133c0a)
 
 **vi.** Then we update our **`inventory/dev.yml`** file with the following lines of code:
 
@@ -721,6 +729,7 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 [webservers]
 <Web-Server1-Private-IP-Address> ansible_ssh_user=ec2-user
 <Web-Server2-Private-IP-Address> ansible_ssh_user=ec2-user
+<Web-Server3-Private-IP-Address> ansible_ssh_user=ec2-user
 
 [db]
 <Database-Private-IP-Address> ansible_ssh_user=ec2-user 
@@ -728,5 +737,7 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user=ubuntu
 ```
+
+![input code dev-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4b5992e-5f92-4d5a-9d46-49447265ce91)
 
 #### <br>Step 3: Setting up Ansible Inventory <br/>
