@@ -798,10 +798,29 @@ $ git commit -m "commit message"
 
 ![new pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46e0162b-0cb7-4ff4-8514-6fd0c8ab0a7c)
 
-+ This takes us to the **"Compare changes"** page where we choose the **new-feature** branch to set up a comparison with the **main** branch.
++ This takes us to the **"Compare changes"** page where we choose the **`new-feature`** branch to set up a comparison with the **`main`** branch.
 
 ![compare changes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8994c81-ac90-49bd-8f0e-f0b2784928df)
 
-+ 
-+ 
++ Once we set up the comparisons between the **`main`** and the **`new-feature`** branch, we then proceed to click on the **"Create pull request"** button.
+
+![compare changes able to merge create pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3e769f77-05a9-4e0e-a21b-44b4a6e9a9e0)
+
++ In the next page, we input a pull request message inside the dialogue box and we click on the  **"Create pull request"** button.
+
+![create pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/227acfa7-d1e0-471b-8f21-11804afa65e1)
+
+**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`new-feature`** branch and check for conflicts with the **`main`** branch.
+
+![merge pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9c3dd35f-af53-4f69-ae7a-49f49c2fa639)
+
+**iv.** As we are satisfied and happy with the changes made in **`new-feature`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
+
+![confirm merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/602e25e2-635a-4eb1-b17d-4291a95a749a)
+
+**v.** This takes us to the next page which shows that **`new-feature`** has been successfully merged to **`main`** branch.
+
+![successful merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8d033c58-fe3b-4342-a966-b7181d9bef2f)
+
+**vi.** Now we head back to the terminal, and we checkout from the **`new-feature`** branch into the **`main`** branch, and then we pull down the latest changes.
 
