@@ -583,29 +583,29 @@ The following serves to break down the configuration file above and explain in m
 
 #### <br>Step 8: Prepare Development Environment <br/>
 
-The first part of ‘DevOps’ is ‘Dev’, which means we will be required to write some codes and to make coding and debugging comfortable, we will need an Integrated development environment (IDE) or Source-code Editor. There is a plethora of different IDEs and Source-code Editors for different languages with their own advantages and drawbacks. We however decided to use one free and universal editor that will fully satisfy our needs – **Visual Studio Code (VSC)**.
+The first part of **"DevOps"** is **"Dev"**, which means we will be required to write some codes and to make coding and debugging comfortable, we will need an Integrated development environment (IDE) or Source-code Editor. There is a plethora of different IDEs and Source-code Editors for different languages with their own advantages and drawbacks. We however decided to use one free and universal editor that will fully satisfy our needs – **Visual Studio Code (VSC)**.
 
 **i.** To proceed, we download and install [Visual Studio Code (VSC)](https://code.visualstudio.com/download)
 
-**ii.** After successfully installing VSC, we configure it to connect to our newly created GitHub repository that we named **ansible-config-mgt**. We do this by implementing the following:
+**ii.** After successfully installing VSC, we configure it to connect to our newly created GitHub repository that we named **`ansible-config-mgt`**. We do this by implementing the following:
 
-+ We open the VS code application and in on the left hand pane we click on **Source Control**
++ We open the VS code application and in on the left hand pane we click on **"Source Control"**
 
 ![clone repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/73c22477-db2b-4944-82c0-d5e5e4ccb37f)
 
-+ Next, we click on the **Clone Repository** button and under the search bar, we click on **"Clone from Github"**. 
++ Next, we click on the **"Clone Repository"** button and under the search bar, we click on **"Clone from Github"**. 
 
 ![clone from github](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/44aea80c-0294-4333-9209-ffb1bd35e80b)
 
-+ This takes us to our browser and we get a prompt to log into our GitHub account so we click on **Sign in**.
++ This takes us to our browser and we get a prompt to log into our GitHub account so we click on **"Sign in"**.
 
 ![github sign in](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ff9b4cf1-b93a-4de2-b487-0a4e9ae51229)
 
-+ Next, we get to the Authorization page where we **Authorize GitHub for VS Code**.
++ Next, we get to the Authorization page where we **"Authorize GitHub for VS Code"**.
 
  ![Authorize github for vscode](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/be4717f2-efd5-408d-8b86-c66895f1e6d8)
 
-+ Then back in VSC, we select our **ansible-config-mgt** repository.
++ Then back in VSC, we select our **`ansible-config-mgt`** repository.
 
 ![vsc ansible-config-mgt](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/90488c4d-ac0e-441a-8d65-64f2b494124f)
 
@@ -617,12 +617,12 @@ The first part of ‘DevOps’ is ‘Dev’, which means we will be required to 
 
  ![open cloned repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8d6ba6b9-4c13-47e6-bd7e-77650efcc756)
 
-+  As we can see in the image below, the **ansible-config-mgt** repository has been cloned to VS Code.
++  As we can see in the image below, the **`ansible-config-mgt`** repository has been cloned to VS Code.
 
 ![repo cloned](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f7d6b699-d42f-4f63-9b36-a94bf0f0eda5)
 
 
-**iii.** Next, we clone down the **ansible-config-mgt** repository to our Jenkins-Ansible instance with the following command:
+**iii.** Next, we clone down the **`ansible-config-mgt`** repository to our Jenkins-Ansible instance with the following command:
 
 **`git clone <ansible-config-mgt repo link>`**
 
