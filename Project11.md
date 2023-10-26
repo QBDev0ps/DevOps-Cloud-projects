@@ -1,4 +1,4 @@
-## DOCUMENTATION FOR ANSIBLE-AUTOMATE PROJECT
+![image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/794f6440-f857-4d14-8c2b-629691096dab)## DOCUMENTATION FOR ANSIBLE-AUTOMATE PROJECT
 
 In this project, we will be working on automating routine IT operations with [Ansible Configuration Management](https://www.redhat.com/en/topics/automation/what-is-configuration-management#:~:text=Configuration%20management%20is%20a%20process,in%20a%20desired%2C%20consistent%20state.&text=Managing%20IT%20system%20configurations%20involves,building%20and%20maintaining%20those%20systems.). The project will show how deploying Ansible will help to simplify complex tasks and streamline IT infastructure. We will also work with Jenkins to configure and execute build jobs whilst writing code using declarative language such as **`YAML`**.
  
@@ -856,4 +856,38 @@ Now, it is time to execute the **`ansible-playbook`** command and verify if our 
 
 **i.** We connect to our **`Jenkins-Ansible`** server via VScode:
 
-**ii.** 
+**`$ ssh -A ubuntu@16.171.91.213`**
+
+![connect to jenkins ansible](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/513d25c1-57bf-424d-b294-a00098af6a1e)
+
+**ii.** Then we change to the **`ansible-config-mgt`** directory and we run our **`ansible-playbook`** with the following command:
+
+```
+$ cd ansible-config-mgt
+
+$ ansible-playbook -i inventory/dev.yml playbooks/common.yml
+```
+
+![ansible playbook success](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/96d91b5f-1bb6-45b5-b19f-12092d4d5edd)
+
+**iii.** As shown in the output image above, the **`ansible-playbook`** ran successfully and deployed **`wireshark`** on all the servers specified in the playbook. However, for further confirmation, we go to each one of our servers and we run the following commands:
+
+```
+$ which wireshark
+
+$ wireshark --version
+```
+
+**iv.** The output images below reflect that our playbook deployed wireshark on the Load Balancer, NFS server, DB Server, and Web Servers 1, 2 and 3.
+
+![wireshark loadbalancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/486ab3a8-b109-4a09-93b8-4be5c3b3cade)
+
+![wireshark nfs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eea1071d-258f-4aaf-b63f-9c1cb203c481)
+
+![wireshark db](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/067e6558-0a77-4ca2-b3ae-6c385e9eef4d)
+
+![wireshark web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cdc933e2-b6ff-444e-aa8f-a8de77a27063)
+
+![wireshark web server 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/eac63571-5fdb-4755-9de2-5cfe9c5e3ad5)
+
+![wireshark webserver 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/94167d29-6375-4d75-b313-fc0767f7e4e3)
