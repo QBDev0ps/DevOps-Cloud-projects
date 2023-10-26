@@ -774,7 +774,7 @@ Ansible Playbooks are lists of tasks that automatically execute for a specified 
 
 + The code as seen in the playbook image above is divided into two parts with each of them intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on our RHEL 8 (Web, NFS) and Ubuntu (LB, DB) servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
 
-#### <br>Step 4: Create a Common Playbook <br/>
+#### <br>Step 4: Update GIT with latest Code <br/>
 
 At this point, our directories and files are on our local machine so we need to push all the changes we made locally to Github.
 
@@ -849,3 +849,7 @@ $ sudo cat /var/lib/jenkins/jobs/ansible/builds/7/archive/inventory/dev.yml
 ```
 
 ![inventory and playbooks confirmation](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3cb20380-8dc6-4568-8391-aea92937520f)
+
+#### <br>Step 5: Run First Ansible Test <br/>
+
+
