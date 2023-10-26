@@ -694,6 +694,39 @@ $ touch uat.yml
 
 An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs, it is important to have a way to organize our hosts in such an inventory. We shall save the below inventory structure in the **`inventory/dev`** file to start configuring our development servers. We will also ensure to replace the IP addresses according to our own setup.
 
-**i.** Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host. For this, implement the concept of ssh-agent. To install and configure Openssh server and agent for Windows 11, we follow these [instructions.](https://windowsloop.com/install-openssh-server-windows-11/)
+**i.** Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from the Jenkins-Ansible host. For this, we implement the concept of ssh-agent. To install and configure Openssh server and agent for Windows 11, we follow these [instructions.](https://windowsloop.com/install-openssh-server-windows-11/)
 
-**ii.** Next, we need to import our key into ssh-agent by executing the following command:
+**ii.** Next, we need to enable the ssh agent for the current session:
+
+**`$ eval `ssh-agent -s``**
+
+**iii.** Then we import our key into ssh-agent by executing the following command:
+
+**`$ ssh-add <path-to-private-key>`**
+
+**iv.** Afterwards, we confirm the key has been added with the command below:
+
+**`$ ssh-add -l`**
+
+**v.** Now we proceed to ssh into our **Jenkins-Ansible** server using the ssh-agent:
+
+**`ssh -A ubuntu@public-ip`**
+
+**vi.** Then we update our **`inventory/dev.yml`** file with the following lines of code:
+
+```
+[nfs]
+<NFS-Server-Private-IP-Address> ansible_ssh_user=ec2-user
+
+[webservers]
+<Web-Server1-Private-IP-Address> ansible_ssh_user=ec2-user
+<Web-Server2-Private-IP-Address> ansible_ssh_user=ec2-user
+
+[db]
+<Database-Private-IP-Address> ansible_ssh_user=ec2-user 
+
+[lb]
+<Load-Balancer-Private-IP-Address> ansible_ssh_user=ubuntu
+```
+
+#### <br>Step 3: Setting up Ansible Inventory <br/>
