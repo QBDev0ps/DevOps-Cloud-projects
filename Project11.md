@@ -742,9 +742,7 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 
 #### <br>Step 3: Create a Common Playbook <br/>
 
-Ansible Playbooks are lists of tasks that automatically execute for a specified inventory or groups of hosts. Now we proceed to give Ansible the instructions on what we need to be performed on all servers listed in **`inventory/dev`**. In the **`common.yml`** playbook, we will write configuration for repeatable, re-usable, and multi-machine tasks that are common to systems within the infrastructure.
-
-**i.** We begin by updating our **`playbooks/common.yml`** file with following code:
+Ansible Playbooks are lists of tasks that automatically execute for a specified inventory or groups of hosts. Now we proceed to give Ansible the instructions on what we need to be performed on all servers listed in **`inventory/dev`**. In the **`common.yml`** playbook, we will write configuration for repeatable, re-usable, and multi-machine tasks that are common to systems within the infrastructure. We begin by updating our **`playbooks/common.yml`** file with following code:
 
 ```
 ---
@@ -772,7 +770,27 @@ Ansible Playbooks are lists of tasks that automatically execute for a specified 
         state: latest
 ```
 
+![playbook common-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7708b464-d2c1-4695-98f3-7d2d2fabf85c)
 
++ The code as seen in the playbook image above is divided into two parts with each of them intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on our RHEL 8 (Web, NFS) and Ubuntu (LB, DB) servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
 
+#### <br>Step 4: Create a Common Playbook <br/>
 
+At this point, our directories and files are on our local machine so we need to push all the changes we made locally to Github.
+
+**i.** We use the following commands to add commit and push our branch to GitHub:
+
+```
+$ git status
+
+$ git add <selected files>
+
+$ git commit -m "commit message"
+```
+
+![git commit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/750833cf-5068-4201-8a32-f217fd763d1e)
+
+**ii.** The next thing we do is to create a **Pull Request** in GitHub by following [these steps:](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) 
+
++ 
 
