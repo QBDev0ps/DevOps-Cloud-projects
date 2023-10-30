@@ -30,7 +30,7 @@ With the way our Jekins job is currently configured, every new change in the cod
 
 ![mkdir-chmod](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9b18781a-c240-4219-a69c-7650aef46f9e)
 
-**iii.** Next, we will require the **`copy artifact`** plugin:
+**iii.** Next, we will need to install the **`copy artifact`** plugin without restarting Jenkins:
 
 + From the main Jenkins Environment, we click on **"Manage Jenkins"**.
 
@@ -42,11 +42,36 @@ With the way our Jekins job is currently configured, every new change in the cod
 
 + On the Plugins page, we click on Available plugins, then we type **`copy artifact`** in the search box.
 
- ![Available plugins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c6d11722-53d4-42d1-8b39-9c7770004227)
+ ![copy artifact plugin](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/853dd4bf-213f-4ced-afc2-551766f50411)
 
 + From here, we can see the **`copy artifact`** plugin we wish to install, so we check the **"Install"** checkbox beside it and we click on the **"Install"** button. After doing this we will be able to see the download progress page.
 
-![installed plugin](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/15174ef3-7d8f-4300-90b2-18b9ac2928a5)
+![download progress](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/092efd2f-0771-4987-ad3a-de3c189c547f)
 
+**iv.** Next, we create a new Freestyle project (as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md)) and we name it **`save_artifacts`**:
 
++ From the Jenkins web console, we click on **"New item"**
 
+![jenkins new item](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6dd5ad81-1d92-4908-813f-eecce8717871)
+
++ In the next page under **"Enter an item name"** we type in **`save_artifacts`**, then we select **"Freestyle project"** and we click on **"Ok"** at the bottom of the page.
+
+![save-artifacts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a6d3b084-9bcf-4cba-a2cd-c99d4680b78a)
+
+**v.** This project will be triggered by the completion of our existing **`ansible`** project. So therefore we configure it accordingly:
+
++ In the Jenkins configuration page, under **"General"** we click on check box for **"Discard old builds"** and under **"Max # of builds to keep"** we enter our desired number.
+
+![discard old builds](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e356d83f-2a65-43ff-a46c-0525726eafad)
+
++ Next under **"Build Triggers"**, we click on the check box beside **"Build after other projects are built"** and under the **"Projects to watch"** dialogue box we type in **`ansible`**.
+
+![build trigger](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4342fb71-c919-4146-9d71-f6f62837b38a)
+
+**vi.** The main idea of the **`save_artifacts`** project is to save artifacts into the **`/home/ubuntu/ansible-config-artifact`** directory. To achieve this, we proceed as follows:
+
++ Under **"Build Steps"** we click on the **"Add build step"** drop down button and we select **"Copy artifacts from another project"**.
+
++ Under **"Project name"**, we specify **`ansible`** as the source project, under **"Artifacts to copy"**, we input __**__ to copy all artifacts and then we put in  **`/home/ubuntu/ansible-config-artifact`** as the **"Target directory"**.
+
++ 
