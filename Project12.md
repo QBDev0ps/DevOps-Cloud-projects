@@ -74,4 +74,6 @@ With the way our Jekins job is currently configured, every new change in the cod
 
 + Under **"Project name"**, we specify **`ansible`** as the source project, under **"Artifacts to copy"**, we input __**__ to copy all artifacts and then we put in  **`/home/ubuntu/ansible-config-artifact`** as the **"Target directory"**.
 
-+ 
++ Then we click on **"Apply"** and **"Save"** at the bottom of the page.
+
+**vii.** Test your set up by making some change in README.MD file inside your ansible-config-mgt repository (right inside master branch). If both Jenkins jobs have completed one after another – you shall see your files inside /home/ubuntu/ansible-config-artifact directory and it will be updated with every commit to your master branch.
