@@ -80,6 +80,6 @@ With the way our Jekins job is currently configured, every new change in the cod
 
 + Then we click on **"Apply"** and **"Save"** at the bottom of the page.
 
-![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4f559ba5-61b1-4118-a161-f18db45a0f84)
+![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab54ff0a-83b4-41cd-b599-f11164d6e3a6)
 
 **vii.** The next thing we do is to test our set up by making some changes in the **README.MD** file inside our **`ansible-config-mgt`** repository (right inside the **`master`** branch). If both Jenkins jobs have completed one after another – we shall see our files inside the **`/home/ubuntu/ansible-config-artifact`** directory and it will be updated with every commit to our **`master`** branch.
