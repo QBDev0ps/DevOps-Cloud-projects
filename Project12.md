@@ -83,3 +83,13 @@ With the way our Jekins job is currently configured, every new change in the cod
 ![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab54ff0a-83b4-41cd-b599-f11164d6e3a6)
 
 **vii.** The next thing we do is to test our set up by making some changes in the **README.MD** file inside our **`ansible-config-mgt`** repository (right inside the **`master`** branch). If both Jenkins jobs have completed one after another – we shall see our files inside the **`/home/ubuntu/ansible-config-artifact`** directory and it will be updated with every commit to our **`master`** branch.
+
+![console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b56eac24-c25a-4fa9-862d-624168008446)
+
+As seen in the above image, the **`save_artifacts`** job was successfully triggered and completed. To confirm that our files are inside the **`/home/ubuntu/ansible-config-artifact`** directory, we execute the following command:
+
+**` $ ls /home/ubuntu/ansible-config-artifact`**
+
+![confirmation ansible artifacts](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a1a1831f-57de-491d-997a-c0519e88061e)
+
+#### <br>Step 2: Refactor Ansible code by importing other playbooks into `site.yml`<br/>
