@@ -159,5 +159,45 @@ $ touch site.yml
 
 Since we need to apply some tasks to our **`dev`** servers and **`wireshark`** is already installed – we proceed to create another playbook under **`static-assignments`** and name it **`common-del.yml`**. However, in this playbook, we configure the deletion of wireshark utility.
 
-**i.**
+**i.** After moving into the **`static-assignments`** directory, we create a new playbook with the following command:
+
+**`$ touch common-del.yml`**
+
+**ii.** Next, we open up the newly created file in VS Code and we paste in the following configuration:
+
+```
+---
+- name: update web and nfs servers
+  hosts: webservers, nfs
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    yum:
+      name: wireshark
+      state: removed
+
+- name: update LB and db servers
+  hosts: lb, db
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+  - name: delete wireshark
+    apt:
+      name: wireshark-qt
+      state: absent
+      autoremove: yes
+      purge: yes
+      autoclean: yes
+```
+
+**iii.** After completing our configuration, we update **`site.yml`** with **`- import_playbook: ../static-assignments/common-del.yml`** instead of **`common.yml`** as shown below:
+
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common-del.yml
+```
 
