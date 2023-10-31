@@ -229,4 +229,44 @@ $ wireshark --version
 
 ![which wireshark](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce2f6924-52d0-404d-8db7-917a7781daa6)
 
+### <br>Configure UAT Webservers with Roles <br/>
 
+Writing tasks to configure Web Servers in the same playbook we used earlier would make our configuration cumbersome, so instead we decide to make use of a dedicated role which ensures that our configuration would be reusable.
+
+#### <br>Step 1: Provision Two (2) EC2 Instances of RHEL 8<br/>
+
+Our first step is to launch 2 fresh Red Hat Enterprise Linux 8, EC2 instances that we will be using as our **`UAT`** servers, and which would be named accordingly as – **`Web1-UAT`** and **`Web2-UAT`**.
+
+**i.** We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+ + We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+
+![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
+
+ + Under **Name and tags**, we provide a unique name for our server.
+
+![Name and tags web server 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/345f3147-6b01-4f1c-8fde-0cbf3accb81f)
+  
++ From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
+
+![application and OS images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2beaaf89-c746-4ed5-a434-f0989bfb3db1)
+
++ Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+
+![Key Pair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65facdd1-4be3-4ec5-aac4-aadd74821653)
+
++ Under the Network settings tab, we click on **"Edit"** then under **"Subnet Info"** we click on the dropdown and select the same subnet and availability zone that is in use by our NFS Server.
+
+![network settings subnet](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce8dc829-2da0-444e-b3c7-7bf969be6bf5)
+  
++ And then, we click on **"Launch Instance"**
+
+![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
+
+**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+
+**iii.** After connecting to our server we must first update all installed packages and their dependencies before commencing configuration. We do this by executing the following command: 
+
+**`$ sudo yum update -y`**
+
+![web server update ](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/860e8f0f-527e-443a-981a-67085f7ed561)
