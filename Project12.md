@@ -110,6 +110,47 @@ As seen in the above image, the **`save_artifacts`** job was successfully trigge
 
 + Then we subsequently click on the **"Publish Branch"** button.
 
- ![publish branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f3a6dad0-134c-40dd-a3b8-f7c37dba12ac)
+![publish branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b5deffd8-4b4d-4451-bdc7-77cfde70d2f9)
 
-**ii.** Within playbooks folder, create a new file and name it site.yml – This file will now be considered as an entry point into the entire infrastructure configuration. Other playbooks will be included here as a reference. In other words, site.yml will become a parent to all other playbooks that will be developed. Including common.yml that you created previously.
+
+**ii.** Next, we enter the command below to checkout the newly created branch **`refactor`** to our local machine and start refactoring our code:
+
+**`$ git checkout refactor`**
+
+![git checkout refactor](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d77bf426-8555-43e4-9fc6-342f6758f0b5)
+
+**iii.** Then within the playbooks folder, we create a new file and name it **`site.yml`** – This file will now be considered as an entry point into the entire infrastructure configuration. Other playbooks will be included here as a reference. In other words, **`site.yml`** will become a parent to all other playbooks that will be developed. This is including **`common.yml`** that we created previously.
+
+```
+$ cd playbooks/
+
+$ touch site.yml
+```
+
+![touch site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f2cfb881-26a8-470d-9fec-5a622e0cee29)
+
+**iv.** The next thing we do is to create a new folder in the root of the repository and name it **`static-assignments`**. This is where all other children playbooks will be stored. This is merely for easy organization of our work and it is therefore not an Ansible specific concept as we can always choose to organise our work in different ways.
+
+**`$ mkdir static-assignments`**
+
+![mkdir static assignments](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2ecd13b7-9150-4e55-b668-34ab228cff33)
+
+**v.** Next we move **`common.yml`** file into the newly created **`static-assignments`** folder:
+
+**` $ sudo mv playbooks/common.yml static-assignments/`**
+
+![move playbooks to static assignments](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5e9a7a21-80b3-4284-9999-9563b6ba6449)
+
+**vi.** Then from inside the **`site.yml`** file, we import the **`common.yml`** playbook.
+
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common.yml
+```
+
+![import playbooks in site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5f6f9b82-fd90-4011-a9d9-6a5fff435574)
+
+**vii.** At this point, our folder structure is as shown in the image below:
+
+![folder structure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a828d7d7-a213-4c6b-aa99-f393804de278)
