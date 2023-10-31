@@ -98,17 +98,18 @@ As seen in the above image, the **`save_artifacts`** job was successfully trigge
 
 + From the VS code GUI in the **`main`** branch of our ansible-config-mgt repository, we click on the **"Views and More Actions"** button then we select **"pull"** to pull down the latest code from the **`main`** branch.
 
+ ![pull latest code](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/19605205-1fa8-4317-9248-f13ace4be134)
+
 + From the VS Code environment we go to the bottom of the page and we click on **`main`**.
 
 + ![create new branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/659f1c32-4fa4-4d80-a97f-1c53bb1d70a1)
 
++ Afterwards, we enter the new branch name **`refactor`** and we press **Enter**.
+
+![branch name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ef38ba25-19e3-4420-bda2-63182009bd1a)
+
 + Then we subsequently click on the **"Publish Branch"** button.
 
  ![publish branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f3a6dad0-134c-40dd-a3b8-f7c37dba12ac)
-
-+ Afterwards, we enter the new branch name **`refactor`** and we press **Enter**.
-
-![branch name](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ea9cf21d-a8ed-4abd-80ab-bfb8db0c09ed)
-
 
 **ii.** Within playbooks folder, create a new file and name it site.yml – This file will now be considered as an entry point into the entire infrastructure configuration. Other playbooks will be included here as a reference. In other words, site.yml will become a parent to all other playbooks that will be developed. Including common.yml that you created previously.
