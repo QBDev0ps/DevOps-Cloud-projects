@@ -163,6 +163,8 @@ Since we need to apply some tasks to our **`dev`** servers and **`wireshark`** i
 
 **`$ touch common-del.yml`**
 
+![common-del-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d122b8c2-b15c-4830-9cd7-9ae87f73bfb7)
+
 **ii.** Next, we open up the newly created file in VS Code and we paste in the following configuration:
 
 ```
@@ -193,6 +195,8 @@ Since we need to apply some tasks to our **`dev`** servers and **`wireshark`** i
       autoclean: yes
 ```
 
+![edit common-del-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1f61c947-78eb-478a-9c56-a474df41b7da)
+
 **iii.** After completing our configuration, we update **`site.yml`** with **`- import_playbook: ../static-assignments/common-del.yml`** instead of **`common.yml`** as shown below:
 
 ```
@@ -200,4 +204,29 @@ Since we need to apply some tasks to our **`dev`** servers and **`wireshark`** i
 - hosts: all
 - import_playbook: ../static-assignments/common-del.yml
 ```
+
+![edit sites-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c0c23e7-49a0-45de-9592-3c512a530141)
+
+**iv.** Then we proceed to run the playbook against the **`dev.yml`** servers in our inventory file:
+
+```
+$ cd /home/ubuntu/ansible-config-mgt/
+
+$ ansible-playbook -i inventory/dev.yml playbooks/site.yml
+```
+
+![run playbook](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/dd078e3b-c656-4303-a55a-3b3a64102997)
+
+**v.** After successfully running our playbook, we confirm that **`wireshark`** has indeed been deleted from all the servers by executing the following commands:
+
+```
+$ ssh <user@public-IP-address>
+
+$ which wireshark
+
+$ wireshark --version
+```
+
+![which wireshark](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce2f6924-52d0-404d-8db7-917a7781daa6)
+
 
