@@ -154,3 +154,10 @@ $ touch site.yml
 **vii.** At this point, our folder structure is as shown in the image below:
 
 ![folder structure](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a828d7d7-a213-4c6b-aa99-f393804de278)
+
+#### <br>Step 3: Run `ansible-playbook` command against the `dev` Environment<br/>
+
+Since we need to apply some tasks to our **`dev`** servers and **`wireshark`** is already installed – we proceed to create another playbook under **`static-assignments`** and name it **`common-del.yml`**. However, in this playbook, we configure the deletion of wireshark utility.
+
+**i.**
+
