@@ -487,21 +487,28 @@ $ git commit -m "saved all updates to refactor branch"
 
 ![pull request 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/52c38f08-6b60-4a92-b637-01adda2298a6)
 
-**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`refactor`** branch and check for conflicts with the **`main`** branch.
+**iv.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`refactor`** branch and check for conflicts with the **`main`** branch.
 
 ![merge pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c6f96909-f948-42a4-8734-736ba64383ec)
 
-**iv.** As we are satisfied and happy with the changes made in **`refactor`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
+**v.** As we are satisfied and happy with the changes made in **`refactor`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
 
 ![confirm merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/39b7e91f-52bb-4c81-b01f-1f34467ca43d)
 
-**v.** This takes us to the next page which shows that **`refactor`** has been successfully merged to **`main`** branch.
+**vi.** This takes us to the next page which shows that **`refactor`** has been successfully merged to **`main`** branch.
 
 ![successful merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e88ae9b7-3b67-4201-a146-6b250d6dd9ac)
 
-**vi.** As can be seen in the console output images below, our existing webhook configuration in Github and Jenkins triggered the **`ansible`** build job which upon successful completion consequently triggered the **`save_artifact`** build job. Both jobs ran successfully and copied all the build artifacts/files to our Jenkins-Ansible server into the **`/home/ubuntu/ansible-config/`** and **`/home/ubuntu/ansible-config-artifact/`** directories respectively.
+**vii.** As can be seen in the console output images below, our existing webhook configuration in Github and Jenkins triggered the **`ansible`** build job which upon successful completion consequently triggered the **`save_artifact`** build job. Both jobs ran successfully and copied all the build artifacts/files to our **`Jenkins-Ansible`** server into the **`/home/ubuntu/ansible-config/`** and **`/home/ubuntu/ansible-config-artifact/`** directories respectively.
 
 ![ansible jenkins console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1fd00eef-be52-4ea0-a86d-905749a099e2)
 
 ![save-artifact console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a1994a93-72ab-43d7-b94d-1777a445afa7)
 
+**viii.** The next step is to connect to our **`Jenkins-Ansible`** server via ssh-agent as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then with the commands below, we run the playbook against our **`uat inventory`**.
+
+```
+$ cd /home/ubuntu/ansible-config-mgt
+
+$ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
+```
