@@ -317,4 +317,42 @@ $ rm -r vars
 <Web2-UAT-Server-Private-IP-Address> ansible_ssh_user=ec2-user
 ```
 
+![edit uat-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c68884d3-d8e5-495b-8bc8-9acfb0da5c4b)
+
 **ii.** Next, we navigate with the VS Code file explorer to the **`/etc/ansible/ansible.cfg`** file and uncomment the **`roles_path`** string and provide a full path to our roles directory **`roles_path = /home/ubuntu/ansible-config/roles`**, to enable Ansible know where to find configured roles.
+
+#### BLOCKER❗
+
++ We could not find the **`ansible/ansible.cfg`** directory in **`/etc`** so we decided to run the following command to get information about our ansible version and the location of its configuration file.
+
+**`$ ansible --version`**
+
+![ansible --version no config file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cc2fa71a-1cfd-4500-9afd-aacac81e5168)
+
++ As can be seen in the above image, there is no configuration file present in our ansible set up. So we decide to execute the command below to generate a fully commented-out ansible.cfg file in the current working directory as specified in the [official ansible documentation](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings):
+
+**`$ ansible-config init --disabled -t all > ansible.cfg`**
+
+![ansible init error](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7a6f4959-754b-492f-97ec-647749775af9)
+
++ As shown in the output image above, we get an error that the **`init`** command is not supported for our current ansible version. So we proceed to update the ansible repo and install a more recent ansible version that supports the **`init`** command:
+
+```
+$ sudo add-apt-repository --yes --update ppa:ansible/ansible
+
+$ sudo apt install ansible-core
+```
+
+![update ansible repo](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/85c07a88-66e7-4319-97a3-ceafef8e96fe)
+
+![install ansible core](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d8df087a-6d49-4a3a-ab35-ca5d741154a0)
+
++ After completing the installation, we proceed to run the following command again:
+
+**`$ ansible-config init --disabled -t all > ansible.cfg`**
+
+![ansible init successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f5405d52-14eb-4d2d-97da-d18f7eab91d4)
+
++ As seen in the output image above, we are successful this time. Next, we navigate to our current working directory via VS Code Explorer and now we can see and access the **`ansible.cfg`** file.
+
+![ansible-cfg file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41c0ccb9-13ad-40e8-b262-66192febdf48)
