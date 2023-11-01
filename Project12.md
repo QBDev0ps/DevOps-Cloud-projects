@@ -82,7 +82,7 @@ With the way our Jekins job is currently configured, every new change in the cod
 
 ![apply and save](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab54ff0a-83b4-41cd-b599-f11164d6e3a6)
 
-**vii.** The next thing we do is to test our set up by making some changes in the **README.MD** file inside our **`ansible-config-mgt`** repository (right inside the **`master`** branch). If both Jenkins jobs have completed one after another – we shall see our files inside the **`/home/ubuntu/ansible-config-artifact`** directory and it will be updated with every commit to our **`master`** branch.
+**vii.** The next thing we do is to test our set up by making some changes in the **README.MD** file inside our **`ansible-config-mgt`** repository (right inside the **`main`** branch). If both Jenkins jobs have completed one after another – we shall see our files inside the **`/home/ubuntu/ansible-config-artifact`** directory and it will be updated with every commit to our **`main`** branch.
 
 ![console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b56eac24-c25a-4fa9-862d-624168008446)
 
@@ -450,3 +450,53 @@ $ sudo apt install ansible-core
 #### <br>Step 2: Commit and Test <br/>
 
 In this step, we shall commit our changes, create a Pull Request and then merge the changes in the refactor branch to the main branch. Afterwards we will make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to our Jenkins-Ansible server into **`/home/ubuntu/ansible-config/`** directory.
+
+**i.** Using the following set of commands, we add all untracked files to the staging area and then we commit the changes:
+
+```
+$ git add .
+
+$ git commit -m "saved all updates to refactor branch"
+```
+
+![commit changes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/73a838ce-92b8-435a-bd49-471ea730f418)
+
+**ii.** Next we push the refactor branch to our github repository using the following command:
+
+**`$ git push --set-upstream origin refactor`**
+
+![git push refactor](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ff3cf491-b762-495c-b240-c7407a3cf6c3)
+
+**iii.** The next thing we do is to create a **Pull Request** in GitHub by following [these steps:](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) 
+
++ From the **`ansible-config-mgt`** repository page, we click on the **"Pull requests"** tab and then in the next page we click on the **"New pull request"** button.
+
+![pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a27f564c-53f7-49c8-9905-aa7e440fc17b)
+
+![new pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46e0162b-0cb7-4ff4-8514-6fd0c8ab0a7c)
+
++ This takes us to the **"Compare changes"** page where we choose the **`refactor`** branch to set up a comparison with the **`main`** branch.
+
+![compare changes refactor](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/408ec46e-bd47-4c5b-999e-af4bd96f26f1)
+
++ Once we set up the comparisons between the **`main`** and the **`refactor`** branch, we then proceed to click on the **"Create pull request"** button.
+
+![create pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8b9baea3-2856-4787-ba57-1c0e9a2dce4c)
+
++ In the next page, we input a pull request message inside the dialogue box and we click on the  **"Create pull request"** button.
+
+![pull request 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/52c38f08-6b60-4a92-b637-01adda2298a6)
+
+**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`refactor`** branch and check for conflicts with the **`main`** branch.
+
+![merge pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c6f96909-f948-42a4-8734-736ba64383ec)
+
+**iv.** As we are satisfied and happy with the changes made in **`refactor`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
+
+![confirm merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/39b7e91f-52bb-4c81-b01f-1f34467ca43d)
+
+**v.** This takes us to the next page which shows that **`refactor`** has been successfully merged to **`main`** branch.
+
+![successful merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e88ae9b7-3b67-4201-a146-6b250d6dd9ac)
+
+
