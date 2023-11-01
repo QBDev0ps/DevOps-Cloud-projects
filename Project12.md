@@ -239,27 +239,72 @@ Our first step is to launch 2 fresh Red Hat Enterprise Linux 8, EC2 instances th
 
 **i.** We begin by spinning up an EC2 Instance of Red Hat Linux. We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
- + We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
+ **ii.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
 
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
- + Under **Name and tags**, we provide a unique name for our server.
+**iii.** Under **Name and tags**, we provide a unique name for our server.
 
 ![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e77b17db-21b0-40d6-ae57-030cac0e40b1)
   
-+ From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
+**iv.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Red Hat Enterprise Linux 8 (HVM).
 
 ![application and OS images](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2beaaf89-c746-4ed5-a434-f0989bfb3db1)
 
-+ Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
+**v.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
 ![keypair](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9a924391-71e8-4bea-babf-c3dacb6f78b1)
 
-+ Under the Network settings tab, we click on **"Edit"** then under **"Subnet Info"** we click on the dropdown and select the same subnet and availability zone that is in use by our NFS Server.
+**vi.** Under the Network settings tab, we click on **"Edit"** then under **"Subnet Info"** we click on the dropdown and select the same subnet and availability zone that is in use by our NFS Server.
 
 ![network settings subnet](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce8dc829-2da0-444e-b3c7-7bf969be6bf5)
   
-+ And then, we click on **"Launch Instance"**
+**vii.** And then, we click on **"Launch Instance"**
 
 ![Launch Instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ed623db9-831f-4c86-bc46-f0e7201c18f6)
 
+**viii.** At the end of this process, we have our two UAT instances up and running.
+
+![web uat instances](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a98ee202-8407-49de-bd03-fdb35d513b4e)
+
+#### <br>Step 2: Create Roles Directory<br/> 
+
+To create a role, we must create a directory called **`roles/`**, relative to the playbook file or in the **`/etc/ansible/`** directory. 
+
+**i.** To create this folder structure, we decide to use the **`ansible-galaxy`** utility inside the **`ansible-config-mgt/roles`** directory. We execute by using the following commands:
+
+```
+$ mkdir roles
+
+$ cd roles
+
+$ ansible-galaxy init webserver
+```
+
+![init ansible galaxy](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1c8eb3e1-734b-4b73-8075-7ccc9f0d6be0)
+
+**ii.** At this point, the folder structure looks exactly as shown in the image below.
+
+![roles directory structure 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/65eb1cd9-cbd6-48a3-b623-5477f7ed34b7)
+
+**iii.** Next, we remove the unnecessary folders **`tests`** and **`vars`** and their contents. 
+
+```
+$ rm -r tests
+
+$ rm -r vars
+```
+
+![remove unnecessary files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8d117f4b-8a3c-4883-8279-2d392c431212)
+
+**iv.** We do not have the templates folder in our directory structure so we manually create it:
+
+**`$ mkdir templates`**
+
+![mkdir templates](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cb13ba69-a68d-473b-8315-e6a74a97950c)
+
+**v.** After cleaning up our directory, the **`roles`** folder structure looks exactly as shown below:
+
+![directory structure 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2cc6dc1c-fd46-4ad7-bac9-9f38064d3dae)
+
+#### <br>Step 3: Update Configuration for UAT Webservers<br/>
