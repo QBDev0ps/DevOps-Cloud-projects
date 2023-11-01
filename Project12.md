@@ -421,6 +421,8 @@ $ sudo apt install ansible-core
 
 **`$ touch uat-webservers.yml`**
 
+![create uat-webservers-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/faa08ed6-bed2-4ab7-821d-74f0b05213c9)
+
 **ii.** The next step is to open up the **`uat-webservers.yml`** file via the VS Code file explorer and then we paste in the following configuration to reference the webserver role:
 
 ```
@@ -430,5 +432,17 @@ $ sudo apt install ansible-core
      - webserver
 ```
 
+![uat-webservers-yml-configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7abdfd35-970a-417a-ad22-416a6c591818)
 
+**iii.** Considering that the entry point to our ansible configuration is the **`site.yml`** file, we therefore need to reference our **`uat-webservers.yml`** role inside **`site.yml`**. So, we navigate via the VS Code file explorer and put the following configuration inside **`site.yml`**:
 
+```
+---
+- hosts: all
+- import_playbook: ../static-assignments/common.yml
+
+- hosts: uat-webservers
+- import_playbook: ../static-assignments/uat-webservers.yml
+```
+
+![site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/227bcd76-645d-4c4c-b6e4-278a41bc5431)
