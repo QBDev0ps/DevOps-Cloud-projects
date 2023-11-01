@@ -309,4 +309,12 @@ $ rm -r vars
 
 #### <br>Step 3: Update Configuration for UAT Webservers<br/>
 
-**i.** We proceed to update the inventory **`ansible-config/inventory/uat.yml`** file with the Private IP addresses of the 2 UAT Webservers.
+**i.** We proceed to update the inventory **`ansible-config/inventory/uat.yml`** file with the Private IP addresses of the 2 UAT Webservers using the following syntax:
+
+```
+[uat-webservers]
+<Web1-UAT-Server-Private-IP-Address> ansible_ssh_user=ec2-user
+<Web2-UAT-Server-Private-IP-Address> ansible_ssh_user=ec2-user
+```
+
+**ii.** Next, we navigate with the VS Code file explorer to the **`/etc/ansible/ansible.cfg`** file and uncomment the **`roles_path`** string and provide a full path to our roles directory **`roles_path = /home/ubuntu/ansible-config/roles`**, to enable Ansible know where to find configured roles.
