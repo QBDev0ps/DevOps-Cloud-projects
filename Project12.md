@@ -415,3 +415,20 @@ $ sudo apt install ansible-core
 
 ### <br>Reference Webserver Role <br/>
 
+#### <br>Step 1: Reference Web Server Role in `static-assignments` <br/>
+
+**i.** We start by navigating to the **`static-assignments`** folder, and within this directory, we execute the command below to create a new assignment for **uat-webservers** which we name as **`uat-webservers.yml`**. 
+
+**`$ touch uat-webservers.yml`**
+
+**ii.** The next step is to open up the **`uat-webservers.yml`** file via the VS Code file explorer and then we paste in the following configuration to reference the webserver role:
+
+```
+---
+- hosts: uat-webservers
+  roles:
+     - webserver
+```
+
+
+
