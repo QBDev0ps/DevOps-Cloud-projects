@@ -370,3 +370,48 @@ $ sudo apt install ansible-core
 + Ensure the tooling website code is deployed to **`/var/www/html`** on each of 2 UAT Web servers.
   
 + Make sure **`httpd`** service is started.
+
+**iv.** After completing the configuration, our **`main.yml` file consists of the following tasks:
+
+```
+---
+- name: install apache
+  become: true
+  ansible.builtin.yum:
+    name: "httpd"
+    state: present
+
+- name: install git
+  become: true
+  ansible.builtin.yum:
+    name: "git"
+    state: present
+
+- name: clone a repo
+  become: true
+  ansible.builtin.git:
+    repo: https://github.com/QBDev0ps/tooling.git
+    dest: /var/www/html
+    force: yes
+
+- name: copy html content to one level up
+  become: true
+  command: cp -r /var/www/html/html/ /var/www/
+
+- name: Start service httpd, if not started
+  become: true
+  ansible.builtin.service:
+    name: httpd
+    state: started
+
+- name: recursively remove /var/www/html/html/ directory
+  become: true
+  ansible.builtin.file:
+    path: /var/www/html/html
+    state: absent
+```
+
+![main-yml configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0f6dc885-5432-41f8-9d02-43aab7299e05)
+
+### <br>Reference Webserver Role <br/>
+
