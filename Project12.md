@@ -308,3 +308,5 @@ $ rm -r vars
 ![directory structure 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2cc6dc1c-fd46-4ad7-bac9-9f38064d3dae)
 
 #### <br>Step 3: Update Configuration for UAT Webservers<br/>
+
+**i.** We proceed to update the inventory **`ansible-config/inventory/uat.yml`** file with the Private IP addresses of the 2 UAT Webservers.
