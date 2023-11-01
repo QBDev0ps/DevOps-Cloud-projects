@@ -499,4 +499,9 @@ $ git commit -m "saved all updates to refactor branch"
 
 ![successful merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e88ae9b7-3b67-4201-a146-6b250d6dd9ac)
 
+**vi.** As can be seen in the console output images below, our existing webhook configuration in Github and Jenkins triggered the **`ansible`** build job which upon successful completion consequently triggered the **`save_artifact`** build job. Both jobs ran successfully and copied all the build artifacts/files to our Jenkins-Ansible server into the **`/home/ubuntu/ansible-config/`** and **`/home/ubuntu/ansible-config-artifact/`** directories respectively.
+
+![ansible jenkins console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1fd00eef-be52-4ea0-a86d-905749a099e2)
+
+![save-artifact console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a1994a93-72ab-43d7-b94d-1777a445afa7)
 
