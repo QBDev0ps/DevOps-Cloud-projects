@@ -353,6 +353,20 @@ $ sudo apt install ansible-core
 
 ![ansible init successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f5405d52-14eb-4d2d-97da-d18f7eab91d4)
 
-+ As seen in the output image above, we are successful this time. Next, we navigate to our current working directory via VS Code Explorer and now we can see and access the **`ansible.cfg`** file.
++ As seen in the output image above, we are successful this time. Next, we navigate to our current working directory via VS Code Explorer and now we can see and access the **`ansible.cfg`** file. 
 
 ![ansible-cfg file](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41c0ccb9-13ad-40e8-b262-66192febdf48)
+
++ After overcoming our **BLOCKER** we navigate with the VS Code file explorer to the **`/etc/ansible/ansible.cfg`** file and uncomment the **`roles_path`** string and provide a full path to our roles directory **`roles_path = /home/ubuntu/ansible-config/roles`**, to enable Ansible know where to find configured roles.
+
+![roles-path](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8d68cc8f-f28d-47ba-9eaf-263fff911fd9)
+
+**iii.** The next step is to start adding some logic to the webserver role. We move into the **`tasks`** directory, and within the **`main.yml`** file, we proceed to write configuration tasks to do the following:
+
++ Install and configure Apache (**`httpd`** service)
+
++ Clone Tooling website from GitHub **`https://github.com/<your-name>/tooling.git`**.
+  
++ Ensure the tooling website code is deployed to **`/var/www/html`** on each of 2 UAT Web servers.
+  
++ Make sure **`httpd`** service is started.
