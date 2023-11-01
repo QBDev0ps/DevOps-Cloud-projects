@@ -446,3 +446,7 @@ $ sudo apt install ansible-core
 ```
 
 ![site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/227bcd76-645d-4c4c-b6e4-278a41bc5431)
+
+#### <br>Step 2: Commit and Test <br/>
+
+In this step, we shall commit our changes, create a Pull Request and then merge the changes in the refactor branch to the main branch. Afterwards we will make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to our Jenkins-Ansible server into **`/home/ubuntu/ansible-config/`** directory.
