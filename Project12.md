@@ -505,10 +505,30 @@ $ git commit -m "saved all updates to refactor branch"
 
 ![save-artifact console output](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a1994a93-72ab-43d7-b94d-1777a445afa7)
 
-**viii.** The next step is to connect to our **`Jenkins-Ansible`** server via ssh-agent as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then with the commands below, we run the playbook against our **`uat inventory`**.
+**viii.** The next step is to connect to our **`Jenkins-Ansible`** server via **`ssh-agent`** as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then with the commands below, we run the playbook against our **`uat inventory`**.
 
 ```
 $ cd /home/ubuntu/ansible-config-mgt
 
 $ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
 ```
+
+#### BLOCKER❗
+
+We got the error above when we ran the playbook, but after we examined the error message and did some investigations we realised it was a permision issue. Our current user did not have the adequate rights to **`/inventory/uat.yml`**. So to fix this, we executed the following command:
+
+**`sudo chmod 744 inventory/uat.yml`**
+
+![playbook successful 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0154d7cb-c1e6-4f8f-833a-ec688b2156f1)
+
+![playbook successful 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/78d77ff5-4c44-4f35-8322-49a5b77c7d69)
+
+**ix.** As can be seen in the images above, we resolved the **BLOCKER** and our playbook ran successfully. 
+
+**x.** To confirm our playbook executed the tasks properly and complete the project, we go to our browser and try to reach the UAT web servers using the syntax below:
+
+**`http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php`**
+
+![uat 1 successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fe1830a0-77b4-4f01-81bd-82007c9b6935)
+
+![uat 2 successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/87f650f1-576c-49ba-8b8c-15e32004f7f6)
