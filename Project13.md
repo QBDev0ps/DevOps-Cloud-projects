@@ -21,5 +21,5 @@ On the other hand, when **`include`** module is used, all statements are process
 
 ### <br>Introducing Dynamic Assignment Into the Structure<br/>
 
-
+**i.** In our GitHub repository
 
