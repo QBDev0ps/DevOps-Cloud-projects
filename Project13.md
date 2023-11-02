@@ -23,13 +23,17 @@ On the other hand, when **`include`** module is used, all statements are process
 
 #### <br>Step 1: Introducing Dynamic Assignment Into the Structure<br/>
 
-**i.** In our GitHub repository, we execute the following command to create a new branch that we will call **`dynamic-assignments`**.
+**i.** In our GitHub repository, we execute the following command to create and move into a new branch that we will call **`dynamic-assignments`**.
 
 **`$ git checkout -b dynamic-assignments`**
+
+![git checkout -b](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8da27569-6e77-4652-9439-0f970b4135f4)
 
 **ii.** Next we create a folder and name it **`dynamic-assignments`**
 
 **`$ mkdir dynamic-assignments`**
+
+![mkdir dynamic assignments](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/075643a0-5b53-48ef-a951-00ce266c5fb6)
 
 **iii.** We use the set of commands below to move into the dynamic-assignments folder and create a file named **`env-vars.yml`**
 
@@ -39,23 +43,33 @@ $ cd dynamic-assignments
 $ touch env-vars.yml
 ```
 
-**iv.** At this point, our GitHub structure is as shown in the image below:
+![cd touch env-vars](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/49eea68b-0195-497f-8240-176b35354bcc)
+
+**iv.** At this point, our GitHub directory structure is as shown in the image below:
+
+![directory structure 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/af3e864d-ac1f-4074-afb6-a20ed5936b1c)
 
 **v.** Since we will be using the same Ansible to configure multiple environments, and each of these environments will have certain unique attributes, such as servername, ip-address etc., we will need a way to set values to variables per specific environment. For this reason, we proceed to create a folder **`env-vars`** to keep each environment’s variables file.
 
 **`$ mkdir env-vars`**
+
+![mkdir env-vars](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/43692f09-2d1f-438e-80dc-cacc2d5f2fac)
 
 **vi.** Then, we move into the created **`env-vars`** folder, and for each environment, we create new **`YAML`** files which we will use to set variables.
 
 ```
 $ cd env-vars
 
-$ touch dev stage uat prod
+$ touch dev.yml stage.yml uat.yml prod.yml
 ```
+
+![cd env-vars and create files](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00de21e8-3e20-4fdc-ab9e-712a0a099c91)
 
 **vi.** Our directory layout now looks as shown in the image below:
 
-**vii.** The next set is for us to paste the following block of instruction into the **`env-vars.yml`** file.
+![directory structure 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e97bad3a-856d-47fe-9049-50a67396e8d1)
+
+**vii.** Now satisfied with our folder structure, we move ahead and paste the following block of instruction into the **`env-vars.yml`** file.
 
 ```
 ---
@@ -75,6 +89,8 @@ $ touch dev stage uat prod
       tags:
         - always
 ```
+
+![env-vars-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f251f135-e39a-4ba6-8b02-d9db467fef96)
 
 **viii.** There are three things to note about the configuration above in **vii.**
 
@@ -115,5 +131,7 @@ The next step is to update the **`site.yml`** file to make use of the dynamic as
 - name: Webserver assignment
   import_playbook: ../static-assignments/webservers.yml
 ```
+
+![site-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0e49a73d-e805-4f00-b778-1f5a58ef01d2)
 
 ### <br>Making use of Community Roles<br/>
