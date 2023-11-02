@@ -515,9 +515,13 @@ $ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
 
 #### BLOCKER❗
 
-We got the error above when we ran the playbook, but after we examined the error message and did some investigations we realised it was a permision issue. Our current user did not have the adequate rights to **`/inventory/uat.yml`**. So to fix this, we executed the following command:
++ We got the error above when we ran the playbook, but after we examined the error message and did some investigations we realised it was a permision issue. Our current user did not have the adequate rights to **`/inventory/uat.yml`**. So to fix this, we executed the following command:
 
 **`sudo chmod 744 inventory/uat.yml`**
+
++ And then we ran our playbook again:
+
+**`$ ansible-playbook -i /inventory/uat.yml playbooks/site.yml`**
 
 ![playbook successful 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0154d7cb-c1e6-4f8f-833a-ec688b2156f1)
 
@@ -532,3 +536,15 @@ We got the error above when we ran the playbook, but after we examined the error
 ![uat 1 successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/fe1830a0-77b4-4f01-81bd-82007c9b6935)
 
 ![uat 2 successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/87f650f1-576c-49ba-8b8c-15e32004f7f6)
+
+### <br>Conclusion<br/>
+
+The images web browser images above show that we have been able to successfully deploy and configure two UAT Web Servers using Ansible **`imports`** and **`roles`** and our setup looks somewhat like what we have in the image below.
+
+
+
+The goal of this project was to demonstrate Ansible's powerful automation capabilities and we have been able to do just that. We began the project by installing and setting up Jenkins which we would be using for running build jobs. And then in GitHub, we created a new repository **`ansible-config-mgt`**. After this, we installed and configured Ansible (on the same server as Jenkins) to serve as a Jump Server/Bastion Host. Next, we created a freestyle job and also used GitHub webhooks to configure a Jenkins build job to archive content to a our **`ansible-config-mgt`** repository any time there are changes. 
+
+With our server's new status as a **`Jenkins-Ansible`** instance, we made sure to create and allocate an Elastic IP address to it so that everytime we stop/start the server, there will be no need to keep reconfiguring Github Web Hooks to a new IP address. The next step was to configure Jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md) Subsequently, to get our set up to the desired state, we needed to deploy a load balancer to distribute traffic across our web servers. Our next step involved preparing Visual Studio Code (VSC) as our development environment. We successfully installed and configured VS Code and then we cloned down our **`ansible-config-mgt`** repository to the **`Jenkins-Ansible`** server.
+
+The final phase of this project was where we commenced Ansible Development. We created our playbook directory with the **`common.yml`** file inside it and then our inventory directory along with the relevant files for development, staging, testing and production. Next, we set up the Ansible inventory file to define the hosts and groups of hosts upon which the commands and tasks in the playbook would operate. We then proceeded to create a playbook to give Ansible the instructions on what we need to be performed on all servers listed in the Ansible inventory. After this, we pushed all the changes we made locally to our GitHub repository to ensure GIT remains updated with the latest code. We did this by creating a pull request and merging the code changes to the **`main`** branch. To complete the project, we set up VS Code to connect to our instance via SSH and we ran our playbook. Afterwards, we were able to confirm that the playbook task (which was to install the latest version of **`wireshark`** on all the servers specified in the inventory file) was carried out successfully. Thank you.
