@@ -541,7 +541,7 @@ $ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
 
 ### <br>Conclusion<br/>
 
-The images web browser images above show that we have been able to successfully deploy and configure two UAT Web Servers using Ansible **`imports`** and **`roles`** and our setup looks somewhat like what we have in the image below.
+The web browser images above show that we have been able to successfully deploy and configure two UAT Web Servers using Ansible **`imports`** and **`roles`** and our setup looks somewhat like what we have in the image below.
 
 ![final architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce5a4765-fdfc-446c-95e8-391188b16134)
 
