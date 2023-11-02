@@ -541,9 +541,15 @@ $ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
 
 The images web browser images above show that we have been able to successfully deploy and configure two UAT Web Servers using Ansible **`imports`** and **`roles`** and our setup looks somewhat like what we have in the image below.
 
+![final architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce5a4765-fdfc-446c-95e8-391188b16134)
 
+The goal of this project was to demonstrate how Ansible refactoring works to  enhance code readability, increase maintainability and extensibility. We began the project by enhancing our existing Jenkins Job **`ansible`** with the introduction of a new Jenkins project/job **`save_artifacts`** which required the use of the **`Copy Artifact`** plugin. After this, we pulledd down the latest code from the **`main`** branch, and create a new branch **`refactor`** where we began making changes and refactoring ansible code.
 
-The goal of this project was to demonstrate Ansible's powerful automation capabilities and we have been able to do just that. We began the project by installing and setting up Jenkins which we would be using for running build jobs. And then in GitHub, we created a new repository **`ansible-config-mgt`**. After this, we installed and configured Ansible (on the same server as Jenkins) to serve as a Jump Server/Bastion Host. Next, we created a freestyle job and also used GitHub webhooks to configure a Jenkins build job to archive content to a our **`ansible-config-mgt`** repository any time there are changes. 
+Refactor Ansible code by importing other playbooks into `site.yml`<br/>
+
+**i.** Before starting to refactor the codes, we need to pull down the latest code from the **`main`** branch, and create a new branch, which we will name **`refactor`**:
+
+Ansible's powerful automation capabilities and we have been able to do just that. We began the project by installing and setting up Jenkins which we would be using for running build jobs. And then in GitHub, we created a new repository **`ansible-config-mgt`**. After this, we installed and configured Ansible (on the same server as Jenkins) to serve as a Jump Server/Bastion Host. Next, we created a freestyle job and also used GitHub webhooks to configure a Jenkins build job to archive content to a our **`ansible-config-mgt`** repository any time there are changes. 
 
 With our server's new status as a **`Jenkins-Ansible`** instance, we made sure to create and allocate an Elastic IP address to it so that everytime we stop/start the server, there will be no need to keep reconfiguring Github Web Hooks to a new IP address. The next step was to configure Jenkins to connect via SSH and copy files to the /mnt/opt directory in the NFS server we deployed for the [Tooling Website Solution.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project10.md) Subsequently, to get our set up to the desired state, we needed to deploy a load balancer to distribute traffic across our web servers. Our next step involved preparing Visual Studio Code (VSC) as our development environment. We successfully installed and configured VS Code and then we cloned down our **`ansible-config-mgt`** repository to the **`Jenkins-Ansible`** server.
 
