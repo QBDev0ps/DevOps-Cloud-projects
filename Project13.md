@@ -97,4 +97,23 @@ In the same version, variants of **`import`** were also introduced, such as:
 
 3. We are including the variables using a loop. **`with_first_found`** implies that, looping through the list of files, the first one found is used. This is good so that we can always set default values in case an environment specific env file does not exist.
 
-#### <br>Step 2: Introducing Dynamic Assignment Into the Structure<br/>
+#### <br>Step 2: Update `site.yml` with Dynamic Assignments<br/>
+
+The next step is to update the **`site.yml`** file to make use of the dynamic assignment. (It is however important to note that we cannot test it just yet. Rather, this is us preparing the stage for what is to come.) **`site.yml`** should look like this:
+
+```
+---
+- hosts: all
+- name: Include dynamic variables 
+  tasks:
+  import_playbook: ../static-assignments/common.yml 
+  include: ../dynamic-assignments/env-vars.yml
+  tags:
+    - always
+
+-  hosts: webservers
+- name: Webserver assignment
+  import_playbook: ../static-assignments/webservers.yml
+```
+
+### <br>Making use of Community Roles<br/>
