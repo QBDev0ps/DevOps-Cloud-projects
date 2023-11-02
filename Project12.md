@@ -515,6 +515,8 @@ $ ansible-playbook -i /inventory/uat.yml playbooks/site.yml
 
 #### BLOCKER❗
 
+![ansible blocker](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ca0229e6-390b-4062-8710-6935eb9cadf8)
+
 + We got the error above when we ran the playbook, but after we examined the error message and did some investigations we realised it was a permision issue. Our current user did not have the adequate rights to **`/inventory/uat.yml`**. So to fix this, we executed the following command:
 
 **`sudo chmod 744 inventory/uat.yml`**
@@ -543,17 +545,8 @@ The images web browser images above show that we have been able to successfully 
 
 ![final architecture](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ce5a4765-fdfc-446c-95e8-391188b16134)
 
-The goal of this project was to demonstrate how Ansible refactoring works to  enhance code readability, increase maintainability and extensibility. We began the project by enhancing our existing Jenkins Job **`ansible`** with the introduction of a new Jenkins project/job **`save_artifacts`** which required the use of the **`Copy Artifact`** plugin. After this, we pulledd down the latest code from the **`main`** branch, and create a new branch **`refactor`** where we began making changes and refactoring ansible code.
+The goal of this project was to demonstrate how Ansible refactoring works to  enhance code readability, increase maintainability and extensibility. We began the project by enhancing our existing Jenkins Job **`ansible`** with the introduction of a new Jenkins project/job **`save_artifacts`** which required the use of the **`Copy Artifact`** plugin. After this, we pulledd down the latest code from the **`main`** branch, and create a new branch **`refactor`** where we began making changes and refactoring ansible code. Essentially, we created a new file **`site.yml`** to not only be seen as a parent to all other playbooks, but also used as an entry point into the entire infrastructure configuration and we included and referenced our other children playbooks from here. To ensure our work stays well organized, we also created a folder **`static-assignments`** in the root of our repository to be used as storage for all our children playbooks. 
 
 The next phase of the project involved using **`roles`** to configure two UAT web servers. We launched 2 fresh Red Hat Enterprise Linux 8, EC2 instances to be used as the **`UAT`** servers, and then in our **`Jenkins-Ansible`** server, we created the **`roles/`** directory and used the **`ansible-galaxy`** utility to generate the appropriate folder structure. The next step was to update the relevant inventory file with the Private IP addresses of the 2 UAT Webservers. Then we attempted to update the ansible configuration file to enable Ansible know where to find configured roles but we ran into a **BLOCKER** here. The **`ansible.cfg`** file was absent from our setup so we had to manually generate it and make the necessary configuration changes.
 
-
-
-
-
-
-
-
-
-
-The final phase of this project was where we commenced Ansible Development. We created our playbook directory with the **`common.yml`** file inside it and then our inventory directory along with the relevant files for development, staging, testing and production. Next, we set up the Ansible inventory file to define the hosts and groups of hosts upon which the commands and tasks in the playbook would operate. We then proceeded to create a playbook to give Ansible the instructions on what we need to be performed on all servers listed in the Ansible inventory. After this, we pushed all the changes we made locally to our GitHub repository to ensure GIT remains updated with the latest code. We did this by creating a pull request and merging the code changes to the **`main`** branch. To complete the project, we set up VS Code to connect to our instance via SSH and we ran our playbook. Afterwards, we were able to confirm that the playbook task (which was to install the latest version of **`wireshark`** on all the servers specified in the inventory file) was carried out successfully. Thank you.
+Aftwerwards, we started adding some logic to the webserver role and we wrote configuration tasks to Install and configure Apache (**`httpd`** service), Clone Tooling website from GitHub **`https://github.com/<your-name>/tooling.git`**, Ensure the tooling website code is deployed to **`/var/www/html`** on each of 2 UAT Web servers and Make sure **`httpd`** service is started. Then we referenced our Web Server Role in `static-assignments` folder. Next, we committed our changes, created a Pull Request and then merged the changes from the refactor branch to the main branch. Afterwards we made sure sure webhook triggered two consequent Jenkins jobs that ran successfully and copied all the files to our Jenkins-Ansible server into **`/home/ubuntu/ansible-config/`** directory.The next step was to connect to our **`Jenkins-Ansible`** server via **`ssh-agent`** as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then run the playbook against our UAT inventory file where we configured the Private IP addresses of the 2 UAT Webservers. We ran into another blocker here as ansible was unable to gain access to our inventory directory but we were able to rectify this by fixing the permissions of the directory. From here onwards, our playbook ran successfully and via our browser we were able to access the tooling website deployed on our two UAT servers. Thank you.
