@@ -21,5 +21,32 @@ On the other hand, when **`include`** module is used, all statements are process
 
 ### <br>Introducing Dynamic Assignment Into the Structure<br/>
 
-**i.** In our GitHub repository
+**i.** In our GitHub repository, we execute the following command to create a new branch that we will call **`dynamic-assignments`**.
 
+**`$ git checkout -b dynamic-assignments`**
+
+**ii.** Next we create a folder and name it **`dynamic-assignments`**
+
+**`$ mkdir dynamic-assignments`**
+
+**iii.** We use the set of commands below to move into the dynamic-assignments folder and create a file named **`env-vars.yml`**
+
+```
+$ cd dynamic-assignments
+
+$ touch env-vars.yml
+```
+
+**iv.** At this point, our GitHub structure is as shown in the image below:
+
+**v.** Since we will be using the same Ansible to configure multiple environments, and each of these environments will have certain unique attributes, such as servername, ip-address etc., we will need a way to set values to variables per specific environment. For this reason, we proceed to create a folder **`env-vars`** to keep each environment’s variables file.
+
+**`$ mkdir env-vars`**
+
+**vi.** Then, we move into the created **`env-vars`** folder, and for each environment, we create new **`YAML`** files which we will use to set variables.
+
+```
+$ cd env-vars
+
+$ touch dev prod stage uat
+```
