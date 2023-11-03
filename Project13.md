@@ -134,9 +134,31 @@ The next step is to update the **`site.yml`** file to make use of the dynamic as
 
 ![site-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0e49a73d-e805-4f00-b778-1f5a58ef01d2)
 
+push and create pull request
+
 ### <br>Making use of Community Roles<br/>
 
 Now it is time to create a role for MySQL database which will perform the functions of installing the MySQL package, creating a database and configuring users. It is important to note that there are tons of roles that have already been developed by other open source engineers out there. These roles are actually production ready, and dynamic to accomodate most of Linux flavours. So rather than re-inventing the wheel, we simply make use of Ansible Galaxy again and we can simply download a ready to use ansible role.
 
+#### <br>Step 1: Download Mysql Ansible Role<br/>
 
+**i.** We proceed to browse available community roles [here](https://galaxy.ansible.com/ui/). We decide to use a [MySQL role developed by](https://galaxy.ansible.com/ui/standalone/roles/geerlingguy/mysql/) **`geerlingguy`**.
 
+**ii.** On Jenkins-Ansible server make sure that git is installed with **`git --version`**, and then we go to the **`ansible-config-mgt`** directory and run the following commands:
+
+```
+$ git init
+$ git pull https://github.com/<your-name>/ansible-config-mgt.git
+$ git remote add origin https://github.com/<your-name>/ansible-config-mgt.git
+$ git branch roles-feature
+$ git switch roles-feature
+```
+
+**iii.** Inside the **`roles`** directory, we create a new MySQL role with ansible-galaxy and then we rename the folder to **`mysql`**:
+
+```
+ansible-galaxy install geerlingguy.mysql
+mv geerlingguy.mysql/ mysql
+```
+
+**iv.** 
