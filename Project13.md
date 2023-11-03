@@ -136,10 +136,7 @@ The next step is to update the **`site.yml`** file to make use of the dynamic as
 
 ### <br>Making use of Community Roles<br/>
 
-Now it is time to create a role for MySQL database which will perform the functions of installing the MySQL package, creating a database and configuring users.
+Now it is time to create a role for MySQL database which will perform the functions of installing the MySQL package, creating a database and configuring users. It is important to note that there are tons of roles that have already been developed by other open source engineers out there. These roles are actually production ready, and dynamic to accomodate most of Linux flavours. So rather than re-inventing the wheel, we simply make use of Ansible Galaxy again and we can simply download a ready to use ansible role.
 
-But why should we re-invent the wheel? There are tons of roles that have already been developed by other open source engineers out there.
 
-These roles are actually production ready, and dynamic to accomodate most of Linux flavours.
 
-With Ansible Galaxy again, we can simply download a ready to use ansible role, and keep going.
