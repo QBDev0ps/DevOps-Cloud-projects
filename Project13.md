@@ -135,3 +135,11 @@ The next step is to update the **`site.yml`** file to make use of the dynamic as
 ![site-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0e49a73d-e805-4f00-b778-1f5a58ef01d2)
 
 ### <br>Making use of Community Roles<br/>
+
+Now it is time to create a role for MySQL database which will perform the functions of installing the MySQL package, creating a database and configuring users.
+
+But why should we re-invent the wheel? There are tons of roles that have already been developed by other open source engineers out there.
+
+These roles are actually production ready, and dynamic to accomodate most of Linux flavours.
+
+With Ansible Galaxy again, we can simply download a ready to use ansible role, and keep going.
