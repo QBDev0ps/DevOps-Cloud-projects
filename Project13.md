@@ -210,6 +210,8 @@ $ git pull
 
 **`$ git checkout -b roles-feature`**
 
+![git-checkout-b roles-feature](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/bccf8b97-bf72-4af3-a2f1-73b5bb30bfc7)
+
 **iv.** Inside the **`roles`** directory, we create a new MySQL role with ansible-galaxy and then we rename the folder to **`mysql`**:
 
 ```
@@ -234,7 +236,7 @@ $ mv geerlingguy.mysql/ mysql
   ```
   ---
   - hosts: database
-  roles:
+    roles:
     - role: geerlingguy.mysql
       become: yes
   ```
@@ -285,11 +287,29 @@ $ git add .
 $ git commit -m "saved all updates to role-features branch"
 ```
 
+![commit to roles-feature branch](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7d3051cd-6b9c-40d8-afca-d1944498de7f)
+
 **ii.** The next step is to ensure connection to our **`Jenkins-Ansible`** server via **`ssh-agent`** as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then with the commands below, we run the playbook against our **`dev inventory`**.
 
 ```
 $ cd /home/ubuntu/ansible-config-mgt
 
 $ ansible-playbook -i /inventory/dev.yml playbooks/site.yml
+```
+
+#### <br>Step 4: Load Balancer Roles<br/>
+
+We want to be able to make a choice on which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively: Nginx and Apache.
+
+**i.** We refer to what we did earlier with **`msql`** role and we do the same for both nginx and apache load balancer roles. Inside the **`roles`** directory, we create new roles for both nginx and apache load balancers with ansible-galaxy. And then we rename the folders to **`nginx-lb`** and  **`apache-lb`** respectively.
+
+```
+$ ansible-galaxy install geerlingguy.nginx
+
+$ mv geerlingguy.nginx/ nginx-lb
+
+$ ansible-galaxy install geerlingguy.apache
+
+$ mv geerlingguy.apache/ apache-lb
 ```
 
