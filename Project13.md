@@ -220,11 +220,14 @@ $ mv geerlingguy.mysql/ mysql
 
 ![ansible galaxy geerling guy](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/003e1e95-c811-4f29-9c93-ddd11c8180bf)
 
-**v.** The next thing we do is to go through the **README.md** file, and edit roles configuration to use the correct credentials for MySQL required for the **`tooling`** website. We navigate via VS Code explorer through **`roles > mysql > defaults > main.yml`** and we edit configuration in the **`main.yml`** file as shown in the image below:
+
+#### <br>Step 2: Configure Mysql Ansible Role<br/>
+
+**i.** The next thing we do is to go through the **README.md** file, and edit roles configuration to use the correct credentials for MySQL required for the **`tooling`** website. We navigate via VS Code explorer through **`roles > mysql > defaults > main.yml`** and we edit configuration in the **`main.yml`** file as shown in the image below:
 
 ![main-yml edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5d778f8a-33f3-47d9-a736-f8af44d8ba05)
 
-**vi.** To reference, the database role, we do the following:
+**ii.** To reference, the database role, we do the following:
 
 + Go into the **README.md** file and copy the following block of code:
 
@@ -250,7 +253,7 @@ $ touch db.yml
 
 ![reference db-yml role](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3d1151c1-7006-4f20-a829-d835362ce739)
 
-**vii.** We also need to reference the **`db.yml`** role inside **`site.yml`**. So, we navigate via the VS Code file explorer and put the following configuration inside site.yml:
+**iii.** We also need to reference the **`db.yml`** role inside **`site.yml`**. So, we navigate via the VS Code file explorer and put the following configuration inside site.yml:
 
 ```
 -  hosts: db
@@ -260,7 +263,7 @@ $ touch db.yml
 
 ![db-yml in site-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/804f1ce1-9efa-4893-89d0-96803d6de96b)
 
-**viii.** We proceed to update the inventory **`ansible-config/inventory/dev.yml`** file with the Private IP address of our DB server using the following syntax:
+**iv.** We proceed to update the inventory **`ansible-config/inventory/dev.yml`** file with the Private IP address of our DB server using the following syntax:
 
 ```
 [db]
@@ -269,4 +272,24 @@ $ touch db.yml
 
 ![dev-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c242a60-a8ad-41b2-b490-e5edc7f9b84e)
 
+
+#### <br>Step 3: Commit and Test DB Playbook<br/>
+
+In this step, we shall stage and commit our changes in the **`roles-feature`** branch. then we shall test run the db playbook. We decided to do this with the consideration that it would be cleaner and less cumbersome rather than executing it with the other roles we are going to download and configure later on in this project. It will also be easier to debug and investigate any potential errors our playbook might encounter.
+
+**i.** Using the following set of commands, we add all untracked files to the staging area and then we commit the changes:
+
+```
+$ git add .
+
+$ git commit -m "saved all updates to role-features branch"
+```
+
+**ii.** The next step is to ensure connection to our **`Jenkins-Ansible`** server via **`ssh-agent`** as we did in [Project 11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and then with the commands below, we run the playbook against our **`dev inventory`**.
+
+```
+$ cd /home/ubuntu/ansible-config-mgt
+
+$ ansible-playbook -i /inventory/dev.yml playbooks/site.yml
+```
 
