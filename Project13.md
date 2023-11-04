@@ -213,8 +213,9 @@ $ git pull
 **iv.** Inside the **`roles`** directory, we create a new MySQL role with ansible-galaxy and then we rename the folder to **`mysql`**:
 
 ```
-ansible-galaxy install geerlingguy.mysql
-mv geerlingguy.mysql/ mysql
+$ ansible-galaxy install geerlingguy.mysql
+
+$ mv geerlingguy.mysql/ mysql
 ```
 
 ![ansible galaxy geerling guy](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/003e1e95-c811-4f29-9c93-ddd11c8180bf)
