@@ -219,4 +219,34 @@ mv geerlingguy.mysql/ mysql
 
 ![ansible galaxy geerling guy](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/003e1e95-c811-4f29-9c93-ddd11c8180bf)
 
-**v.** 
+**v.** The next thing we do is to go through the **README.md** file, and edit roles configuration to use the correct credentials for MySQL required for the **`tooling`** website. We navigate via VS Code explorer through **`roles > mysql > defaults > main.yml`** and we edit configuration in the **`main.yml`** file as shown in the image below:
+
+![main-yml edit](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5d778f8a-33f3-47d9-a736-f8af44d8ba05)
+
+**vi.** To reference, the database role, we do the following:
+
++ Go into the **README.md** file and copy the following block of code:
+
+  ```
+  ---
+  - hosts: database
+  roles:
+    - role: geerlingguy.mysql
+      become: yes
+  ```
+
++ Then we move into the **`static-assignments`** folder and create a file we name **`db.yml`**
+
+ ```
+$ cd static-assignments
+
+$ touch db.yml
+```
+
+![cd and touch db-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/63ed4dcd-7b8d-4fa3-9804-5357c963279a)
+
++ Then we enter the file via VS code explorer and we paste in the configuration as shown in the image below:
+
+![reference db-yml role](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3d1151c1-7006-4f20-a829-d835362ce739)
+
+**vii.**
