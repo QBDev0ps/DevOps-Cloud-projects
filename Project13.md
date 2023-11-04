@@ -249,4 +249,23 @@ $ touch db.yml
 
 ![reference db-yml role](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3d1151c1-7006-4f20-a829-d835362ce739)
 
-**vii.**
+**vii.** We also need to reference the **`db.yml`** role inside **`site.yml`**. So, we navigate via the VS Code file explorer and put the following configuration inside site.yml:
+
+```
+-  hosts: db
+- name: Installing db
+  import_playbook: ../static-assignments/db.yml
+```
+
+![db-yml in site-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/804f1ce1-9efa-4893-89d0-96803d6de96b)
+
+**viii.** We proceed to update the inventory **`ansible-config/inventory/dev.yml`** file with the Private IP address of our DB server using the following syntax:
+
+```
+[db]
+<db-Server-Private-IP-Address> ansible_ssh_user=ubuntu
+```
+
+![dev-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c242a60-a8ad-41b2-b490-e5edc7f9b84e)
+
+
