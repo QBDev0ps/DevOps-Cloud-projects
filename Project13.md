@@ -342,3 +342,17 @@ $ mv geerlingguy.apache/ apache-lb
 ![set variables to false](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5302d8d5-e6df-4ccc-b32f-c4d7e21bf9fb)
 
 ![set apache variables to false](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9fb75b2a-01c8-4d58-9cb4-c464a43fada0)
+
+**iv.** Next, we update **`static-assignements`** by creating a **`loadbalancers.yml`**:
+
+**`$ touch loadbalancer.yml`**
+
+**v.** And then, we subsequently paste the following block of configuration into the file we just created:
+
+```
+- hosts: lb
+  roles:
+    - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
+    - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+  become: true
+```
