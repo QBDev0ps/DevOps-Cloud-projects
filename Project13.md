@@ -314,12 +314,24 @@ We want to be able to make a choice on which Load Balancer to use, Nginx or Apac
 **i.** We refer to what we did earlier with **`msql`** role and we do the same for both nginx and apache load balancer roles. Inside the **`roles`** directory, we create new roles for both nginx and apache load balancers with ansible-galaxy. And then we rename the folders to **`nginx-lb`** and  **`apache-lb`** respectively.
 
 ```
-$ ansible-galaxy install geerlingguy.nginx
+$ sudo ansible-galaxy install geerlingguy.nginx
 
 $ mv geerlingguy.nginx/ nginx-lb
 
-$ ansible-galaxy install geerlingguy.apache
+$ sudo ansible-galaxy install geerlingguy.apache
 
 $ mv geerlingguy.apache/ apache-lb
 ```
+
+![install load balancer roles](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3bb63621-6379-4d83-8576-64d6bfb7d4e1)
+
+**ii.** To make Nginx and Apache function as a loadbalancer, we need to update the **`default/main.yml`** file inside the Nginx and Apache roles with the private IP address of our two UAT webservers:
+
+**iii.** Since we cannot use both Nginx and Apache as load balancer at the same time, we need to make use of variables to enable either one depending on preference. We proceed to declare the variables in the **`default/main.yml`** file inside the Nginx and Apache roles as follows:
+
++ We name each variable **`enable_nginx_lb`** and **`enable_apache_lb`** respectively.
+
++ We set both variable values to false as follows: **`enable_nginx_lb: false`** and **`enable_apache_lb: false`**
+
++ We declare another variable **`load_balancer_is_required`** and we set its value to **`false`** as well.
 
