@@ -297,6 +297,16 @@ $ cd /home/ubuntu/ansible-config-mgt
 $ ansible-playbook -i /inventory/dev.yml playbooks/site.yml
 ```
 
+#### BLOCKER❗
+
+![blocker error 5](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b6dc5ef9-6b01-42a9-9fc0-2956179ab1d8)
+
++ We got the error above when we ran the playbook, but after we examined the error message and did some investigations we realised that the hostname in the inventory folder in the **`dev.yml`** file was **`db`** while while in the static-assignments folders in the **`db.yml`** file, we had the hostname as **`database`**. So we fixed this issue and the playbook ran successfully as shown in the images below:
+
+![plybook success 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/570c2107-929b-4c5e-b2fd-63d213875f7b)
+
+![playbook success 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/41124e9d-36aa-4791-9987-3c6294f2714d)
+
 #### <br>Step 4: Load Balancer Roles<br/>
 
 We want to be able to make a choice on which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively: Nginx and Apache.
