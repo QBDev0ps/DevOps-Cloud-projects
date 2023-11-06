@@ -327,7 +327,7 @@ $ mv geerlingguy.apache/ apache-lb
 
 **ii.** To make Nginx and Apache function as a loadbalancer, we need to update the **`default/main.yml`** file inside the Nginx and Apache roles with the private IP address of our two UAT webservers as shown in the images below:
 
-![make nginx loadbalancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9f1c7a42-62d8-482b-89e8-c4fe3aecc829)
+![diagram 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/c4a8192c-f78a-4c59-987f-26870634a42b)
 
 ![make apache loadbalancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/adf0b7d4-3467-4119-ac24-491c9453744e)
 
