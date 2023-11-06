@@ -391,4 +391,6 @@ enable_apache_lb: true
 load_balancer_is_required: true
 ```
 
-**ix.** 
+**ix.** Next we run our playbook by executing the command below:
+
+**`ansible-playbook -i inventory/dev.yml playbooks/site.yml`**
