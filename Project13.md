@@ -134,7 +134,7 @@ The next step is to update the **`site.yml`** file to make use of the dynamic as
 
 ![site-yml config](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/0e49a73d-e805-4f00-b778-1f5a58ef01d2)
 
-#### <br>Step 3: Update Git with Latest Code<br/> 
+#### <br>Step 3: Update Git with Latest Code in `dynamic-assignments` Branch<br/> 
 
 At this point, we we need to push all the changes we made locally to our remote Github repository.
 
@@ -407,3 +407,54 @@ load_balancer_is_required: true
 ![apache playbook 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ffd2102f-0cbe-4c9e-b59d-ef3509bf7997)
 
 ![apache playbook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8808a331-3d36-47ea-86e9-488ad7c61dd0)
+
+#### <br>Step 3: Update Git with Latest Code in `roles-feature` Branch<br/> 
+
+At this point, we we need to push all the changes we made locally to our remote Github repository.
+
+**i.** We use the following commands to stage, commit and push our branch to GitHub:
+
+```
+$ git status
+
+$ git add <selected files>
+
+$ git commit -m "commit message"
+
+$ git push --set-upstream origin dynamic-assignments
+```
+
+![git push set upstream](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/753db294-3be8-4b12-8abb-3a911d8148e9)
+
+**ii.** The next thing we do is to create a **Pull Request** in GitHub by following [these steps:](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) 
+
++ From the **`ansible-config-mgt`** repository page, we click on the **"Pull requests"** tab and then in the next page we click on the **"New pull request"** button.
+
+![pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a27f564c-53f7-49c8-9905-aa7e440fc17b)
+
+![new pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46e0162b-0cb7-4ff4-8514-6fd0c8ab0a7c)
+
++ This takes us to the **"Compare changes"** page where we choose the **`dynamic-assignments`** branch to set up a comparison with the **`main`** branch.
+
+![compare changes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6eddc09c-5460-4d07-a11b-ac6e38daaeb0)
+
++ Once we set up the comparisons between the **`main`** and the **`dynamic-assignments`** branch, we then proceed to click on the **"Create pull request"** button.
+
+![comparing changes create pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/85e25bdb-6afc-4a40-a644-73389a193d5d)
+
++ In the next page, we input a pull request message inside the dialogue box and we click on the  **"Create pull request"** button.
+
+![open a pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f8b48d19-4265-445b-a576-615bd6b7b371)
+
+**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`dynamic-assignments`** branch and check for conflicts with the **`main`** branch.
+
+![merge pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/272752ff-9315-44c9-9987-003e6904c9d1)
+
+**iv.** As we are satisfied and happy with the changes made in **`dynamic-assignments`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
+
+![confirm merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cca3dc74-e690-4243-b32f-166f5f994e9f)
+
+**v.** This takes us to the next page which shows that **`dynamic-assignments`** has been successfully merged to **`main`** branch.
+
+![merge successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a2402b5-1279-452c-8d71-6e7983600ca5)
+
