@@ -345,7 +345,9 @@ $ mv geerlingguy.apache/ apache-lb
 
 **iv.** Next, we update **`static-assignements`** by creating a **`loadbalancers.yml`**:
 
-**`$ touch loadbalancer.yml`**
+**`$ touch loadbalancers.yml`**
+
+![load balancers-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e3c6ffbe-179f-403e-8893-d9175f8dc078)
 
 **v.** And then, we subsequently paste the following block of configuration into the file we just created:
 
@@ -356,3 +358,37 @@ $ mv geerlingguy.apache/ apache-lb
     - { role: apache, when: enable_apache_lb and load_balancer_is_required }
   become: true
 ```
+
+![configure loadbalancers-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f8cd749c-75e2-4428-b07d-229253f2011e)
+
+**vi.** The next step is to update the entry point for our playbooks, the **`site.yml`** file with the following configuration block:
+
+```
+-hosts: lb
+- name: Loadbalancers assignment
+- import_playbook: ../static-assignments/loadbalancers.yml
+when: load_balancer_is_required 
+```
+
+![load balancers site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/18e1a902-bea0-443a-acf9-5d1bc217f560)
+
+**vi.** Afterwards, we update our **`inventory/dev.yml`** file with the private IP address of the load balancer server as shown below:
+
+![inventory dev](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab2368b6-abab-465c-822c-df0891c1f0b6)
+
+**viii.** To complete our configuration, we need to decide whether it is Nginx or Apache that is used as a loadbalancer at any given time.  We make use of the **`env-vars/dev.yml`** file to define which load balancer to use in the UAT environment by setting the respective environmental variables to **`true`**.
+
++ By setting the variable below in the **`env-vars/dev.yml`** file, we activate the load balancer and enable **`nginx`**.
+
+```
+enable_nginx_lb: true
+load_balancer_is_required: true
+```
++ By setting the variable below in the **`env-vars/dev.yml`** file, we activate the load balancer and enable **`apache`**.
+
+```
+enable_apache_lb: true
+load_balancer_is_required: true
+```
+
+**ix.** 
