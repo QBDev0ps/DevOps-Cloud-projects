@@ -408,7 +408,7 @@ load_balancer_is_required: true
 
 ![apache playbook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8808a331-3d36-47ea-86e9-488ad7c61dd0)
 
-#### <br>Step 3: Update Git with Latest Code in `roles-feature` Branch<br/> 
+#### <br>Step 5: Update Git with Latest Code in `roles-feature` Branch<br/> 
 
 At this point, we we need to push all the changes we made locally to our remote Github repository.
 
@@ -421,10 +421,14 @@ $ git add <selected files>
 
 $ git commit -m "commit message"
 
-$ git push --set-upstream origin dynamic-assignments
+$ git push --set-upstream origin roles-feature
 ```
 
-![git push set upstream](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/753db294-3be8-4b12-8abb-3a911d8148e9)
+![git 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a91f5ccc-e301-45c2-834f-28e043283a80)
+
+![git 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4b0c3004-afee-4c5e-beeb-9d6c1ffd7bea)
+
+![git 3](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1aaf349b-422a-48ba-ad02-6f3784a2c972)
 
 **ii.** The next thing we do is to create a **Pull Request** in GitHub by following [these steps:](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) 
 
@@ -434,27 +438,27 @@ $ git push --set-upstream origin dynamic-assignments
 
 ![new pull requests](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/46e0162b-0cb7-4ff4-8514-6fd0c8ab0a7c)
 
-+ This takes us to the **"Compare changes"** page where we choose the **`dynamic-assignments`** branch to set up a comparison with the **`main`** branch.
++ This takes us to the **"Compare changes"** page where we choose the **`roles-feature`** branch to set up a comparison with the **`main`** branch.
 
-![compare changes](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/6eddc09c-5460-4d07-a11b-ac6e38daaeb0)
+![compare changes 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3da7a80b-f71a-4571-8396-8c968e12e05c)
 
 + Once we set up the comparisons between the **`main`** and the **`dynamic-assignments`** branch, we then proceed to click on the **"Create pull request"** button.
 
-![comparing changes create pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/85e25bdb-6afc-4a40-a644-73389a193d5d)
+![comparing changes create pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/16ad29fb-3e7f-4e2b-8ee1-81647ec89c9e)
 
 + In the next page, we input a pull request message inside the dialogue box and we click on the  **"Create pull request"** button.
 
-![open a pull request](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f8b48d19-4265-445b-a576-615bd6b7b371)
+![open a pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2c49be69-a895-4a12-9420-9f1a16498166)
 
 **iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`dynamic-assignments`** branch and check for conflicts with the **`main`** branch.
 
-![merge pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/272752ff-9315-44c9-9987-003e6904c9d1)
+![merge pull request 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9469a339-9db0-4b14-bffe-8230f381674e)
 
 **iv.** As we are satisfied and happy with the changes made in **`dynamic-assignments`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
 
-![confirm merge](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/cca3dc74-e690-4243-b32f-166f5f994e9f)
+![confirm merge 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/70ca9698-9d77-47cd-8cbf-34f983c7e91f)
 
 **v.** This takes us to the next page which shows that **`dynamic-assignments`** has been successfully merged to **`main`** branch.
 
-![merge successful](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2a2402b5-1279-452c-8d71-6e7983600ca5)
+![merge successful 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ec17b6f-c0b7-4dcc-a914-9ea3ebba29fb)
 
