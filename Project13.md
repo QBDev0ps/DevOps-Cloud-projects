@@ -442,7 +442,7 @@ $ git push --set-upstream origin roles-feature
 
 ![compare changes 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3da7a80b-f71a-4571-8396-8c968e12e05c)
 
-+ Once we set up the comparisons between the **`main`** and the **`dynamic-assignments`** branch, we then proceed to click on the **"Create pull request"** button.
++ Once we set up the comparisons between the **`main`** and the **`roles-feature`** branch, we then proceed to click on the **"Create pull request"** button.
 
 ![comparing changes create pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/16ad29fb-3e7f-4e2b-8ee1-81647ec89c9e)
 
@@ -450,15 +450,17 @@ $ git push --set-upstream origin roles-feature
 
 ![open a pull request 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2c49be69-a895-4a12-9420-9f1a16498166)
 
-**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`dynamic-assignments`** branch and check for conflicts with the **`main`** branch.
+**iii.** Now as shown in the image below, we act as a reviewer and we examine the changes in the **`roles-feature`** branch and check for conflicts with the **`main`** branch.
 
 ![merge pull request 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9469a339-9db0-4b14-bffe-8230f381674e)
 
-**iv.** As we are satisfied and happy with the changes made in **`dynamic-assignments`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
+**iv.** As we are satisfied and happy with the changes made in **`roles-feature`**, we click on **"Merge pull request"** and then we click on **"Confirm merge"**
 
 ![confirm merge 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/70ca9698-9d77-47cd-8cbf-34f983c7e91f)
 
-**v.** This takes us to the next page which shows that **`dynamic-assignments`** has been successfully merged to **`main`** branch.
+**v.** This takes us to the next page which shows that **`roles-feature`** has been successfully merged to **`main`** branch.
 
 ![merge successful 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5ec17b6f-c0b7-4dcc-a914-9ea3ebba29fb)
+
+### <br>Conclusion<br/>
 
