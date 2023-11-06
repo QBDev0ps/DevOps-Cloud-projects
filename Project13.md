@@ -390,7 +390,20 @@ load_balancer_is_required: true
 enable_apache_lb: true
 load_balancer_is_required: true
 ```
-
-**ix.** Next we run our playbook by executing the command below:
++ **Tip**: *After testing the variable for the first load balancer, we must stop the load balancer service (e.g **`sudo systemctl stop apache2`** before setting the variable for the second load balancer and subsequently running the playbook against it. This is imperative to avoid errors as two loadbalancers cannot run simultaneously on the same server.*
+  
+**ix.** Next, we run our playbook by executing the command below:
 
 **`ansible-playbook -i inventory/dev.yml playbooks/site.yml`**
+
++ The following images show the playbook output when we set the variable to enable **`nginx`** load balancer:
+
+![nginx playbook 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00174d30-7be1-4128-bfc2-5058ec9763b1)
+
+![nginx playbook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/96162e62-c5bf-48d6-9da6-285cb0d3ecb8)
+
++ The following images show the playbook output when we set the variable to enable **`apache`** load balancer:
+
+![apache playbook 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ffd2102f-0cbe-4c9e-b59d-ef3509bf7997)
+
+![apache playbook 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/8808a331-3d36-47ea-86e9-488ad7c61dd0)
