@@ -325,7 +325,11 @@ $ mv geerlingguy.apache/ apache-lb
 
 ![install load balancer roles](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/3bb63621-6379-4d83-8576-64d6bfb7d4e1)
 
-**ii.** To make Nginx and Apache function as a loadbalancer, we need to update the **`default/main.yml`** file inside the Nginx and Apache roles with the private IP address of our two UAT webservers:
+**ii.** To make Nginx and Apache function as a loadbalancer, we need to update the **`default/main.yml`** file inside the Nginx and Apache roles with the private IP address of our two UAT webservers as shown in the images below:
+
+![make nginx loadbalancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9f1c7a42-62d8-482b-89e8-c4fe3aecc829)
+
+![make apache loadbalancer](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/adf0b7d4-3467-4119-ac24-491c9453744e)
 
 **iii.** Since we cannot use both Nginx and Apache as load balancer at the same time, we need to make use of variables to enable either one depending on preference. We proceed to declare the variables in the **`default/main.yml`** file inside the Nginx and Apache roles as follows:
 
@@ -335,3 +339,6 @@ $ mv geerlingguy.apache/ apache-lb
 
 + We declare another variable **`load_balancer_is_required`** and we set its value to **`false`** as well.
 
+![set variables to false](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5302d8d5-e6df-4ccc-b32f-c4d7e21bf9fb)
+
+![set apache variables to false](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/9fb75b2a-01c8-4d58-9cb4-c464a43fada0)
