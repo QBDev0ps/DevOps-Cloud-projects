@@ -354,12 +354,12 @@ $ mv geerlingguy.apache/ apache-lb
 ```
 - hosts: lb
   roles:
-    - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
-    - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+    - { role: nginx-lb, when: enable_nginx_lb and load_balancer_is_required }
+    - { role: apache-lb, when: enable_apache_lb and load_balancer_is_required }
   become: true
 ```
 
-![configure loadbalancers-yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f8cd749c-75e2-4428-b07d-229253f2011e)
+![diagram 5](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/104e5699-0d5b-4302-a619-abc4c9ac240f)
 
 **vi.** The next step is to update the entry point for our playbooks, the **`site.yml`** file with the following configuration block:
 
@@ -372,9 +372,9 @@ when: load_balancer_is_required
 
 ![load balancers site yml](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/18e1a902-bea0-443a-acf9-5d1bc217f560)
 
-**vi.** Afterwards, we update our **`inventory/dev.yml`** file with the private IP address of the load balancer server as shown below:
+**vii.** Afterwards, we update our **`inventory/dev.yml`** file with the private IP address of the load balancer server as shown below:
 
-![inventory dev](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ab2368b6-abab-465c-822c-df0891c1f0b6)
+![diagram 7](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/f9a8ff3b-4849-4edc-8945-1374fed055fd)
 
 **viii.** To complete our configuration, we need to decide whether it is Nginx or Apache that is used as a loadbalancer at any given time.  We make use of the **`env-vars/dev.yml`** file to define which load balancer to use in the UAT environment by setting the respective environmental variables to **`true`**.
 
