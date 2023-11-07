@@ -2,6 +2,18 @@
 
 [Dynamic assignments](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse.html#includes-dynamic-re-use) in ansible refer to the use of variables whose values are calculated or determined at runtime. This is in contrast to static assignments, where the values of variables are defined and fixed at the time of writing the playbook. In this project, we will continue configuring our UAT Servers whilst learning and practicing new Ansible concepts and modules. We shall discover the flexibility of Ansible with dynamic assignments (include) and  we shall leverage on Ansible pre-built solutons to expand our automation capabilities.
 
+### Project Dependencies
+
+In order to successfully execute this project, the following prerequisites need to be in place:
+
+1. **`Jenkins-Ansible`** Server from [Project 12.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project12.md)
+   
+2. Database Server Instance running Ubuntu Linux Distribution.
+  
+3. Loadbalancer Instance running Ubuntu Linux Distribution.
+   
+4. Two UAT Web Server Instances running Red Hat Enterprise Linux Distribution.
+
 ### <br>Introduction to Ansible Dynamic Assignments (include) and Community Roles<br/>
 
 Dynamic assignments are useful in scenarios where the values of variables need to be determined based on certain conditions or inputs. From our work in [Project 12](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project12.md) we can surmise that static assignments make use of the **`import`** ansible module. However, on the other hand, the module that enables dynamic assignments is the **`include`** ansible module.
