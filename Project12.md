@@ -1,18 +1,6 @@
 ## ANSIBLE REFACTORING AND STATIC ASSIGNMENTS (IMPORTS AND ROLES)
 
 In this project, we will continue working with **`ansible-config-mgt`** repository and make some improvements on our code. We will refactor our Ansible code, create assignments and learn how to use the import functionality. Imports enables the ability to effectively re-use previously created playbooks in a new playbook. In essence, it allows us to organise our tasks and reuse them when necessary.
-   
-### Project Dependencies
-
-In order to successfully execute this project, the following prerequisites need to be in place:
-
-1. **`Jenkins-Ansible`** Server from [Project 12.](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project12.md)
-   
-2. Database Server Instance running Ubuntu Linux Distribution.
-  
-4. Loadbalancer Instance running Ubuntu Linux Distribution.
-   
-5. Two UAT Web Server Instances running Red Hat Enterprise Linux Distribution.
 
 ### <br>Introduction to Code Refactoring<br/>
 
