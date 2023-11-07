@@ -464,3 +464,14 @@ $ git push --set-upstream origin roles-feature
 
 ### <br>Conclusion<br/>
 
+The output images from **ix.** above show that we have been able to successfully use Ansible Dynamic Assignments and Roles to prepare UAT environment for tooling web solution. The goal of our project was to demonstrate the flexibility of Ansible with dynamic assignments (include) and leverage on Ansible roles to how the automation capabilities demonstrated in Projects [11](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project11.md) and [12](https://github.com/QBDev0ps/DevOps-Cloud-projects/blob/main/Project12.md) can be extended.
+
+We began the project by creating and moving into a new branch **`dynamic-assignments`**. Here, we created the necessary folders and files and then inputted the necessary configuration to set our variables. Importantly, in our configuration, we used **`include_vars`** syntax instead of **`include`**, as the  **`include module`** has been deprecated since Ansible version **2.8**, and variants of **`include_*`** must be used. We made use of special variables that will help Ansible dynamically resolve the name of the inventory file being used and that will also help to determine the location of the running playbook, and from there navigate to other paths on the filesystem. We included the variables using a loop. **`with_first_found`** which implies that, looping through the list of files, the first one found is used. After, this we updated the **`site.yml`** file to make use of the dynamic assignment and then we staged, committed and pushed all the changes we made locally in our branch to our remote Github repository. In our repository, we initiated a pull request and merged the **`dynamic-assignments`** branch to our main branch.
+
+In the next phase of this project, we began working with community roles. We created and moved into **`roles-feature`** branch. We then browsed available community roles in [ansible-galaxy](https://galaxy.ansible.com/ui/). We decided to use a [MySQL role developed by](https://galaxy.ansible.com/ui/standalone/roles/geerlingguy/mysql/) **`geerlingguy`**.The next thing we did was to configure Mysql Ansible Role. We did this by creating **`db.yml`** file inside the **`static-assignments`** folder. After putting in the necessary configuration, we moved ahead to reference the **`db.yml`** role inside **`site.yml`**. With the configuration in place inside **`site.yml`**, we proceeded to update the inventory **`ansible-config/inventory/dev.yml`** file with the Private IP address of our DB server. Next, we staged and committed our changes and then we tested the playbook. We ran into a bit of a blocker at this point, but we were able to correct it by fixing a configuration issue and our playbook ran successfully.
+
+
+
+
+
+
