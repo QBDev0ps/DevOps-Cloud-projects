@@ -146,11 +146,18 @@ The Domain Name System (DNS) is a hierarchical, distributed database that is use
 
 **1. Domain names**: These are the human-readable names used to identify websites and other resources on the internet. 
 
-**2. DNS servers**: These are the servers that store and manage the DNS database and respond to DNS queries from clients. DNS records are the entries in the DNS database that map domain names to IP addresses and other information. DNS protocols: These are the protocols that are used to communicate between DNS servers and clients. By understanding how DNS works, organizations can more effectively manage their online presence, optimize their use of DNS resources, and improve the performance and reliability of their networks.
+**2. DNS servers**: These are the servers that store and manage the DNS database and respond to DNS queries from clients. 
 
-Network Address Translation (NAT)
-Network Address Translation (NAT) is a technique that allows devices on a private network to communicate with devices on a public network, such as the internet. It is often used to allow devices on a local network to access the internet without needing a public IP address.
+**3. DNS records**: These are the entries in the DNS database that map domain names to IP addresses and other information. 
 
-There are several benefits to using NAT, including:
+**4. DNS protocols**: These are the protocols that are used to communicate between DNS servers and clients. 
 
-Security: NAT can help to improve security by hiding the IP addresses of devices on the private network from the public network. This can make it more difficult for attackers to target specific devices. Resource conservation: NAT can help to conserve resources by allowing multiple devices on a private network to share a single public IP address. This can be useful when a limited number of public IP addresses are available. Improved performance: NAT can help improve a network’s performance by reducing the number of IP addresses that need to be routed over the internet. This can reduce the load on the network and improve overall performance. NAT is a useful technique for allowing devices on a private network to communicate with devices on a public network while maintaining security and conserving resources.
+#### Network Address Translation (NAT)
+
+Network Address Translation (NAT) is a technique that allows devices on a private network to communicate with devices on a public network, such as the internet. It is often used to allow devices on a local network to access the internet without needing a public IP address. There are several benefits to using NAT, including:
+
+**1. Security**: NAT can help to improve security by hiding the IP addresses of devices on the private network from the public network. This can make it more difficult for attackers to target specific devices. 
+
+**2. Resource conservation**: NAT can help to conserve resources by allowing multiple devices on a private network to share a single public IP address. This can be useful when a limited number of public IP addresses are available. 
+
+**3. Improved performance**: NAT can help improve a network’s performance by reducing the number of IP addresses that need to be routed over the internet. This can reduce the load on the network and improve overall performance. 
