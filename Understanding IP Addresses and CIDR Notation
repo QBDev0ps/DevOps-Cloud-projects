@@ -90,10 +90,24 @@ Class E IP address is defined by including the starting four network address bit
 
 Example for a Class E IP address: **243.164.89.28**
 
-####Limitations of classful IP addressing
+#### Limitations of classful IP addressing
 
 Here are the drawbacks/ cons of the classful IP addressing method:
 
 Risk of running out of address space soon Class boundaries did not encourage efficient allocation of address space Rules for assigning Network ID: The network ID will be assigned based on the below-given rules:
 
 The network ID cannot start with 127 because 127 belongs to class A address and is reserved for internal loopback functions. All bits of network ID set to 1 are reserved for use as an IP broadcast address and cannot be used. All bits of network ID are set to 0. They are used to denote a particular host on the local network and should not be routed.
+
+### Advanced Topics in IP Addressing
+
+Advanced topics in TCP/IP networking involve the study of advanced technologies and techniques for managing and optimizing network performance. These may include routing protocols, which are used to exchange information about network destinations between devices on a network; Virtual Private Networks (VPNs), which enable users to securely connect to a private network over the internet; Quality of Service (QoS), which is a set of technologies and techniques that are used to manage and optimize network performance; the Domain Name System (DNS), which is a hierarchical, distributed database that is used to translate human-readable domain names into machine-readable IP addresses; and Network Address Translation (NAT), which is a technique that is used to allow devices on a private network to communicate with devices on a public network.
+
+#### Routing Protocols 
+
+Routing protocols exchange information about network destinations between devices on a network. They are an important component of advanced TCP/IP networking topics, as they play a key role in determining the best path for data to travel from one device to another.
+
+There are several types of routing protocols, including:
+
+**1.** **Distance Vector Routing Protocols**: These protocols use a distance metric (such as hop count) to determine the best path to a destination. Examples include Routing Information Protocol (RIP) and Interior Gateway Routing Protocol (IGRP). 
+
+2. Link-State Routing Protocols: These protocols maintain a database of the entire network topology and use this information to determine the best path to a destination. Examples include Open Shortest Path First (OSPF) and Intermediate System-to-Intermediate System (IS-IS). Hybrid Routing Protocols: These protocols combine elements of distance vector and link-state protocols. Examples include Enhanced IGRP (EIGRP) and Border Gateway Protocol (BGP). Path Vector Routing Protocols: These protocols use a path vector (a list of autonomous systems that a route traverses) to determine the best path to a destination. Examples include Border Gateway Protocol (BGP) and Protocol Independent Multicast (PIM). By understanding the different routing protocols and how they work, you can more effectively design and manage networks, optimize routing decisions, and improve network performance.
