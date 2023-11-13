@@ -7,3 +7,35 @@ An IP address is a unique address that identifies a device on the internet or a 
 #### What is an IP Address?
 
 An IP address is a string of numbers separated by periods. IP addresses are expressed as a set of four numbers — an example address might be 192.158.1.38. Each number in the set can range from 0 to 255. So, the full IP addressing range goes from **0.0.0.0** to **255.255.255.255.** IP addresses are not random. They are mathematically produced and allocated by the Internet Assigned Numbers Authority (IANA), a division of the Internet Corporation for Assigned Names and Numbers (ICANN). ICANN is a non-profit organization that was established in the United States in 1998 to help maintain the security of the internet and allow it to be usable by all. Each time anyone registers a domain on the internet, they go through a domain name registrar, who pays a small fee to ICANN to register the domain.
+
+![IP-Address](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/759fe000-2797-41d2-bdb4-59c92071dcae)
+
+### Subnetting and Subnet Masks
+
+#### What is Subnetting?
+
+Subnetting is the practice of dividing a network into two or smaller networks. It increases routing efficiency, which helps to enhance the security of the network and reduces the size of the broadcast domain.
+
+IP Subnetting designates high-order bits from the host as part of the network prefix. This method divides a network into smaller subnets.
+
+It also helps you to reduce the size of the routing tables, which is stored in routers. This method also helps you to extend the existing IP address base & restructures the IP address.
+
+A subnet mask is a 32 bits address used to distinguish between a network address and a host address in IP address. A subnet mask identifies which part of an IP address is the network address and the host address. They are not shown inside the data packets traversing the Internet. They carry the destination IP address, which a router will match with a subnet.
+
+![subnetting](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9eb7ebf4-e1c9-4d5e-8c0e-3dd6567ecfd5)
+
+### CIDR Notation and Address Aggregation
+
+#### What is CIDR?
+
+Classless Inter-Domain Routing (CIDR) is an IP address allocation method that improves data routing efficiency on the internet. Every machine, server, and end-user device that connects to the internet has a unique number, called an IP address, associated with it. Devices find and communicate with one another by using these IP addresses. Organizations use CIDR to allocate IP addresses flexibly and efficiently in their networks.
+
+![cidr](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2a028065-ebd0-4bed-8a8b-7ff9d5508419)
+
+#### IP Address Aggregator
+
+IP Address Aggregator is a utility developed to automate minimization process and convert bunch of IPv4 addresses into smallest continuous range(s) possible. IP aggregation is commonly performed by network engineers working with BGP & routers. This utility will help webmasters to configure server firewalls, apache .htaccess files, address masks and so on.
+
+#### Basic Usage
+
+IP Address Aggregation Tool accepts various IP address formats for input (scroll to Input Format Examples for more details). Enter IP Address list in a block of text (one IP Address or range per line) into IP Address Ranges input area. Select desired output format and click submit button. It will automatically discard any non-recognized or invalid address text. Once processed click on Copy To Clipboard button to directly copy results into memory and paste it anywhere else
