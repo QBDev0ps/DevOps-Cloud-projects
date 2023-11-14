@@ -52,3 +52,5 @@ Subnets are like smaller segments within a VPC that help you organize and manage
 |subnet-public2b	|  eu-north-1b	| 10.0.12.0/24 |
 |subnet-private1a	|  eu-north-1a	| 10.0.1.0/24  |
 |subnet-private2b	|  eu-north-1b	| 10.0.2.0/24  |
+
+Go to VPC > Subnets > Create Subnets and select the VPC that you've created previously 
