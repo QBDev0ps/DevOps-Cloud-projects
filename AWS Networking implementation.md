@@ -54,3 +54,12 @@ Subnets are like smaller segments within a VPC that help you organize and manage
 |subnet-private2b	|  eu-north-1b	| 10.0.2.0/24  |
 
 Go to VPC > Subnets > Create Subnets and select the VPC that you've created previously 
+
+![create subnets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/85ca64ee-53a9-4457-80b2-2ebb271889b4)
+
+click on **`CREATE SUBNET`**
+
+![create subnet 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/af574caa-9ab5-4435-b91e-9ae16eca7ba3)
+
+Enter the subnet settings detail. Don't click the **"Create subnet"** button just yet, click the Add new subnet button to add the remaining subnets then after completing all the required subnets, click **"Create subnet"** Note: if you don't choose a zone, it will be randomly picked by AWS.
+
