@@ -36,4 +36,18 @@ As soon as the VPC is created, it's assigned with a vpc-id and there's a route t
 
 ![first VPC](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/83f5c094-f772-4352-9eee-938657fbdf58)
 
+Now you have a VPC and a route table, but you won't be able to put anything inside. If you try to create an EC2 instance for example, you can't proceed as it requires subnets.
 
+#### Creating and configuring subnets
+
+**What are Subnets?**
+
+Subnets are like smaller segments within a VPC that help you organize and manage your resources. Subnets are like dividing an office building into smaller sections, where each section represents a department. In this analogy, subnets are created to organize and manage the network effectively.
+
+![subnet](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e95a3a4b-9b4d-4ce0-b264-80acd061d715)
+
+**Subnet name**	**AZ**	**CIDR block**
+subnet-public1a	  eu-north-1a	 10.0.11.0/24
+subnet-public2b	  eu-north-1b	 10.0.12.0/24
+subnet-private1a	eu-north-1a	 10.0.1.0/24
+subnet-private2b	eu-north-1b	 10.0.2.0/24
