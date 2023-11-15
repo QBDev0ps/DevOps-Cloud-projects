@@ -113,7 +113,7 @@ Understanding public and private subnets helps you to organize and protect your 
 
 Just like in a real city, in your virtual city (VPC), you need roads (Internet Gateway) for people (data) to come and go. And you also need a map or GPS (Routing Table) to tell people (data) which way to go to reach their destination.
 
-##### What is an Internet Gateway?
+#### What is an Internet Gateway?
 
 An Internet Gateway in AWS is like a road that connects your city (VPC) to the outside world (the internet). Without this road, people (data) can't come in or go out of your city (VPC).
 
@@ -149,13 +149,34 @@ Select the VPC
 
 We want the private subnets to be private, we don't want the private subnets to have a default route to the Internet. For that, we'll need to create a separate route table for the public subnets.
 
-##### What is a Routing Table?
+#### What is a Routing Table?
 
 A Routing Table is like a map or GPS. It tells the people (data) in your city (VPC) which way to go to reach their destination. For example, if the data wants to go to the internet, the Routing Table will tell it to take the road (Internet Gateway) that you built.
 
-##### Creating and Configuring Routing Tables
+#### Creating and Configuring Routing Tables
 
 Now that we have our entrance and exit (Internet Gateway), we need to give directions to our resources. This is done through a Routing Table. It's like a map, guiding your resources on how to get in and out of your VPC.
 
 Let's go to the route table menu and create a route table for the public subnets.
 
+![route tables](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c1f9fbdc-7484-4dd8-b9cf-d7f7ad0e45b2)
+
+Put a name for the route table e.g., test-vpc-public-rtb and select the desired vpc - **"first-vpc"**
+
+![create route table](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cb0a6b3c-7c2d-40be-b144-0c7844f3e634)
+
+Once created, edit the route table, add a default route to the Internet Gateway (IGW)
+
+![add route](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e45db494-1b76-4904-b952-5396c4615a47)
+
+Afterwards, select Internet Gateway
+
+![add internet gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ae0a3d0b-2496-474c-9bfb-71a56ca30219)
+
+Next, go to the **"Subnet associations"** tab and click **"Edit subnet associations"**.
+
+![subnet associations](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3059c627-8618-4c8f-ae06-abe7f15fcde8)
+
+Select the public subnets and click **"Save associations"**.
+
+![edit subnet associations](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f1c5028-0a2f-494e-b5b5-536158713e18)
