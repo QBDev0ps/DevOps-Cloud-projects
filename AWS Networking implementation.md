@@ -219,13 +219,32 @@ Create the NAT Gateway named **"test-nat"** under one of the private subnets. We
 
 ![create nat gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2bb3e4f2-7fe8-40d6-a6d6-a2e07c759178)
 
-You need to allocate Elastic IP because is required for the creation of NAT gateway.
+You need to allocate Elastic IP because is required for the creation of NAT gateway and then click on **"Create NAT Gateway"**.
 
 ![allocate elastic IP](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/431ba184-57ef-43c7-9506-30b95f4fccb8)
 
-The next step is to go to the route table menu and create a route table for the private subnets.
+After creating the NAT Gateway, the next step is to go to the route table menu and create a route table for the private subnets.
 
 Then we edit the route table, add a default route to the Network Address Translation (NAT) Gateway.
 
+![Route tables 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0eff8f0d-6a5b-4858-bc11-83aa6d5ae296)
 
+Next, choose route table **"test-vpc-private-rtb"**, select **"Routes"** tab, and select **"Add Route"**. Under the Target, select the NAT gateway named **"test-nat"**.
 
+![edit route](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9a29ff8d-d0f4-45bc-9b96-a08ac91f5bfd)
+
+![test nat](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cc8cb0f4-0ebd-4ac0-887a-96aad126c335)
+
+Next, go to the **"Subnet associations"** tab and click **"Edit subnet associations"**, then add one of the existing private subnets and click on **"save associations"**.
+
+![save subnet associations](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/43f1ac90-133c-485b-ab03-0daa98b9b8c3)
+
+![route tables update](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/39af91a0-bd1e-45b0-9816-44af569aa9c6)
+
+#### Security Group and Network ACLs
+
+#### Understanding the Differences between Security Groups and Network Access Control Lists
+
+Security groups and network access control lists (ACLs) are both important tools for securing your network on the AWS cloud, but they serve different purposes and have different use cases.
+
+#### Security Groups
