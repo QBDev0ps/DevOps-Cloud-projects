@@ -180,3 +180,12 @@ Next, go to the **"Subnet associations"** tab and click **"Edit subnet associati
 Select the public subnets and click **"Save associations"**.
 
 ![edit subnet associations](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f1c5028-0a2f-494e-b5b5-536158713e18)
+
+The process has now been completed. Now that the VPC is ready, you can run an EC2 instance in public subnets if they need Internet access or in private subnets if they don't.
+
+Note:
+test-vpc-public-rtb: A route table with a target to Internet gateway is a public route table.
+
+test-vpc-private-rtb: A route table with a target to NAT gateway is a private route table.
+
+We will also create the route table for for private but subnets and routes are not yet been attached to it just only created
