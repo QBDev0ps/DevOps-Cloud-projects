@@ -1,4 +1,4 @@
-![image](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9e45e935-42ae-4f7e-bc4c-d4d8645e5cd5)## AWS Networking implementation (VPC, Subnets, IG, NAT, Routing)
+## AWS Networking implementation (VPC, Subnets, IG, NAT, Routing)
 
 #### What is an Amazon VPC?
 
