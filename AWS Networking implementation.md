@@ -1,4 +1,4 @@
-## AWS Networking implementation (VPC, Subnets, IG, NAT, Routing)
+![image](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9e45e935-42ae-4f7e-bc4c-d4d8645e5cd5)## AWS Networking implementation (VPC, Subnets, IG, NAT, Routing)
 
 #### What is an Amazon VPC?
 
@@ -131,4 +131,31 @@ Technically, the subnets are still private. You'll need these to make it work as
   
 + Public IP assigned to the AWS resources (e.g., EC2 instances)
   
-Go to VPC > Internet gateways and click "Create internet gateway"
+Go to VPC > Internet gateway and click **"Create internet gateway"**
+
+![internet gateways](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e9fad9d3-975a-4f7a-be97-e3a8bffa343e)
+
+Put a name tag and click **"create internet gateway"**
+
+![test gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c1cc7d87-302f-4f88-8f07-0a65fe15302a)
+
+Attach the IGW to the test-vpc
+
+![attach to a vpc](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4ee73697-a2a0-487b-ab12-608aecbcad8e)
+
+Select the VPC
+
+![attach to vpc 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/817bef99-dea3-4854-a258-d1f9064663dd)
+
+We want the private subnets to be private, we don't want the private subnets to have a default route to the Internet. For that, we'll need to create a separate route table for the public subnets.
+
+##### What is a Routing Table?
+
+A Routing Table is like a map or GPS. It tells the people (data) in your city (VPC) which way to go to reach their destination. For example, if the data wants to go to the internet, the Routing Table will tell it to take the road (Internet Gateway) that you built.
+
+##### Creating and Configuring Routing Tables
+
+Now that we have our entrance and exit (Internet Gateway), we need to give directions to our resources. This is done through a Routing Table. It's like a map, guiding your resources on how to get in and out of your VPC.
+
+Let's go to the route table menu and create a route table for the public subnets.
+
