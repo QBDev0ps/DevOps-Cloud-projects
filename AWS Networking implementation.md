@@ -183,9 +183,49 @@ Select the public subnets and click **"Save associations"**.
 
 The process has now been completed. Now that the VPC is ready, you can run an EC2 instance in public subnets if they need Internet access or in private subnets if they don't.
 
-Note:
-test-vpc-public-rtb: A route table with a target to Internet gateway is a public route table.
+#### Note:
 
-test-vpc-private-rtb: A route table with a target to NAT gateway is a private route table.
+**test-vpc-public-rtb**: A route table with a target to Internet gateway is a public route table.
 
-We will also create the route table for for private but subnets and routes are not yet been attached to it just only created
+**test-vpc-private-rtb**: A route table with a target to NAT gateway is a private route table.
+
++ We will also create the route table for for private but subnets and routes are not yet been attached to it just only created.
+
+![2 subnets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b89e5714-c432-4d32-be1d-96974bd1243c)
+
+#### NAT Gateway and Private Subnets
+
+#### Introduction to Private Subnets and NAT Gateway
+
+In your AWS Virtual Private Cloud (VPC), private subnets are secluded areas where you can place resources that should not be directly exposed to the internet. But what if these resources need to access the internet for updates or downloads? This is where the NAT Gateway comes in.
+
+A private subnet in AWS is like a secure room inside your house (VPC) with no windows or doors to the street (internet). Anything you place in this room (like a database) is not directly accessible from the outside world.
+
+#### Understanding NAT Gateway
+
+A Network Address Translation (NAT) Gateway acts like a secure door that only opens one way. It allows your resources inside the private subnet to access the internet for things like updates and downloads, but it doesn't allow anything from the internet to enter your private subnet.
+
+A Network Address Translation (NAT) allows instances in your private subnet to connect to outside services like Databases but restricts external services to connecting to these instances.
+
+#### Creating a NAT Gateway and Linking It to a Private Subnet
+
+We'll proceed to follow a step-by-step on how to create a NAT Gateway and how to link it to your private subnet. We'll also cover how to configure a route in your routing table to direct outbound internet traffic from your private subnet to the NAT Gateway.
+
+Go to VPC > NAT Gateways and click **"Create NAT Gateway"**.
+
+![nat gateways](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d33f1bff-19d9-4fd2-a937-a95a12acaae5)
+
+Create the NAT Gateway named **"test-nat"** under one of the private subnets. We choose the **"subnet-private1a"** as the subnet.
+
+![create nat gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2bb3e4f2-7fe8-40d6-a6d6-a2e07c759178)
+
+You need to allocate Elastic IP because is required for the creation of NAT gateway.
+
+![allocate elastic IP](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/431ba184-57ef-43c7-9506-30b95f4fccb8)
+
+The next step is to go to the route table menu and create a route table for the private subnets.
+
+Then we edit the route table, add a default route to the Network Address Translation (NAT) Gateway.
+
+
+
