@@ -34,7 +34,7 @@ To fix the error in the image above, we can enter the command below and enter th
 
 `su`
 
-And then,  we can subsequently rerun the `sudo apt upgrade` command. Below is the correct output:
+And then, we can subsequently rerun the `sudo apt upgrade` command. Below is the correct output:
 
 ![sudo correct](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/1d06bfb8-efee-4051-a870-39a0e9980b87)
 
