@@ -183,7 +183,7 @@ We can also make a local copy of our remote repository inside our local machine.
 
 `git clone https://github.com/Quadri-Bello/DevOps_Repo.git`
 
-As seen below entering the `git clone` command along with the link to our repository downloads our local repository onto our local computer.
+As seen below, entering the `git clone` command along with the link to our repository downloads our local repository onto our local computer.
 
 ![git clone](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/66494618-55ee-4b8a-b575-3567d04329ac)
 
