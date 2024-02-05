@@ -67,3 +67,37 @@ In order to successfully execute this project, the following prerequisites need 
 [artifact_repository]
 <Artifact_repository-Private-IP-Address>
 ```
+
+**`dev`** inventory file
+
+```
+[tooling]
+<Tooling-Web-Server-Private-IP-Address>
+
+[todo]
+<Todo-Web-Server-Private-IP-Address>
+
+[nginx]
+<Nginx-Private-IP-Address>
+
+[db:vars]
+ansible_user=ec2-user
+ansible_python_interpreter=/usr/bin/python
+
+[db]
+<DB-Server-Private-IP-Address>
+```
+
+**`pentest`** inventory file
+
+```
+[pentest:children]
+pentest-todo
+pentest-tooling
+
+[pentest-todo]
+<Pentest-for-Todo-Private-IP-Address>
+
+[pentest-tooling]
+<Pentest-for-Tooling-Private-IP-Address>
+```
