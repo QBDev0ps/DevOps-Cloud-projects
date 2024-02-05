@@ -42,6 +42,7 @@ In order to successfully execute this project, the following prerequisites need 
   
 3. Our Ansible inventory is expected to look like this:
 
+```
 ├── ci
 ├── dev
 ├── pentest
@@ -49,9 +50,11 @@ In order to successfully execute this project, the following prerequisites need 
 ├── prod
 ├── sit
 └── uat
+```
 
 **`ci`** inventory file
 
+```
 [jenkins]
 <Jenkins-Private-IP-Address>
 
@@ -63,4 +66,4 @@ In order to successfully execute this project, the following prerequisites need 
 
 [artifact_repository]
 <Artifact_repository-Private-IP-Address>
-
+```
