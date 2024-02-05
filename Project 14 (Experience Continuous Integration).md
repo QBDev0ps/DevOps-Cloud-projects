@@ -20,3 +20,23 @@ However, the concept of CI is not only about committing your code. There is a ge
 
 **Deploy an artifact from CI:** At this stage, the difference between CI and CD is spelt out. As you now know, CI is Continuous Integration, which is everything we have been discussing so far. CD on the other hand is Continuous Delivery which ensures that software checked into the mainline is always ready to be deployed to users. The deployment here is manually triggered after certain QA tasks are passed successfully. There is another CD known as Continuous Deployment which is also about deploying the software to the users, but rather than manual, it makes the entire process fully automated. Thus, Continuous Deployment is just one step ahead in automation than Continuous Delivery.
 
+### Project Dependencies
+
+In order to successfully execute this project, the following prerequisites need to be in place:
+
+1. Servers: We will be making use of six(6) AWS virtual machines for this project and these include:
+
++ Jenkins server: This will be used to implement our CI/CD workflows or pipelines. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 8080.
++ Nginx server: This would act as the reverse proxy server to our site and tool.
++ SonarQube server: This will be used for Code quality analysis. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 9000.
++ Artifactory server: This will be implemented as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081.
++ Database server: This will serve as the databse server for the Todo application
++ Todo webserver: This will be used to host the Todo web application.
++ Security groups: For the purposes of this project, we can have one security group that is open to all traffic. This should however not be attempted in a real DevOps enviroment.
+Your Ansible inventory should look like this
+   
+2. Database Server Instance running Ubuntu Linux Distribution.
+  
+3. Loadbalancer Instance running Ubuntu Linux Distribution.
+   
+4. Two UAT Web Server Instances running Red Hat Enterprise Linux Distribution.
