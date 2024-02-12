@@ -38,9 +38,9 @@ In order to successfully execute this project, the following prerequisites need 
   
 + Todo webserver: This will be used to host the Todo web application.
   
-2. Security groups: For the purposes of this project, we can have one security group that is open to all traffic. This should however not be attempted in a real DevOps enviroment.
+2. Security Groups: For the purposes of this project, we can have one security group that is open to all traffic. This should however not be attempted in a real DevOps enviroment.
   
-3. Our Ansible inventory is expected to look like this:
+3. Ansible Inventory: Our Ansible inventory is expected to look like this:
 
 ```
 ├── ci
@@ -101,3 +101,10 @@ pentest-tooling
 [pentest-tooling]
 <Pentest-for-Tooling-Private-IP-Address>
 ```
+
+4. Ansible Roles: We need to add two more roles to ansible for our CI Environment:
+
+1. [SonarQube:](https://www.sonarqube.org) SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality, it is used to perform automatic reviews with static analysis of code to detect bugs, [code smells](https://en.wikipedia.org/wiki/Code_smell), and security vulnerabilities.
+2. [Artifactory:](https://jfrog.com/artifactory/) Artifactory is a product by [JFrog](https://jfrog.com) that serves as a binary repository manager. The binary repository is a natural extension to the source code repository, in that the outcome of your build process is stored. It can be used for certain other automation, but we will it strictly to manage our build artifacts.
+
+
