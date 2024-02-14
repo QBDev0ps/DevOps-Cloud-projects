@@ -207,36 +207,47 @@ Visual Studio Code is a streamlined code editor with support for development ope
 
 **i.** After connecting to our server we must first update all installed packages and their dependencies before commencing other installations or configurations. We do this by executing the following command: 
 
-**`$ sudo apt update -y`**
+**`$ sudo yum update -y`**
 
-![sudo apt update -y](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/5c7ab738-cee6-4385-b1f1-9ddff8f263af)
+![update jenkins server](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cd776836-fe2c-4acf-9fe6-a7dc69d4a40a)
 
 **ii.** Next, we run the following set of commands to [install dependencies for Jenkins](https://pkg.jenkins.io/debian-stable/):
 
 ```
-$ sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \ https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+$ sudo wget -O /etc/yum.repos.d/jenkins.repo \ https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
-$ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \ https://pkg.jenkins.io/debian-stable binary/ | sudo tee \ /etc/apt/sources.list.d/jenkins.list > /dev/null
+$ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 
-$ sudo apt-get update
+$ sudo dnf upgrade
 
-$ sudo apt-get install fontconfig openjdk-11-jre
+# Add required dependencies for the jenkins package
 
+$ sudo dnf install fontconfig java-11-openjdk
 ```
 
-![jenkins installation 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4e9df2c4-1a6c-41a8-9d51-18289cae592d)
+![jenkins installation1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/411dbe67-5f08-456a-a58c-f703b4b2ecf2)
 
 **iii.** Then we execute the command below to install Jenkins:
 
-**`$ sudo apt-get install jenkins`**
+```
+$ sudo dnf install jenkins
 
-![jenkins installation 2](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/4a53c019-5a7c-4d84-8999-4cb0ec297313)
+$ sudo systemctl daemon-reload
+```
 
-**iv.** To ensure Jenkins is up and running, we enter the command below:
+![jenkins installation 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/18b922b5-11a6-4681-9a6f-dd1bbf970bf9)
 
-**`$ sudo systemctl status jenkins`**
+**iv.** To start and enable Jenkins, then ensure Jenkins is up and running, we enter the commands below:
 
-![sudo systemctl jenkins](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d401bbae-7a7b-4e94-bbe6-08f8302dc06c)
+```
+$ sudo systemctl start jenkins
+
+$ sudo systemctl enable jenkins
+
+$ sudo systemctl status jenkins
+```
+
+![start and enable jenkins](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/78d95951-446a-4121-9136-749bf23cbc66)
 
 **v.** Then we begin setting up Jenkins by accessing it via our browser using the following syntax: 
 
