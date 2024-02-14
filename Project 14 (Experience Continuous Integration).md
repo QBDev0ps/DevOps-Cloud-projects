@@ -121,12 +121,10 @@ We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 inst
 ![launch EC2 instance](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d331142c-a425-485d-9338-5e8f21d2a37d)
 
 **ii.** Under **Name and tags**, we provide a unique name for our server.
-
-![name and tags](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/e9c2dc00-0a59-433a-ab2d-6136183f190f)
   
-**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of Ubuntu Linux Server 22.04 LTS (HVM).
+**iii.** From the **Applications and Amazon Machine Image (AMI Image)** tab, we ensure we select the free tier eligible version of RHEL Linux Server 8.7.0(HVM).
 
-![Application and OS Image](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/ae844641-2121-49de-99e3-67c8621c4027)
+![launch instance](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/09c8d44a-43a4-4900-b906-e4c6087cfacf)
 
 **iv.** Under **Key pair**, we select an existing one. (You can create a new key pair if you do not have one and the same key pair can be used for all the instances that will be provisioned in this project.)
 
