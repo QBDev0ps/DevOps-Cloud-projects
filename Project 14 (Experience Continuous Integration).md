@@ -198,9 +198,10 @@ Considering that we'll be using Jenkins with Github and configuring Web Hooks in
 
 After we have provisioned our server and we have opened the necessary port, we must next connect to the server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our server. We carry this out by doing the following:
 
-**i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
+**i.** Download and Install an SSH client: Download and install [Visual Studio Code.](https://code.visualstudio.com/download)
+Visual Studio Code is a streamlined code editor with support for development operations like debugging, task running, and version control. It aims to provide just the tools a developer needs for a quick code-build-debug cycle and leaves more complex workflows to fuller featured IDEs, such as Visual Studio IDE. VS Code Remote SSH lets you access a remote computer or virtual machine securely over a network connection. You can connect over SSH into another machine from Visual Studio Code and interact with files and folders anywhere on that remote filesystem.
 
-**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our Termius SSH client by following [these instructions:](https://dev.to/aws-builders/how-to-connect-your-ec2-linux-instance-with-termius-5209)
+**ii.** Establish connection with the EC2 instance: We configure connection to our EC2 instance via our VS Code platform by following [these instructions:](https://code.visualstudio.com/docs/remote/ssh)
 
 #### <br>Step 5: Jenkins Installation and Set-up<br/>
 
