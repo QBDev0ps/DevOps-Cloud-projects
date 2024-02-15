@@ -275,7 +275,7 @@ $ sudo systemctl status jenkins
 
 ![skip and continue as admin](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/82c59719-18a2-49b5-b1aa-610527076f30)
 
-**x.** In the instance configuration page, we paste in our elastic ip address and click on **"Save and Finish"**.
+**x.** In the instance configuration page, we  click on **"Save and Finish"**.
 
 ![instance configuration](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/7a0e7627-7661-4af4-b270-d9efbca0207f)
 
