@@ -259,7 +259,7 @@ $ sudo systemctl status jenkins
 
 **`sudo cat /var/lib/jenkins/secrets/initialAdminPassword`**
 
-![initial admin password](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b4b11c70-6079-4fef-a5bd-996b8959fc5a)
+![obtain jenkins password](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/58f4b959-103d-42ba-945e-11c77e0ace43)
 
 **vii.** Next, from the server, we copy the password as seen in the image above and we paste it in the dialogue box in the **"Unlock Jenkins"** page after which we click on **"Continue"**.
 
