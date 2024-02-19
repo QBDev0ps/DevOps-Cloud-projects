@@ -283,3 +283,14 @@ $ sudo systemctl status jenkins
 
 ![installation complete](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/b725826c-ef8b-4906-b6ac-02d37cca0d43)
 
+### Configuring Ansible For Jenkins Deployment
+
+In previous projects, we were launching Ansible commands manually from a CLI. Now, with Jenkins, we will start running Ansible from Jenkins UI.
+
+To do this,
+
+1. Navigate to Jenkins URL
+
+2. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, the we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in Blue Ocean, and we subsequently install and open Blue Ocean Jenkins Plugin.
+
+3. Create a new pipeline 
