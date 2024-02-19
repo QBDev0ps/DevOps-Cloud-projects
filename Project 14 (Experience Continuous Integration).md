@@ -424,4 +424,8 @@ $ git commit -m "added test stage"
 $ git push --set-upstream origin feature/jenkinspipeline-stages
 ```
 
-4. To make our new branch show up in Jenkins, we need to tell Jenkins to scan the repository.
+4. To make our new branch show up in Jenkins, we need to tell Jenkins to scan the repository. We navigate to the Ansible project and click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+5. We refresh the page and both branches start building automatically. We go into Blue Ocean and see both branches there too.
+
+6. In Blue Ocean, we can now see how the **`Jenkinsfile`** has caused a new step in the pipeline launch build for the new branch.
