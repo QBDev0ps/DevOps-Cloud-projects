@@ -351,6 +351,77 @@ pipeline {
 
 9.  We navigate to our VS Code terminal and execute the following commands:
 
-10. We go back to the pipeline again, and this time click on **`Build now`**
+```
+$ git config --global user.name "QuadriBello"      #enter username credentials for github 
 
-12. This triggers a build and we are able to see the effect of our basic Jenkinsfile configuration by going through the console output of the build.
+$ git config --global user.email "moyor_bello@yahoo.co.uk"  #enter email credentials for github 
+ 
+$ cd ansible-config-mgt           #move into the ansible-config-mgt repository
+
+$ git branch                      #confirm you are in the main branch
+
+$ git add .                       #stage all changes
+
+$ git commit -m "saved Jenkinsfile" #save staged changes and include a commit message
+
+$ git push                       #push changes to remote repository
+```
+
+10. We go back to the pipeline again, and this time click on **`Scan Repository now`** and we refresh the Jenkins GUI page.
+
+11. This triggers a build and we are able to see the effect of our basic Jenkinsfile configuration by going through the console output of the build.
+
+To really appreciate and feel the difference of Cloud Blue UI, we proceed to trigger the build again from Blue Ocean interface.
+
+1. We click on the Blue Ocean plugin on the Jenkins dashboard.
+
+2. Select your project
+   
+3. Click on the play button against the branch
+
+4. This pipeline is a multibranch one. This means, if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch.
+  
+Let us see this in action.
+
+1. Using the command below, we create a new git branch and name it **`feature/jenkinspipeline-stages`**
+
+**`$ git checkout -b feature/jenkinspipeline-stages`**
+   
+2. Currently we only have the `Build` stage. Let us add another stage called `Test`. We paste the code snippet below:
+   
+```
+   pipeline {
+    agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          sh 'echo "Testing Stage"'
+        }
+      }
+    }
+    }
+}
+
+```
+
+3.And then we add, commit and push the new changes to github with the following set of commands:
+
+```
+$ git add .
+
+$ git commit -m "added test stage"
+
+$ git push --set-upstream origin feature/jenkinspipeline-stages
+```
+
+4. To make our new branch show up in Jenkins, we need to tell Jenkins to scan the repository.
