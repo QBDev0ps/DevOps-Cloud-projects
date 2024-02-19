@@ -315,7 +315,7 @@ To do this,
 
 1. We naviagte to the ansible-config-mgmt repository in our github account and we copy the HTTPS clone URL.
 
-2. We navigate to our VS Code terminal and intall git using the following command:
+2. We navigate to our VS Code terminal and install git using the following command:
 
 **` $ sudo yum install git -y`**
 
@@ -344,9 +344,13 @@ pipeline {
 }
 ```
 6. Now we go back into the Ansible pipeline in Jenkins, and select **`configure`**.
+   
+7. We scroll down to **`GitHub`** section and select Jenkins Credential provider, then we enter our GitHub credentials.
+   
+8. We scroll down to **`Build Configuration`** section and specify the location of the **Jenkinsfile** at **`deploy/Jenkinsfile`**.
 
-7. We scroll down to **`Build Configuration`** section and specify the location of the **Jenkinsfile** at **`deploy/Jenkinsfile`**.
+9.  We navigate to our VS Code terminal and execute the following commands:
 
-8. We go back to the pipeline again, and this time click on **`Build now`**
+10. We go back to the pipeline again, and this time click on **`Build now`**
 
-9. 
+12. This triggers a build and we are able to see the effect of our basic Jenkinsfile configuration by going through the console output of the build.
