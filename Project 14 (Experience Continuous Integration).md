@@ -325,23 +325,38 @@ To do this,
 
 + Next we select the Repo owner and the **`ansible-config-mgt`** repository and then we click on **`Create Pipeline`**
 
+![create pipeline](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2a1a682e-b4cf-44eb-b522-cd98791ff6b3)
+
 + At this point we do not have a Jenkinsfile in the Ansible repository, so Blue Ocean attempts to give us some guidance to create one. But we do not need this. Rather, we opt to ceate one ourselves. So, we click on Administration to exit the Blue Ocean console.
 
+![click on administration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/16e1c76b-fa11-4f4c-b5ec-d4bccc1b684b)
+
 + We can find our newly created pipeline in our Jenkins dashboard.
+
+![created pipeline](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9afe4af0-9fd1-40b6-a32a-6d59a93a2c2f)
+
 
 ### Creating our `Jenkinsfile`
 
 1. We naviagte to the ansible-config-mgmt repository in our github account and we copy the HTTPS clone URL.
 
+![copy ansible-config-mgt clone url](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/54539b55-1d58-4b36-930c-327ee73e7713)
+
 2. We navigate to our VS Code terminal and install git using the following command:
 
 **` $ sudo yum install git -y`**
+
+![install git](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5b4d3d33-6dc0-4055-91f8-fad195939701)
 
 3. After completing the installation we clone our ansible config mgt repo using the URL we copied:
 
 **` $ git clone https://github.com/QuadriBello/ansible-config-mgt.git`**
 
+![git clone](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/770dc96e-b9a0-4692-b1ca-7c006ea7ed37)
+
 4. Inside the Ansible project, we create a new directory **`deploy`** and then start a new file **`Jenkinsfile`** inside the directory.
+
+![creae directory deploy and file jenkinsfile](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6b681ec4-ae1d-45e7-b07d-1498b7bc7e62)
 
 5. Next, we add the code snippet below to start building the **`Jenkinsfile`** gradually. This pipeline currently has just one stage called **`Build`** and the only thing we are doing is using the **`shell script`** module to echo **`Building Stage`**
 
@@ -361,11 +376,20 @@ pipeline {
     }
 }
 ```
+
+![jenkins file code](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/307082c8-15d6-47dd-a870-c7e04a1bdbd9)
+
 6. Now we go back into the Ansible pipeline in Jenkins, and select **`configure`**.
+
+![select configure](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/65ffadfe-7330-43c9-9857-be35852f6496)
    
 7. We scroll down to **`GitHub`** section and select Jenkins Credential provider, then we enter our GitHub credentials.
+
+![Jenkins credential provider](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/baae7fb8-7692-4f19-a03b-5c89327a2250)
    
 8. We scroll down to **`Build Configuration`** section and specify the location of the **Jenkinsfile** at **`deploy/Jenkinsfile`**.
+
+![build configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/61aefbab-1422-4743-a38f-d6ee241d03f5)
 
 9.  We navigate to our VS Code terminal and execute the following commands:
 
@@ -385,17 +409,25 @@ $ git commit -m "saved Jenkinsfile" #save staged changes and include a commit me
 $ git push                       #push changes to remote repository
 ```
 
+![git push](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2af054c0-0aa0-41e1-900b-665b3eb41617)
+
 10. We go back to the pipeline again, and this time click on **`Scan Repository now`** and we refresh the Jenkins GUI page.
 
+![scan repo now](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1b0a67f8-4d06-437d-bfea-f47701c33024)
+
 11. This triggers a build and we are able to see the effect of our basic Jenkinsfile configuration by going through the console output of the build.
+
+![console output](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9004f0ce-3a19-4c48-a221-4b49e9ebc0d9)
 
 To really appreciate and feel the difference of Cloud Blue UI, we proceed to trigger the build again from Blue Ocean interface.
 
 1. We click on the Blue Ocean plugin on the Jenkins dashboard.
 
-2. Select your project
+2. We select our project
    
-3. Click on the play button against the branch
+3. And we click on the play button against the branch
+
+![blue ocean build](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a555ee04-b008-4ae7-b0dc-e1e6bf069e2c)
 
 4. This pipeline is a multibranch one. This means, if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch.
   
@@ -404,7 +436,9 @@ Let us see this in action.
 1. Using the command below, we create a new git branch and name it **`feature/jenkinspipeline-stages`**
 
 **`$ git checkout -b feature/jenkinspipeline-stages`**
-   
+
+![git checkout](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e6ac9769-9e73-4b9f-b305-3124badbf045)
+
 2. Currently we only have the `Build` stage. Let us add another stage called `Test`. We paste the code snippet below:
    
 ```
@@ -432,7 +466,9 @@ Let us see this in action.
 
 ```
 
-3.And then we add, commit and push the new changes to github with the following set of commands:
+![jenkins file test stage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/199d9e93-3a70-49f1-bfcb-c3f86cc65545)
+
+3. And then we add, commit and push the new changes to github with the following set of commands:
 
 ```
 $ git add .
@@ -442,8 +478,14 @@ $ git commit -m "added test stage"
 $ git push --set-upstream origin feature/jenkinspipeline-stages
 ```
 
+![git add commit and push](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5727bde0-bb34-484b-acac-d63bae02d4ab)
+
 4. To make our new branch show up in Jenkins, we need to tell Jenkins to scan the repository. We navigate to the Ansible project and click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+![scan repository for chnages](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0fd088a5-fb25-45ee-bd56-f45656357c53)
 
 5. We refresh the page and both branches start building automatically. We go into Blue Ocean and see both branches there too.
 
 6. In Blue Ocean, we can now see how the **`Jenkinsfile`** has caused a new step in the pipeline launch build for the new branch.
+
+![blue ocean testing stage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9798db71-3d1a-44ab-a7ea-3f2fd153fb96)
