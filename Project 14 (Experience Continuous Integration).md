@@ -293,4 +293,25 @@ To do this,
 
 2. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, the we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in Blue Ocean, and we subsequently install and open Blue Ocean Jenkins Plugin.
 
-3. Create a new pipeline 
+3. In the blue Ocean User Interface, we click on **`Create a new pipeline`** button.
+
++ We select GitHub as where we store our code.
+
++ Next, we proceed to connect Jenkins with GitHub.
+
++ We login to our Github account and generate an access token.
+
++ We copy the access token
+
++ Then we paste it and connect
+
++ Next we select the Repo owner and the **`ansible-config-mgt`** repository and then we click on **`Create Pipeline`**
+
++ At this point we do not have a Jenkinsfile in the Ansible repository, so Blue Ocean attempts to give us some guidance to create one. But we do not need this. Rather, we opt to ceate one ourselves. So, we click on Administration to exit the Blue Ocean console.
+
++ We can find our newly created pipeline in our Jenkins dashboard.
+
+### Creating our `Jenkinsfile`
+
+Inside the Ansible project, create a new directory **`deploy`** and start a new file **`Jenkinsfile`** inside the directory.
+
