@@ -313,5 +313,38 @@ To do this,
 
 ### Creating our `Jenkinsfile`
 
-Inside the Ansible project, create a new directory **`deploy`** and start a new file **`Jenkinsfile`** inside the directory.
+1. We naviagte to the ansible-config-mgmt repository in our github account and we copy the HTTPS clone URL.
 
+2. We navigate to our VS Code terminal and intall git using the following command:
+
+**` $ sudo yum install git -y`**
+
+3. After completing the installation we clone our ansible config mgt repo using the URL we copied:
+
+**` $ git clone https://github.com/QuadriBello/ansible-config-mgt.git`**
+
+4. Inside the Ansible project, we create a new directory **`deploy`** and then start a new file **`Jenkinsfile`** inside the directory.
+
+5. Next, we add the code snippet below to start building the **`Jenkinsfile`** gradually. This pipeline currently has just one stage called **`Build`** and the only thing we are doing is using the **`shell script`** module to echo **`Building Stage`**
+
+```
+pipeline {
+    agent any
+
+
+  stages {
+    stage('Build') {
+      steps {
+        script {
+          sh 'echo "Building Stage"'
+        }
+      }
+    }
+    }
+}
+```
+6. Now we go back into the Ansible pipeline in Jenkins, and select **`configure`**.
+
+7. We scroll down to **`Build Configuration`** section and specify the location of the **Jenkinsfile** at **`deploy/Jenkinsfile`**.
+
+8. Back to the pipeline again, this time click "Build now"
