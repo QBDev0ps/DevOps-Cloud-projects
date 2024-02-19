@@ -347,4 +347,6 @@ pipeline {
 
 7. We scroll down to **`Build Configuration`** section and specify the location of the **Jenkinsfile** at **`deploy/Jenkinsfile`**.
 
-8. Back to the pipeline again, this time click "Build now"
+8. We go back to the pipeline again, and this time click on **`Build now`**
+
+9. 
