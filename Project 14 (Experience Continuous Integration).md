@@ -291,19 +291,37 @@ To do this,
 
 1. Navigate to Jenkins URL
 
+![navigate to jenkins url](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b828c6ab-c700-4a4d-ab7a-0d18659312c4)
+
 2. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, the we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in Blue Ocean, and we subsequently install and open Blue Ocean Jenkins Plugin.
+
+![install blue ocean plug in](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4c03d450-ac8d-4065-9fa7-04f18e6ba5ba)
 
 3. In the blue Ocean User Interface, we click on **`Create a new pipeline`** button.
 
+![create new pipeline](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6eafdff7-5709-4f62-9b55-b26a7a8ca576)
+
 + We select GitHub as where we store our code.
+
+![select github as code storage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ab932f72-a380-4e11-8522-d204717ac010)
 
 + Next, we proceed to connect Jenkins with GitHub.
 
+![connect jenkins to github](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/22548a10-6429-4b84-8ca3-4401b4bbcb62)
+
 + We login to our Github account and generate an access token.
+
+![jenkins token1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ce2f0c23-8d4b-422d-9b0e-608cedb02b3d)
+
+![jenkins token 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4c9bf178-3b33-4e15-ac11-00e8aa403429)
 
 + We copy the access token
 
+![copy jenkins token](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/77cc67da-6116-4e18-bf86-46990b61b69a)
+
 + Then we paste it and connect
+
+![paste token and connect](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8b81b77e-f323-44ac-8736-dc8ba59a507a)
 
 + Next we select the Repo owner and the **`ansible-config-mgt`** repository and then we click on **`Create Pipeline`**
 
