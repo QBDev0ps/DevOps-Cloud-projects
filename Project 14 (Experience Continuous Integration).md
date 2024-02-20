@@ -489,3 +489,53 @@ $ git push --set-upstream origin feature/jenkinspipeline-stages
 6. In Blue Ocean, we can now see how the **`Jenkinsfile`** has caused a new step in the pipeline launch build for the new branch.
 
 ![blue ocean testing stage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9798db71-3d1a-44ab-a7ea-3f2fd153fb96)
+
+7. Create a pull request to merge the latest code into the `main branch`
+
+![pull request](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/85aa152f-d47a-497d-914c-39ac1bc7cf9f)
+
+8. After merging the `PR`, we go back into our terminal and switch into the `main` branch.
+
+**`$ git switch main`**
+
+![git switch main](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8b9b3b9c-3bcb-4bad-8e3c-bbba29e65535)
+
+9. Then we pull the latest change from our GitHub repository:
+
+**`$ git pull`**
+
+![git pull](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b31ddcc1-fb91-4a5b-9645-846eca3ea680)
+
+10. Next we create a new branch, and add more stages into the Jenkins file to simulate the **`Package`**, **`Deploy`** and **`Clean up`** phases.
+
+![add new stages](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ca2d7e03-30d4-49e8-bfc7-133180f5f1f1)
+
+11. And then we add, commit and push the new changes to github with the following set of commands:
+
+```
+$ git add .
+
+$ git commit -m "added new stages"
+
+$ git push
+```
+
+![git add commit and push 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4b0dbc40-44e1-4b43-a73b-1d3880c67bad)
+
+12. We navigate back to our Jenkins pipeline and we click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+![scan repository now 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/62629230-3fd1-4c85-b5b8-e0f1b811303f)
+
+13. Then we verify in Blue Ocean that all the stages are working.
+
+![blue ocean new stages](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4884ce7b-1bef-4eff-a26d-7e87efc421bd)
+
+### Running Ansible Playbook from Jenkins
+
+Now that we have a broad overview of a typical Jenkins pipeline. We proceed to get the actual Ansible deployment to work by implementing the following: 
+
+1. Installing Ansible on Jenkins
+   
+2. Installing Ansible plugin in Jenkins UI
+
+3. Creating `Jenkinsfile` from scratch. (Delete all you currently have in there and start all over to get Ansible to run successfully)
