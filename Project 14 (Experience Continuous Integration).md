@@ -568,7 +568,7 @@ $ ansible-galaxy collection install community.postgresql
 
 ![generate ssh key](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/345e00b7-8d38-4a4b-8d23-821fa6bd351e)
 
-4. Ansible plugin will require the ansible interpreter that is installed on the Jenkins server for it to work. So we will need to specify the path for the interpreter in Jenkins. We obtain the path where ansible is installed on our server by running the coomand below:
+4. Ansible plugin will require the ansible interpreter that is installed on the Jenkins server for it to work. So we will need to specify the path for the interpreter in Jenkins. We obtain the path where ansible is installed on our server by running the command below:
 
 **`$ which ansible`**
 
@@ -627,4 +627,26 @@ pipeline {
 ```
 
 6. Using the Pipeline Syntax tool in Ansible, we generate the syntax to create environment variables to set. We navigate and enter the parameters as shown in the image below:
+
+7. Then we ensure we check the box for disabling the host SSH key check and we click on "Generate Pipeline Script". Next, we copy the script up to the point specified in the image below and we use it to replace the script in the `Run Ansible playbook` stage in our **`Jenkinsfile`**.
+
+8. Next, we need to create a global ansible configuration file that will specify pointers on variables to use and default settings on how we want ansible to run. In ansible, the global configuration file we are creating will take precedence over the local configuration file that came with our ansible installation. So, in the deploy folder, we create a file named **`ansible.cfg`** and paste in the configuration below.
+
+```
+[defaults]
+timeout = 160
+callback_whitelist = profile_tasks
+log_path=~/ansible.log
+host_key_checking = False
+gathering = smart
+ansible_python_interpreter=/usr/bin/python3
+allow_world_readable_tmpfiles=true
+
+[ssh_connection]
+ssh_args = -o ControlMaster=auto -o ControlPersist=30m -o ControlPath=/tmp/ansible-ssh-%h-%p-%r -o ServerAliveInterval=60 -o ServerAliveCountMax=60 -o ForwardAgent=yes
+```
+
+9. We note that **`ansible.cfg`** must be exported to environment variable so that Ansible knows where to find Roles. To do this, we make sure to specify the role path in the global ansible configuration file.
+
+10. 
 
