@@ -564,4 +564,10 @@ $ ansible-galaxy collection install community.postgresql
 
 ![install ansible plugin](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c49a8e68-5460-4348-b36a-71e4d34e496a)
 
+3. Next, we specify ssh keys to be used for ansible by adding the keys as global credentials in Jenkins. To do this, we go to the Jenkins dashboard, click on "Manage Jenkins", navigate to "Credentials", click on "System", then select "Global Credentials" and click on the "Add Credentials" button. In the dilogue box, we fill in the credential ID, the username and then we paste in the contents of our .pem key. This will enable us run Ansible playbook via the Jenkinsfile.
+
+![generate ssh key](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/345e00b7-8d38-4a4b-8d23-821fa6bd351e)
+
+Ansible plugin will require the ansible interpreter that is installed on the Jenkins server for it to work. So we will need to specify the path for the interpreter in Jenkins.
+
 3. Creating `Jenkinsfile` from scratch. (Delete all you currently have in there and start all over to get Ansible to run successfully)
