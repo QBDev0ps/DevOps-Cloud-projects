@@ -568,6 +568,63 @@ $ ansible-galaxy collection install community.postgresql
 
 ![generate ssh key](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/345e00b7-8d38-4a4b-8d23-821fa6bd351e)
 
-Ansible plugin will require the ansible interpreter that is installed on the Jenkins server for it to work. So we will need to specify the path for the interpreter in Jenkins.
+4. Ansible plugin will require the ansible interpreter that is installed on the Jenkins server for it to work. So we will need to specify the path for the interpreter in Jenkins. We obtain the path where ansible is installed on our server by running the coomand below:
 
-3. Creating `Jenkinsfile` from scratch. (Delete all you currently have in there and start all over to get Ansible to run successfully)
+**`$ which ansible`**
+
+Then we navigate to the global tool configuration in Jenkins, we click on "Add Ansible" and then we enter the name of the ansible executable and specify the path to the ansible executable folder.
+
+5. Introduce parameterization by creating `Jenkinsfile` from scratch. To do this we delete all of the code we have in the file and we paste in the following lines of code:
+
+```
+pipeline {
+  agent any
+
+  environment {
+      ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+
+  stages{
+      stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+      stage('Checkout SCM') {
+         steps{
+            git branch: 'main', url: 'https://github.com/QuadriBello/ansible-config-mgt.git'
+         }
+       }
+
+      stage('Prepare Ansible For Execution') {
+        steps {
+          sh 'echo ${WORKSPACE}' 
+          sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+        }
+     }
+
+      stage('Run Ansible playbook') {
+        steps {
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
+         }
+      }
+
+      stage('Clean Workspace after build'){
+        steps{
+          cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
+        }
+      }
+   }
+
+}
+```
+
+6. Using the Pipeline Syntax tool in Ansible, we generate the syntax to create environment variables to set. We navigate and enter the parameters as shown in the image below:
+
