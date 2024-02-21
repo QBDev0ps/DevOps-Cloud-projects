@@ -534,8 +534,34 @@ $ git push
 
 Now that we have a broad overview of a typical Jenkins pipeline. We proceed to get the actual Ansible deployment to work by implementing the following: 
 
-1. Installing Ansible on Jenkins
-   
-2. Installing Ansible plugin in Jenkins UI
+1. Installing Ansible and its dependencies on Jenkins. To do this, we execute the following commands:
+
+```
+$ sudo yum install ansible -y
+
+$ sudo yum install python3 python3-pip wget unzip git -y
+
+$ sudo python3 -m pip install --upgrade setuptools
+
+$ sudo python3 -m pip install --upgrade pip
+
+$ sudo python3 -m pip install PyMySQL
+
+$ sudo python3 -m pip install mysql-connector-python
+
+$ sudo python3 -m pip install psycopg2==2.7.5 --ignore-installed
+
+$ ansible-galaxy collection install community.mysql
+
+$ ansible-galaxy collection install community.postgresql
+```
+
+![install ansible](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dc0b2182-3c41-4988-ac14-d0f921353893)
+
+![install dependencies](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4f86f833-cd93-4ed7-a70e-51882b739ff4)
+
+2. Installing Ansible plugin in Jenkins UI. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, next we select **`Available plugins`**, and then in the search bar, we type in "Ansible", and we subsequently install the Ansible plugin.
+
+![install ansible plugin](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c49a8e68-5460-4348-b36a-71e4d34e496a)
 
 3. Creating `Jenkinsfile` from scratch. (Delete all you currently have in there and start all over to get Ansible to run successfully)
