@@ -572,9 +572,13 @@ $ ansible-galaxy collection install community.postgresql
 
 **`$ which ansible`**
 
-Then we navigate to the global tool configuration in Jenkins, we click on "Add Ansible" and then we enter the name of the ansible executable and specify the path to the ansible executable folder.
+![which ansible](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e8a5d64c-042e-4c42-8bbf-de0f817eb103)
 
-5. Introduce parameterization by creating `Jenkinsfile` from scratch. To do this we delete all of the code we have in the file and we paste in the following lines of code:
+5. Then we navigate to the global tool configuration in Jenkins, we click on "Add Ansible" and then we enter the name of the ansible executable and specify the path to the ansible executable folder.
+
+![add ansible](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/93fde6d9-ddce-4c99-a236-6b6fe69112b1)
+
+6. Introduce parameterization by creating `Jenkinsfile` from scratch. To do this we delete all of the code we have in the file and we paste in the following lines of code:
 
 ```
 pipeline {
@@ -626,9 +630,17 @@ pipeline {
 }
 ```
 
-6. Using the Pipeline Syntax tool in Ansible, we generate the syntax to create environment variables to set. We navigate and enter the parameters as shown in the image below:
+![create jenkins file from scratch](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e1058e12-8e1e-4506-ae87-9707cc1723dc)
 
-7. Then we ensure we check the box for disabling the host SSH key check and we click on "Generate Pipeline Script". Next, we copy the script up to the point specified in the image below and we use it to replace the script in the `Run Ansible playbook` stage in our **`Jenkinsfile`**.
+7. Using the Pipeline Syntax tool in Ansible, we generate the syntax to create environment variables to set. We navigate and enter the parameters as shown in the image below:
+
+![pipeline syntax](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e3e9bd11-08e1-4f6b-8e10-14166e9a36dd)
+
+8. Then we ensure we check the box for disabling the host SSH key check and we click on "Generate Pipeline Script". Next, we copy the script up to the point specified in the image below and we use it to replace the script in the `Run Ansible playbook` stage in our **`Jenkinsfile`**.
+
+![pipeline script](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8030d52e-7e5a-4991-9a98-2feb2f25797f)
+
+![ansible playbook script replacement](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3b72fc1b-6f9b-4c1a-a811-45096e5e31b6)
 
 8. Next, we need to create a global ansible configuration file that will specify pointers on variables to use and default settings on how we want ansible to run. In ansible, the global configuration file we are creating will take precedence over the local configuration file that came with our ansible installation. So, in the deploy folder, we create a file named **`ansible.cfg`** and paste in the configuration below.
 
@@ -646,7 +658,11 @@ allow_world_readable_tmpfiles=true
 ssh_args = -o ControlMaster=auto -o ControlPersist=30m -o ControlPath=/tmp/ansible-ssh-%h-%p-%r -o ServerAliveInterval=60 -o ServerAliveCountMax=60 -o ForwardAgent=yes
 ```
 
+![create ansible configuration file](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cb759136-c537-4c2c-8876-3ab154ce00fa)
+
 9. We note that **`ansible.cfg`** must be exported to environment variable so that Ansible knows where to find Roles. To do this, we make sure to specify the role path in the global ansible configuration file.
+
+![specify role path](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e7ff7cf2-bbed-4b43-9dc8-8fc5a4c9e067)
 
 10. 
 
