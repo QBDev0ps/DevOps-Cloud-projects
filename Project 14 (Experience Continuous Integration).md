@@ -698,4 +698,55 @@ $ git push
 
 + Then we verify in Blue Ocean that our ansible playbook is working.
 
+![invoke ansible playbook](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1923d4cd-0533-4d59-97e2-e6829c60f74b)
+
 ![ansible run dev successful](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/815e30e0-d503-44ff-befb-6af268b9947e)
+
+
+### Parameterizing `Jenkinsfile` For Ansible Deployment
+
+To deploy to other environments, we will need to use parameters.
+
+1. Update `sit` inventory with new servers
+
+```
+[tooling]
+<SIT-Tooling-Web-Server-Private-IP-Address>
+
+[todo]
+<SIT-Todo-Web-Server-Private-IP-Address>
+
+[nginx]
+<SIT-Nginx-Private-IP-Address>
+
+[db:vars]
+ansible_user=ec2-user
+ansible_python_interpreter=/usr/bin/python
+
+[db]
+<SIT-DB-Server-Private-IP-Address>
+```
+
+2. Update `Jenkinsfile` to introduce parameterization. Below is just one parameter. It has a default value in case if no value is specified at execution. It also has a description so that everyone is aware of its purpose.
+
+```
+pipeline {
+    agent any
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+...
+```
+
+3. In the Ansible execution section, remove the hardcoded `inventory/dev` and replace with `${inventory}
+
+From now on, each time you hit on execute, it will expect an input.
+
+<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Parameter.png" width="936px" height="550px">
+
+Notice that the default value loads up, but we can now specify which environment we want to deploy the configuration to. Simply type `sit` and hit **Run**
+
+<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Parameter-Sit.png" width="936px" height="550px">
+
+4. Add another parameter. This time, introduce `tagging` in Ansible. You can limit the Ansible execution to a specific role or playbook desired.  Therefore, add an Ansible tag to run against `webserver` only. Test this locally first to get the experience. Once you understand this, update `Jenkinsfile` and run it from Jenkins.
