@@ -26,7 +26,7 @@ In order to successfully execute this project, the following prerequisites need 
 
 1. Servers: We will be making use of six(6) AWS virtual machines for this project and these include:
 
-+ Jenkins server: This will be used to implement our CI/CD workflows or pipelines. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 8080.
++ Jenkins server: This will be used to implement our CI/CD workflows or pipelines. Select a t2.medium at least, RHEL 8.7.0 and Security group should be open to port 8080.
   
 + Nginx server: This would act as the reverse proxy server to our site and tool.
   
@@ -114,7 +114,7 @@ To begin our project we need to install and set up Jenkins. Jenkins is an open-s
 
 #### <br>Step 1: Provision EC2 Instance<br/>
 
-We begin by spinning up an EC2 Instance of Ubuntu Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+We begin by spinning up an EC2 Instance of Red Hat Linux Server: We launch our EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
 
 **i.** We open the AWS console and click on **"EC2"**, then we scroll up and click on **"Launch Instance"**.
 
@@ -664,5 +664,38 @@ ssh_args = -o ControlMaster=auto -o ControlPersist=30m -o ControlPath=/tmp/ansib
 
 ![specify role path](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e7ff7cf2-bbed-4b43-9dc8-8fc5a4c9e067)
 
-10. 
+10.  Next, we ensure that Ansible runs against the Dev environment successfully. To do this, we implement the following:
 
++ Provison EC2 instance by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
+
++ Add provisioned instance to ansible inventory **`dev.yml`** using the private IP address.
+
+ ![dev inventory](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/84bdb33e-f786-4d28-a706-bc549f28b6d4)
+
++ Specify the nginx role to be used under **`static-assignments`**
+
+![specify roles](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1e193d31-5c10-4008-ac36-2d5d78b81cd5)
+
++ update the ansible playbook file **`site.yml`** with the relevant nginx configuration.
+
+![specify dev playbook](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fc05b4d6-2354-4eb3-8d70-be62db49aaf4)
+
++ And then we add, commit and push the new changes to github with the following set of commands:
+
+```
+$ git add .
+
+$ git commit -m "updated Jenkinsfile"
+
+$ git push
+```
+
+![git add commit and push 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4b0dbc40-44e1-4b43-a73b-1d3880c67bad)
+
++ We navigate back to our Jenkins pipeline and we click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+![scan repository now 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/62629230-3fd1-4c85-b5b8-e0f1b811303f)
+
++ Then we verify in Blue Ocean that our ansible playbook is working.
+
+![ansible run dev successful](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/815e30e0-d503-44ff-befb-6af268b9947e)
