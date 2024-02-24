@@ -761,7 +761,7 @@ https://github.com/darey-devops/php-todo.git
 
 ![fork todo 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/493f10d2-7d59-4a84-8601-52f4fb029bf0)
 
-2. On our Jenkins server, we install PHPand its dependencies.
+2. On our Jenkins server, we install PHP and its dependencies then we install [Composer tool](https://getcomposer.org)
 
 ```
 $ sudo yum module reset php -y
@@ -773,32 +773,36 @@ $ sudo yum install -y php php-common php-mbstring php-opcache php-intl php-xml p
 $ sudo systemctl start php-fpm
 
 $ sudo systemctl enable php-fpm
-```
 
-3. Then we install [Composer tool](https://getcomposer.org)
-
-```
 $ curl -sS https://getcomposer.org/installer | php
 
 $ sudo mv composer.phar /usr/bin/composer
 
 $ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
 
-$ dnf module reset php -y
+$ sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
 
-$ dnf module install php:remi-7.4
+$ sudo dnf module reset php -y
+
+$ sudo dnf module install php:remi-7.4 -y
 
 $ sudo dnf --enablerepo=remi install php-phpunit-phploc
 
+$ wget -O phpunit https://phar.phpunit.de/phpunit-7.phar
 
+$ chmod +x phpunit 
 
+$ sudo yum install php-xdebug
+```
 
 4. Install Jenkins plugins
-   1. [Plot plugin](https://plugins.jenkins.io/plot/)
-   2. [Artifactory plugin](https://www.jfrog.com/confluence/display/JFROG/Jenkins+Artifactory+Plug-in) 
 
-- We will use `plot` plugin to display tests reports, and code coverage information.
-- The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server.
++ [Plot plugin](https://plugins.jenkins.io/plot/) - We will use `plot` plugin to display tests reports, and code coverage information. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "Plot", and we subsequently install the Plot Plugin.
+
++ [Artifactory plugin](https://www.jfrog.com/confluence/display/JFROG/Jenkins+Artifactory+Plug-in) - The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "Artifactory", and we subsequently install the Artifactory Plugin.
+
+
+
 
 5. In Jenkins UI configure Artifactory
 
