@@ -705,7 +705,7 @@ $ git push
 
 ### Parameterizing `Jenkinsfile` For Ansible Deployment
 
-To deploy to other environments, we will need to use parameters.
+But what if we need to deploy to other environments, manually updating the **`Jenkinsfile`** is definitely not an option. To deploy to other environments, we will need to use parameters.
 
 1. Update `sit` inventory with new servers
 
@@ -727,7 +727,7 @@ ansible_python_interpreter=/usr/bin/python
 <SIT-DB-Server-Private-IP-Address>
 ```
 
-2. Update `Jenkinsfile` to introduce parameterization. Below is just one parameter. It has a default value in case if no value is specified at execution. It also has a description so that everyone is aware of its purpose.
+2. We update `Jenkinsfile` to introduce parameterization. Below is just one parameter. It has a default value in case if no value is specified at execution. It also has a description so that everyone is aware of its purpose.
 
 ```
 pipeline {
@@ -739,14 +739,70 @@ pipeline {
 ...
 ```
 
-3. In the Ansible execution section, remove the hardcoded `inventory/dev` and replace with `${inventory}
+3. In the Ansible execution section, we remove the hardcoded `inventory/dev` and replace with **`${inventory}`**
 
-From now on, each time you hit on execute, it will expect an input.
+![parameter](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9d4ac4b0-2c3f-4f07-a17f-4b29a52931ef)
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Parameter.png" width="936px" height="550px">
+### CI/CD Pipeline for TODO application
 
-Notice that the default value loads up, but we can now specify which environment we want to deploy the configuration to. Simply type `sit` and hit **Run**
+We already have `tooling` website as a part of deployment through Ansible. Here we will introduce another PHP application to add to the list of software products we are managing in our infrastructure. The good thing with this particular application is that it has unit tests, and it is an ideal application to show an end-to-end CI/CD pipeline for a particular application.
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Parameter-Sit.png" width="936px" height="550px">
+Our goal here is to deploy the application onto servers directly from `Artifactory` rather than from `git`.
 
-4. Add another parameter. This time, introduce `tagging` in Ansible. You can limit the Ansible execution to a specific role or playbook desired.  Therefore, add an Ansible tag to run against `webserver` only. Test this locally first to get the experience. Once you understand this, update `Jenkinsfile` and run it from Jenkins.
+#### Phase 1 - Prepare Jenkins
+
+1. We Fork the repository below into our GitHub account.
+   
+```
+https://github.com/darey-devops/php-todo.git
+```
+
+![fork todo ](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c9516921-cccb-4f6a-b257-ff22dbc17523)
+
+![fork todo 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/493f10d2-7d59-4a84-8601-52f4fb029bf0)
+
+2. On our Jenkins server, we install PHPand its dependencies.
+
+```
+$ sudo yum module reset php -y
+
+$ sudo yum module enable php:remi-7.4 -y
+
+$ sudo yum install -y php php-common php-mbstring php-opcache php-intl php-xml php-gd php-curl php-mysqlnd php-fpm php-json
+
+$ sudo systemctl start php-fpm
+
+$ sudo systemctl enable php-fpm
+```
+
+3. Then we install [Composer tool](https://getcomposer.org)
+
+```
+$ curl -sS https://getcomposer.org/installer | php
+
+$ sudo mv composer.phar /usr/bin/composer
+
+$ sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+
+$ dnf module reset php -y
+
+$ dnf module install php:remi-7.4
+
+$ sudo dnf --enablerepo=remi install php-phpunit-phploc
+
+
+
+
+4. Install Jenkins plugins
+   1. [Plot plugin](https://plugins.jenkins.io/plot/)
+   2. [Artifactory plugin](https://www.jfrog.com/confluence/display/JFROG/Jenkins+Artifactory+Plug-in) 
+
+- We will use `plot` plugin to display tests reports, and code coverage information.
+- The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server.
+
+5. In Jenkins UI configure Artifactory
+
+<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Configure-System1.png" width="936px" height="550px">
+Configure the server ID, URL and Credentials, run Test Connection.
+
+<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Configure-System2.png" width="936px" height="550px">
