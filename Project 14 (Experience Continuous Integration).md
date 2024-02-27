@@ -809,7 +809,7 @@ Next, we carry out the following steps:
 
 **iii.** Then we proceed to add the private IP address of our artifactory server to our ansible inventory in **`ci.yml`**
 
-**iv.** Next we update Ansible with an Artifactory role.
+**iv.** Next, we update Ansible with an Artifactory role.
 
 5. In Jenkins UI configure Artifactory
 
