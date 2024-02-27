@@ -801,11 +801,15 @@ $ sudo yum install php-xdebug
 
 + [Artifactory plugin](https://www.jfrog.com/confluence/display/JFROG/Jenkins+Artifactory+Plug-in) - The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "Artifactory", and we subsequently install the Artifactory Plugin.
 
-Next, we spin up an EC2 instance for our artifactory server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
+Next, we carry out the following steps:
 
-Then we proceed to add the private IP address of our artifactory server to our ansible inventory in **`ci.yml`**
+**i.** We spin up an EC2 instance for our artifactory server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
 
-Next we update Ansible with an Artifactory role.
+**ii.** We open ports TCP 8081 and 8082 in the server's security group.
+
+**iii.** Then we proceed to add the private IP address of our artifactory server to our ansible inventory in **`ci.yml`**
+
+**iv.** Next we update Ansible with an Artifactory role.
 
 5. In Jenkins UI configure Artifactory
 
