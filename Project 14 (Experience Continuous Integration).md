@@ -795,23 +795,96 @@ $ chmod +x phpunit
 $ sudo yum install php-xdebug
 ```
 
-4. Install Jenkins plugins
+![php installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5ee6ce04-d7f8-4640-a7c7-2730599e2fa2)
+
+![php installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/01d7bcbf-d6c0-403d-8456-2685e491a06b)
+
+![php installation 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3ca8f425-cad7-412b-b5b9-89835ba9958f)
+
+![php installation 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f6489734-9708-4fe5-a101-0221bf530715)
+
+3. Install Jenkins plugins
 
 + [Plot plugin](https://plugins.jenkins.io/plot/) - We will use `plot` plugin to display tests reports, and code coverage information. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "Plot", and we subsequently install the Plot Plugin.
 
+![plot plugin](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0e319210-f5d6-4769-be52-34d21362931d)
+
 + [Artifactory plugin](https://www.jfrog.com/confluence/display/JFROG/Jenkins+Artifactory+Plug-in) - The `Artifactory` plugin will be used to easily upload code artifacts into an Artifactory server. From the Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "Artifactory", and we subsequently install the Artifactory Plugin.
 
-Next, we carry out the following steps:
+![artifactory plugin](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/20fceba5-87a2-49d6-8af7-7071a99a1619) 
+
+4.  Next, we carry out the following steps to install artifactory using a role via our Jenkins pipeline:
 
 **i.** We spin up an EC2 instance for our artifactory server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
 
+![artifactory instance](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/663ad090-f6b9-4827-a57f-5393585c8ed4)
+
 **ii.** We open ports TCP 8081 and 8082 in the server's security group.
+
+![open ports 8081 and 8082](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d180be1d-c63e-4d32-ad67-4ad6dd8ef058)
 
 **iii.** Then we proceed to add the private IP address of our artifactory server to our ansible inventory in **`ci.yml`**
 
+![private ip inventory](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9b88f000-6f42-4afb-98f2-17b945ded1c6)
+
 **iv.** Next, we update Ansible with an Artifactory role.
 
+![artifactory role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5f23d6a6-6f90-44ee-9e5b-b6c6776c3cc7)
+
+**v.** Under **`static-assignments`**, we reference the artifactory host and role in the **`uat-webservers.yml`** file.
+
+![static assignments](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eaf9fe8d-2843-46c5-b79e-512e77c52262)
+
+**vi.** Then in our **`site.yml`** file in the playbooks folder, we import the configuration from **`static-assignments`**
+
+![artifactory siteyml](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fe4ad800-ff93-45c6-8393-bb416562e4cd)
+
+**vii.** Next we edit the **Checkout SCM** stage in **`Jenkinsfile`** and we paste in the URL to our Git repository the git branch to main and push code
+
+![checkout scm](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/920bbb3c-20bf-49de-8411-276108b801f4)
+
+**viii.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+
+```
+$ git add .
+
+$ git commit -m "updated Jenkinsfile"
+
+$ git push
+```
+
+![add commit and push](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/27283a28-1cad-4e86-b2d2-c7a9e165f175)
+
+**ix.** We navigate back to our Jenkins pipeline and we click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+![scan reposit now](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8e5ce85b-8fc0-435c-b580-4616d3b5cb1f)
+
+**x.** Then we click on the **`ansible-config-mgt`** repository, in the repository page we click on **Build with Parameters** and we enter **`ci.yml`** as the inventory path.
+
+![build with parameters](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/266470ab-5561-4569-87ff-1dc2fee460a9)
+
+**xi.** Subsequently we click on the Blue Ocean plugin to view the output of our build.
+
+![artifactory playbook success 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d830383b-89d7-4d0a-9633-0d07f7090f1c)
+
+![artifactory playbook success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dcbf9780-05b1-4f6a-966b-b2e007f0d204)
+
+**xii.** After successful completion of the build, we Login into the Jfrog Artifactory using the public IP address of the server with port 8081 and we login using username (admin) and password (password).
+
+![jfrog login](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/203e46f4-9d0b-40e8-957a-f5a00843083c)
+
+**xiii.** Next, we reset the admin password and complete the log in process.
+
+![reset admin password](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/56b97719-2171-458e-948c-850b1b5b566d)
+
 5. In Jenkins UI configure Artifactory
+
+**i.** To initiate this configuration, we move to the dashboard of our Jenkins UI, from here, we click on **"Manage Jenkins"** and under **"System Configuration"**, we click on **"System"**.
+
+**ii.** Under **"Jfrog Plugin Configuration"**, click on **"Add Jfrog Platform Instance"**
+
+
+Configure the server ID, URL and Credentials, run Test Connection.
 
 <img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Configure-System1.png" width="936px" height="550px">
 Configure the server ID, URL and Credentials, run Test Connection.
