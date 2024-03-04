@@ -881,17 +881,25 @@ $ git push
 
 **i.** To initiate this configuration, we move to the dashboard of our Jenkins UI, from here, we click on **"Manage Jenkins"** and under **"System Configuration"**, we click on **"System"**.
 
+![system configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d7bbdbab-5458-4635-bf6d-074bba64cebc)
+
 **ii.** Under **"Jfrog Plugin Configuration"**, click on **"Add Jfrog Platform Instance"**
 
 **iii.** Next, we configure the server ID, and then the Jfrog URL and Credentials.
+
+![jfrog plugin configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/af98e701-be28-43c0-bd13-3494f8213f59)
 
 #### Phase 2 - Integrate Artifactory repository with Jenkins
 
 **i.** We create a dummy Jenkinsfile in the php-todo repository.
 
-**ii.** Using Blue Ocean, we create a multibranch Jenkins pipeline. From the dashboard, we click on the Blue Ocean plug in, then in the Blue Ocean UI, we click on **`New pipeline`**, we select Github, we choose the php-todo repository and then we click on
+**ii.** Using Blue Ocean, we create a multibranch Jenkins pipeline. From the dashboard, we click on the Blue Ocean plug in, then in the Blue Ocean UI, we click on **`New pipeline`**, we select Github, we choose the php-todo repository and then we click on **"Create pipeline"**
+
+![create multibranch pipeline](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2fd7068c-669b-4968-ae91-87f6894ff4b6)
 
 **iii.** We launch an ec2 instance for our database server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
+
+![launch db instance](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/47b5f07b-5cae-4e56-aa6e-7135ba7ff3ac)
 
 **iv.** On the database server, we create database and user.
 
@@ -908,11 +916,19 @@ DB_CONNECTION=mysql
 DB_PORT=3306
 ```
 
+![envsample](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d00402a8-f920-4383-96d3-d7d0d8d81634)
+
 **vi.** Then we proceed to add the private IP address of our database server to our ansible inventory in **`dev.yml`**
+
+![db private ip dev inventory](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/69988431-77e4-44b5-90f6-b89cb7d6cc18)
 
 **vii.** Under **`static-assignments`**, we reference the db host and role in the **`uat-webservers.yml`** file.
 
+![static-assignments reference mysql role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6d03f3f4-38b7-4911-8291-7a86d84459e0)
+
 **viii.** Then in our **`site.yml`** file in the playbooks folder, we point the configuration to our **`db`** role in **`static-assignments`**
+
+![point siteyml to db](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fbb06262-c5f9-42f0-8579-060666eb22f3)
 
 **ix** We update **`Jenkinsfile`** with proper pipeline configuration.
 
@@ -958,3 +974,5 @@ $ git commit -m "mysql save"
 
 $ git push
 ```
+
+![commit and push mysql role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/920e2691-493c-4aee-9c46-3a94d6af4b6c)
