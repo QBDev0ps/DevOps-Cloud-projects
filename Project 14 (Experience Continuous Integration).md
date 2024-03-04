@@ -883,10 +883,62 @@ $ git push
 
 **ii.** Under **"Jfrog Plugin Configuration"**, click on **"Add Jfrog Platform Instance"**
 
+**iii.** Next, we configure the server ID, and then the Jfrog URL and Credentials.
 
-Configure the server ID, URL and Credentials, run Test Connection.
+#### Phase 2 - Integrate Artifactory repository with Jenkins
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Configure-System1.png" width="936px" height="550px">
-Configure the server ID, URL and Credentials, run Test Connection.
+**i.** We create a dummy Jenkinsfile in the php-todo repository.
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project14/Jenkins-Configure-System2.png" width="936px" height="550px">
+**ii.** Using Blue Ocean, we create a multibranch Jenkins pipeline. From the dashboard, we click on the Blue Ocean plug in, then in the Blue Ocean UI, we click on **`New pipeline`**, we select Github, we choose the php-todo repository
+
+**iii.** We launch an ec2 instance for our database server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
+
+**iv.** On the database server, we create database and user.
+
+```
+Create database homestead;
+CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
+GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
+```
+
+**v.** We use the following code to update the database connectivity requirements in the file **`.env.sample`**
+
+```
+DB_CONNECTION=mysql
+DB_PORT=3306
+```
+
+**vi.** Update Jenkinsfile with proper pipeline configuration.
+
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+  
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/darey-devops/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+  }
+}
+```
