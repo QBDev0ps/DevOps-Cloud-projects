@@ -889,7 +889,7 @@ $ git push
 
 **i.** We create a dummy Jenkinsfile in the php-todo repository.
 
-**ii.** Using Blue Ocean, we create a multibranch Jenkins pipeline. From the dashboard, we click on the Blue Ocean plug in, then in the Blue Ocean UI, we click on **`New pipeline`**, we select Github, we choose the php-todo repository
+**ii.** Using Blue Ocean, we create a multibranch Jenkins pipeline. From the dashboard, we click on the Blue Ocean plug in, then in the Blue Ocean UI, we click on **`New pipeline`**, we select Github, we choose the php-todo repository and then we click on
 
 **iii.** We launch an ec2 instance for our database server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
 
@@ -897,7 +897,7 @@ $ git push
 
 ```
 Create database homestead;
-CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
+CREATE USER 'homestead'@'%' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
 ```
 
@@ -908,7 +908,13 @@ DB_CONNECTION=mysql
 DB_PORT=3306
 ```
 
-**vi.** Update Jenkinsfile with proper pipeline configuration.
+**vi.** Then we proceed to add the private IP address of our database server to our ansible inventory in **`dev.yml`**
+
+**vii.** Under **`static-assignments`**, we reference the db host and role in the **`uat-webservers.yml`** file.
+
+**viii.** Then in our **`site.yml`** file in the playbooks folder, we point the configuration to our **`db`** role in **`static-assignments`**
+
+**ix** We update **`Jenkinsfile`** with proper pipeline configuration.
 
 ```
 pipeline {
@@ -941,4 +947,14 @@ pipeline {
     }
   }
 }
+```
+
+**x.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+
+```
+$ git add .
+
+$ git commit -m "mysql save"
+
+$ git push
 ```
