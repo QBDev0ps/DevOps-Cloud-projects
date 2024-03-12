@@ -965,6 +965,14 @@ pipeline {
 }
 ```
 
+As noticedd in the Prepare Dependencies section: 
+
++ The required file by PHP is .env so we are renaming .env.sample to .env
+
++ Composer is used by PHP to install all the dependent libraries used by the application
+
++ php artisan uses the .env file to setup the required database objects
+  
 **x.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
 
 ```
