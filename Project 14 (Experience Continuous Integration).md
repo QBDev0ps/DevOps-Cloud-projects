@@ -930,7 +930,29 @@ DB_PORT=3306
 
 ![point siteyml to db](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fbb06262-c5f9-42f0-8579-060666eb22f3)
 
-**ix** We update **`Jenkinsfile`** with proper pipeline configuration.
+**ix.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+
+```
+$ git add .
+
+$ git commit -m "update"
+
+$ git push
+```
+
+![add commit and push](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/27283a28-1cad-4e86-b2d2-c7a9e165f175)
+
+**x.** We navigate back to our Jenkins pipeline and we click on "Scan repository now" and we refresh the Jenkins dashboard.
+
+![scan reposit now](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8e5ce85b-8fc0-435c-b580-4616d3b5cb1f)
+
+**xi.** Then we click on the **`ansible-config-mgt`** repository, in the repository page we click on **Build with Parameters** and we enter **`dev.yml`** as the inventory path.
+
+![build with parameters](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/266470ab-5561-4569-87ff-1dc2fee460a9)
+
+**xii.** Subsequently we click on the Blue Ocean plugin to view the output of our build.
+
+**xiii.** We update **`Jenkinsfile`** in the **`php-todo`** folder with proper pipeline configuration.
 
 ```
 pipeline {
@@ -965,7 +987,7 @@ pipeline {
 }
 ```
 
-As noticedd in the Prepare Dependencies section: 
+As noticed in the Prepare Dependencies section: 
 
 + The required file by PHP is .env so we are renaming .env.sample to .env
 
@@ -973,7 +995,7 @@ As noticedd in the Prepare Dependencies section:
 
 + php artisan uses the .env file to setup the required database objects
   
-**x.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+**xiv.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
 
 ```
 $ git add .
