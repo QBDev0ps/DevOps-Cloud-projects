@@ -935,12 +935,12 @@ DB_PORT=3306
 ```
 $ git add .
 
-$ git commit -m "update"
+$ git commit -m "message"
 
 $ git push
 ```
 
-![add commit and push](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/27283a28-1cad-4e86-b2d2-c7a9e165f175)
+![commit and push mysql role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/920e2691-493c-4aee-9c46-3a94d6af4b6c)
 
 **x.** We navigate back to our Jenkins pipeline and we click on "Scan repository now" and we refresh the Jenkins dashboard.
 
@@ -948,11 +948,35 @@ $ git push
 
 **xi.** Then we click on the **`ansible-config-mgt`** repository, in the repository page we click on **Build with Parameters** and we enter **`dev.yml`** as the inventory path.
 
-![build with parameters](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/266470ab-5561-4569-87ff-1dc2fee460a9)
+![build with parameters dev](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3e9b5f8b-5e24-417b-8958-cb69d89ff59f)
 
 **xii.** Subsequently we click on the Blue Ocean plugin to view the output of our build.
 
-**xiii.** We update **`Jenkinsfile`** in the **`php-todo`** folder with proper pipeline configuration.
+![mysql playbook successful](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8dd5d7cc-f13e-44a2-9803-da838aa3db78)
+
+![mysql playbook successful 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3674933b-8c10-40b2-a0c3-1ec5e3e6284f)
+
+**xiii.** As we can see in the images above, our playbook ran sucessfully, to further confirm if the sql databaase and user was created, we carry out the following steps:
+
++ We execute the following command to install mysql client on the Jenkins server.
+
+**`$ sudo yum install mysql -y`**
+
+![install mysql client](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/37c8c7cd-53c9-41a6-9a61-9e5682463bf0)
+
++ We use the user **`homestead`** to initiate a remote connection with the DB Server and then we check to see if the database exists.
+
+```
+$ sudo mysql -u homestead -h 172.31.44.66 -p
+
+mysql> show databases;
+
+```
+
+![connect and show databases](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/640baa3a-74fa-4a3b-8bb9-cb1f376f3406)
+
+
+**xiv.** We update **`Jenkinsfile`** in the **`php-todo`** folder with proper pipeline configuration.
 
 ```
 pipeline {
@@ -987,6 +1011,8 @@ pipeline {
 }
 ```
 
+![jenkins file php-todo](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0492b6f6-e5d5-43a7-890b-e91a40aba92e)
+
 As noticed in the Prepare Dependencies section: 
 
 + The required file by PHP is .env so we are renaming .env.sample to .env
@@ -1005,4 +1031,34 @@ $ git commit -m "mysql save"
 $ git push
 ```
 
-![commit and push mysql role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/920e2691-493c-4aee-9c46-3a94d6af4b6c)
+![git push phptodo](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/597cbe31-b671-44e6-beda-4a11e375918d)
+
+**xv.** We move to the Jenkins dashboard and we click on the **`php-todo`** repository.
+
+![jenkins repo php todo](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f50b9b95-e987-4dd4-a9bb-78644d3a48df)
+
+**xvi.** Then we click on "Scan repository now" and we click on the main branch.
+
+![phptodo scan repo now](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dc830b49-d448-4ccd-a405-59175c52116c)
+
+**xvii.** Subsequently we click on the Blue Ocean plugin to view the output of our build.
+
+![phptodo pipeline successful](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4fcf9d2b-c87f-4781-b670-a7f8d0368e19)
+
+**xviii.** Next, we update the **`Jenkinsfile`** to include Unit tests step.
+
+```
+    stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      }
+   }
+```
+
+![unit test stage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c01203c4-9d80-49d3-a957-a5cc62854dbb)
+
+**xix.** We repeat steps **xiv.** to **xvii.** and we can see the output of our build in the image below.
+
+
+
+
