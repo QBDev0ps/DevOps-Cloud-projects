@@ -1059,12 +1059,18 @@ $ git push
 
 **xix.** For this stage to run successfully, code coverage needs to be enabled in **`php.ini`** by setting 'xdebug.mode' to 'coverage'. We do this by executing the following command.
 
-**`$ sudo nano /etc/php.d/15-xdebug.ini`**
+```
+$ sudo nano /etc/php.d/15-xdebug.ini
+
+$ sudo nano /etc/php.ini
+```
 
 ![xdebug mode coverage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/743bcaee-fdb4-4ad6-a615-a0bc8b427a45)
 
+![xdebug mode coverage 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e8e8a44a-329b-4cf1-a0e2-c6dcd11bb57a)
+
 **xx.** We repeat steps **xiv.** to **xvii.** and we can see the output of our build in the image below.
 
-
+![unit test success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fd34144a-8afa-41fe-96dd-88723b7a5bee)
 
 
