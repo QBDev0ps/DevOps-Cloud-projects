@@ -1073,4 +1073,18 @@ $ sudo nano /etc/php.ini
 
 ![unit test success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fd34144a-8afa-41fe-96dd-88723b7a5bee)
 
+### Phase 3 - Code Quality Analysis
+
+This is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. For PHP, the most commonly tool used for code quality analysis is **`phploc`**.
+
+**i.** We proceed by adding the code analysis step in **`Jenkinsfile`**. The output of the data will be saved in **`build/logs/phploc.csv`** file.
+
+```
+    stage('Code Analysis') {
+      steps {
+            sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+      }
+    }
+```
 
