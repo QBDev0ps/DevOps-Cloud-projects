@@ -1155,4 +1155,6 @@ stage ('Deploy to Dev Environment') {
   }
 ```
 
-**vi.** 
+For this stage, we need to launch a **`todo`** server
+Even though we have implemented Unit Tests and Code Coverage Analysis with **`phpunit`** and **`phploc`**, we still need to implement Quality Gate to ensure that ONLY code with the required code coverage, and other quality standards make it through to the environments.
+To achieve this, we need to configure **SonarQube** - An open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities.
