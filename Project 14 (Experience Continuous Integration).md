@@ -1110,7 +1110,7 @@ This is one of the areas where developers, architects and many stakeholders are 
     }
 ```
 
-**iii.** Then we bundle the application code into an artifact (archived package) and upload to Artifactory.
+**iii.** Then, we bundle the application code into an artifact (archived package) and upload to Artifactory.
 
 ```
 stage ('Package Artifact') {
@@ -1120,4 +1120,39 @@ stage ('Package Artifact') {
     }
 ```
 
-**iv.** 
+**iv.** Subsequently, we publish the resulting artifact into Artifactory.
+
+```
+stage ('Upload Artifact to Artifactory') {
+          steps {
+            script { 
+                 def server = Artifactory.server 'artifactory-server'                 
+                 def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "<name-of-artifact-repository>/php-todo",
+                       "props": "type=zip;status=ready"
+
+                       }
+                    ]
+                 }""" 
+
+                 server.upload spec: uploadSpec
+               }
+            }
+  
+        }
+```
+
+**v.** Afterwards, we deploy the application to the **`dev`** environment by launching Ansible pipeline.
+
+```
+stage ('Deploy to Dev Environment') {
+    steps {
+    build job: 'ansible-project/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+    }
+  }
+```
+
+**vi.** 
