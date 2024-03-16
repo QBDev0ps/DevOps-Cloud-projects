@@ -32,7 +32,7 @@ In order to successfully execute this project, the following prerequisites need 
   
 + SonarQube server: This will be used for Code quality analysis. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 9000.
   
-+ Artifactory server: This will be implemented as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081.
++ Artifactory server: This will be implemented as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081 and 8082.
   
 + Database server: This will serve as the databse server for the Todo application
   
@@ -166,35 +166,7 @@ We begin by spinning up an EC2 Instance of Red Hat Linux Server: We launch our E
 
 ![open port 8080](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/d41b3f43-59c9-4c78-8a80-0fa40515399a)
 
-#### <br>Step 3: Create and Allocate Elastic IP Address to Jenkins-Ansible Server<br/>
-
-Considering that we'll be using Jenkins with Github and configuring Web Hooks in this project, it will make our job easier to create and allocate an elastic IP adress to our Jenkins-Ansible Server. This is beacuse everytime we stop/start the server, there will be a need to keep reconfiguring Github Web Hooks to a new IP address. Having an elastic IP address (which will not change when we stop/start the server) is the ideal way to overcome this issue.
-
-**i.** From the EC2 cockpit, we click on **"Elastic Ips"**.
-
-![elastic IPs](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2bd8c559-b18f-4db9-9446-84eed4c34c81)
-
-**ii.** In the next page displayed, we click on **"Allocate Elastic IP Address"**.
-
-![Allocate elastic IP address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/633bb57d-7414-425e-ba73-66faa341eeb1)
-
-**iii.** In the elastic IP address settings page we ensure to choose the same network border group as our EC2 instance. Then we select the option to choose from Amazon's pool of IPv4 addresses. Then we click on **"Allocate"**.
-
-![elastic IP address settings](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/2b22c080-2bfa-4b8f-aa59-808fc7d1ba9f)
-
-**iv.** In the next page which shows us that the elastic IP has been allocated successfully, we click on the **"Actions"** drop down tab and we select **"Associate Elastic IP address"**.
-
-![associate elatic ip 1](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/00c69fbe-bea1-435c-ba5a-37323e19ccc7)
-
-**v.** In the Associate Elastic IP Address page, we scroll down to **"Instance"** and we select our EC2 instance. After this, we click on the **"Associate"** button at the bottom of the page.
-
-![Associate Elastic IP address](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a8ee57a4-991e-4505-9fb8-9b7132353d8a)
-
-**vi.** As can be seen in the output image below, the elastic IP address was successfully asssociated with our EC2 instance.
-
-![Elastic IP successfully associated](https://github.com/QBDev0ps/DevOps-Cloud-projects/assets/140855364/a6dba97b-2953-485e-a13f-ecbe8ac62dd4)
-
-#### <br>Step 4: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
+#### <br>Step 3: Connect to the Jenkins-Ansible Server via the Terminal using the SSH Client<br/>
 
 After we have provisioned our server and we have opened the necessary port, we must next connect to the server via an SSH client. This will enable us to subsequently be able to run commands on the terminal of our server. We carry this out by doing the following:
 
@@ -203,7 +175,7 @@ Visual Studio Code is a streamlined code editor with support for development ope
 
 **ii.** Establish connection with the EC2 instance: We configure connection to our EC2 instance via our VS Code platform by following [these instructions:](https://code.visualstudio.com/docs/remote/ssh)
 
-#### <br>Step 5: Jenkins Installation and Set-up<br/>
+#### <br>Step 4: Jenkins Installation and Set-up<br/>
 
 **i.** After connecting to our server we must first update all installed packages and their dependencies before commencing other installations or configurations. We do this by executing the following command: 
 
@@ -431,7 +403,7 @@ To really appreciate and feel the difference of Cloud Blue UI, we proceed to tri
 
 4. This pipeline is a multibranch one. This means, if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch.
   
-Let us see this in action.
+We proceed to see this in action.
 
 1. Using the command below, we create a new git branch and name it **`feature/jenkinspipeline-stages`**
 
@@ -1073,7 +1045,7 @@ $ sudo nano /etc/php.ini
 
 ![unit test success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fd34144a-8afa-41fe-96dd-88723b7a5bee)
 
-### Phase 3 - Code Quality Analysis
+#### Phase 3 - Code Quality Analysis
 
 This is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. For PHP, the most commonly tool used for code quality analysis is **`phploc`**.
 
@@ -1227,5 +1199,17 @@ stage ('Deploy to Dev Environment') {
 
 ![artifacts deployed on todo server](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f44f1ed3-bcf4-45ea-bc1a-008a3a583019)
 
+### SonarQube Installation
+
 Even though we have implemented Unit Tests and Code Coverage Analysis with **`phpunit`** and **`phploc`**, we still need to implement Quality Gate to ensure that ONLY code with the required code coverage, and other quality standards make it through to the environments.
+
 To achieve this, we need to configure **SonarQube** - An open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities.
+
+Before getting hands on with **SonarQube** configuration, it is incredibly important to understand a few concepts:
+
+- [Software Quality](https://en.wikipedia.org/wiki/Software_quality) - The degree to which a software component, system or process meets specified requirements based on user needs and expectations.
+- [Software Quality Gates](https://docs.sonarqube.org/latest/user-guide/quality-gates/) - Quality gates are basically acceptance criteria which are usually presented as a set of predefined quality criteria that a software development project must meet in order to proceed from one stage of its lifecycle to the next one.
+
+SonarQube is a tool that can be used to create quality gates for software projects, and the ultimate goal is to be able to ship only quality software code. 
+
+Despite that DevOps CI/CD pipeline helps with fast software delivery, it is of the same importance to ensure the quality of such delivery. Hence, we will need SonarQube to set up Quality gates. In this project we will use predefined Quality Gates (also known as [The Sonar Way](https://docs.sonarqube.org/latest/instance-administration/quality-profiles/)). Software testers and developers would normally work with project leads and architects to create custom quality gates.
