@@ -26,17 +26,17 @@ In order to successfully execute this project, the following prerequisites need 
 
 1. Servers: We will be making use of six(6) AWS virtual machines for this project and these include:
 
-+ Jenkins server: This will be used to implement our CI/CD workflows or pipelines. Select a t2.medium at least, RHEL 8.7.0 and Security group should be open to port 8080.
++ Jenkins server: This will be used to implement our CI/CD workflows or pipelines. Select a t3.medium at least, RHEL 8.7.0 and Security group should be open to port 8080.
   
 + Nginx server: This would act as the reverse proxy server to our site and tool.
   
-+ SonarQube server: This will be used for Code quality analysis. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 9000.
++ SonarQube server: This will be used for Code quality analysis. Select a t3.medium at least, Ubuntu 20.04 and Security group should be open to port 9000.
   
-+ Artifactory server: This will be implemented as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081 and 8082.
++ Artifactory server: This will be implemented as the binary repository where the outcome of your build process is stored. Select a t3.medium at least, RHEL 8.7.0  and Security group should be open to port 8081 and 8082.
   
-+ Database server: This will serve as the databse server for the Todo application
++ Database server: This will serve as the databse server for the Todo application. Select a t3.micro, RHEL 8.7.0.
   
-+ Todo webserver: This will be used to host the Todo web application.
++ Todo webserver: This will be used to host the Todo web application. Select a t3.micro, RHEL 8.7.0.
   
 2. Security Groups: For the purposes of this project, we can have one security group that is open to all traffic. This should however not be attempted in a real DevOps enviroment.
   
@@ -1213,3 +1213,5 @@ Before getting hands on with **SonarQube** configuration, it is incredibly impor
 SonarQube is a tool that can be used to create quality gates for software projects, and the ultimate goal is to be able to ship only quality software code. 
 
 Despite that DevOps CI/CD pipeline helps with fast software delivery, it is of the same importance to ensure the quality of such delivery. Hence, we will need SonarQube to set up Quality gates. In this project we will use predefined Quality Gates (also known as [The Sonar Way](https://docs.sonarqube.org/latest/instance-administration/quality-profiles/)). Software testers and developers would normally work with project leads and architects to create custom quality gates.
+
+**i.** To begin, we launch an EC2 instance of Ubuntu Linux  for our Sonarqube server by following these steps 
