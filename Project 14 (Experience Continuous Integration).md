@@ -1337,7 +1337,7 @@ $ git push
 
 **`$ sudo vi sonar-scanner.properties`**
 
-**xiii.** And then, we add configuration related to **`php-todo`** project.
+**xiii.** And then, we add configuration related to **`php-todo`** project whilst ensuring we update our sonarqube public IP address.
 
 ```
 sonar.host.url=http://<SonarQube-Server-IP-address>:9000
@@ -1349,5 +1349,7 @@ sonar.php.coverage.reportPaths=build/logs/clover.xml
 sonar.php.tests.reportPath=build/logs/junit.xml
 ```
 
-**xiv.**
+**xiv.** We navigate to the Jenkins UI and build our pipeline again. As seen below, the **`SonarQube Quality Gate`** step is successful this time.
+
+
 
