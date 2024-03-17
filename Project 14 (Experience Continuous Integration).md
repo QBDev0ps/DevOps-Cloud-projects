@@ -1236,10 +1236,118 @@ $ git push
 
 **vii.** And then we execute the following command:
 
-**`$ export ANSIBLE_CONFIG=<path of ansible.cfg file>`**
+**`$ export ANSIBLE_CONFIG=<path-to-ansible.cfg-file>`**
 
-**vii.** 
+**viii.** Ansible uses TCP port 22 by default, which means it needs to ssh into the target Sonarqube server from the **`Jenkins-Ansible`** host. For this, we implement the concept of ssh-agent. To install and configure Openssh server and agent for Windows 11, we follow these [instructions.](https://windowsloop.com/install-openssh-server-windows-11/) We proceed we need to enable the ssh agent for the current session:
+
+```
+
+$ eval `ssh-agent -s`
+
+```
+
+**ix.** Then we import our key into ssh-agent by executing the following command:
+
+**`$ ssh-add -k <private-key>`**
+
+**x.** Afterwards, we confirm the key has been added with the command below:
+
+**`$ ssh-add -l`**
+
+**xi.** Next, we ssh back in to our Jenkins-Ansible host and we make sure our private key is added with **`$ ssh-add -l`**
+
+**xii.** And then we run our ansible playbook with the following command:
+
+**`$ ansible-playbook -i inventory/ci.yml playbooks/site.yml`**
 
 
+#### Accessing SonarQube
 
+**i.** our playbook ran and successfully installed sonarqube on the designated server. To access SonarQube using the browser, we type in the server's Public IP address followed by port **`9000/sonar`**
+
+**ii.** Next, we Login to SonarQube with default administrator username and password - **`admin`**
+
+
+#### Configure SonarQube and Jenkins For Quality Gate
+
+**i.** Now, that SonarQube is up and running, we need to setup our Quality gate in Jenkins. We navigate to our Jenkins Dashboard, we click on **`Manage Jenkins`**, then we click the **`Plugins`** button, then we select **`Available plugins`**, and then in the search bar, we type in "SonarScanner", and we subsequently install the SonarQube Scanner plugin.
+
+**ii.** Next, we navigate to system configuration in Jenkins. And we add SonarQube server configuration as shown in the image below:
+
+**iii.** Then we navigate to the SonarQube UI and we generate an authentication token.
+
+```
+User > My Account > Security > Generate Tokens
+```
+
+**iv.** We proceed to configure Quality Gate Jenkins Webhook in SonarQube  - The URL should point to our Jenkins server **`http://{JENKINS_HOST}/sonarqube-webhook/`**
+
+```
+Administration > Configuration > Webhooks > Create
+```
+
+**v.** As shown in the image below, we navigate back to the Jenkins dashboard to setup SonarQube scanner with the System Configuration Tool.
+
+```
+Manage Jenkins > Tools
+```
+
+**vi.**  Next, we update Jenkins Pipeline in the **`php-todo`** folder to include SonarQube scanning and Quality Gate. We make sure to place it just before the **`package artifact`** stage. Below is the snippet for a Quality Gate stage in **`Jenkinsfile`**.
+Below is the snippet for a Quality Gate stage in Jenkinsfile.
+
+```
+    stage('SonarQube Quality Gate') {
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+
+        }
+    }
+```
+
+**vii.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+
+```
+$ git add .
+
+$ git commit -m "updated jenkinsfile"
+
+$ git push
+```
+
+**viii.** We move to the Jenkins dashboard and we click on the **`php-todo`** repository.
+
+![jenkins repo php todo](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f50b9b95-e987-4dd4-a9bb-78644d3a48df)
+
+**ix.** Then we click on "Scan repository now" and we click on the main branch.
+
+![phptodo scan repo now](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dc830b49-d448-4ccd-a405-59175c52116c)
+
+**x.** Subsequently, we click on the Blue Ocean plugin to view the output of our build. As seen in the image below, the **`SonarQube Quality Gate`** step fails because we have not updated **`sonar-scanner.properties`**
+
+**xi.** To fix this, we have to **`sonar-scanner.properties`** - From the step in **vi.** above, Jenkins will install the scanner tool on the Linux server. So we need to go into the tools directory on the server to configure the properties file in which SonarQube will require to function during pipeline execution.
+
+**`$ cd /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/conf/`**
+
+**xii.** Next, we open **`sonar-scanner.properties`** file
+
+**`$ sudo vi sonar-scanner.properties`**
+
+**xiii.** And then, we add configuration related to **`php-todo`** project.
+
+```
+sonar.host.url=http://<SonarQube-Server-IP-address>:9000
+sonar.projectKey=php-todo
+#----- Default source code encoding
+sonar.sourceEncoding=UTF-8
+sonar.php.exclusions=**/vendor/**
+sonar.php.coverage.reportPaths=build/logs/clover.xml
+sonar.php.tests.reportPath=build/logs/junit.xml
+```
+
+**xiv.**
 
