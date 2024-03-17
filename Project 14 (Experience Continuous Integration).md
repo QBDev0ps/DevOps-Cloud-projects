@@ -1214,4 +1214,32 @@ SonarQube is a tool that can be used to create quality gates for software projec
 
 Despite that DevOps CI/CD pipeline helps with fast software delivery, it is of the same importance to ensure the quality of such delivery. Hence, we will need SonarQube to set up Quality gates. In this project we will use predefined Quality Gates (also known as [The Sonar Way](https://docs.sonarqube.org/latest/instance-administration/quality-profiles/)). Software testers and developers would normally work with project leads and architects to create custom quality gates.
 
-**i.** To begin, we launch an EC2 instance of Ubuntu Linux  for our Sonarqube server by following these steps 
+**i.** To begin, we launch an EC2 instance of Ubuntu Linux for our Sonarqube server by following by following [these steps](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance)
+
+**ii.** Next, we add the private IP addresss of our Sonarqube instance to the **`ci.yml`** environment under inventory.
+
+**iii.** In static-assignments, we create and configure **`sonar.yml`**.
+
+**iv.** Then in our **`site.yml`** environment under playbooks, we include the sonarqube assignment which refrences **`sonar.yml`** in static-assignments.
+
+ **v.** Then using the following commands, we add, commit and push all our changes to our remote Git repository.
+
+```
+$ git add .
+
+$ git commit -m "message"
+
+$ git push
+```
+
+**vi.** Since we will be running our playbook manually rather than through the Jenkins pipeline, we need to update the **`roles_path`** configuration in our **`ansible.cfg`** file.
+
+**vii.** And then we execute the following command:
+
+**`$ export ANSIBLE_CONFIG=<path of ansible.cfg file>`**
+
+**vii.** 
+
+
+
+
