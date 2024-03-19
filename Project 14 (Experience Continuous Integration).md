@@ -1391,5 +1391,51 @@ sonar.php.tests.reportPath=build/logs/junit.xml
 
 **xiv.** We navigate to the Jenkins UI and build our pipeline again. As seen below, the **`SonarQube Quality Gate`** step is successful this time.
 
+![quality gate success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0f4b69e7-466d-4cb2-885f-1916350dcc8e)
 
+### End-to-End Pipeline Overview
 
+**i.** The quality gate we just included has no effect because when we go to the SonarQube UI, we realise that we just pushed a poor-quality code onto the development environment. There are bugs, and there is poor code coverage. (*code coverage is a percentage of unit tests added by developers to test functions and objects in the code*)
+
+![quality gate fail 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6a3daddf-f1c6-419c-b2ab-000484da685e)
+
+**ii.** When we click on **`php-todo`** project for further analysis, we see that there is technical debt, code smells and security issues in the code.
+
+![quality gate fail 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/14e13986-a281-4951-a514-9dc1257f3d08)
+
+**iii.** In the development environment, this is acceptable as developers will need to keep iterating over their code towards perfection. But as a DevOps engineer working on the pipeline, we must ensure that the quality gate step causes the pipeline to fail if the conditions for quality are not met. So to fix this situation we need to conditionally deploy our code to higher environments:
+
++ First, we will include a **`When`** condition to run Quality Gate whenever the running branch is either **`develop`**, **`hotfix`**, **`release`**, **`main`**, or **`master`**.
+
+```
+when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEXP"}
+```
+
++ Then we add a timeout step to wait for SonarQube to complete analysis and successfully finish the pipeline only when code quality is acceptable.
+
+```
+    timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+    }
+```
+
++ The complete stage will now look like this:
+
+```
+    stage('SonarQube Quality Gate') {
+      when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEXP"}
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+            }
+            timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+```
+
+![quality gate fix](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f72e576f-8f0d-4661-8515-49d4d0d6c1d8)
