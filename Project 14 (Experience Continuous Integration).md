@@ -1395,13 +1395,13 @@ sonar.php.tests.reportPath=build/logs/junit.xml
 
 ### End-to-End Pipeline Overview
 
-**i.** The quality gate we just included has no effect because when we go to the SonarQube UI, we realise that we just pushed a poor-quality code onto the development environment. There are bugs, and there is poor code coverage. (*code coverage is a percentage of unit tests added by developers to test functions and objects in the code*)
+**i.** The quality gate we just included has no effect because when we go to the SonarQube UI, we realise that although the gate passed, we just pushed a poor-quality code onto the development environment. There are bugs, and there is poor code coverage. (*code coverage is a percentage of unit tests added by developers to test functions and objects in the code*)
 
-![quality gate fail 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6a3daddf-f1c6-419c-b2ab-000484da685e)
+![quality gate pass](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4982e69d-4b08-4c46-b499-c33c00b55373)
 
 **ii.** When we click on **`php-todo`** project for further analysis, we see that there is technical debt, code smells and security issues in the code.
 
-![quality gate fail 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/14e13986-a281-4951-a514-9dc1257f3d08)
+![quality gate pass 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5d4fe868-41a9-4ba9-966e-d11157c7cc83)
 
 **iii.** In the development environment, this is acceptable as developers will need to keep iterating over their code towards perfection. But as a DevOps engineer working on the pipeline, we must ensure that the quality gate step causes the pipeline to fail if the conditions for quality are not met. So to fix this situation we need to conditionally deploy our code to higher environments:
 
@@ -1439,3 +1439,13 @@ when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEX
 ```
 
 ![quality gate fix](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f72e576f-8f0d-4661-8515-49d4d0d6c1d8)
+
++ As can be seen in the image below, the pipeline is aborting due to quality gate failure as expected.  
+
+![quality gate abort 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/78082765-7cbf-4d48-aa54-6bf55cecfe9a)
+
++ When we check the analysis in sonarqube UI, we can see that quality gate performs as expected and fails the pipeline. 
+
+![quality gate abort 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cc6e5e19-7c8b-4e14-a654-d79a06b6fb30)
+
+Introduce Jenkins agents/slaves - Add 2 more servers to be used as Jenkins slave. Configure Jenkins to run its pipeline jobs randomly on any available slave nodes.
