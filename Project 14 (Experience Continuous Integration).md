@@ -1,4 +1,4 @@
-## EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP
+![image](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a413b7b9-f37f-4840-978a-27a123eabe4a)## EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP
 
 This project is partly a continuation of the ongoing infrastructure development with Ansible started from Project 11. We will be setting up a pipeline that simulates continuous integration and delivery for a PHP based application. The target end to end CI/CD pipeline is represented as shown in the diagram below:
 
@@ -1448,4 +1448,82 @@ when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEX
 
 ![quality gate abort 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cc6e5e19-7c8b-4e14-a654-d79a06b6fb30)
 
-Introduce Jenkins agents/slaves - Add 2 more servers to be used as Jenkins slave. Configure Jenkins to run its pipeline jobs randomly on any available slave nodes.
+It is of note that with the current state of the code, it cannot be deployed to Integration environments due to its quality. In the real world, DevOps engineers will push this back to developers to work on the code further, based on SonarQube quality report. Once everything is good with code quality, the pipeline will pass and proceed with shipping the codes further to a higher environment.
+
+### Conclusion and Additional Tasks
+
+We have now come to the conclusion of this project. We have been able to successfully create a pipeline that simulates continuous integration and delivery. To do this, we have  deployed and made use of important DevOps tools such as **Jenkins** to implement our CI/CD pipelines, **Ansible** to automate application deployment to our servers, **Artifactory** to store code artifacts, and **SonarQube** which we used for Code quality checks and analysis. To round things off, we do the following few additional tasks to enhance the outcome of the project:
+
+**1.** Introduce Jenkins agents/slaves - Add 2 more servers to be used as Jenkins slave. Configure Jenkins to run its pipeline jobs randomly on any available slave nodes.
+
+**i.** For our Jenkins slaves, we spin up two EC2 Instances of Red Hat Linux Server by following [these steps:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) 
+
+![extra launch instance](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9fc33278-d178-46e4-b3e1-ce15d2713898)
+
+**ii.** After we have provisioned our server, we must next connect to the web server via an SSH client. This will enable us to subsequently be able to run commands and begin configuration on our web server. We carry this out by doing the following:
+
+**i.** Download and Install an SSH client: Download and install [Termius](https://www.termius.com/download/windows) or Download and install [git](https://git-scm.com/downloads) (the ssh client - git bash will be packaged with the git installation)
+
+**ii.** Establish connection with the EC2 instance: We connect to our EC2 instance via our SSH client by following [these instructions:](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-linux-inst-ssh.html)
+
+**`$ ssh -i "QB-EC2.pem" ec2-user@ec2-13-49-134-191.eu-north-1.compute.amazonaws.com`**
+
+![connect to jenkins slave](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/21e08ea2-15fd-4c65-a86e-c484b4b2a328)
+
+**iii.** Next we execute the following command to install JAVA on our instance:
+
+**`$ sudo yum install java-11-openjdk-devel -y`**
+
+![install java](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0234f1c1-421c-418b-b6bc-d8ac8aaa8bb6)
+
+**iv.** After the JAVA installation, we run the command below to open a bash profile:
+
+**`$ sudo vi .bash_profile`**
+
+**v.** Then we paste in the following configuration block:
+
+```
+export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
+```
+
+![paste in bash profile](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e2a15ad3-5865-47cd-aede-b717e5ff473a)
+
+**vi.** To configure the instance as a Jenkins slave, we navigate to the Jenkins UI as follows:
+
+```
+Manage Jenkins > Nodes > New Node
+```
+
+![new node](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/90cf98f6-6932-47ea-8933-0ee9d5c2f71b)
+
+**vii.** We type in **`agent-1`** as name of the node, select **Permanent Agent** and then we click on **Create**
+
+![permanent agent](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/09c41aa9-b476-4f71-92a6-1e26b90f67dc)
+
+**viii.** Using the Private IP address of the Jenkins slave, we configure as shown in the image below and then we click on **Save**
+
+![slave configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/71ab7796-0d37-4f7b-ba18-066c2d420e6c)
+
+**ix.** We have now successfully configured a slave to be used for Jenkins Pipeline jobs.
+
+![configuration success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a8d8803c-669a-453b-86dc-ee6f101347e6)
+
+**2.** Configure webhook between Jenkins and GitHub to automatically run the pipeline when there is a code push.
+
+**i.** We navigate to our GitHub repository as follows:
+
+```
+Repositories > php-todo > Settings > Webhooks
+```
+
+![add a webhook](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bd63a68a-f716-49cb-bbb2-16667b722408)
+
+**ii.** Using the Public IP address of our Jenkins Server, we configure as shown in the image below and then we click on **Add webhook**
+
+![configure and add webhook](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c00de25c-4781-4f18-a8e1-697c134f513c)
+
+**iii.** As can be seen in the image below, the webhook was successfully configured.
+
+![webhook success](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d7d71795-a2a4-4731-af90-1f3f0d7feeb7)
