@@ -23,8 +23,8 @@ There are few requirements that must be met before we begin our project implemen
 
 3. We create a hosted zone in AWS, and map it to your free domain from Freenom. [Watch how to do that here](https://youtu.be/IjcHp94Hq8A) 
 
-***NOTE*** : As you proceed with configuration, ensure that all resources are appropriately tagged, for example:
+***NOTE*** : As we proceed with configuration, we ensure that all resources are appropriately tagged, for example:
 
-* Project: `<Give your project a name>`
+* Project: `<Give our project a name>`
 * Environment: `<dev>`
-* Automated: `<No>` (If you create a recource using an automation tool, it would be `<Yes>`)
+* Automated: `<No>` (If we create a recource using an automation tool, it would be `<Yes>`)
