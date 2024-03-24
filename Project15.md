@@ -7,7 +7,7 @@ Cost, Security, and Scalability are the major requirements for this project. Hen
 
 ![152831445-844e3865-0317-4bf4-969a-490a7c1e06ba](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a07fce80-4415-4e3c-961e-ff5e1af744cf)
 
-#### Project Prerequisites
+### Project Prerequisites
 
 There are few requirements that must be met before we begin our project implementation:
 
