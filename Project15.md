@@ -16,6 +16,10 @@ An AWS Cloud setup usually comes with a default VPC. The Default VPC is like a s
 
 A Default VPC, which Amazon provides for you in each region (think of a region as a separate city), is like a pre-built house in that city. This house comes with some default settings to help you move in and start living (or start deploying your applications) immediately. But just like a real house, you can change these settings according to your needs. A VPC can also have smaller sections called subnets.
 
+Subnets are like smaller segments within a VPC that help you organize and manage your resources. Subnets are like dividing an office building into smaller sections, where each section represents a department. In this analogy, subnets are created to organize and manage the network effectively.
+
+![subnet](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e95a3a4b-9b4d-4ce0-b264-80acd061d715)
+
 ## Project Prerequisites
 
 There are few requirements that must be met before we begin our project implementation:
