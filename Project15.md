@@ -46,12 +46,22 @@ There are few requirements that must be met before we begin our project implemen
 
 We need to always make reference to the architectural diagram and ensure that our configuration and infrastructure is aligned with it.
 
-1. Create a [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-2. Create subnets as shown in the architecture
-3. Create a route table and associate it with public subnets
-4. Create a route table and associate it with private subnets
-5. Create an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
-6. Edit a route in public route table, and associate it with the Internet Gateway. (This is what allows a public subnet to be accisble from the Internet)
+1. Create a [VPC:](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) 
+
+* We navigate to the VPC dashboard in AWS and the we click on **`Your VPCs > Create VPC`**. Next we enter the Name tag and the IPv4 CIDR and then we click on the "Create VPC" button.
+
+
+* AS we can see in the image above, our VPC was successfully created. However, DNS hostnames is disabled. To enable this, we click on **`Actions > Edit VPC Settings`**, then we select the check box to Enable DNS hostnames and we click on Save.
+
+
+* 
+
+   
+3. Create subnets as shown in the architecture
+4. Create a route table and associate it with public subnets
+5. Create a route table and associate it with private subnets
+6. Create an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
+7. Edit a route in public route table, and associate it with the Internet Gateway. (This is what allows a public subnet to be accisble from the Internet)
 6. Create 3 [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) 
 7. Create a [Nat Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and assign one of the Elastic IPs (*The other 2 will be used by [Bastion hosts](https://aws.amazon.com/quickstart/architecture/linux-bastion/))
 8. Create a [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#CreatingSecurityGroups) for:
