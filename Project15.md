@@ -152,7 +152,7 @@ From the VPC dashboard we navigate to  **`Security groups > Create security grou
 
 ![security group for data layer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/189160b7-dc96-400a-9104-ebdbb39f4d58)
 
-#### Creating With Compute Resources 
+#### Creating Compute Resources 
 
 Next, we need to set up and configure compute resources inside our VPC. The recources related to compute are: 
 
