@@ -167,7 +167,7 @@ Next, we need to set up and configure compute resources inside our VPC. The reco
 
 We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB).
 
-**i.** Navigate to AWS ACM
-**ii.** Request a public wildcard certificate for the domain name you registered in Freenom
+**i.** Navigate to AWS Cedrtificate Manager
+**ii.** Request a public wildcard certificate for the domain name you registered.
 **iii.** Use DNS to validate the domain name
 **iv.** Tag the resource
