@@ -264,6 +264,8 @@ You will need to set up and configure compute resources inside your VPC. The rec
 
 ###### Configure Target Groups
 
+* From the EC2 dashboard, we navigate to **`Target groups > Create target group`** and then we do the following:
+
 1. Select Instances as the target type
 2. Ensure the protocol `HTTPS` on secure TLS port `443`
 3. Ensure that the health check path is `/healthstatus`
@@ -361,3 +363,13 @@ Now, you will need to create 2 separate launch templates for both the WordPress 
 2. Ensure the Instances are launched into a public subnet 
 3. Assign appropriate security group
 4. Configure Userdata to update `yum` package repository and install `wordpress` (*Only required on the WordPress launch template*)
+
+###### Configure Target Groups for both Wordpress and Tooling servers
+
+* From the EC2 dashboard, we navigate to **`Target groups > Create target group`** and then we do the following:
+
+1. Select Instances as the target type
+2. Ensure the protocol `HTTPS` on secure TLS port `443`
+3. Ensure that the health check path is `/healthstatus`
+4. Register targets accordingly
+5. Ensure that health check passes for the target group
