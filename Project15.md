@@ -167,7 +167,197 @@ Next, we need to set up and configure compute resources inside our VPC. The reco
 
 We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB).
 
-**i.** Navigate to AWS Cedrtificate Manager
+**i.** Navigate to AWS Certificate Manager
 **ii.** Request a public wildcard certificate for the domain name you registered.
 **iii.** Use DNS to validate the domain name
-**iv.** Tag the resource
+**iv.** Tag the resource and Click on Request.
+**v.** Create DNS CNAME records in Amazon Route 53. 
+
+#### Setup Amazon EFS
+
+[Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html) provides a simple, scalable, fully managed elastic [Network File System (NFS)](https://en.wikipedia.org/wiki/Network_File_System) for use with AWS Cloud services and on-premises resources. In this project, we will utulize EFS service and mount filesystems on both Nginx and Webservers to store data.
+
+**i.** Create an EFS filesystem
+
+* From the EFS dashboard we click on "Create file system". Then we enter the filesystem name and select the VPC, then we click on "customize".
+
+* In the following page, we add a Name tag and we click on the "Next" button.
+
+* In the Network Access page, we need to specify our Mount targets which will be our private subnets 1 and 2 according to our project diagram and we also need to add our Datalayer security group.
+
+* And in the next page, we review our configuration and we click on "Create".
+
+* Next we create two access points for our Wordpress and Tooling web servers respectively. We navigate to **`ACS-filesystem > Access points > Create access point`**
+
+**ii.** Create an EFS mount target per AZ in the VPC, associate it with both subnets dedicated for data layer
+**iii.** Associate the Security groups created earlier for data layer.
+**iv.** Create an EFS access point. (Give it a name and leave all other settings as default)
+
+#### Setup Amazon RDS 
+
+***Pre-requisite***: Create a KMS key from [Key Management Service (KMS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) to be used to encrypt the database instance.
+
+* From the AWS Key Management Service dashboard, we click on "Create a Key" and then we configure key as shown in the image below:
+
+
+
+[Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) is a managed distributed relational database service by Amazon Web Services. This web service running in the cloud designed to simplify setup, operations, maintenans & scaling of relational databases. *Without RDS, Database Administrators (DBA) have more work to do, due to RDS, some DBAs have become jobless*
+
+To ensure that yout databases are highly available and also have failover support in case one availability zone fails, we will configure a [multi-AZ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) set up of [RDS MySQL database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html) instance. In our case, since we are only using 2 AZs, we can only failover to one, but the same concept applies to 3 Availability Zones. We will not consider possible failure of the whole Region, but for this AWS also has a solution - this is a more advanced concept that will be discussed in following projects.
+
+To configure RDS, follow steps below:
+
+1. Create a subnet group and add 2 private subnets (data Layer)
+
+* From the Amazon RDS dashboard we navigate to **`Subnet groups > Create DB subnet group`** and we configure as shown in the image below:
+
+2. Create an RDS Instance for `mysql 8.*.*`
+
+* We navigate to **`Dashboard > Create database`**, then we configure and create our database as shown in the images below:
+
+* 
+5. To satisfy our architectural diagram, you will need to select either **Dev/Test** or **Production** Sample Template. But to minimize AWS cost, you can select the **Do not create a standby instance** option under **Availability & durability** sample template (*The production template will enable Multi-AZ deployment*)
+6. Configure other settings accordingly (*For test purposes, most of the default settings are good to go*). In the real world, you will need to size the database appropriately. You will need to get some information about the usage. If it is a highly transactional database that grows at 10GB weekly, you must bear that in mind while configuring the initial storage allocation, storage autoscaling, and maximum storage threshold.
+7. Configure VPC and security (ensure the database is not available from the Internet)
+8. Configure backups and retention
+9. Encrypt the database using the KMS key created earlier
+10. Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
+
+
+  #### Proceed With Compute Resources 
+
+You will need to set up and configure compute resources inside your VPC. The recources related to compute are: 
+
+* [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
+* [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
+* [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
+* [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
+* [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+* [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
+
+#### Set Up Compute Resources for Nginx
+
+##### Provision EC2 Instances for Nginx
+
+1. Create an EC2 Instance based on CentOS [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in any 2 [Availability Zones (AZ) in any AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) ([it is recommended to use the Region that is closest to your customers](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/RegionsAndAZs.html)). Use EC2 instance of [T2 family](https://aws.amazon.com/ec2/instance-types/t2/) (e.g. t2.micro or similar)
+2. Ensure that it has the following software installed:
+        
+    * `python`
+    * `ntp`
+    * `net-tools`
+    * `vim`
+    * `wget`
+    * `telnet`
+    * `epel-release`
+    * `htop`
+
+3. [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
+
+* Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
+
+###### Prepare Launch Template For Nginx (One Per Subnet)
+
+1. Make use of the AMI to set up a launch template
+2. Ensure the Instances are launched into a public subnet 
+3. Assign appropriate security group
+4. Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update `yum` package repository and install `nginx`
+
+###### Configure Target Groups
+
+1. Select Instances as the target type
+2. Ensure the protocol `HTTPS` on secure TLS port `443`
+3. Ensure that the health check path is `/healthstatus`
+4. Register `Nginx` Instances as targets
+5. Ensure that health check passes for the target group
+
+###### Configure Autoscaling For Nginx 
+
+1. Select the right launch template
+2. Select the VPC
+3. Select both public subnets
+4. Enable Application Load Balancer for the AutoScalingGroup (ASG) 
+5. Select the target group you created before
+6. Ensure that you have health checks for both `EC2` and `ALB`
+7. The desired capacity is 2
+8. Minimum capacity is 2 
+9. Maximum capacity is 4
+10. Set [scale out](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html) if CPU utilization reaches 90%
+11. Ensure there is an [`SNS`](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) topic to send scaling notifications
+
+#### Set Up Compute Resources for Bastion
+
+###### Provision the EC2 Instances for Bastion
+
+1. Create an EC2 Instance based on CentOS Amazon Machine Image (AMI) per each Availability Zone in the same Region and same AZ where you created Nginx server
+2. Ensure that it has the following software installed
+
+    * `python`
+    * `ntp`
+    * `net-tools`
+    * `vim`
+    * `wget`
+    * `telnet`
+    * `epel-release`
+    * `htop`
+3. [Associate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating) with each of the Bastion EC2 Instances
+4. Create an `AMI` out of the EC2 instance
+
+* Select Bastion instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
+
+###### Prepare Launch Template For Bastion (One per subnet)
+
+1. Make use of the AMI to set up a launch template
+2. Ensure the Instances are launched into a public subnet 
+3. Assign appropriate security group
+4. Configure Userdata to update `yum` package repository and install `Ansible` and `git`
+
+###### Configure Target Groups
+
+1. Select Instances as the target type
+2. Ensure the protocol is `TCP` on port `22`
+3. Register `Bastion` Instances as targets
+4. Ensure that health check passes for the target group
+
+###### Configure Autoscaling For Bastion 
+
+1. Select the right launch template
+2. Select the VPC
+3. Select both public subnets
+4. Enable Application Load Balancer for the AutoScalingGroup (ASG) 
+5. Select the target group you created before
+6. Ensure that you have health checks for both `EC2` and `ALB`
+7. The desired capacity is 2
+8. Minimum capacity is 2 
+9. Maximum capacity is 4
+10. Set scale out if CPU utilization reaches 90%
+11. Ensure there is an `SNS` topic to send scaling notifications
+
+#### Set Up Compute Resources for Webservers 
+
+##### Provision the EC2 Instances for Webservers 
+
+Now, you will need to create 2 separate launch templates for both the WordPress and Tooling websites
+
+1. Create an EC2 Instance (`Centos`) each for WordPress and Tooling websites per Availability Zone (in the same Region).
+2. Ensure that it has the following software installed
+
+    * `python`
+    * `ntp`
+    * `net-tools`
+    * `vim`
+    * `wget`
+    * `telnet`
+    * `epel-release`
+    * `htop`
+    * `php`
+
+3. Create an `AMI` out of the EC2 instance
+
+* Select Webserver instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
+  
+##### Prepare Launch Template For Webservers (One per subnet)
+
+1. Make use of the AMI to set up a launch template
+2. Ensure the Instances are launched into a public subnet 
+3. Assign appropriate security group
+4. Configure Userdata to update `yum` package repository and install `wordpress` (*Only required on the WordPress launch template*)
