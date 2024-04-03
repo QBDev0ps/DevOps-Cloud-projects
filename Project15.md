@@ -285,7 +285,15 @@ We will need to set up and configure compute resources inside our VPC. The resou
     * `epel-release`
     * `htop`
 
-4. [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
+![nginx ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/80a9e70d-e9aa-4a4d-8dc1-ca14e47a8255)
+
+![nginx ami installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2ae5d5cd-1663-4079-89bc-98bd2eb54e82)
+
+![nginx ami installation 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/23983287-e5f4-48a8-820b-785b6e431fe5)
+
+![nginx ami installation 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/99b1bfae-5488-4aae-9dab-081dc14a52ff)
+
+**iii.** [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
 
 * Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
@@ -344,11 +352,18 @@ We will need to set up and configure compute resources inside our VPC. The resou
 ![bastion ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0e4800d3-82ec-48ae-9e9f-725c833e1016)
 
 ![bastion ami installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/64b24662-5094-497d-a6e7-e563fc1344d4)
+
+![bastion ami installation 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/50de294a-83e9-4737-989f-63d418e73de8)
+
+![bastion ami installation 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dcea8c8a-5642-486f-b362-5c3c68136ac3)
     
-4. [Associate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating) with each of the Bastion EC2 Instances
-5. Create an `AMI` out of the EC2 instance
+**iii.** [Associate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating) with each of the Bastion EC2 Instances
+   
+**iv.** Create an `AMI` out of the EC2 instance
 
 * We select the Bastion instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
+
+![create bastion ami](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f8a9205d-f44a-4904-a7b8-e94954f3e112)
 
 ###### Prepare Launch Template For Bastion (One per subnet)
 
