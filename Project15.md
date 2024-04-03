@@ -56,7 +56,7 @@ We need to always make reference to the architectural diagram and ensure that ou
 
 ![VPC created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c51ca9a2-41e3-401c-a718-cbf73666193b)
 
-**ii.** AS we can see in the image above, our VPC was successfully created. However, DNS hostnames is disabled. To enable this, we click on **`Actions > Edit VPC Settings`**, then we select the check box to Enable DNS hostnames and we click on Save.
+**ii.** As we can see in the image above, our VPC was successfully created. However, DNS hostnames is disabled. To enable this, we click on **`Actions > Edit VPC Settings`**, then we select the check box to Enable DNS hostnames and we click on Save.
 
 ![enable DNS hostnames](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/14831105-f414-47f8-b572-c7587a1f1423)
 
@@ -191,66 +191,90 @@ We will need TLS certificates to handle secured connectivity to our Application 
 
 **i.** Create an EFS filesystem: From the EFS dashboard we click on "Create file system". Then we enter the filesystem name and select the VPC, then we click on "customize".
 
+![create file system](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ce4a13c2-504d-4544-8dae-db8441ff4c3b)
+
 **ii.** In the following page, we add a Name tag and we click on the "Next" button.
 
-* In the Network Access page, we need to specify our EFS Mount targets per Availability Zone in the VPC and associate it with our private subnets 1 and 2 according to our project diagram and we also need to add our Datalayer security group.
+![name tag](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ab3805db-2b2e-41b6-b5b0-114b27fd8aac)
 
-* And in the next page, we review our configuration and we click on "Create".
+**iii.** In the Network Access page, we need to specify our EFS Mount targets per Availability Zone in the VPC and associate it with our private subnets 1 and 2 according to our project diagram.
 
-* Next we create two access points for our Wordpress and Tooling web servers respectively. We navigate to **`ACS-filesystem > Access points > Create access point`**
+![network access](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a64a8734-7c00-43a4-8aea-c9300564b8d9)
 
-**ii.** Create an EFS mount target per AZ in the VPC, associate it with both subnets dedicated for data layer
-**iii.** Associate the Security groups created earlier for data layer.
-**iv.** Create an EFS access point. (Give it a name and leave all other settings as default)
+**iv.** Associate the Security groups created earlier for data layer.
+
+**v.** And in the next page, we review our configuration and we click on "Create".
+
+![review and create](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/cfdf9ea4-45ff-41a0-b300-21e407e0e8e5)
+
+**vi.** Next we create two access points for our Wordpress and Tooling web servers respectively. We navigate to **`ACS-filesystem > Access points > Create access point`** and then we configure the access points as shown in the images below:
+
+![wordpress access point](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dba81c61-9de6-4773-9ebc-c041a7596bf2)
+
+![tooling access point](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/03c62eaa-9bbe-4952-a647-5068f7fd8e67)
 
 #### Setup Amazon RDS 
 
 ***Pre-requisite***: Create a KMS key from [Key Management Service (KMS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) to be used to encrypt the database instance.
 
-* From the AWS Key Management Service dashboard, we click on "Create a Key" and then we configure key as shown in the image below:
+* From the AWS Key Management Service dashboard, we click on "Create a Key" and then we configure key as shown in the images below:
 
+![configure KMS key](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a6456c21-f31f-49b3-8dfc-c0b194b02aa0)
 
+![configure KMS key2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/20482dad-12a6-402a-ac0c-ed9880c74ae5)
+
+![configure KMS key3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7a5d528a-fd50-4763-938b-ce7494da26a3)
 
 [Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) is a managed distributed relational database service by Amazon Web Services. This web service running in the cloud designed to simplify setup, operations, maintenans & scaling of relational databases. *Without RDS, Database Administrators (DBA) have more work to do, due to RDS, some DBAs have become jobless*
 
-To ensure that yout databases are highly available and also have failover support in case one availability zone fails, we will configure a [multi-AZ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) set up of [RDS MySQL database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html) instance. In our case, since we are only using 2 AZs, we can only failover to one, but the same concept applies to 3 Availability Zones. We will not consider possible failure of the whole Region, but for this AWS also has a solution - this is a more advanced concept that will be discussed in following projects.
+To ensure that our databases are highly available and also have failover support in case one availability zone fails, we will configure a [multi-AZ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) set up of [RDS MySQL database](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html) instance. In our case, since we are only using 2 AZs, we can only failover to one, but the same concept applies to 3 Availability Zones. We will not consider possible failure of the whole Region, but for this AWS also has a solution - this is a more advanced concept that will be discussed in following projects.
 
-To configure RDS, follow steps below:
+To configure RDS, we follow steps below:
 
-1. Create a subnet group and add 2 private subnets (data Layer)
+**i.** Create a subnet group and add 2 private subnets (data Layer). From the Amazon RDS dashboard, we navigate to **`Subnet groups > Create DB subnet group`** and we configure as shown in the image below:
 
-* From the Amazon RDS dashboard we navigate to **`Subnet groups > Create DB subnet group`** and we configure as shown in the image below:
+![create subnet group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/315396ca-0f60-42f6-be9b-f85e0823377e)
 
-2. Create an RDS Instance for `mysql 8.*.*`
+**ii.** Create an RDS Instance for `mysql 8.*.*`. We navigate to **`Dashboard > Create database`**, then we configure and create our database as shown in the images below:
 
-* We navigate to **`Dashboard > Create database`**, then we configure and create our database as shown in the images below:
+![RDS config 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/77769ba8-e532-4824-ad6e-2e7e28d52fb6)
 
-* 
-5. To satisfy our architectural diagram, you will need to select either **Dev/Test** or **Production** Sample Template. But to minimize AWS cost, you can select the **Do not create a standby instance** option under **Availability & durability** sample template (*The production template will enable Multi-AZ deployment*)
-6. Configure other settings accordingly (*For test purposes, most of the default settings are good to go*). In the real world, you will need to size the database appropriately. You will need to get some information about the usage. If it is a highly transactional database that grows at 10GB weekly, you must bear that in mind while configuring the initial storage allocation, storage autoscaling, and maximum storage threshold.
-7. Configure VPC and security (ensure the database is not available from the Internet)
-8. Configure backups and retention
-9. Encrypt the database using the KMS key created earlier
-10. Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
+**iii.** To satisfy our architectural diagram, we will need to select either **Dev/Test** or **Production** Sample Template. But to minimize AWS cost, we can select the free tier sample template then we configure other settings accordingly (*For test purposes, most of the default settings are good to go*). In the real world, we will need to size the database appropriately. We will need to get some information about the usage. If it is a highly transactional database that grows at 10GB weekly, you must bear that in mind while configuring the initial storage allocation, storage autoscaling, and maximum storage threshold.
+
+![RDS config 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eb6b0317-7eb4-46c2-bdad-41a0bafc425f)
+
+**iv.** Next, we configure VPC and security (ensure the database is not available from the Internet), we configure backups and retention and we encrypt the database using the KMS key created earlier.
+
+![RDS config 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bcac1b17-6f14-4b54-ab89-d894004e130c)
+ 
+**v.** Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
 
 
 #### Proceed With Compute Resources 
 
-You will need to set up and configure compute resources inside your VPC. The recources related to compute are: 
+We will need to set up and configure compute resources inside our VPC. The resources related to compute are: 
 
-* [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
-* [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
-* [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-* [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
-* [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
-* [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
+1. [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
+  
+2. [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
+   
+3. [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
+ 
+4. [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
+
+5. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+
+6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
 
 #### Set Up Compute Resources for Nginx
 
 ##### Provision EC2 Instances for Nginx
 
-1. Create an EC2 Instance based on CentOS [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in any 2 [Availability Zones (AZ) in any AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) ([it is recommended to use the Region that is closest to your customers](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/RegionsAndAZs.html)). Use EC2 instance of [T2 family](https://aws.amazon.com/ec2/instance-types/t2/) (e.g. t2.micro or similar)
-2. Ensure that it has the following software installed:
+**i.** We create an EC2 Instance based on CentOS [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in any 2 [Availability Zones (AZ) in any AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) ([it is recommended to use the Region that is closest to our customers](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/RegionsAndAZs.html)). We use EC2 instance of [T2 family](https://aws.amazon.com/ec2/instance-types/t2/) (e.g. t2.micro or similar)
+
+![launch ec2 instances](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2d0f17d8-3f95-4244-966a-496894c95309)
+   
+**ii.** Then we ssh into the instance and we ensure that it has the following software installed:
         
     * `python`
     * `ntp`
@@ -261,7 +285,7 @@ You will need to set up and configure compute resources inside your VPC. The rec
     * `epel-release`
     * `htop`
 
-3. [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
+4. [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
 
 * Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
@@ -302,8 +326,11 @@ You will need to set up and configure compute resources inside your VPC. The rec
 
 ###### Provision the EC2 Instances for Bastion
 
-1. Create an EC2 Instance based on CentOS Amazon Machine Image (AMI) per each Availability Zone in the same Region and same AZ where you created Nginx server
-2. Ensure that it has the following software installed
+**i.** We create an EC2 Instance based on CentOS Amazon Machine Image (AMI) per each Availability Zone in the same Region and the same AZ where we created Nginx server.
+
+![launch ec2 instances](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2d0f17d8-3f95-4244-966a-496894c95309)
+   
+**ii.** Then we ssh into the instance and we ensure that it has the following software installed:
 
     * `python`
     * `ntp`
@@ -313,10 +340,15 @@ You will need to set up and configure compute resources inside your VPC. The rec
     * `telnet`
     * `epel-release`
     * `htop`
-3. [Associate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating) with each of the Bastion EC2 Instances
-4. Create an `AMI` out of the EC2 instance
 
-* Select Bastion instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
+![bastion ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0e4800d3-82ec-48ae-9e9f-725c833e1016)
+
+![bastion ami installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/64b24662-5094-497d-a6e7-e563fc1344d4)
+    
+4. [Associate an Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#using-instance-addressing-eips-associating) with each of the Bastion EC2 Instances
+5. Create an `AMI` out of the EC2 instance
+
+* We select the Bastion instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
 ###### Prepare Launch Template For Bastion (One per subnet)
 
