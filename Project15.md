@@ -7,7 +7,7 @@ Cost, Security, and Scalability are the major requirements for this project. Hen
 
 ![152831445-844e3865-0317-4bf4-969a-490a7c1e06ba](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a07fce80-4415-4e3c-961e-ff5e1af744cf)
 
-## Introduction to AWS VPC
+### Introduction to AWS VPC
 
 An Amazon Virtual Private Cloud (VPC) is like your own private section of the Amazon cloud, where you can place and manage your resources (like servers or databases). You control who and what can go in and out, just like a gated community.
 An AWS Cloud setup usually comes with a default VPC. The Default VPC is like a starter pack provided by Amazon for your cloud resources. It's a pre-configured space in the Amazon cloud where you can immediately start deploying your applications or services. It has built-in security and network settings to help you get up and running quickly, but you can adjust these as you see fit.
@@ -20,7 +20,7 @@ Subnets are like smaller segments within a VPC that help you organize and manage
 
 ![subnet](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e95a3a4b-9b4d-4ce0-b264-80acd061d715)
 
-## Project Prerequisites
+### Project Prerequisites
 
 There are few requirements that must be met before we begin our project implementation:
 
@@ -34,9 +34,9 @@ There are few requirements that must be met before we begin our project implemen
 
 ![AWS organisations account](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f6845afd-f717-46aa-8932-38ffb8c0d153)
 
-2. We create a free domain name for your fictitious company at Freenom domain registrar [here](https://www.freenom.com).
+2. We create a free domain name for our fictitious company at Freenom domain registrar [here](https://www.freenom.com).
 
-3. We create a hosted zone in AWS, and map it to your free domain from Freenom. [Watch how to do that here](https://youtu.be/IjcHp94Hq8A) 
+3. We create a hosted zone in AWS, and map it to our free domain from Freenom. [Watch how to do that here](https://youtu.be/IjcHp94Hq8A) 
 
 ***NOTE*** : As we proceed with configuration, we ensure that all resources are appropriately tagged, for example:
 
@@ -50,13 +50,13 @@ We need to always make reference to the architectural diagram and ensure that ou
 
 1. Create a [VPC:](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) 
 
-* We navigate to the VPC dashboard in AWS and the we click on **`Your VPCs > Create VPC`**. Next we enter the Name tag and the IPv4 CIDR and then we click on the "Create VPC" button.
+**i.** We navigate to the VPC dashboard in AWS and the we click on **`Your VPCs > Create VPC`**. Next we enter the Name tag and the IPv4 CIDR and then we click on the "Create VPC" button.
 
 ![create VPC](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e909e16a-101f-4ac1-8696-ffe6e69fdea6)
 
 ![VPC created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c51ca9a2-41e3-401c-a718-cbf73666193b)
 
-* AS we can see in the image above, our VPC was successfully created. However, DNS hostnames is disabled. To enable this, we click on **`Actions > Edit VPC Settings`**, then we select the check box to Enable DNS hostnames and we click on Save.
+**ii.** AS we can see in the image above, our VPC was successfully created. However, DNS hostnames is disabled. To enable this, we click on **`Actions > Edit VPC Settings`**, then we select the check box to Enable DNS hostnames and we click on Save.
 
 ![enable DNS hostnames](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/14831105-f414-47f8-b572-c7587a1f1423)
 
@@ -64,7 +64,7 @@ We need to always make reference to the architectural diagram and ensure that ou
  
 2. Create subnets as shown in the architecture:
 
- * From the VPC dashboard we navigate to **`Subnets > Create subnet`**, then we select our VPC in the VPC dropdown box and as shown in the image below, we enter the details for subnet settings to create all our subnets.
+ **i.** From the VPC dashboard we navigate to **`Subnets > Create subnet`**, then we select our VPC in the VPC dropdown box and as shown in the image below, we enter the details for subnet settings to create all our subnets.
 
 ![subnet settings](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/91a823d8-b5a2-4da9-9ffb-10dfccd9d4fc)
 
@@ -72,55 +72,55 @@ We need to always make reference to the architectural diagram and ensure that ou
 
 3. Create a route table and associate it with public subnets:
 
- * From the VPC dashboard we navigate to **`Route tables > Create route tables`**, then we enter the route table name and we select our VPC in the VPC dropdown box and click on "Create route table".
+ **i.** From the VPC dashboard we navigate to **`Route tables > Create route tables`**, then we enter the route table name and we select our VPC in the VPC dropdown box and click on "Create route table".
 
  ![create public route table](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/45287965-74c5-4b99-808a-bc6621a771a0)
 
- * Next we associate the route table with our public subnets by selecting the route table and navigating to **`Subnet associations > Edit subnet associations`**.and then we select our public subnets and we click on "Save associations".
+ **ii.** Next we associate the route table with our public subnets by selecting the route table and navigating to **`Subnet associations > Edit subnet associations`**.and then we select our public subnets and we click on "Save associations".
 
 ![associate public subnets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/58472e11-c8bc-41a4-a117-5023204eb6f7)
 
 4. Create a route table and associate it with private subnets:
 
- * From the VPC dashboard we navigate to **`Route tables > Create route tables`**, then we enter the route table name and we select our VPC in the VPC dropdown box and click on "Create route table".
+ **i.** From the VPC dashboard we navigate to **`Route tables > Create route tables`**, then we enter the route table name and we select our VPC in the VPC dropdown box and click on "Create route table".
 
  ![create private route table](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b67f6412-9ad1-4358-b51a-b1faa1ff9ef8)
 
-* Next we associate the route table with our private subnets by selecting the route table and navigating to **`Subnet associations > Edit subnet associations`**.and then we select our private subnets and we click on "Save associations".
+**ii.** Next we associate the route table with our private subnets by selecting the route table and navigating to **`Subnet associations > Edit subnet associations`**.and then we select our private subnets and we click on "Save associations".
 
 ![associate private subnets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c1e73208-f253-42c8-b09a-1b089649edcd)
 
 5. Create an [Internet Gateway:](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
 
-* From the VPC dashboard we navigate to  **`Internet gateways > Create internet gateway`**, then we enter the name tag and click on "Create internet gateway".
+**i.** From the VPC dashboard we navigate to  **`Internet gateways > Create internet gateway`**, then we enter the name tag and click on "Create internet gateway".
 
   ![create internet gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1ad68088-d9a7-47b1-8cab-c575e41983a7)
 
-* Next, we click on "Attach to a VPC" then in the resulting page, we select our VPC in the dropdown box and we click on "Attach internet gateway". 
+**ii.** Next, we click on "Attach to a VPC" then in the resulting page, we select our VPC in the dropdown box and we click on "Attach internet gateway". 
 
 ![attach to a vpc](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bef044c6-ee0b-49d8-bf80-1759bfb932a1)
 
 ![attach to a vpc 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3d89a686-731b-4f64-9c4d-2031a71e110a)
 
-6. Edit a route in public route table, and associate it with the Internet Gateway. (This is what allows a public subnet to be accisble from the Internet)
+6. Edit a route in public route table, and associate it with the Internet Gateway. (This is what allows a public subnet to be accessible from the Internet)
 
-* We select the public route table and we navigate to **`Actions > Edit routes`** then we click on "Add route" and then we edit and save changes as shown in the image below:
+**i.** We select the public route table and we navigate to **`Actions > Edit routes`** then we click on "Add route" and then we edit and save changes as shown in the image below:
 
 ![edit route associate internet gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6769250d-a74c-4546-b855-c87f1e6899df)
 
 7. Create 3 [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 
-* From the VPC dashboard we navigate to  **`Elastic IPs > Allocate Elastic IP address`**, then we give a name tag and we click on "Allocate".
+**i.** From the VPC dashboard we navigate to  **`Elastic IPs > Allocate Elastic IP address`**, then we give a name tag and we click on "Allocate".
 
 ![allocate elastic IP](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4b8f61f4-68ca-4f49-8cdc-06a4bd5b4c14)
 
 8. Create a [Nat Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and assign one of the Elastic IPs (*The other 2 will be used by [Bastion hosts](https://aws.amazon.com/quickstart/architecture/linux-bastion/))
   
-* From the VPC dashboard we navigate to  **`NAT gateways > Create NAT gateway`**, then we proceed to enter the NAT gateway settins as shown in the image below, and afterwards, we click on "Create NAT gateway".
+**i.** From the VPC dashboard we navigate to  **`NAT gateways > Create NAT gateway`**, then we proceed to enter the NAT gateway settins as shown in the image below, and afterwards, we click on "Create NAT gateway".
 
  ![create NAT gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d8645cbf-cc0d-43e9-b715-2d1b4d72673a)
 
-* Next we proceed to add the NAT gateway to our private route table.
+**ii.** Next we proceed to add the NAT gateway to our private route table.
 
 ![add NAT gateway to private route table](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/75478b8c-1100-4665-b895-844091a31425)
 
@@ -154,36 +154,46 @@ From the VPC dashboard we navigate to  **`Security groups > Create security grou
 
 #### Creating Compute Resources 
 
-Next, we need to set up and configure compute resources inside our VPC. The recources related to compute are: 
+Next, we need to set up and configure compute resources inside our VPC. The resources related to compute are: 
+1. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+   
+2. [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
+ 
+3. [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
+ 
+4. [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
 
-* [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
-* [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
-* [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
-* [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-* [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
-* [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
+5. [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
+
+6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
 
 #### TLS Certificates From [Amazon Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/)
 
-We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB).
+We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB). To obtain the certificates, we proceed with the following steps:
 
 **i.** Navigate to AWS Certificate Manager
+
 **ii.** Request a public wildcard certificate for the domain name you registered.
+
 **iii.** Use DNS to validate the domain name
+
+![AWS cert](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7699f683-c653-4829-97ac-01f8f64efbfd)
+
 **iv.** Tag the resource and Click on Request.
+
 **v.** Create DNS CNAME records in Amazon Route 53. 
+
+![DNS CNAME record route53](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5957bed9-8aea-404d-95a4-e65e34c45bc8)
 
 #### Setup Amazon EFS
 
 [Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html) provides a simple, scalable, fully managed elastic [Network File System (NFS)](https://en.wikipedia.org/wiki/Network_File_System) for use with AWS Cloud services and on-premises resources. In this project, we will utulize EFS service and mount filesystems on both Nginx and Webservers to store data.
 
-**i.** Create an EFS filesystem
+**i.** Create an EFS filesystem: From the EFS dashboard we click on "Create file system". Then we enter the filesystem name and select the VPC, then we click on "customize".
 
-* From the EFS dashboard we click on "Create file system". Then we enter the filesystem name and select the VPC, then we click on "customize".
+**ii.** In the following page, we add a Name tag and we click on the "Next" button.
 
-* In the following page, we add a Name tag and we click on the "Next" button.
-
-* In the Network Access page, we need to specify our Mount targets which will be our private subnets 1 and 2 according to our project diagram and we also need to add our Datalayer security group.
+* In the Network Access page, we need to specify our EFS Mount targets per Availability Zone in the VPC and associate it with our private subnets 1 and 2 according to our project diagram and we also need to add our Datalayer security group.
 
 * And in the next page, we review our configuration and we click on "Create".
 
@@ -224,7 +234,7 @@ To configure RDS, follow steps below:
 10. Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
 
 
-  #### Proceed With Compute Resources 
+#### Proceed With Compute Resources 
 
 You will need to set up and configure compute resources inside your VPC. The recources related to compute are: 
 
