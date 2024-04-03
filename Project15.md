@@ -274,6 +274,8 @@ You will need to set up and configure compute resources inside your VPC. The rec
 
 ###### Configure Autoscaling For Nginx 
 
+* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`**
+
 1. Select the right launch template
 2. Select the VPC
 3. Select both public subnets
@@ -308,6 +310,8 @@ You will need to set up and configure compute resources inside your VPC. The rec
 
 ###### Prepare Launch Template For Bastion (One per subnet)
 
+* From the EC2 dashboard, we navigate to **`Launch Templates > Create launch template`** and then we do the following:
+
 1. Make use of the AMI to set up a launch template
 2. Ensure the Instances are launched into a public subnet 
 3. Assign appropriate security group
@@ -322,6 +326,8 @@ You will need to set up and configure compute resources inside your VPC. The rec
 
 ###### Configure Autoscaling For Bastion 
 
+* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`**
+  
 1. Select the right launch template
 2. Select the VPC
 3. Select both public subnets
@@ -373,3 +379,22 @@ Now, you will need to create 2 separate launch templates for both the WordPress 
 3. Ensure that the health check path is `/healthstatus`
 4. Register targets accordingly
 5. Ensure that health check passes for the target group
+
+
+##### Create external load balancer
+
+* From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer > Application load balancer > Create`** and then we do the following:
+
+##### Create internal load balancere
+
+* From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer> Application load balancer > Create`** and then we do the following:
+
+* After the load balancer is created, we select it and navigate to **`Listeners and rules > Manage rules > Add rule `** and then we do the following:
+
+1. Add a Name tag.
+2. Define Rule conditions.
+3. Define Rule actions.
+4. Set rule priority.
+5. Review and Create.
+
+  
