@@ -293,7 +293,65 @@ We will need to set up and configure compute resources inside our VPC. The resou
 
 ![nginx ami installation 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/99b1bfae-5488-4aae-9dab-081dc14a52ff)
 
-**iii.** [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
+**iii.** Next, we configure selinux policies for the nginx server using the following commands:
+
+```
+$ setsebool -P httpd_can_network_connect=1
+
+$ setsebool -P httpd_can_network_connect_db=1
+
+$ setsebool -P httpd_execmem=1
+
+$ setsebool -P httpd_use_nfs 1
+```
+
+![nginx ami installation 5](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/16a10e31-614a-41e8-8f80-01d0368c7064)
+
+**iv.** Next, we use the following set of commands to install amazon efs utils for mounting the target on the Elastic file system.
+
+```
+$ git clone https://github.com/aws/efs-utils
+
+$ cd efs-utils
+
+$ yum install -y make
+
+$ yum install -y rpm-build
+
+$ make rpm 
+
+$ yum install -y  ./build/amazon-efs-utils*rpm
+```
+
+![nginx ami installation 6](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a24b3a5a-162d-4402-8712-b3da294ad949)
+
+![nginx ami installation 7](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e4fbb22a-125b-48d0-8a04-d12f4361dcaa)
+
+![nginx ami installation 8](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9f928666-32f8-4582-9ada-fee396cb1d12)
+
+![nginx ami installation 9](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dd586dcf-b0da-4f3d-a6ae-426219d2676f)
+
+
+**v.** We proceed with setting up a self-signed certificate for the nginx instance.
+
+```
+$ sudo mkdir /etc/ssl/private
+
+$ sudo chmod 700 /etc/ssl/private
+
+$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ACS.key -out /etc/ssl/certs/ACS.crt
+
+$ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+```
+
+![nginx ami install certificate generation](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/27eda37b-d8d9-4c4b-a35a-084f9165ba5b)
+
+![nginx ami install certificate generation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f2829ff-e54d-4c16-9bfe-3e1f78e05538)
+
+
+**vi.**
+
+[Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
 
 * Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
