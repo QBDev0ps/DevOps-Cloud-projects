@@ -285,6 +285,18 @@ We will need to set up and configure compute resources inside our VPC. The resou
     * `epel-release`
     * `htop`
 
+```
+$ yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+$ yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+$ yum install wget vim python3 telnet htop git mysql net-tools chrony -y
+
+$ systemctl start chronyd
+
+$ systemctl enable chronyd
+```
+
 ![nginx ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/80a9e70d-e9aa-4a4d-8dc1-ca14e47a8255)
 
 ![nginx ami installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2ae5d5cd-1663-4079-89bc-98bd2eb54e82)
@@ -392,7 +404,7 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 ###### Provision the EC2 Instances for Bastion
 
-**i.** We create an EC2 Instance based on CentOS Amazon Machine Image (AMI) per each Availability Zone in the same Region and the same AZ where we created Nginx server.
+**i.** We create an EC2 Instance based on RHEL Amazon Machine Image (AMI) per each Availability Zone in the same Region and the same AZ where we created Nginx server.
 
 ![launch ec2 instances](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2d0f17d8-3f95-4244-966a-496894c95309)
    
@@ -406,6 +418,18 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     * `telnet`
     * `epel-release`
     * `htop`
+
+```
+$ yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+$ yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+$ yum install wget vim python3 telnet htop git mysql net-tools chrony -y
+
+$ systemctl start chronyd
+
+$ systemctl enable chronyd
+```
 
 ![bastion ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0e4800d3-82ec-48ae-9e9f-725c833e1016)
 
@@ -459,10 +483,11 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 ##### Provision the EC2 Instances for Webservers 
 
-Now, you will need to create 2 separate launch templates for both the WordPress and Tooling websites
+Now, we will need to create 2 separate launch templates for both the WordPress and Tooling websites
 
-1. Create an EC2 Instance (`Centos`) each for WordPress and Tooling websites per Availability Zone (in the same Region).
-2. Ensure that it has the following software installed
+**i.** Create an EC2 Instance (`RHEL`) each for WordPress and Tooling websites per Availability Zone (in the same Region).
+
+**ii.** Ensure that it has the following software installed
 
     * `python`
     * `ntp`
@@ -474,27 +499,122 @@ Now, you will need to create 2 separate launch templates for both the WordPress 
     * `htop`
     * `php`
 
-3. Create an `AMI` out of the EC2 instance
+```
+$ yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+$ yum install -y dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+$ yum install wget vim python3 telnet htop git mysql net-tools chrony -y
+
+$ systemctl start chronyd
+
+$ systemctl enable chronyd
+```
+
+![nginx ami installation 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/80a9e70d-e9aa-4a4d-8dc1-ca14e47a8255)
+
+![nginx ami installation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2ae5d5cd-1663-4079-89bc-98bd2eb54e82)
+
+![nginx ami installation 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/23983287-e5f4-48a8-820b-785b6e431fe5)
+
+![nginx ami installation 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/99b1bfae-5488-4aae-9dab-081dc14a52ff)
+
+**iii.** Next, we configure selinux policies for the webserver using the following commands:
+
+```
+$ setsebool -P httpd_can_network_connect=1
+
+$ setsebool -P httpd_can_network_connect_db=1
+
+$ setsebool -P httpd_execmem=1
+
+$ setsebool -P httpd_use_nfs 1
+```
+
+![nginx ami installation 5](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/16a10e31-614a-41e8-8f80-01d0368c7064)
+
+**iv.** Then, we use the following set of commands to install amazon efs utils for mounting the target on the Elastic file system.
+
+```
+$ git clone https://github.com/aws/efs-utils
+
+$ cd efs-utils
+
+$ yum install -y make
+
+$ yum install -y rpm-build
+
+$ make rpm 
+
+$ yum install -y  ./build/amazon-efs-utils*rpm
+```
+
+![nginx ami installation 6](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a24b3a5a-162d-4402-8712-b3da294ad949)
+
+![nginx ami installation 7](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e4fbb22a-125b-48d0-8a04-d12f4361dcaa)
+
+![nginx ami installation 8](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9f928666-32f8-4582-9ada-fee396cb1d12)
+
+![nginx ami installation 9](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/dd586dcf-b0da-4f3d-a6ae-426219d2676f)
+
+
+**v.** We proceed with setting up a self-signed certificate for the apache webserver instance.
+
+```
+yum install -y mod_ssl
+
+openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -days 365 -out /etc/pki/tls/certs/ACS.crt
+```
+
+![webserver ami installation generate cert](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b25f4389-065c-4b75-a274-eaaa317dec4d)
+
+* Then we edit the **`ssl.conf`** fie as shown in the image below.
+
+**`vi /etc/httpd/conf.d/ssl.conf`**
+
+![webserver ami installation edit etc httpd conf](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9ce341b1-eba6-46b1-b0e9-e4da69950f8c)
+
+**vi.** Create an `AMI` out of the EC2 instance
 
 * Select Webserver instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
-  
+
+![create webserver ami](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8d76a2f4-b4a1-42d2-a440-f770f927a323)
+
 ##### Prepare Launch Template For Webservers (One per subnet)
 
-1. Make use of the AMI to set up a launch template
-2. Ensure the Instances are launched into a public subnet 
-3. Assign appropriate security group
-4. Configure Userdata to update `yum` package repository and install `wordpress` (*Only required on the WordPress launch template*)
+**i.** Make use of the AMI to set up a launch template.
+
+![create wordpress launch template 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c0de09a2-fa65-4556-b3b0-83129cbad384)
+
+**ii.** Ensure the Instances are launched into a public subnet.
+
+![create wordpress launch template 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c76a50a1-61a3-4272-8e41-015e186477d1)
+
+**iii.** Assign appropriate security group.
+
+![create wordpress launch template 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/607fd30c-77c9-44ed-9c71-e9017c8873ec)
+
+**iv.** Configure Userdata to update `yum` package repository and install `wordpress` (*Only required on the WordPress launch template*).
+
+![create wordpress launch template 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/28c20a5f-c7e7-405e-8439-a91bfd2cfebc)
 
 ###### Configure Target Groups for both Wordpress and Tooling servers
 
 * From the EC2 dashboard, we navigate to **`Target groups > Create target group`** and then we do the following:
 
-1. Select Instances as the target type
-2. Ensure the protocol `HTTPS` on secure TLS port `443`
-3. Ensure that the health check path is `/healthstatus`
-4. Register targets accordingly
-5. Ensure that health check passes for the target group
+**i.** Select Instances as the target type.
 
+**ii.** Ensure the protocol `HTTPS` on secure TLS port `443`
+
+**iii.** Ensure that the health check path is `/healthstatus`
+
+**iv.** Register targets accordingly.
+
+**v.** Ensure that health check passes for the target group.
+
+![create wordpress target group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f3f68f27-4166-4dd7-8bbc-13a92d4c58f3)
+
+![create tooling target group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0af43d8a-cf8b-4322-9dd6-d32ee8b1614d)
 
 ##### Create external load balancer
 
