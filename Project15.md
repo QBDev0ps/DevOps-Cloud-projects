@@ -361,7 +361,7 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 ![nginx ami install certificate generation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f2829ff-e54d-4c16-9bfe-3e1f78e05538)
 
 
-**vi.** [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance.
+**vi.** We [create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance.
 
 * Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
@@ -369,36 +369,71 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 ###### Prepare Launch Template For Nginx (One Per Subnet)
 
-**i.** Make use of the AMI to set up a launch template
-**ii.** Ensure the Instances are launched into a public subnet 
-**iii.** Assign appropriate security group
-**iv.** Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update `yum` package repository and install `nginx`
+**i.** Make use of the AMI to set up a launch template.
+
+![create nginx launch template 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/73367a1a-5833-487d-8d0b-b53602731f59)
+
+**ii.** Ensure the Instances are launched into a public subnet.
+
+![create nginx launch template 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4679f508-1db7-4c58-b03a-9b05cdd16b4b)
+
+**iii.** Assign appropriate security group.
+
+![create nginx launch template 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/44e96f30-978f-4f3d-8c9b-cf9dc046f71d)
+
+**iv.** Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update `yum` package repository and install `nginx`.
+
+![create nginx launch template 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/840c7142-0f68-440d-b323-1e38f847d0ac)
 
 ###### Configure Target Groups
 
 * From the EC2 dashboard, we navigate to **`Target groups > Create target group`** and then we do the following:
 
-1. Select Instances as the target type
-2. Ensure the protocol `HTTPS` on secure TLS port `443`
-3. Ensure that the health check path is `/healthstatus`
-4. Register `Nginx` Instances as targets
-5. Ensure that health check passes for the target group
+**i.** Select Instances as the target type.
+
+**ii.** Ensure the protocol `HTTPS` on secure TLS port `443`.
+
+![create nginx target group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2f94b2b5-ba9f-4e7f-a9d3-2ca1b12fd0cf)
+
+**iii.** Ensure that the health check path is `/healthstatus`.
+
+**iv.** Register `Nginx` Instances as targets.
+
+**v.** Ensure that health check passes for the target group.
+
+![target group healthy 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a38622c2-4c1f-499d-92c8-11bf8d5394f4)
 
 ###### Configure Autoscaling For Nginx 
 
-* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`**
+* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`** and we do the following:
 
-1. Select the right launch template
-2. Select the VPC
-3. Select both public subnets
-4. Enable Application Load Balancer for the AutoScalingGroup (ASG) 
-5. Select the target group you created before
-6. Ensure that you have health checks for both `EC2` and `ALB`
-7. The desired capacity is 2
-8. Minimum capacity is 2 
-9. Maximum capacity is 4
-10. Set [scale out](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html) if CPU utilization reaches 90%
-11. Ensure there is an [`SNS`](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) topic to send scaling notifications
+**i.** Select the right launch template.
+
+**ii.** Select the VPC.
+
+**iii.** Select both public subnets.
+
+![ACS nginx autoscaling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0feb9b39-6c63-41e0-822f-c7af60db9f68)
+
+**iv.** Enable Application Load Balancer for the AutoScalingGroup (ASG).
+
+**v.** Select the target group you created before.
+
+**vi.** Ensure that you have health checks for both `EC2` and `ALB`.
+
+**vii.** The desired capacity is 2.
+
+**viii.** Minimum capacity is 2.
+
+**ix.** Maximum capacity is 4.
+
+![ACS nginx autoscaling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6b142fcc-647a-4ce3-b699-667200979ee0)
+
+**x.** Set [scale out](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html) if CPU utilization reaches 90%.
+
+**xi.** Ensure there is an [`SNS`](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) topic to send scaling notifications.
+
+![ACS nginx autoscaling 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/180c2525-3bfa-46b3-8c08-cbde7de61155)
 
 #### Set Up Compute Resources for Bastion
 
@@ -451,33 +486,51 @@ $ systemctl enable chronyd
 
 * From the EC2 dashboard, we navigate to **`Launch Templates > Create launch template`** and then we do the following:
 
-1. Make use of the AMI to set up a launch template
-2. Ensure the Instances are launched into a public subnet 
-3. Assign appropriate security group
-4. Configure Userdata to update `yum` package repository and install `Ansible` and `git`
+**i.** Make use of the AMI to set up a launch template.
 
-###### Configure Target Groups
+![create bastion launch template 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b89161b4-e6d4-41c1-8d66-7fc402b87b5a)
 
-1. Select Instances as the target type
-2. Ensure the protocol is `TCP` on port `22`
-3. Register `Bastion` Instances as targets
-4. Ensure that health check passes for the target group
+**ii.** Ensure the Instances are launched into a public subnet.
+
+![create bastion launch template 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/774463ea-d66f-4176-af71-f9ee5f00926d)
+
+**iii.** Assign appropriate security group.
+
+![create bastion launch template 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/24223bae-cd9a-4d3e-8c89-68e9c181ff3d)
+
+**iv.** Configure Userdata to update `yum` package repository and install `Ansible` and `git`.
+
+![create bastion launch template 4](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ab504009-75f1-4e3f-b637-8f7a2f6e0555)
 
 ###### Configure Autoscaling For Bastion 
 
 * From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`**
   
-1. Select the right launch template
-2. Select the VPC
-3. Select both public subnets
-4. Enable Application Load Balancer for the AutoScalingGroup (ASG) 
-5. Select the target group you created before
-6. Ensure that you have health checks for both `EC2` and `ALB`
-7. The desired capacity is 2
-8. Minimum capacity is 2 
-9. Maximum capacity is 4
-10. Set scale out if CPU utilization reaches 90%
-11. Ensure there is an `SNS` topic to send scaling notifications
+**i.** Select the right launch template.
+
+**ii.** Select the VPC.
+
+**iii**. Select both public subnets.
+
+![ACS bastion autoscaling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/385912a4-bc1d-47dd-82ba-c541b2d33106)
+
+**iv.** Enable Application Load Balancer for the AutoScalingGroup (ASG).
+
+**v.** Select the target group you created before.
+
+**vi.** Ensure that you have health checks for both `EC2` and `ALB`.
+
+**vii.** The desired capacity is 2.
+
+**viii.** Minimum capacity is 2.
+
+**ix.** Maximum capacity is 4.
+
+**x.** Set scale out if CPU utilization reaches 90%.
+
+**xi.** Ensure there is an `SNS` topic to send scaling notifications.
+
+![ACS bastion autoscaling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e0546b2f-c3db-493f-bd5f-53ad41a292dc)
 
 #### Set Up Compute Resources for Webservers 
 
@@ -610,11 +663,129 @@ openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -
 
 **iv.** Register targets accordingly.
 
-**v.** Ensure that health check passes for the target group.
-
 ![create wordpress target group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f3f68f27-4166-4dd7-8bbc-13a92d4c58f3)
 
 ![create tooling target group](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0af43d8a-cf8b-4322-9dd6-d32ee8b1614d)
+
+**v.** Ensure that health check passes for the target group.
+
+![target group healthy 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f3779153-e61a-4561-8bf7-d16b1b11ef31)
+
+![target group healthy 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2a6d300b-66ce-4299-9406-4b0c55ee06bf)
+
+##### Create Database for Wordpress and Tooling
+
+Before creating Autoscaling Group for WordPress and Tooling, we need to SSH into our Bastion server and from the bastion we connect into RDS by copying the RDS endpoint as host. And after we gain access into the RDS instance, we create database for tooling and wordpress respectively.
+
+```
+$ mysql -h acs-database.cdqpbjkethv0.us-east-1.rds.amazonaws.com -u ACSadmin -p
+
+mysql> CREATE DATABASE wordpressdb;
+
+mysql> CREATE DATABASE toolingdb;
+```
+
+![connect to RDS and create tooling and wordpress db](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/29090557-ac7e-4fc1-a8c6-9e80820faa7a)
+
+###### Configure Autoscaling For Wordpress 
+
+* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`** and we do the following:
+
+**i.** Select the right launch template.
+
+**ii.** Select the VPC.
+
+**iii.** Select both public subnets.
+
+![ACS wordpress autoscaling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a82bb4b8-849f-49eb-a63d-f25e25088478)
+
+**iv.** Enable Application Load Balancer for the AutoScalingGroup (ASG).
+
+**v.** Select the target group you created before.
+
+**vi.** Ensure that you have health checks for both `EC2` and `ALB`.
+
+**vii.** The desired capacity is 2.
+
+**viii.** Minimum capacity is 2.
+
+**ix.** Maximum capacity is 4.
+
+![ACS wordpress autoscaling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c0128953-7061-418b-81c8-7989185311e1)
+
+**x.** Set [scale out](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html) if CPU utilization reaches 90%.
+
+**xi.** Ensure there is an [`SNS`](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) topic to send scaling notifications.
+
+![ACS wordpress autoscaling 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/abdf7eb3-f568-4878-9fd1-76465d5a6568)
+
+###### Configure Autoscaling For Tooling 
+
+* From the EC2 dashboard, we navigate to **`Auto Scaling Groups > Create Auto Scaling group`** and we do the following:
+
+**i.** Select the right launch template.
+
+**ii.** Select the VPC.
+
+**iii.** Select both public subnets.
+
+![ACS tooling autoscaling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/48a120c1-5a72-4920-9490-6dfe2c57d88a)
+
+**iv.** Enable Application Load Balancer for the AutoScalingGroup (ASG).
+
+**v.** Select the target group you created before.
+
+**vi.** Ensure that you have health checks for both `EC2` and `ALB`.
+
+**vii.** The desired capacity is 2.
+
+**viii.** Minimum capacity is 2.
+
+**ix.** Maximum capacity is 4.
+
+![ACS tooling autoscaling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c4281a0b-7ceb-4b3a-8d86-3205646a8713)
+
+**x.** Set [scale out](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html) if CPU utilization reaches 90%.
+
+**xi.** Ensure there is an [`SNS`](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) topic to send scaling notifications.
+
+![ACS tooling autoscaling 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f9441d5f-bc92-4d42-bb09-d8550f24c4f0)
+
+#### Configure Application Load Balancer (ALB)
+
+##### External Application Load Balancer To Route Traffic To NGINX 
+
+Nginx EC2 Instances will have configurations that accepts incoming traffic only from Load Balancers. No request should go directly to Nginx servers. With this kind of setup, we will benefit from intelligent routing of requests from the **ALB** to Nginx servers across the 2 Availability Zones. We will also be able to [offload](https://avinetworks.com/glossary/ssl-offload/) SSL/TLS certificates on the **ALB** instead of Nginx. Therefore, Nginx will be able to perform faster since it will not require extra compute resources to valifate certificates for every request.
+
+1. Create an Internet facing ALB
+2. Ensure that it listens on `HTTPS` protocol (TCP port 443)
+3. Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`
+4. Choose the Certificate from ACM
+5. Select Security Group
+6. Select Nginx Instances as the target group
+
+##### Internal Application Load Balancer To Route Traffic To Web Servers 
+
+Since the webservers are configured for auto-scaling, there is going to be a problem if servers get dynamically scalled out or in. Nginx will not know about the new IP addresses, or the ones that get removed. Hence, Nginx will not know where to direct the traffic. 
+
+To solve this problem, we must use a load balancer. But this time, it will be an internal load balancer. Not Internet facing since the webservers are within a private subnet, and we do not want direct access to them.
+
+1. Create an Internal ALB
+2. Ensure that it listens on `HTTPS` protocol (TCP port 443)
+3. Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`
+4. Choose the Certificate from ACM
+5. Select Security Group
+6. Select webserver Instances as the target group
+7. Ensure that health check passes for the target group
+
+***NOTE:*** This process must be repeated for both WordPress and Tooling websites.
+
+
+
+
+
+
+
 
 ##### Create external load balancer
 
