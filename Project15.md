@@ -307,7 +307,7 @@ $ setsebool -P httpd_use_nfs 1
 
 ![nginx ami installation 5](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/16a10e31-614a-41e8-8f80-01d0368c7064)
 
-**iv.** Next, we use the following set of commands to install amazon efs utils for mounting the target on the Elastic file system.
+**iv.** Then, we use the following set of commands to install amazon efs utils for mounting the target on the Elastic file system.
 
 ```
 $ git clone https://github.com/aws/efs-utils
@@ -349,18 +349,18 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 ![nginx ami install certificate generation 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f2829ff-e54d-4c16-9bfe-3e1f78e05538)
 
 
-**vi.**
-
-[Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance
+**vi.** [Create an `AMI`](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/tkv-create-ami-from-instance.html) out of the EC2 instance.
 
 * Select Nginx instance, then navigate to **`Actions > Image and templates > Create image`** and then we configure and create the AMI as shown in the image below:
 
+![create nginx ami](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/39d6c09b-a8fd-4c3b-8225-ec8b08ed2b5b)
+
 ###### Prepare Launch Template For Nginx (One Per Subnet)
 
-1. Make use of the AMI to set up a launch template
-2. Ensure the Instances are launched into a public subnet 
-3. Assign appropriate security group
-4. Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update `yum` package repository and install `nginx`
+**i.** Make use of the AMI to set up a launch template
+**ii.** Ensure the Instances are launched into a public subnet 
+**iii.** Assign appropriate security group
+**iv.** Configure [Userdata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) to update `yum` package repository and install `nginx`
 
 ###### Configure Target Groups
 
