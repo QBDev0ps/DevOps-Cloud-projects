@@ -44,7 +44,7 @@ There are few requirements that must be met before we begin our project implemen
 * Environment: `<dev>`
 * Automated: `<No>` (If we create a recource using an automation tool, it would be `<Yes>`)
 
-#### Setting Up Infrastructure
+#### <br>Setting Up Infrastructure<br/>
 
 We need to always make reference to the architectural diagram and ensure that our configuration and infrastructure is aligned with it.
 
@@ -152,7 +152,7 @@ From the VPC dashboard we navigate to  **`Security groups > Create security grou
 
 ![security group for data layer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/189160b7-dc96-400a-9104-ebdbb39f4d58)
 
-#### Setup Amazon EFS
+#### <br>Setup Amazon EFS<br/>
 
 [Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html) provides a simple, scalable, fully managed elastic [Network File System (NFS)](https://en.wikipedia.org/wiki/Network_File_System) for use with AWS Cloud services and on-premises resources. In this project, we will utulize EFS service and mount filesystems on both Nginx and Webservers to store data.
 
@@ -180,7 +180,7 @@ From the VPC dashboard we navigate to  **`Security groups > Create security grou
 
 ![tooling access point](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/03c62eaa-9bbe-4952-a647-5068f7fd8e67)
 
-#### Setup Amazon RDS 
+#### <br>Setup Amazon RDS<br/> 
 
 ***Pre-requisite***: Create a KMS key from [Key Management Service (KMS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) to be used to encrypt the database instance.
 
@@ -216,7 +216,7 @@ To configure RDS, we follow steps below:
  
 **v.** Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
 
-#### Creating Compute Resources 
+#### <br>Creating Compute Resources<br/> 
 
 Next, we need to set up and configure compute resources inside our VPC. The resources related to compute are: 
 1. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
@@ -232,7 +232,7 @@ Next, we need to set up and configure compute resources inside our VPC. The reso
 6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
 
 
-#### TLS Certificates From [Amazon Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/)
+#### <br>TLS Certificates From [Amazon Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/)<br/>
 
 We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB). To obtain the certificates, we proceed with the following steps:
 
@@ -250,9 +250,11 @@ We will need TLS certificates to handle secured connectivity to our Application 
 
 ![DNS CNAME record route53](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5957bed9-8aea-404d-95a4-e65e34c45bc8)
 
-#### Set Up Compute Resources for Nginx
+#### <br>Set Up Compute Resources for Nginx<br/>
 
-##### Provision EC2 Instances for Nginx
+We proceed to setup all compute resources for Nginx.
+
+##### <br>Provision EC2 Instances for Nginx<br/>
 
 **i.** We create an EC2 Instance based on CentOS [Amazon Machine Image (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) in any 2 [Availability Zones (AZ) in any AWS Region](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) ([it is recommended to use the Region that is closest to our customers](https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/RegionsAndAZs.html)). We use EC2 instance of [T2 family](https://aws.amazon.com/ec2/instance-types/t2/) (e.g. t2.micro or similar)
 
@@ -419,9 +421,11 @@ $ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 ![ACS nginx autoscaling 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/180c2525-3bfa-46b3-8c08-cbde7de61155)
 
-#### Set Up Compute Resources for Bastion
+#### <br>Set Up Compute Resources for Bastion<br/>
 
-###### Provision the EC2 Instances for Bastion
+We proceed to set up all compute resources for Bastion.
+
+##### <br>Provision the EC2 Instances for Bastion<br/>
 
 **i.** We create an EC2 Instance based on RHEL Amazon Machine Image (AMI) per each Availability Zone in the same Region and the same AZ where we created Nginx server.
 
@@ -516,9 +520,11 @@ $ systemctl enable chronyd
 
 ![ACS bastion autoscaling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e0546b2f-c3db-493f-bd5f-53ad41a292dc)
 
-#### Set Up Compute Resources for Webservers 
+#### <br>Set Up Compute Resources for Webservers<br/>
 
-##### Provision the EC2 Instances for Webservers 
+We proceed to set up all the compute resources for our Web servers.
+
+##### <br>Provision the EC2 Instances for Webservers<br/> 
 
 Now, we will need to create 2 separate launch templates for both the WordPress and Tooling websites
 
@@ -617,7 +623,7 @@ $ openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509
 
 ![create webserver ami](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8d76a2f4-b4a1-42d2-a440-f770f927a323)
 
-##### Prepare Launch Template For Webservers (One per subnet)
+###### Prepare Launch Template For Webservers (One per subnet)
 
 **i.** Make use of the AMI to set up a launch template.
 
@@ -657,7 +663,7 @@ $ openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509
 
 ![target group healthy 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/2a6d300b-66ce-4299-9406-4b0c55ee06bf)
 
-##### Create Database for Wordpress and Tooling
+###### Create Database for Wordpress and Tooling
 
 Before creating Autoscaling Group for WordPress and Tooling, we need to SSH into our Bastion server and from the bastion we connect into RDS by copying the RDS endpoint as host. And after we gain access into the RDS instance, we create database for tooling and wordpress respectively.
 
@@ -735,9 +741,11 @@ mysql> CREATE DATABASE toolingdb;
 
 ![ACS tooling autoscaling 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f9441d5f-bc92-4d42-bb09-d8550f24c4f0)
 
-#### Configure Application Load Balancer (ALB)
+#### <br>Configure Application Load Balancer (ALB)<br/>
 
-##### External Application Load Balancer To Route Traffic To NGINX 
+We proceed to configure both External and Internal Application Load Balancers.
+
+##### <br>External Application Load Balancer To Route Traffic To NGINX<br/> 
 
 Nginx EC2 Instances will have configurations that accepts incoming traffic only from Load Balancers. No request should go directly to Nginx servers. With this kind of setup, we will benefit from intelligent routing of requests from the **ALB** to Nginx servers across the 2 Availability Zones. We will also be able to [offload](https://avinetworks.com/glossary/ssl-offload/) SSL/TLS certificates on the **ALB** instead of Nginx. Therefore, Nginx will be able to perform faster since it will not require extra compute resources to valifate certificates for every request.
 
@@ -757,7 +765,7 @@ From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer 
 
 ![create external application load balancer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/86ee1ad5-0c2b-4b3a-b6e4-6ce34446e6ee)
 
-##### Internal Application Load Balancer To Route Traffic To Web Servers 
+##### <br>Internal Application Load Balancer To Route Traffic To Web Servers<br/> 
 
 Since the webservers are configured for auto-scaling, there is going to be a problem if servers get dynamically scalled out or in. Nginx will not know about the new IP addresses, or the ones that get removed. Hence, Nginx will not know where to direct the traffic. 
 
@@ -799,7 +807,7 @@ From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer>
 
 ***NOTE:*** This process must be repeated for both WordPress and Tooling websites.
 
-#### Configuring DNS with Route53
+#### <br>Configuring DNS with Route53<br/>
 
 Earlier in this project we registered a free domain with Freenom and configured a hosted zone in [**Route53**](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html). But that is not all that needs to be done as far as DNS configuration is concerned. 
 
