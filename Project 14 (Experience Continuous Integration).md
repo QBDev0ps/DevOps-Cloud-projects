@@ -1450,7 +1450,7 @@ when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEX
 
 It is of note that with the current state of the code, it cannot be deployed to Integration environments due to its quality. In the real world, DevOps engineers will push this back to developers to work on the code further, based on SonarQube quality report. Once everything is good with code quality, the pipeline will pass and proceed with shipping the codes further to a higher environment.
 
-### Conclusion and Additional Tasks
+### <br>Conclusion and Additional Tasks<br/> 
 
 We have now come to the conclusion of this project. We have been able to successfully create a pipeline that simulates continuous integration and delivery. To do this, we have  deployed and made use of important DevOps tools such as **Jenkins** to implement our CI/CD pipelines, **Ansible** to automate application deployment to our servers, **Artifactory** to store code artifacts, and **SonarQube** which we used for Code quality checks and analysis. To round things off, we do the following few additional tasks to enhance the outcome of the project:
 
