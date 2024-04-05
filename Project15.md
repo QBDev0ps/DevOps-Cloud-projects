@@ -116,7 +116,7 @@ We need to always make reference to the architectural diagram and ensure that ou
 
 8. Create a [Nat Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and assign one of the Elastic IPs (*The other 2 will be used by [Bastion hosts](https://aws.amazon.com/quickstart/architecture/linux-bastion/))
   
-**i.** From the VPC dashboard we navigate to  **`NAT gateways > Create NAT gateway`**, then we proceed to enter the NAT gateway settins as shown in the image below, and afterwards, we click on "Create NAT gateway".
+**i.** From the VPC dashboard we navigate to  **`NAT gateways > Create NAT gateway`**, then we proceed to enter the NAT gateway settings as shown in the image below, and afterwards, we click on "Create NAT gateway".
 
  ![create NAT gateway](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d8645cbf-cc0d-43e9-b715-2d1b4d72673a)
 
@@ -151,39 +151,6 @@ From the VPC dashboard we navigate to  **`Security groups > Create security grou
 **vi.** `Data Layer`: Access to the Data layer, which is comprised of [Amazon Relational Database Service (RDS)](https://aws.amazon.com/rds/) and [Amazon Elastic File System (EFS)](https://aws.amazon.com/efs/) must be carefully desinged - only bastion and  webservers should be able to connect to **RDS**, while Nginx and Webservers will have access to **EFS Mountpoint**.
 
 ![security group for data layer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/189160b7-dc96-400a-9104-ebdbb39f4d58)
-
-#### Creating Compute Resources 
-
-Next, we need to set up and configure compute resources inside our VPC. The resources related to compute are: 
-1. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
-   
-2. [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
- 
-3. [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
- 
-4. [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-
-5. [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
-
-6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
-
-#### TLS Certificates From [Amazon Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/)
-
-We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB). To obtain the certificates, we proceed with the following steps:
-
-**i.** Navigate to AWS Certificate Manager
-
-**ii.** Request a public wildcard certificate for the domain name you registered.
-
-**iii.** Use DNS to validate the domain name
-
-![AWS cert](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7699f683-c653-4829-97ac-01f8f64efbfd)
-
-**iv.** Tag the resource and Click on Request.
-
-**v.** Create DNS CNAME records in Amazon Route 53. 
-
-![DNS CNAME record route53](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5957bed9-8aea-404d-95a4-e65e34c45bc8)
 
 #### Setup Amazon EFS
 
@@ -249,22 +216,39 @@ To configure RDS, we follow steps below:
  
 **v.** Enable [CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html) monitoring and export `Error` and `Slow Query` logs (for production, also include `Audit`)
 
+#### Creating Compute Resources 
 
-#### Proceed With Compute Resources 
-
-We will need to set up and configure compute resources inside our VPC. The resources related to compute are: 
-
-1. [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
-  
-2. [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
+Next, we need to set up and configure compute resources inside our VPC. The resources related to compute are: 
+1. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
    
-3. [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
+2. [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/)
  
-4. [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
+3. [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html)
+ 
+4. [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
 
-5. [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+5. [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html)
 
-6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) 
+6. [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html)
+
+
+#### TLS Certificates From [Amazon Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/)
+
+We will need TLS certificates to handle secured connectivity to our Application Load Balancers (ALB). To obtain the certificates, we proceed with the following steps:
+
+**i.** Navigate to AWS Certificate Manager
+
+**ii.** Request a public wildcard certificate for the domain name you registered.
+
+**iii.** Use DNS to validate the domain name
+
+![AWS cert](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7699f683-c653-4829-97ac-01f8f64efbfd)
+
+**iv.** Tag the resource and Click on Request.
+
+**v.** Create DNS CNAME records in Amazon Route 53. 
+
+![DNS CNAME record route53](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5957bed9-8aea-404d-95a4-e65e34c45bc8)
 
 #### Set Up Compute Resources for Nginx
 
@@ -614,16 +598,16 @@ $ yum install -y  ./build/amazon-efs-utils*rpm
 **v.** We proceed with setting up a self-signed certificate for the apache webserver instance.
 
 ```
-yum install -y mod_ssl
+$ sudo yum install -y mod_ssl
 
-openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -days 365 -out /etc/pki/tls/certs/ACS.crt
+$ openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -days 365 -out /etc/pki/tls/certs/ACS.crt
 ```
 
 ![webserver ami installation generate cert](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b25f4389-065c-4b75-a274-eaaa317dec4d)
 
 * Then we edit the **`ssl.conf`** fie as shown in the image below.
 
-**`vi /etc/httpd/conf.d/ssl.conf`**
+**`$ sudo vi /etc/httpd/conf.d/ssl.conf`**
 
 ![webserver ami installation edit etc httpd conf](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9ce341b1-eba6-46b1-b0e9-e4da69950f8c)
 
@@ -757,12 +741,21 @@ mysql> CREATE DATABASE toolingdb;
 
 Nginx EC2 Instances will have configurations that accepts incoming traffic only from Load Balancers. No request should go directly to Nginx servers. With this kind of setup, we will benefit from intelligent routing of requests from the **ALB** to Nginx servers across the 2 Availability Zones. We will also be able to [offload](https://avinetworks.com/glossary/ssl-offload/) SSL/TLS certificates on the **ALB** instead of Nginx. Therefore, Nginx will be able to perform faster since it will not require extra compute resources to valifate certificates for every request.
 
-1. Create an Internet facing ALB
-2. Ensure that it listens on `HTTPS` protocol (TCP port 443)
-3. Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`
-4. Choose the Certificate from ACM
-5. Select Security Group
-6. Select Nginx Instances as the target group
+From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer > Application load balancer > Create`** and then we do the following:
+
+**i.** Create an Internet facing ALB.
+
+**ii.** Ensure that it listens on `HTTPS` protocol (TCP port 443).
+
+**iii.** Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`.
+
+**iv.** Choose the Certificate from ACM.
+
+**v.** Select Security Group.
+
+**vi.** Select Nginx Instances as the target group.
+
+![create external application load balancer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/86ee1ad5-0c2b-4b3a-b6e4-6ce34446e6ee)
 
 ##### Internal Application Load Balancer To Route Traffic To Web Servers 
 
@@ -770,37 +763,72 @@ Since the webservers are configured for auto-scaling, there is going to be a pro
 
 To solve this problem, we must use a load balancer. But this time, it will be an internal load balancer. Not Internet facing since the webservers are within a private subnet, and we do not want direct access to them.
 
-1. Create an Internal ALB
-2. Ensure that it listens on `HTTPS` protocol (TCP port 443)
-3. Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`
-4. Choose the Certificate from ACM
-5. Select Security Group
-6. Select webserver Instances as the target group
-7. Ensure that health check passes for the target group
+From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer> Application load balancer > Create`** and then we do the following:
+
+**i.** Create an Internal ALB.
+
+**ii.** Ensure that it listens on `HTTPS` protocol (TCP port 443).
+
+**iii.** Ensure the ALB is created within the appropriate `VPC | AZ | Subnets`.
+
+**iv.** Choose the Certificate from ACM.
+
+**v.** Select Security Group.
+
+**vi.** Select webserver Instances as the target group.
+
+![create internal application load balancer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8b6668bf-5715-483b-a157-bcd2e55a61bf)
+
+* After the internal load balancer is created, we select it and navigate to **`Listeners and rules > Manage rules > Add rule `** and then we do the following:
+
+**i.** Add a Name tag and define Rule conditions.
+
+![define rule condition](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a8b3fd06-1798-4382-9f01-538f3aa12f30)
+
+**ii.** Define Rule actions.
+
+![define rule actions](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/59d03b25-87d7-451f-ac7f-7acbfc5396f9)
+
+**iii.** Set rule priority.
+
+![set rule priority](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d1d337be-eac5-4a4e-8957-6516459c9d0d)
+
+**iv.** Review and Create rule.
+
+![review and create rule](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5baf5d1b-ce16-4d9c-b546-30bf199d5b16)
 
 ***NOTE:*** This process must be repeated for both WordPress and Tooling websites.
 
+#### Configuring DNS with Route53
 
+Earlier in this project we registered a free domain with Freenom and configured a hosted zone in [**Route53**](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html). But that is not all that needs to be done as far as DNS configuration is concerned. 
 
+We need to ensure that the main domain for the WordPress website can be reached, and the subdomain for Tooling website can also be reached using a browser.
 
+We create other records such as [`CNAME`, `alias` and `A` records](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-concepts.html).
 
+***NOTE***: You can use either `CNAME` or `alias` records to achieve the same thing. But `alias` record has better functionality because it is a faster to resolve DNS record, and can coexist with other records on that name. Read [here](https://support.dnsimple.com/articles/differences-between-a-cname-alias-url/#:~:text=The%20A%20record%20maps%20a,a%20name%20to%20another%20name.&text=The%20ALIAS%20record%20maps%20a,the%20HTTP%20301%20status%20code) to get to know more about the differences.
 
+![records in route 53](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/677cbb33-1646-478b-871e-ecf5726870b9)
 
+**i.** Create an `alias` record for the root domain and direct its traffic to the `ALB` DNS name.
 
-##### Create external load balancer
+![route 53 hosted zones add records2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8f306d05-9383-427c-8005-a99a6626bfb3)
 
-* From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer > Application load balancer > Create`** and then we do the following:
+**ii.** Create an `alias` record for `tooling.<yourdomain>.com` and direct its traffic to the `ALB` DNS name.
 
-##### Create internal load balancere
+![route 53 hosted zones add records](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/80183177-66a7-4219-a703-8519836343c3)
 
-* From the EC2 dashboard, we navigate to **`Load Balancers > Create load balancer> Application load balancer > Create`** and then we do the following:
+### <br>Conclusion<br/>
 
-* After the load balancer is created, we select it and navigate to **`Listeners and rules > Manage rules > Add rule `** and then we do the following:
+We have been able to successfuly use reverse proxy technology to build a secure infrastructure inside AWS VPC (Virtual Private Cloud) network for a company that uses WordPress CMS for its main business website, and a Tooling Website **(`https://github.com/QuadriBello/tooling`)** for their DevOps team. As can be seen in the images below, we were able to successfully reach both Wordpress and Tooling websites via the browser.
 
-1. Add a Name tag.
-2. Define Rule conditions.
-3. Define Rule actions.
-4. Set rule priority.
-5. Review and Create.
+![Welcome to wordpress](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a0e74ff3-7a53-4e85-b8ea-4c2cf87500c7)
+
+![tooling webpage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1e62e0b7-4db3-4b31-9f00-6e79ee32f045)
+
+The goal of for us at the beginning of this project was to deploy AWS cloud concepts and tools in building a robust and secure cloud infrastructure and components to support our Wordpress and Tooling websites. We began by creating a domain name for our company and then we created a VPC. Within the VPC, we enabled DNS hostnames within VPC settings, created public and private subnets, created route tables and associated them with our subnets, created and attached Internet gateway, created NAT gateway and then also created security groups.
+
+Next, we created [Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html) a simple, scalable, fully managed elastic [Network File System (NFS)](https://en.wikipedia.org/wiki/Network_File_System) for use with AWS Cloud services and on-premises resources; and  [Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html) a managed distributed relational database service by Amazon Web Services. After this, we deployed our compute resources which include: [TLS Certificates](https://en.wikipedia.org/wiki/Transport_Layer_Security), [EC2 Instances](https://www.amazonaws.cn/en/ec2/instance-types/), [Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html), [Target Groups](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html), [Autoscaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html) and [Application Load Balancers (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html).
 
   
