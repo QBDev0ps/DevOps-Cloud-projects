@@ -239,10 +239,11 @@ To destroy whatever has been created we run `terraform destroy` command, and typ
 
 ![terraform destroy](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7a551ec8-a2ea-4e93-bfec-f4e5eab97ae7)
 
-### <ins>Fixing The Problems By Code Refactoring<ins>
+#### <ins>Fixing The Problems By Code Refactoring<ins>
 
-- **Fixing Hard Coded Values**: We will introduce variables, and remove hard coding.
-  - Starting with the provider block, declare a variable named `region`, give it a default value, and update the provider section by referring to the declared variable.
+**i.** **Fixing Hard Coded Values**: We will introduce variables, and remove hard coding.
+
+  - Starting with the provider block, we declare a variable named `region`, give it a default value, and update the provider section by referring to the declared variable.
 
     ```
         variable "region" {
@@ -254,7 +255,8 @@ To destroy whatever has been created we run `terraform destroy` command, and typ
         }
 
     ```
-  - Do the same to `cidr` value in the `vpc` block, and all the other arguments.
+    
+  - We do the same to `cidr` value in the `vpc` block, and all the other arguments.
   
     ```
         variable "region" {
@@ -297,11 +299,13 @@ To destroy whatever has been created we run `terraform destroy` command, and typ
 
     ```
 
-- **Fixing multiple resource blocks**: This is where things become a little tricky. It's not complex, we are just going to introduce some interesting concepts. <ins>Loops & Data sources</ins>
-  
-Terraform has a functionality that allows us to pull data which exposes information to us. For example, every region has Availability Zones (AZ). Different regions have from 2 to 4 Availability Zones. With over 20 geographic regions and over 70 AZs served by AWS, it is impossible to keep up with the latest information by hard coding the names of AZs. Hence, we will explore the use of Terraform's **Data Sources** to fetch information outside of Terraform. In this case, from **AWS**
+![fixing hard coded values](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/941c5a8f-8b13-4fe5-b8e6-b08f23442662)
 
-Let us fetch Availability zones from AWS, and replace the hard coded value in the subnet's `availability_zone` section.
+**ii.** **Fixing multiple resource blocks**: This is where things become a little tricky. It's not complex, we are just going to introduce some interesting concepts. <ins>Loops & Data sources</ins>
+  
+Terraform has a functionality that allows us to pull data which exposes information to us. For example, every region has Availability Zones (AZ). Different regions have from 2 to 4 Availability Zones. With over 20 geographic regions and over 70 AZs served by AWS, it is impossible to keep up with the latest information by hard coding the names of AZs. Hence, we will explore the use of Terraform's **Data Sources** to fetch information outside of Terraform. In this case, from **AWS**.
+
+We proceed to fetch Availability zones from AWS, and replace the hard coded value in the subnet's `availability_zone` section.
 
 ```
         # Get list of availability zones
@@ -309,6 +313,7 @@ Let us fetch Availability zones from AWS, and replace the hard coded value in th
         state = "available"
         }
 ```
+
 To make use of this new `data` resource, we will need to introduce a `count` argument in the subnet block: Something like this.
 
 ```
@@ -324,8 +329,10 @@ To make use of this new `data` resource, we will need to introduce a `count` arg
 
 ```
 
-Let us quickly understand what is going on here.
+Let us quickly understand what is going on here:
+
 - The `count` tells us that we need 2 subnets. Therefore, Terraform will invoke a loop to create 2 subnets.
+  
 - The `data` resource will return a list object that contains a list of AZs. Internally, Terraform will receive the data like this 
 
 ```
@@ -338,9 +345,7 @@ Therefore, each time Terraform goes into a loop to create a subnet, it must be c
 
 But we still have a problem. If we run Terraform with this configuration, it may succeed for the first time, but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So, we have a little more work to do.
 
-###  Let's make `cidr_block` dynamic. 
-
-We will introduce a function `cidrsubnet()` to make this happen. It accepts 3 parameters. Let us use it first by updating the configuration, then we will explore its internals.
+**iii.**  **Making `cidr_block` dynamic**: We will introduce a function `cidrsubnet()` to make this happen. It accepts 3 parameters. Let us use it first by updating the configuration, then we will explore its internals.
 
 ```
     # Create public subnet1
@@ -354,36 +359,46 @@ We will introduce a function `cidrsubnet()` to make this happen. It accepts 3 pa
     }
 
 ```
+
 A closer look at `cidrsubnet` - this function works like an algorithm to dynamically create a subnet CIDR per AZ. Regardless of the number of subnets created, it takes care of the cidr value per subnet. 
 
 Its parameters are `cidrsubnet(prefix, newbits, netnum)`
 
-- The `prefix` parameter must be given in CIDR notation, same as for VPC. 
-- The `newbits` parameter is the number of additional bits with which to extend the prefix. For example, if given a prefix ending with /16 and a newbits value of 4, the resulting subnet address will have length /20
+- The `prefix` parameter must be given in CIDR notation, same as for VPC.
+  
+- The `newbits` parameter is the number of additional bits with which to extend the prefix. For example, if given a prefix ending with /16 and a newbits value of 4, the resulting subnet address will have length /20.
+  
 - The `netnum` parameter is a whole number that can be represented as a binary integer with no more than `newbits` binary digits, which will be used to populate the additional bits added to the prefix
 
-You can experiment how this works by entering the `terraform console` and keep changing the figures to see the output.
+We can experiment how this works by entering the `terraform console` and keep changing the figures to see the output.
 
 - On the terminal, run `terraform console`
+  
 - type `cidrsubnet("172.16.0.0/16", 4, 0)`
+  
 - Hit enter
+  
 - See the output
-- Keep change the numbers and see what happens.
+  
+- Keep changing the numbers and see what happens.
+  
 - To get out of the console, type `exit`
 
-### The final problem to solve is removing hard coded `count` value.
+![terraform console](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a4e96a22-c593-4dde-bbc4-12307c26a5b0)
 
-If we cannot hard code a value we want, then we will need a way to dynamically provide the value based on some input. Since the `data` resource returns all the AZs within a region, it makes sense to count the number of AZs returned and pass that number to the `count` argument.
+**iv.** **Removing hard coded `count` value**: If we cannot hard code a value we want, then we will need a way to dynamically provide the value based on some input. Since the `data` resource returns all the AZs within a region, it makes sense to count the number of AZs returned and pass that number to the `count` argument.
 
 To do this, we can introuduce `length()` function, which basically determines the length of a given list, map, or string.
 
-Since `data.aws_availability_zones.available.names` returns a list like `["eu-central-1a", "eu-central-1b", "eu-central-1c"]` we can pass it into a `lenght` function and get number of the AZs.
+Since `data.aws_availability_zones.available.names` returns a list like `["eu-central-1a", "eu-central-1b", "eu-central-1c"]` we can pass it into a `length` function and get number of the AZs.
 
 `length(["eu-central-1a", "eu-central-1b", "eu-central-1c"])`
 
-Open up `terraform console` and try it
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project16/length-function.png" width="936px" height="550px">
-Now we can simply update the public subnet block like this 
+We open up `terraform console` and try it
+
+![length function](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1066e22a-0e50-4b1c-9914-adb4bda61393)
+
+Now we can simply update the public subnet block like this:
 
 ```    
 # Create public subnet1
@@ -399,17 +414,19 @@ Now we can simply update the public subnet block like this
 
 ***Observations***: 
 
-- What we have now, is sufficient to create the subnet resource required. But if you observe, it is not satisfying our business requirement of just `2` subnets. The `length` function will return number 3 to the `count` argument, but what we actually need is `2`.
+- What we have now, is sufficient to create the subnet resource required. But if when we observe closely, it is not satisfying our business requirement of just `2` subnets. The `length` function will return number 3 to the `count` argument, but what we actually need is `2`.
 
-Now, let us fix this. 
+Now, we proceed to fix this. 
 
-- Declare a variable to store the desired number of public subnets, and set the default value
+- We declare a variable to store the desired number of public subnets, and set the default value
+  
 ```
   variable "preferred_number_of_public_subnets" {
       default = 2
 }
 ```
-- Next, update the `count` argument with a condition. Terraform needs to check first if there is a desired number of subnets. Otherwise, use the data returned by the `lenght` function. See how that is presented below.
+
+- Next, we update the `count` argument with a condition. Terraform needs to check first if there is a desired number of subnets. Otherwise, use the data returned by the `length` function. This is presentedas shown below.
 
 ```
 # Create public subnets
@@ -422,13 +439,16 @@ resource "aws_subnet" "public" {
 
 }
 ```
-Now lets break it down:
 
-- The first part `var.preferred_number_of_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined. 
-- The second part `?` and `length(data.aws_availability_zones.available.names)` means, if the first part is true, then use this. In other words, if preferred number of public subnets is `null` (*Or not known*) then set the value to the data returned by `lenght` function.
-- The third part `:` and  `var.preferred_number_of_public_subnets` means, if the first condition is false, i.e preferred number of public subnets is `not null` then set the value to whatever is definied in `var.preferred_number_of_public_subnets`
+To explain the `count` section in the above code block:
 
-Now the entire configuration should now look like this
+- The first part `var.preferred_number_of_public_subnets == null` checks if the value of the variable is set to `null` or has some value defined.
+  
+- The second part `?` and `length(data.aws_availability_zones.available.names)` means, if the first part is true, then use this. In other words, if preferred number of public subnets is `null` (*Or not known*) then set the value to the data returned by `length` function.
+  
+- The third part `:` and  `var.preferred_number_of_public_subnets` means, if the first condition is false, i.e preferred number of public subnets is `not null` then set the value to whatever is definied in `var.preferred_number_of_public_subnets`.
+
+Now our entire configuration looks as shown below:
 
 ```
 # Get list of availability zones
@@ -491,4 +511,163 @@ resource "aws_subnet" "public" {
 
 ```
 
-***Note***: You should try changing the value of `preferred_number_of_public_subnets` variable to `null` and notice how many subnets get created.
+![entire configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3fb531ea-6feb-4183-ad51-04f183bd5082)
+
+
+### Introducing variables.tf & terraform.tfvars
+
+Instead of havng a long lisf of variables in `main.tf` file, we can actually make our code a lot more readable and better structured by moving out some parts of the configuration content to other files.
+
+- We will put all variable declarations in a separate file.
+  
+- And we will provide non default values to each of them.
+
+**i.** We create a new file and name it `variables.tf`.
+
+**ii.** We copy all the variable declarations into the new file.
+
+**iii.** We create another file, and name it `terraform.tfvars`.
+
+**iv.** We set values for each of the variables.
+
+So our setup now will be as follows:
+
+#### Main.tf
+
+This is a file that contains our main Terraform configuration.
+
+```
+# Get list of availability zones
+data "aws_availability_zones" "available" {
+state = "available"
+}
+
+provider "aws" {
+  region = var.region
+}
+
+# Create VPC
+resource "aws_vpc" "main" {
+  cidr_block                     = var.vpc_cidr
+  enable_dns_support             = var.enable_dns_support 
+  enable_dns_hostnames           = var.enable_dns_support
+  enable_classiclink             = var.enable_classiclink
+  enable_classiclink_dns_support = var.enable_classiclink
+
+}
+
+# Create public subnets
+resource "aws_subnet" "public" {
+  count  = var.preferred_number_of_public_subnets == null ? length(data.aws_availability_zones.available.names) : var.preferred_number_of_public_subnets   
+  vpc_id = aws_vpc.main.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 4 , count.index)
+  map_public_ip_on_launch = true
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+}
+```
+
+![maintf2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3a63b3ce-eb86-4bb1-ae80-ccbca903546e)
+
+#### variables.tf 
+
+This is a file where we can define variables for our Terraform configuration. The file is used for the declaration of variables, name, type, description, as well as the optional default value for the variable and additional meta data.
+
+```
+variable "region" {
+      default = "eu-central-1"
+}
+
+variable "vpc_cidr" {
+    default = "172.16.0.0/16"
+}
+
+variable "enable_dns_support" {
+    default = "true"
+}
+
+variable "enable_dns_hostnames" {
+    default ="true" 
+}
+
+variable "enable_classiclink" {
+    default = "false"
+}
+
+variable "enable_classiclink_dns_support" {
+    default = "false"
+}
+
+  variable "preferred_number_of_public_subnets" {
+      default = null
+}
+```
+
+![variablestf](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9f3d01c9-c4ca-426b-a4b8-8444a74ba21f)
+
+#### terraform.tfvars
+
+This is a file where we actually assign values to the variables. It is used for giving the actual variable values during execution. It allows you to customize a specific execution.
+
+```
+region = "eu-central-1"
+
+vpc_cidr = "172.16.0.0/16" 
+
+enable_dns_support = "true" 
+
+enable_dns_hostnames = "true"  
+
+enable_classiclink = "false" 
+
+enable_classiclink_dns_support = "false" 
+
+preferred_number_of_public_subnets = 2
+```
+
+![terraformtfvars](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f270c9f7-a112-4b59-a1dd-e73664f71e42)
+
+### Conclusion
+
+**i.** At this stage, our file structure in the PBL folder should look as shown below:
+
+```
+└── PBL
+    ├── main.tf
+    ├── terraform.tfstate
+    ├── terraform.tfstate.backup
+    ├── terraform.tfvars
+    └── variables.tf
+```
+
+To confirm this, we run the following command:
+
+**`$ tree.com //a //f`**
+
+![tree](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eca28317-842a-4f27-a3b7-cb4d5aee941a)
+
+**ii.** Next, we proceed to run the following commands to ensure everything works.
+
+```
+$ terraform plan
+
+$ terraform apply --auto-approve
+```
+
+![terraform plan2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c49e28f6-f80a-4e7f-bdf9-c188e0d1cb4f)
+
+![terraform apply auto approve](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3c6714eb-3f06-4fe1-9ea7-57c72713a861)
+
+**iii.** Subsequently, we navigate to our AWS account to confirm that our infrastructure (VPC and Subnets) has indeed been created.
+
+![VPC created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/008e75b7-8774-4393-b0f9-004cb309692d)
+
+![subnets created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1cf9f5cd-b379-47e8-92ec-1897bd686f90)
+
+**iv.** On a final note, we execute `$ terraform destroy --auto-approve` to delete the infrastructure.
+
+![terraform destroy2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/681c8c47-be59-475c-9de7-d53dafbdb475)
+
+![terraform destroy 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c5ae5476-e14a-468a-8d14-62098b5703a7)
+
+We have now successfully utilized the power of IaC and learnt how to create and delete AWS Network Infrastructure programmatically with Terraform. 
+
