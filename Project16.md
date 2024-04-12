@@ -25,7 +25,7 @@ Terraform is an open source infrastructure as code tool created by Hashicorp. It
 
 **vi.** Terraform is great for disaster recovery. It helps to save a lot of money as there might be no need to spend huge amounts on disatser recovery if you can spin up and spin down all your infrastructure in seconds.
 
-Terraform helps to kinimize user errors.
+Terraform helps to minimize user errors.
 
 ### The secrets of writing quality Terraform code
 
@@ -142,21 +142,21 @@ resource "aws_vpc" "main" {
 
 ![create vpc](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/722f83b1-8238-4bbe-8551-7906c2692f9b)
 
-**iii.** The next thing we need to do, is to download necessary plugins for Terraform to work. These plugins are used by `providers` and `provisioners`. At this stage, we only have `provider` in our `main.tf` file. So, Terraform will just download plugin for AWS provider.
+**iii.** The next thing we need to do, is to download necessary plugins for Terraform to work. These plugins are used by `providers` and `provisioners`. At this stage, we only have `provider` in our **`main.tf`** file. So, Terraform will just download plugin for AWS provider.
   
-**iv.** Lets accomplish this with `terraform init` command as seen in the below image.
+**iv.** Lets accomplish this with **`$ terraform init`** command as seen in the below image.
 
 ![terraform init](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5c6173d3-1a9a-4db6-b908-795b6c35daef)
 
 ***Observation***: 
 
-- We notice that a new directory has been created: `.terraform\...`. This is where Terraform keeps plugins. Generally, it is safe to delete this folder. It just means that we must execute `terraform init` again, to download them.
+- We notice that a new directory has been created: **`.terraform\...`**. This is where Terraform keeps plugins. Generally, it is safe to delete this folder. It just means that we must execute **`$ terraform init`** again, to download them.
 
-**v.** Moving on, let us create the only resource we just defined. `aws_vpc`. But before we do that, we should check to see what terraform intends to create before we tell it to go ahead and create it.
+**v.** Moving on, let us create the only resource we just defined. **`aws_vpc`**. But before we do that, we should check to see what terraform intends to create before we tell it to go ahead and create it.
 
-* We run `terraform plan`
+* We run **`$ terraform plan`**
   
-* Then, since we are happy with changes planned, we execute `terraform apply`
+* Then, since we are happy with changes planned, we execute **`$ terraform apply`**
 
 ![terraform plan apply](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/748473c7-a589-48e4-9958-80c16187db10)
 
@@ -219,7 +219,7 @@ We add below configuration to the `main.tf` file:
   
 - We are using the `vpc_id` argument to interpolate the value of the VPC `id` by setting it to `aws_vpc.main.id`. This way, Terraform knows inside which VPC to create the subnet.
 
-**ii.** We run `terraform plan` and `terraform apply` 
+**ii.** We run **`$ terraform plan`** and **`$ terraform apply`** 
 
 ![terraform plan subnets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f7fa6c6c-69b7-483c-b91a-ac751e61a927)
 
@@ -233,9 +233,9 @@ We add below configuration to the `main.tf` file:
 
 **iii.** Now we improve our code by refactoring it.
 
-*First, destroy the current infrastructure. Since we are still in development, this is totally fine. Otherwise, **DO NOT DESTROY** an infrastructure that has been deployed to production.*
+*First, we destroy the current infrastructure. Since we are still in development, this is totally fine. Otherwise, **DO NOT DESTROY** an infrastructure that has been deployed to production.*
 
-To destroy whatever has been created we run `terraform destroy` command, and type `yes` after evaluating the plan.
+To destroy whatever has been created we run **`$ terraform destroy`** command, and type **`yes`** after evaluating the plan.
 
 ![terraform destroy](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7a551ec8-a2ea-4e93-bfec-f4e5eab97ae7)
 
@@ -296,7 +296,6 @@ To destroy whatever has been created we run `terraform destroy` command, and typ
         enable_classiclink_dns_support = var.enable_classiclink
 
         }
-
     ```
 
 ![fixing hard coded values](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/941c5a8f-8b13-4fe5-b8e6-b08f23442662)
@@ -345,7 +344,7 @@ Therefore, each time Terraform goes into a loop to create a subnet, it must be c
 
 But we still have a problem. If we run Terraform with this configuration, it may succeed for the first time, but by the time it goes into the second loop, it will fail because we still have `cidr_block` hard coded. The same `cidr_block` cannot be created twice within the same VPC. So, we have a little more work to do.
 
-**iii.**  **Making `cidr_block` dynamic**: We will introduce a function `cidrsubnet()` to make this happen. It accepts 3 parameters. Let us use it first by updating the configuration, then we will explore its internals.
+**iii.**  **Making `cidr_block` dynamic**: We will introduce a function **`cidrsubnet()`** to make this happen. It accepts 3 parameters. Let us use it first by updating the configuration, then we will explore its internals.
 
 ```
     # Create public subnet1
@@ -357,7 +356,6 @@ But we still have a problem. If we run Terraform with this configuration, it may
         availability_zone       = data.aws_availability_zones.available.names[count.index]
 
     }
-
 ```
 
 A closer look at `cidrsubnet` - this function works like an algorithm to dynamically create a subnet CIDR per AZ. Regardless of the number of subnets created, it takes care of the cidr value per subnet. 
@@ -370,9 +368,9 @@ Its parameters are `cidrsubnet(prefix, newbits, netnum)`
   
 - The `netnum` parameter is a whole number that can be represented as a binary integer with no more than `newbits` binary digits, which will be used to populate the additional bits added to the prefix
 
-We can experiment how this works by entering the `terraform console` and keep changing the figures to see the output.
+We can experiment how this works by entering the **`terraform console`** and then we keep changing the figures to see the output.
 
-- On the terminal, run `terraform console`
+- On the terminal, we run **`$ terraform console`**
   
 - type `cidrsubnet("172.16.0.0/16", 4, 0)`
   
@@ -392,9 +390,9 @@ To do this, we can introuduce `length()` function, which basically determines th
 
 Since `data.aws_availability_zones.available.names` returns a list like `["eu-central-1a", "eu-central-1b", "eu-central-1c"]` we can pass it into a `length` function and get number of the AZs.
 
-`length(["eu-central-1a", "eu-central-1b", "eu-central-1c"])`
+**`length(["eu-central-1a", "eu-central-1b", "eu-central-1c"])`**
 
-We open up `terraform console` and try it
+We open up **`$ terraform console`** and try it.
 
 ![length function](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1066e22a-0e50-4b1c-9914-adb4bda61393)
 
@@ -513,8 +511,7 @@ resource "aws_subnet" "public" {
 
 ![entire configuration](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3fb531ea-6feb-4183-ad51-04f183bd5082)
 
-
-### Introducing variables.tf & terraform.tfvars
+### <br>Introducing variables.tf and terraform.tfvars<br/>
 
 Instead of havng a long lisf of variables in `main.tf` file, we can actually make our code a lot more readable and better structured by moving out some parts of the configuration content to other files.
 
@@ -626,7 +623,7 @@ preferred_number_of_public_subnets = 2
 
 ![terraformtfvars](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f270c9f7-a112-4b59-a1dd-e73664f71e42)
 
-### Conclusion
+### <br>Conclusion<br/>
 
 **i.** At this stage, our file structure in the PBL folder should look as shown below:
 
@@ -663,7 +660,7 @@ $ terraform apply --auto-approve
 
 ![subnets created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/1cf9f5cd-b379-47e8-92ec-1897bd686f90)
 
-**iv.** On a final note, we execute `$ terraform destroy --auto-approve` to delete the infrastructure.
+**iv.** On a final note, we execute **`$ terraform destroy --auto-approve`** to delete the infrastructure.
 
 ![terraform destroy2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/681c8c47-be59-475c-9de7-d53dafbdb475)
 
