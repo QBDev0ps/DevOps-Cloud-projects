@@ -220,6 +220,10 @@ $ terraform plan
 $ terraform apply
 ```
 
+![terraform plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/89814135-f19b-4ae0-8e7e-975f7962e157)
+
+![terraform apply](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e8325f04-e78d-40f0-882f-606ad57c6c01)
+
 After executing the command, we can see that the following resources have been created:
 
 - [x] - Our main vpc 
@@ -230,8 +234,88 @@ After executing the command, we can see that the following resources have been c
 - [x] - 1 EIP
 - [x] - 2 Route tables
 
+![network resources created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8ac1739d-d9cb-4d53-a3f9-e4fc59f8c8e2)
+
+
 ### AWS Identity and Access Management
 
 Now that we are done with the Networking part of our AWS set-up, we proceed to move on to Compute and Access Control configuration automation using Terraform.
 
 #### Step 1: Create IAM Roles.
+
+- An IAM role is passed to the EC2 instances to give them access to some specific resources by first of all creating an AssumeRole and AssumeRole policy.
+- Creating a file named roles.tf and entering the following codes:
+
+```
+resource "aws_iam_role" "ec2_instance_role" {
+  name = "ec2_instance_role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "aws assume role"
+    },
+  )
+}
+```
+
+- Creating an IAM policy which allows an IAM role to perform action describe to EC2 instances:
+
+```
+resource "aws_iam_policy" "policy" {
+  name        = "ec2_instance_policy"
+  description = "A test policy"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+
+  })
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "aws assume policy"
+    },
+  )
+
+}
+```
+
+- Attaching the policy to the IAM role created:
+
+```
+resource "aws_iam_role_policy_attachment" "test-attach" {
+  role       = aws_iam_role.ec2_instance_role.name
+  policy_arn = aws_iam_policy.policy.arn
+}
+```
+
+- Creating an Instance Profile and interpolating the IAM Role
+
+```
+resource "aws_iam_instance_profile" "ip" {
+  name = "aws_instance_profile_test"
+  role = aws_iam_role.ec2_instance_role.name
+}
+```
