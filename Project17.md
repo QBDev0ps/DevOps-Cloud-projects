@@ -39,13 +39,15 @@ A routing table, or routing information base (RIB), is a data table stored in a 
 
 ## Continue Infrastructure Automation with Terraform
 
-In continuation from where we stopped in the previous project, we shall proceed to carry out the following:
+In continuation from where we stopped in the previous project, we shall continue our implementation using the same network architecture diagram. In this project, we shall proceed to carry out the following:
 
 1. Networking Resources: We create our Networking resources.
 
 2. AWS Identity and Access Management: Identity Access Control configuration automation.
 
 3. Compute Resources: Automate creation of compute resources and associated configuration.
+
+![152831445-844e3865-0317-4bf4-969a-490a7c1e06ba](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fc82a9b8-d0b1-4328-83ba-aa569c54dfaa)
 
 ### Networking Resources
 
@@ -277,11 +279,13 @@ resource "aws_iam_role" "ec2_instance_role" {
 }
 ```
 
+![create assume role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e8416b46-3044-4c31-8246-bff846c540d2)
+
 In the above code block, we are creating **`AssumeRole`** with **`AssumeRole policy`**. It grants to an entity, (in our case an EC2 instance) permissions to assume the role.
 
 #### Step 2: Create an [IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for this role.
 
-This is where we need to define a required policy (i.e., permissions) according to our requirements. Here, we define a policy allowing an IAM role to perform an action **`describe`** applied to EC2 instances:
+This is where we need to define a required policy (i.e., permissions) according to our requirements. Here, we define a policy allowing an IAM role to perform an action **`describe`** applied to EC2 instances.
 
 ```
 resource "aws_iam_policy" "policy" {
@@ -311,6 +315,8 @@ resource "aws_iam_policy" "policy" {
 }
 ```
 
+![create iam policy for role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b8d3a9be-166b-445c-9be0-06fd5fc50795)
+
 #### Step 3: Attach the `Policy` to the `IAM Role`. 
     
 This is where, we will be attaching the policy which we created above, to the role we created in the first step.
@@ -322,6 +328,8 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
 }
 ```
 
+![attach policy to IAM role](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3b548c38-83ee-4cf4-8194-eddc02127be9)
+
 #### Step 4: Create an [`Instance Profile`](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) and interpolate the `IAM Role`.
 
 ```
@@ -331,3 +339,310 @@ resource "aws_iam_instance_profile" "ip" {
 }
 ```
 
+![create instance profile](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/68af537f-58e7-4246-b83d-4ea96d528042)
+
+### Compute Resources: 
+
+At this stage, we need to create our compute resources and all other associated resources and configuration. These include Security Groups, Target Group (for Nginx, Wordpress and Tooling), certificate from AWS certificate manager, an External Application Load Balancer and Internal Application Load Balancer, launch template (for Bastion, Tooling, Nginx and Wordpress), an Auto Scaling Group (ASG) (for Bastion, Tooling, Nginx and Wordpress), Elastic Filesystem (EFS), and a Relational Database (RDS).
+
+
+#### STEP 1: Create Security Groups
+
+We are going to create all the security groups in a single file, then we are going to refrence this security group within each resources that needs it.
+
+To proceed, we create a new file **`security.tf`** and paste in the following commands to create security groups for the Internal and External load balancer, the bastion server, Nginx server, the tooling and wordpress webserver and the data layer:
+
+```
+# security group for alb, to allow acess from anywhere for HTTP and HTTPS traffic
+resource "aws_security_group" "ext-alb-sg" {
+  name        = "ext-alb-sg"
+  vpc_id      = aws_vpc.main.id
+  description = "Allow TLS inbound traffic"
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "ext-alb-sg"
+    },
+  )
+
+}
+
+
+# security group for bastion, to allow access into the bastion host from your IP
+resource "aws_security_group" "bastion_sg" {
+  name        = "bastion_sg"
+  vpc_id      = aws_vpc.main.id
+  description = "Allow incoming HTTP connections."
+
+  ingress {
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "Bastion-SG"
+    },
+  )
+}
+
+#security group for nginx reverse proxy, to allow access only from the external load balancer and bastion instance
+resource "aws_security_group" "nginx-sg" {
+  name   = "nginx-sg"
+  vpc_id = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "nginx-SG"
+    },
+  )
+}
+
+resource "aws_security_group_rule" "inbound-nginx-http" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.ext-alb-sg.id
+  security_group_id        = aws_security_group.nginx-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-bastion-ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.bastion_sg.id
+  security_group_id        = aws_security_group.nginx-sg.id
+}
+
+# security group for ialb, to have acces only from nginx reverser proxy server
+resource "aws_security_group" "int-alb-sg" {
+  name   = "my-alb-sg"
+  vpc_id = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "int-alb-sg"
+    },
+  )
+
+}
+
+resource "aws_security_group_rule" "inbound-ialb-https" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.nginx-sg.id
+  security_group_id        = aws_security_group.int-alb-sg.id
+}
+
+# security group for webservers, to have access only from the internal load balancer and bastion instance
+resource "aws_security_group" "webserver-sg" {
+  name   = "webserver-sg"
+  vpc_id = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "webserver-sg"
+    },
+  )
+
+}
+
+resource "aws_security_group_rule" "inbound-web-https" {
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.int-alb-sg.id
+  security_group_id        = aws_security_group.webserver-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-web-ssh" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.bastion_sg.id
+  security_group_id        = aws_security_group.webserver-sg.id
+}
+
+# security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port
+resource "aws_security_group" "datalayer-sg" {
+  name   = "datalayer-sg"
+  vpc_id = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "datalayer-sg"
+    },
+  )
+}
+
+resource "aws_security_group_rule" "inbound-nfs-port" {
+  type                     = "ingress"
+  from_port                = 2049
+  to_port                  = 2049
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.webserver-sg.id
+  security_group_id        = aws_security_group.datalayer-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-mysql-bastion" {
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.bastion_sg.id
+  security_group_id        = aws_security_group.datalayer-sg.id
+}
+
+resource "aws_security_group_rule" "inbound-mysql-webserver" {
+  type                     = "ingress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.webserver-sg.id
+  security_group_id        = aws_security_group.datalayer-sg.id
+}
+```
+
+#### STEP 2: Create Certificate From Amazon Certificate Manager
+
+We create a new file **`cert.tf`** and then we paste in the following code to create and validate a certificate AWS.
+
+```
+# This entire section creates a certiface, public zone, and validates the certificate using DNS method
+
+# Create the certificate using a wildcard for all the domains created in mytoolz
+resource "aws_acm_certificate" "mytoolz" {
+  domain_name       = "*.mytoolz.tk"
+  validation_method = "DNS"
+}
+
+# calling the hosted zone
+data "aws_route53_zone" "mytoolz" {
+  name         = "mytoolz.tk"
+  private_zone = false
+}
+
+# selecting validation method
+resource "aws_route53_record" "mytoolz" {
+  for_each = {
+    for dvo in aws_acm_certificate.mytoolz.domain_validation_options : dvo.domain_name => {
+      name   = dvo.resource_record_name
+      record = dvo.resource_record_value
+      type   = dvo.resource_record_type
+    }
+  }
+
+  allow_overwrite = true
+  name            = each.value.name
+  records         = [each.value.record]
+  ttl             = 60
+  type            = each.value.type
+  zone_id         = data.aws_route53_zone.mytoolz.zone_id
+}
+
+# validate the certificate through DNS method
+resource "aws_acm_certificate_validation" "mytoolz" {
+  certificate_arn         = aws_acm_certificate.mytoolz.arn
+  validation_record_fqdns = [for record in aws_route53_record.mytoolz : record.fqdn]
+}
+
+# create records for tooling
+resource "aws_route53_record" "tooling" {
+  zone_id = data.aws_route53_zone.mytoolz.zone_id
+  name    = "tooling.mytoolz.tk"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.ext-alb.dns_name
+    zone_id                = aws_lb.ext-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+# create records for wordpress
+resource "aws_route53_record" "wordpress" {
+  zone_id = data.aws_route53_zone.mytoolz.zone_id
+  name    = "wordpress.mytoolz.tk"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.ext-alb.dns_name
+    zone_id                = aws_lb.ext-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+```
