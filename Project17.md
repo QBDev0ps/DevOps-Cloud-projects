@@ -341,7 +341,7 @@ resource "aws_iam_instance_profile" "ip" {
 
 ![create instance profile](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/68af537f-58e7-4246-b83d-4ea96d528042)
 
-### Compute Resources: 
+### Compute Resources
 
 At this stage, we need to create our compute resources and all other associated resources and configuration. These include Security Groups, Target Group (for Nginx, Wordpress and Tooling), certificate from AWS certificate manager, an External Application Load Balancer and Internal Application Load Balancer, launch template (for Bastion, Tooling, Nginx and Wordpress), an Auto Scaling Group (ASG) (for Bastion, Tooling, Nginx and Wordpress), Elastic Filesystem (EFS), and a Relational Database (RDS).
 
@@ -599,7 +599,7 @@ data "aws_route53_zone" "qbdevops" {
 # selecting validation method
 resource "aws_route53_record" "qbdevops" {
   for_each = {
-    for dvo in aws_acm_certificate.oyindamola.domain_validation_options : dvo.domain_name => {
+    for dvo in aws_acm_certificate.qbdevops.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -644,6 +644,203 @@ resource "aws_route53_record" "wordpress" {
     name                   = aws_lb.ext-alb.dns_name
     zone_id                = aws_lb.ext-alb.zone_id
     evaluate_target_health = true
+  }
+}
+```
+
+#### STEP 3: Create External Application Load Balancer.
+
+In this step, we shall create an external (Internet facing) [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) which serves to balance traffic for the Nginx servers.
+
+We proceed by creating a file **`alb.tf`** and then we paste in the following code to create the external(internet-facing) load balancer, after which we create the target group and then, we create the lsitener rule:
+
+```
+# create an ALB to balance the traffic between the Instances
+
+resource "aws_lb" "ext-alb" {
+  name     = "ext-alb"
+  internal = false
+  security_groups = [
+    aws_security_group.ext-alb-sg.id,
+  ]
+
+  subnets = [
+    aws_subnet.public[0].id,
+    aws_subnet.public[1].id
+  ]
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "TCS-ext-alb"
+    },
+  )
+
+  ip_address_type    = "ipv4"
+  load_balancer_type = "application"
+}
+```
+
+To inform our ALB where to  route the traffic we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
+
+```
+resource "aws_lb_target_group" "nginx-tgt" {
+  health_check {
+    interval            = 10
+    path                = "/healthstatus"
+    protocol            = "HTTPS"
+    timeout             = 5
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+  }
+  name        = "nginx-tgt"
+  port        = 443
+  protocol    = "HTTPS"
+  target_type = "instance"
+  vpc_id      = aws_vpc.main.id
+}
+```
+
+Then we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target group:
+
+```
+resource "aws_lb_listener" "nginx-listner" {
+  load_balancer_arn = aws_lb.ext-alb.arn
+  port              = 443
+  protocol          = "HTTPS"
+  certificate_arn   = aws_acm_certificate_validation.qbdevops.certificate_arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.nginx-tgt.arn
+  }
+}
+```
+
+Next, we add the following outputs to **`output.tf`** to print the output values on screen:.
+
+```
+output "alb_dns_name" {
+  value = aws_lb.ext-alb.dns_name
+}
+
+output "alb_target_group_arn" {
+  value = aws_lb_target_group.nginx-tgt.arn
+}
+```
+
+#### STEP 4: Create Internal Application Load Balancer.
+
+Next, we create an Internal (Internal) [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-internal-load-balancers.html) to balance traffic between the webservers.
+
+For the Internal Load balancer we will follow the same concepts as with the external load balancer and we add the following code snippets inside the **`alb.tf`** file:
+
+```
+# ----------------------------
+#Internal Load Balancers for webservers
+#---------------------------------
+
+resource "aws_lb" "ialb" {
+  name     = "ialb"
+  internal = true
+  security_groups = [
+    aws_security_group.int-alb-sg.id,
+  ]
+
+  subnets = [
+    aws_subnet.private[0].id,
+    aws_subnet.private[1].id
+  ]
+
+  tags = merge(
+    var.tags,
+    {
+      Name = "TCS-int-alb"
+    },
+  )
+
+  ip_address_type    = "ipv4"
+  load_balancer_type = "application"
+}
+```
+
+To inform our ALB where to route the traffic, we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
+
+```
+# --- target group  for wordpress -------
+
+resource "aws_lb_target_group" "wordpress-tgt" {
+  health_check {
+    interval            = 10
+    path                = "/healthstatus"
+    protocol            = "HTTPS"
+    timeout             = 5
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+  }
+
+  name        = "wordpress-tgt"
+  port        = 443
+  protocol    = "HTTPS"
+  target_type = "instance"
+  vpc_id      = aws_vpc.main.id
+}
+
+# --- target group for tooling -------
+
+resource "aws_lb_target_group" "tooling-tgt" {
+  health_check {
+    interval            = 10
+    path                = "/healthstatus"
+    protocol            = "HTTPS"
+    timeout             = 5
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+  }
+
+  name        = "tooling-tgt"
+  port        = 443
+  protocol    = "HTTPS"
+  target_type = "instance"
+  vpc_id      = aws_vpc.main.id
+}
+```
+
+Then, we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target Group:
+
+```
+# For this aspect a single listener was created for the wordpress which is default,
+# A rule was created to route traffic to tooling when the host header changes
+
+
+resource "aws_lb_listener" "web-listener" {
+  load_balancer_arn = aws_lb.ialb.arn
+  port              = 443
+  protocol          = "HTTPS"
+  certificate_arn   = aws_acm_certificate_validation.qbdevops.certificate_arn
+
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.wordpress-tgt.arn
+  }
+}
+
+# listener rule for tooling target
+
+resource "aws_lb_listener_rule" "tooling-listener" {
+  listener_arn = aws_lb_listener.web-listener.arn
+  priority     = 99
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tooling-tgt.arn
+  }
+
+  condition {
+    host_header {
+      values = ["tooling.qbdevops.co.uk"]
+    }
   }
 }
 ```
