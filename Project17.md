@@ -41,13 +41,13 @@ A routing table, or routing information base (RIB), is a data table stored in a 
 
 In continuation from where we stopped in the previous project, we shall proceed to carry out the following:
 
-1. Networking: Create our Networking resources
+1. Networking Resources: We create our Networking resources.
 
-2. AWS Identity and Access Management: Compute and Access Control configuration automation
+2. AWS Identity and Access Management: Identity Access Control configuration automation.
 
-3.a
+3. Compute Resources: Automate creation of compute resources and associated configuration.
 
-### Networking
+### Networking Resources
 
 Firstly, we need to create our network resources.Since we have created our public subnets in the previous project, we shall start off here by creating our private subnets.
 
@@ -241,10 +241,15 @@ After executing the command, we can see that the following resources have been c
 
 Now that we are done with the Networking part of our AWS set-up, we proceed to move on to Compute and Access Control configuration automation using Terraform.
 
-#### Step 1: Create IAM Roles.
+#### IAM and Roles
 
-- An IAM role is passed to the EC2 instances to give them access to some specific resources by first of all creating an AssumeRole and AssumeRole policy.
-- Creating a file named roles.tf and entering the following codes:
+We want to pass an [IAM](https://docs.aws.amazon.com/iam/index.html) [Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) to our EC2 instances to give them access to some specific resources. To do this, we will need to create **`AssumeRole`** then next, we create an IAM policy for the role and afterwards, we attach the policy to the role.
+
+#### Step 1:  Create [`AssumeRole`](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html).
+
+Assume Role uses Security Token Service (STS) API that returns a set of temporary security credentials that you can use to access AWS resources that you may not normally have access to. These temporary credentials consist of an access key ID, a secret access key, and a security token. Typically,  **`AssumeRole`** is used within your account or for cross-account access.
+
+We proceed by creating a new file **`roles.tf`** and adding the following code.
 
 ```
 resource "aws_iam_role" "ec2_instance_role" {
@@ -272,7 +277,11 @@ resource "aws_iam_role" "ec2_instance_role" {
 }
 ```
 
-- Creating an IAM policy which allows an IAM role to perform action describe to EC2 instances:
+In the above code block, we are creating **`AssumeRole`** with **`AssumeRole policy`**. It grants to an entity, (in our case an EC2 instance) permissions to assume the role.
+
+#### Step 2: Create an [IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for this role.
+
+This is where we need to define a required policy (i.e., permissions) according to our requirements. Here, we define a policy allowing an IAM role to perform an action **`describe`** applied to EC2 instances:
 
 ```
 resource "aws_iam_policy" "policy" {
@@ -302,7 +311,9 @@ resource "aws_iam_policy" "policy" {
 }
 ```
 
-- Attaching the policy to the IAM role created:
+#### Step 3: Attach the `Policy` to the `IAM Role`. 
+    
+This is where, we will be attaching the policy which we created above, to the role we created in the first step.
 
 ```
 resource "aws_iam_role_policy_attachment" "test-attach" {
@@ -311,7 +322,7 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
 }
 ```
 
-- Creating an Instance Profile and interpolating the IAM Role
+#### Step 4: Create an [`Instance Profile`](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html) and interpolate the `IAM Role`.
 
 ```
 resource "aws_iam_instance_profile" "ip" {
@@ -319,3 +330,4 @@ resource "aws_iam_instance_profile" "ip" {
   role = aws_iam_role.ec2_instance_role.name
 }
 ```
+
