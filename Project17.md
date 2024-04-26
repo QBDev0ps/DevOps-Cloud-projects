@@ -346,7 +346,7 @@ resource "aws_iam_instance_profile" "ip" {
 At this stage, we need to create our compute resources and all other associated resources and configuration. These include Security Groups, Target Group (for Nginx, Wordpress and Tooling), certificate from AWS certificate manager, an External Application Load Balancer and Internal Application Load Balancer, launch template (for Bastion, Tooling, Nginx and Wordpress), an Auto Scaling Group (ASG) (for Bastion, Tooling, Nginx and Wordpress), Elastic Filesystem (EFS), and a Relational Database (RDS).
 
 
-#### STEP 1: Create Security Groups
+#### STEP 1: Create Security Groups.
 
 We are going to create all the security groups in a single file, then we are going to refrence this security group within each resources that needs it.
 
@@ -462,7 +462,7 @@ resource "aws_security_group_rule" "inbound-bastion-ssh" {
 
 # security group for ialb, to have acces only from nginx reverser proxy server
 resource "aws_security_group" "int-alb-sg" {
-  name   = "my-alb-sg"
+  name   = "int-alb-sg"
   vpc_id = aws_vpc.main.id
 
   egress {
@@ -577,9 +577,33 @@ resource "aws_security_group_rule" "inbound-mysql-webserver" {
 }
 ```
 
-#### STEP 2: Create Certificate From Amazon Certificate Manager
+Security group for alb, to allow acess from anywhere for HTTP and HTTPS traffic.
 
-We create a new file **`cert.tf`** and then we paste in the following code to create and validate a certificate AWS.
+![security group for alb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/49535659-6b78-4eb9-9861-c6148b3f5566)
+
+Security group for bastion, to allow access into the bastion host from your IP.
+
+![security group for bastion](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d8339829-e967-4bbf-8118-eb0d8a26c397)
+
+Security group for nginx reverse proxy, to allow access only from the external load balancer and bastion instance.
+
+![security group for nginx reverse proxy](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8b55e4ba-b1b9-41c7-91c3-f4178983e346)
+
+Security group for ialb, to have access only from nginx reverse proxy server.
+
+![security group for ialb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b633d9ce-c08b-420b-b84b-65f0c7c033a8)
+
+Security group for webservers, to have access only from the internal load balancer and bastion instance.
+
+![security group for webservers](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/563bc1bf-dd46-4a09-a2cb-5fdd082b53b5)
+
+Security group for datalayer to alow traffic from websever on nfs and mysql port and bastiopn host on mysql port.
+
+![security group for data layer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f7230468-0054-4e47-ab5d-081ed7a43358)
+
+#### STEP 2: Create Certificate From Amazon Certificate Manager.
+
+We create a new file **`cert.tf`** and then we paste in the following code to create and validate a certificate AWS:
 
 ```
 # The entire section creates a certificate, public zone, and validates the certificate using DNS method.
@@ -647,6 +671,8 @@ resource "aws_route53_record" "wordpress" {
   }
 }
 ```
+
+![create certificate](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c509f643-6089-4b7e-a5ef-b5f418b29c23)
 
 #### STEP 3: Create External Application Load Balancer.
 
