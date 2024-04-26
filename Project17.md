@@ -707,6 +707,8 @@ resource "aws_lb" "ext-alb" {
 }
 ```
 
+![create external alb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/39b7d600-2156-4967-9907-e7e89030c63c)
+
 To inform our ALB where to  route the traffic we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
 
 ```
@@ -727,6 +729,8 @@ resource "aws_lb_target_group" "nginx-tgt" {
 }
 ```
 
+![create target group for external](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b682d45e-0730-4316-88bf-6fffc6940125)
+
 Then we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target group:
 
 ```
@@ -743,6 +747,8 @@ resource "aws_lb_listener" "nginx-listner" {
 }
 ```
 
+![create listener for external](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/17679de6-25f1-4fa0-b9ac-e33b182a6dbe)
+
 Next, we add the following outputs to **`output.tf`** to print the output values on screen:.
 
 ```
@@ -754,6 +760,8 @@ output "alb_target_group_arn" {
   value = aws_lb_target_group.nginx-tgt.arn
 }
 ```
+
+![output](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/17fa5623-d445-44ef-9c55-9f04ea077013)
 
 #### STEP 4: Create Internal Application Load Balancer.
 
@@ -789,6 +797,8 @@ resource "aws_lb" "ialb" {
   load_balancer_type = "application"
 }
 ```
+
+![create internal alb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/61b3705b-b649-4781-a6d2-ea1575c13b28)
 
 To inform our ALB where to route the traffic, we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
 
@@ -832,6 +842,8 @@ resource "aws_lb_target_group" "tooling-tgt" {
 }
 ```
 
+![create target group for internal](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7c9116fb-9555-41fc-96c4-785ef4da6d22)
+
 Then, we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target Group:
 
 ```
@@ -870,3 +882,5 @@ resource "aws_lb_listener_rule" "tooling-listener" {
   }
 }
 ```
+
+![create listener for internal](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c2055fe0-50fe-4556-af46-e346fa632df0)
