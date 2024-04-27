@@ -1308,7 +1308,7 @@ systemctl restart httpd
 
 ### Storage and Database Resources
 
-Now we are at the final stage of this project where we will be creating AWS storage and database resources namely Elastic File System (EFS) and [MySQL Relational Database System (RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html).
+Now we are at the stage of our project where we will be creating AWS storage and database resources namely Elastic File System (EFS) and [MySQL Relational Database System (RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html).
 
 #### STEP 1: Create Elastic File System (EFS).
 
@@ -1424,8 +1424,11 @@ resource "aws_efs_access_point" "tooling" {
 
   }
 }
-
 ```
+
+![efs1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5095641e-dc79-43a7-b1ca-0bc61bde2037)
+
+![efs2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3338619b-9dfa-4aeb-9baa-5a196d91e455)
 
 #### STEP 2:Create MySQL RDS
 
@@ -1453,7 +1456,7 @@ resource "aws_db_instance" "ACS-rds" {
   engine                 = "mysql"
   engine_version         = "5.7"
   instance_class         = "db.t2.micro"
-  name                   = "daviddb"
+  name                   = "abduldb"
   username               = var.master-username
   password               = var.master-password
   parameter_group_name   = "default.mysql5.7"
@@ -1464,7 +1467,13 @@ resource "aws_db_instance" "ACS-rds" {
 }
 ```
 
-At this stage, it is imperative to note that we have referenced some variables in our resources and we have declared them in the **`variables.tf`** file. Therefore, our **`variables.tf`** now looks as shown below:
+![rds](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/79d1a8f7-19b0-4ade-beb7-8d20d2a0af51)
+
+### Conclusion 
+
+We have now come to the tail end of this project and we pretty much have all the infrastructure elements ready to be deployed automatically.
+
+However, it is imperative to note that we have referenced some variables in our resources and we have declared them in the **`variables.tf`** file. Therefore, our **`variables.tf`** now looks as shown below:
 
 ```
 variable "region" {
@@ -1544,6 +1553,10 @@ variable "master-password" {
 }
 ```
 
+![variablestf1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/85472e88-132e-4b69-b523-34c12352115b)
+
+![variablestf2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ade37651-7cc9-4422-94b4-28a6d5aaf626)
+
 Subsequently, we have also updated our **`terraform.tfvars`** file where we have declared the values for the variables in our **`varibales.tf`** file:
 
 ```
@@ -1563,7 +1576,7 @@ preferred_number_of_public_subnets = "2"
 
 preferred_number_of_private_subnets = "4"
 
-environment = "production"
+environment = "dev"
 
 ami = "ami-0b0af3577fe5e3532"
 
@@ -1573,7 +1586,7 @@ keypair = "qb-ex"
 account_no = "123456789"
 
 
-db-username = "david"
+db-username = "abdul"
 
 
 db-password = "devopspbl"
@@ -1581,8 +1594,25 @@ db-password = "devopspbl"
 
 tags = {
   Enviroment      = "production" 
-  Owner-Email     = "infradev-segun@darey.io"
+  Owner-Email     = "moyor_bello@yahoo.co.uk"
   Managed-By      = "Terraform"
   Billing-Account = "1234567890"
 }
 ```
+
+![tfvars](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ca5ab8b7-b213-4252-ad26-44b307e99407)
+
+We now proceed to run the following commands to deploy our resources:
+
+```
+$ terraform plan
+
+$ terraform apply
+```
+
+![terraform plan 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ce06bca9-7dbe-4a20-a09f-605ce2414687)
+
+![terraform plan 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b2b50f80-efa2-4faa-a422-f8315c820299)
+
+As we can see in the following images, our resources were successfully deployed.
+
