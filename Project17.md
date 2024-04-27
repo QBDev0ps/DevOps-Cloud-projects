@@ -1617,5 +1617,32 @@ $ terraform apply --auto-approve
 
 <br>With our project now complete, we can see in the images below that our resources were deployed successfully.<br/>
 
+![VPC created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c59c58b5-a626-4419-9ddc-c258fa908b0d)
 
+![private and public subnets created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ce2b10c5-2297-4c13-bf71-aa61e2f87af6)
 
+![internet gateway created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3d3d17bf-0995-45ad-bf61-9f461de1d481)
+
+![NAT gateway created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a585f708-2b5a-42ab-8bee-30a0f0142594)
+
+![elastic IP created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/694e70d0-7717-41b6-be6d-bfdf0611d56e)
+
+![route tables created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eae4a121-90ad-4785-8339-001e8906deda)
+
+![ec2 instance role and policy created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9aa04f48-e275-4954-aa44-61da5505ccda)
+
+![security groups created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/40fccab3-82fa-4ed1-a7d8-43739fb09d25)
+
+![certificate created from ACM](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/12708e7a-3ff7-423b-bcf7-f8cfb8d0be89)
+
+![ialb and ealb created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a868fcc3-906a-4c63-a3c2-f5da65ae592f)
+
+![Auto scaling groups created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/11f33e0d-1791-4b30-90d3-879d91f39ca7)
+
+![launch templates created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4b6c0b7e-7623-4e40-af44-349418244909)
+
+![EC2 instances created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/00bc14da-2e92-4ed9-8c35-c2d5423c6ce1)
+
+![EFS created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c7ba3471-6941-4e9f-a33a-2b32485f4d60)
+
+![RDS created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f3d1aab2-4bcb-48dd-8b17-f7ca731d1f7c)
