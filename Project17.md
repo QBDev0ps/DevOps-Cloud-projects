@@ -51,7 +51,7 @@ In continuation from where we stopped in the previous project, we shall continue
 
 ![152831445-844e3865-0317-4bf4-969a-490a7c1e06ba](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fc82a9b8-d0b1-4328-83ba-aa569c54dfaa)
 
-### Networking Resources
+### <br>Networking Resources<br/>
 
 Firstly, we need to create our network resources.Since we have created our public subnets in the previous project, we shall start off here by creating our private subnets.
 
@@ -241,9 +241,9 @@ After executing the command, we can see that the following resources have been c
 ![network resources created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/8ac1739d-d9cb-4d53-a3f9-e4fc59f8c8e2)
 
 
-### AWS Identity and Access Management
+### <br>AWS Identity and Access Management<br/>
 
-Now that we are done with the Networking part of our AWS set-up, we proceed to move on to Compute and Access Control configuration automation using Terraform.
+Now that we are done with the Networking part of our AWS set-up, we proceed to move on to identity and Access Control configuration automation using Terraform.
 
 #### IAM and Roles
 
@@ -253,7 +253,7 @@ We want to pass an [IAM](https://docs.aws.amazon.com/iam/index.html) [Role](http
 
 Assume Role uses Security Token Service (STS) API that returns a set of temporary security credentials that you can use to access AWS resources that you may not normally have access to. These temporary credentials consist of an access key ID, a secret access key, and a security token. Typically,  **`AssumeRole`** is used within your account or for cross-account access.
 
-We proceed by creating a new file **`roles.tf`** and adding the following code.
+We proceed by creating a new file **`roles.tf`** and adding the following code:
 
 ```
 resource "aws_iam_role" "ec2_instance_role" {
@@ -287,7 +287,7 @@ In the above code block, we are creating **`AssumeRole`** with **`AssumeRole pol
 
 #### Step 2: Create an [IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for this role.
 
-This is where we need to define a required policy (i.e., permissions) according to our requirements. Here, we define a policy allowing an IAM role to perform an action **`describe`** applied to EC2 instances.
+This is where we need to define a required policy (i.e., permissions) according to our requirements. Here, we define a policy allowing an IAM role to perform an action **`describe`** applied to EC2 instances:
 
 ```
 resource "aws_iam_policy" "policy" {
@@ -321,7 +321,7 @@ resource "aws_iam_policy" "policy" {
 
 #### Step 3: Attach the `Policy` to the `IAM Role`. 
     
-This is where, we will be attaching the policy which we created above, to the role we created in the first step.
+This is where, we will be attaching the policy which we created above, to the role we created in the first step:
 
 ```
 resource "aws_iam_role_policy_attachment" "test-attach" {
@@ -343,12 +343,11 @@ resource "aws_iam_instance_profile" "ip" {
 
 ![create instance profile](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/68af537f-58e7-4246-b83d-4ea96d528042)
 
-### Compute Resources
+### <br>Compute Resources<br/>
 
-At this stage, we need to create our compute resources and all other associated resources and configuration. These include Security Groups, Target Group (for Nginx, Wordpress and Tooling), certificate from AWS certificate manager, an External Application Load Balancer and Internal Application Load Balancer, launch template (for Bastion, Tooling, Nginx and Wordpress), an Auto Scaling Group (ASG) (for Bastion, Tooling, Nginx and Wordpress), Elastic Filesystem (EFS), and a Relational Database (RDS).
+At this stage, we need to create our compute resources and all other associated resources and configuration. These include Security Groups, Target Group (for Nginx, Wordpress and Tooling), certificate from AWS certificate manager, an External Application Load Balancer and Internal Application Load Balancer, launch template (for Bastion, Tooling, Nginx and Wordpress), and an Auto Scaling Group (ASG) (for Bastion, Tooling, Nginx and Wordpress).
 
-
-#### STEP 1: Create Security Groups.
+#### Step 1: Create Security Groups.
 
 We are going to create all the security groups in a single file, then we are going to refrence this security group within each resources that needs it.
 
@@ -603,7 +602,7 @@ Security group for datalayer to alow traffic from websever on nfs and mysql port
 
 ![security group for data layer](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/f7230468-0054-4e47-ab5d-081ed7a43358)
 
-#### STEP 2: Create Certificate From Amazon Certificate Manager.
+#### Step 2: Create Certificate From Amazon Certificate Manager.
 
 We create a new file **`cert.tf`** and then we paste in the following code to create and validate a certificate AWS:
 
@@ -676,7 +675,7 @@ resource "aws_route53_record" "wordpress" {
 
 ![create certificate](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c509f643-6089-4b7e-a5ef-b5f418b29c23)
 
-#### STEP 3: Create External Application Load Balancer.
+#### Step 3: Create External Application Load Balancer.
 
 In this step, we shall create an external (Internet facing) [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancer-getting-started.html) which serves to balance traffic for the Nginx servers.
 
@@ -711,7 +710,7 @@ resource "aws_lb" "ext-alb" {
 
 ![create external alb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/39b7d600-2156-4967-9907-e7e89030c63c)
 
-To inform our ALB where to  route the traffic we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
+<br>To inform our ALB where to  route the traffic we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:<br/>
 
 ```
 resource "aws_lb_target_group" "nginx-tgt" {
@@ -733,7 +732,7 @@ resource "aws_lb_target_group" "nginx-tgt" {
 
 ![create target group for external](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b682d45e-0730-4316-88bf-6fffc6940125)
 
-Then we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target group:
+<br>Then we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target group:<br/>
 
 ```
 resource "aws_lb_listener" "nginx-listner" {
@@ -765,7 +764,7 @@ output "alb_target_group_arn" {
 
 ![output](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/17fa5623-d445-44ef-9c55-9f04ea077013)
 
-#### STEP 4: Create Internal Application Load Balancer.
+#### Step 4: Create Internal Application Load Balancer.
 
 Next, we create an Internal (Internal) [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-internal-load-balancers.html) to balance traffic between the webservers.
 
@@ -802,7 +801,7 @@ resource "aws_lb" "ialb" {
 
 ![create internal alb](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/61b3705b-b649-4781-a6d2-ea1575c13b28)
 
-To inform our ALB where to route the traffic, we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:
+<br>To inform our ALB where to route the traffic, we need to create a [`Target Group`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html) to point to its targets:<br/>
 
 ```
 # --- target group  for wordpress -------
@@ -846,7 +845,7 @@ resource "aws_lb_target_group" "tooling-tgt" {
 
 ![create target group for internal](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7c9116fb-9555-41fc-96c4-785ef4da6d22)
 
-Then, we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target Group:
+<br>Then, we will need to create a [`Listner`](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html) for this target Group:<br/>
 
 ```
 # For this aspect a single listener was created for the wordpress which is default,
@@ -887,7 +886,7 @@ resource "aws_lb_listener_rule" "tooling-listener" {
 
 ![create listener for internal](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c2055fe0-50fe-4556-af46-e346fa632df0)
 
-####  STEP 5: Create An Auto Scaling Group (ASG).
+####  Step 5: Create An Auto Scaling Group (ASG).
 
 Now, we need to configure our ASG to be able to scale the EC2s in and out, depending on the application traffic.
 
@@ -1306,11 +1305,11 @@ systemctl restart httpd
 
 ![toolingsh](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ace05f55-b103-4dd9-b4cc-08740af78927)
 
-### Storage and Database Resources
+### <br>Storage and Database Resources<br/>
 
 Now we are at the stage of our project where we will be creating AWS storage and database resources namely Elastic File System (EFS) and [MySQL Relational Database System (RDS)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html).
 
-#### STEP 1: Create Elastic File System (EFS).
+#### Step 1: Create Elastic File System (EFS).
 
 In order to create an EFS we need to create a [KMS key](https://aws.amazon.com/kms/getting-started/).
 
@@ -1347,7 +1346,7 @@ resource "aws_kms_alias" "alias" {
 
 ```
 
-Next, we create EFS and it's mount targets by adding the following code block to **`efs.tf`**:
+<br>Next, we create EFS and it's mount targets by adding the following code block to **`efs.tf`**:<br/>
 
 ```
 # create Elastic file system
@@ -1430,7 +1429,7 @@ resource "aws_efs_access_point" "tooling" {
 
 ![efs2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3338619b-9dfa-4aeb-9baa-5a196d91e455)
 
-#### STEP 2:Create MySQL RDS
+#### Step 2: Create MySQL RDS.
 
 To create the RDS, we create the **`rds.tf`** file and then we add the following snippet of code:
 
@@ -1469,7 +1468,7 @@ resource "aws_db_instance" "ACS-rds" {
 
 ![rds](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/79d1a8f7-19b0-4ade-beb7-8d20d2a0af51)
 
-### Conclusion 
+### <br>Conclusion<br/> 
 
 We have now come to the tail end of this project and we pretty much have all the infrastructure elements ready to be deployed automatically.
 
@@ -1557,7 +1556,7 @@ variable "master-password" {
 
 ![variablestf2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ade37651-7cc9-4422-94b4-28a6d5aaf626)
 
-Subsequently, we have also updated our **`terraform.tfvars`** file where we have declared the values for the variables in our **`varibales.tf`** file:
+<br>Subsequently, we have also updated our **`terraform.tfvars`** file where we have declared the values for the variables in our **`varibles.tf`** file:<br/>
 
 ```
 region = "us-east-1"
@@ -1602,7 +1601,7 @@ tags = {
 
 ![tfvars](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ca5ab8b7-b213-4252-ad26-44b307e99407)
 
-We now proceed to run the following commands to deploy our resources:
+<br>We now proceed to run the following commands to deploy our resources:<br/>
 
 ```
 $ terraform plan
@@ -1616,5 +1615,7 @@ $ terraform apply --auto-approve
 
 ![terraform apply complete](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/99155ec7-3d39-428d-b2ac-de3c0f57d2b2)
 
-As we can see in the following images, our resources were successfully deployed.
+<br>With our project now complete, we can see in the images below that our resources were deployed successfully.<br/>
+
+
 
