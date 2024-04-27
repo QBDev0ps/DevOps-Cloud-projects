@@ -1607,12 +1607,14 @@ We now proceed to run the following commands to deploy our resources:
 ```
 $ terraform plan
 
-$ terraform apply
+$ terraform apply --auto-approve
 ```
 
 ![terraform plan 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ce06bca9-7dbe-4a20-a09f-605ce2414687)
 
 ![terraform plan 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b2b50f80-efa2-4faa-a422-f8315c820299)
+
+![terraform apply complete](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/99155ec7-3d39-428d-b2ac-de3c0f57d2b2)
 
 As we can see in the following images, our resources were successfully deployed.
 
