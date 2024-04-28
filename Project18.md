@@ -93,7 +93,7 @@ vars.tf file.
 
 Then we proceed to copy and refactor the code containing the resources that were created in [Project 17](https://github.com/QuadriBello/DevOps-Cloud/blob/main/Project17.md) and we paste them into each of their relevant modules.
 
-The modularized code for this project can be found in this [repository]().
+The modularized code for this project can be found in this [repository](https://github.com/QuadriBello/PBL-Project18-Terraform-Modular-Architecture.git).
 
 ### <br>Completing the Terraform configuration<br/>
 
