@@ -20,6 +20,37 @@ In this project, in addition to terraform cloud, we shall also be utilizing the 
 
 By combining these tools, we shall automate the provisioning process and ensure consistent, reproducible infrastructure deployments.
 
+### Migrate your `.tf` codes to Terraform Cloud
+
+We shall begin by migrating our codes to Terraform Cloud and manage our AWS infrastructure from there:
+
+1. Create a Terraform Cloud account
+
+We navigate to the [terraform cloud homepage](https://app.terraform.io/signup/account), create a new account and verify our email address.
+
+2. Create an organization
+
+We select "Create Organization", we choose a name for our organization and create it.
+
+3. Configure a workspace
+
+Here, we decide to use **`version control workflow`** as it is the most common and recommended way to run Terraform commands triggered from our git repository.
+
+**i.** We create a new repository in our GitHub and we call it **`qb-terraform-cloud`**, then we push our Terraform codes developed in the previous projects to the repository.
+
+**ii.** We choose `version control workflow` and we are subsequently promped to connect our GitHub account to our workspace - we follow the prompt and add our newly created repository to the workspace.
+
+**iii.** We move on to "Configure settings", provide a description for our workspace and we leave all the rest settings as default, then we click "Create workspace".
+
+4. Configure variables
+
+Terraform Cloud supports two types of variables: environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
+
+Set two environment variables: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, set the values that you used in [Project 16](https://expert-pbl.darey.io/en/latest/project16.html). These credentials will be used to privision your AWS infrastructure by Terraform Cloud.
+
+After you have set these 2 environment variables - your Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
+
+
 
 
 
