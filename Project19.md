@@ -38,17 +38,19 @@ Here, we decide to use **`version control workflow`** as it is the most common a
 
 **i.** We create a new repository in our GitHub and we call it **`qb-terraform-cloud`**, then we push our Terraform codes developed in the previous projects to the repository.
 
-**ii.** We choose `version control workflow` and we are subsequently promped to connect our GitHub account to our workspace - we follow the prompt and add our newly created repository to the workspace.
+**ii.** We choose `version control workflow` and we are subsequently promped to connect our version control system (VCS) which is our GitHub account to our workspace - we follow the prompt and add our newly created repository to the workspace.
 
 **iii.** We move on to "Configure settings", provide a description for our workspace and we leave all the rest settings as default, then we click "Create workspace".
 
 4. Configure variables
 
-Terraform Cloud supports two types of variables: environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
+Terraform Cloud supports two types of workspace variables: Environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
 
-Set two environment variables: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, set the values that you used in [Project 16](https://expert-pbl.darey.io/en/latest/project16.html). These credentials will be used to privision your AWS infrastructure by Terraform Cloud.
+**i.** Terraform variables are the variables we have declared in our configuration. We however do not need to specify these variables in the Terraform Cloud UI since Terraform cloud can also load the default values from our **`.auto.tfvars`** file in the configuration.
 
-After you have set these 2 environment variables - your Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
+**ii.** Environment variables are variables we need to set to be used in the Terraform runtime environment. Here we set two environment variables: **`AWS_ACCESS_KEY_ID`** and **`AWS_SECRET_ACCESS_KEY`**, and we set the values that we used in [Project 16](https://expert-pbl.darey.io/en/latest/project16.html). These credentials will be used to provision our AWS infrastructure by Terraform Cloud.
+
+After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
 
 
 
