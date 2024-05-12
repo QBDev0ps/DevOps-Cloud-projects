@@ -20,7 +20,31 @@ In this project, in addition to terraform cloud, we shall also be utilizing the 
 
 By combining these tools, we shall automate the provisioning process and ensure consistent, reproducible infrastructure deployments.
 
-### Migrate your `.tf` codes to Terraform Cloud
+### Build AMIs Using Packer
+
+As stated before, we shall use packer in this project to create the AMIs for the launch templates used by the Auto Scaling Group.  Packer creates the instances, provision the instances using shell scripts and creates the AMIs. It also deletes the instances after the completion of the AMIs creation process.
+
+1. Run the Packer command to build AMIs
+
+To carry out our AMi builds, we run the packer build command as shown below:
+
+**i.** We build the bastion ami using the following command:
+
+**`$ packer build bastion.pkr.hcl`**
+
+**ii.** We build the ubuntu ami using the following command:
+
+**`$ packer build ubuntu.pkr.hcl`**
+
+**iii.** We build the ubuntu ami using the following command:
+
+**`$ packer build ubuntu.pkr.hcl`**
+
+**iv.** We build the web ami using the following command:
+
+**`$ packer build web.pkr.hcl`**
+
+### Migrate `.tf` codes to Terraform Cloud
 
 We shall begin by migrating our codes to Terraform Cloud and manage our AWS infrastructure from there:
 
@@ -28,31 +52,55 @@ We shall begin by migrating our codes to Terraform Cloud and manage our AWS infr
 
 We navigate to the [terraform cloud homepage](https://app.terraform.io/signup/account), create a new account and verify our email address.
 
+![terraform cloud homepage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/44d3a030-328b-4722-8833-b44b03232084)
+
 2. Create an organization
 
 We select "Create Organization", we choose a name for our organization and create it.
+
+![create organization](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/63cef564-1e90-4bb7-bcb4-570a7062b72c)
 
 3. Configure a workspace
 
 Here, we decide to use **`version control workflow`** as it is the most common and recommended way to run Terraform commands triggered from our git repository.
 
+![create workspace](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3e181484-a542-493b-94bf-1ebf554b8eff)
+
 **i.** We create a new repository in our GitHub and we call it **`qb-terraform-cloud`**, then we push our Terraform codes developed in the previous projects to the repository.
 
-**ii.** We choose `version control workflow` and we are subsequently promped to connect our version control system (VCS) which is our GitHub account to our workspace - we follow the prompt and add our newly created repository to the workspace.
+![create new repo and push terraform code](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c894a7d7-2e73-486c-add9-6210575fd819)
+
+![create new repo and push terraform code 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ae0af401-b2b7-4d92-b32b-f7876a4bc620)
+
+![repository for terraform cloud](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9585a6c8-da5c-48a2-bdfb-9f9b91396230)
+
+**ii.** We choose `version control workflow` and we are subsequently prompted to connect our version control system (VCS) which is our GitHub account to our workspace - we follow the prompt and add our newly created repository to the workspace.
+
+![connect to VCS](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ea3977ad-9d0a-4dd1-bd61-e2e15c3c15a6)
+
+![choose repository](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ab1bdaae-4561-4ccc-a6d9-d0df4bfeb2d4)
 
 **iii.** We move on to "Configure settings", provide a description for our workspace and we leave all the rest settings as default, then we click "Create workspace".
+
+![complete create workspace](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/253196d6-db4f-4adb-b7b9-55f09b6309da)
 
 4. Configure variables
 
 Terraform Cloud supports two types of workspace variables: Environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
 
+![workspace variables](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9cbb95b4-3763-4b0e-8882-a63f2534eb2e)
+
 **i.** Terraform variables are the variables we have declared in our configuration. We however do not need to specify these variables in the Terraform Cloud UI since Terraform cloud can also load the default values from our **`.auto.tfvars`** file in the configuration.
+
+![terraform autovars](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9b70982b-bb09-475c-95dd-e26d1b560a80)
 
 **ii.** Environment variables are variables we need to set to be used in the Terraform runtime environment. Here we set two environment variables: **`AWS_ACCESS_KEY_ID`** and **`AWS_SECRET_ACCESS_KEY`**, and we set the values that we used in [Project 16](https://expert-pbl.darey.io/en/latest/project16.html). These credentials will be used to provision our AWS infrastructure by Terraform Cloud.
 
+![aws access key and secret key environment variable](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5160f29e-8be6-44ce-8c6d-769e0d7ea770)
+
 After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
 
-
+5.
 
 
 
