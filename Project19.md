@@ -124,8 +124,11 @@ We make sure to update the code in **`backend.tf`** with the name of our Terrafo
 
 ![backend terraform cloud organisation and workspace names](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bf189825-65de-4b64-85dc-4f8d858e63b3)
 
+**6.** Push changes to remote repository
 
+Next, we push the changes we made in the terraform code on our local machine to the remote repository we created earlier for terraform cloud.
 
+![push changes to remote](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/51612c6b-b8d7-450a-beff-a97071763af4)
 
 run terraform script
 update ansible script with values from terraform output
