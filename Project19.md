@@ -22,9 +22,9 @@ By combining these tools, we shall automate the provisioning process and ensure 
 
 ### Build AMIs Using Packer
 
-As stated before, we shall use packer in this project to create the AMIs for the launch templates used by the Auto Scaling Group.  Packer creates the instances, provision the instances using shell scripts and creates the AMIs. It also deletes the instances after the completion of the AMIs creation process.
+As stated before, we shall use packer in this project to create the AMIs for the launch templates used by the Auto Scaling Group. We have the Packer codes we used for this purpose stored in this repository. Packer creates the instances, provision the instances using shell scripts and creates the AMIs. It also deletes the instances after the completion of the AMIs creation process.
 
-1. Run the Packer command to build AMIs
+**1.** Run the Packer command to build AMIs
 
 To carry out our AMi builds, we run the packer build command as shown below:
 
@@ -32,35 +32,53 @@ To carry out our AMi builds, we run the packer build command as shown below:
 
 **`$ packer build bastion.pkr.hcl`**
 
-**ii.** We build the ubuntu ami using the following command:
+![packer build bastion](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/84bf2053-b2e3-45a9-92a6-3fc8dbf328c0)
 
-**`$ packer build ubuntu.pkr.hcl`**
+**ii.** We build the nginx ami using the following command:
+
+**`$ packer build nginx.pkr.hcl`**
+
+![packer build nginx](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6145565c-9683-4c4b-bcc2-372ee36d8eb7)
 
 **iii.** We build the ubuntu ami using the following command:
 
 **`$ packer build ubuntu.pkr.hcl`**
 
+![packer build ubuntu](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/20255b10-02d8-448d-b1d7-2ac7d47698c2)
+
 **iv.** We build the web ami using the following command:
 
 **`$ packer build web.pkr.hcl`**
 
+![packer build web](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b45cbebd-7cdd-4ade-aab1-1080306de1eb)
+
+As shown in the image below we can verify in our AWS console that the AMIs were successfully built.
+
+![ami images created](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6c9e6922-f930-4a75-b99d-1e68c09e4be4)
+
+**2.** Update Terraform script with AMI IDs generated from Packer build.
+
+We proceed to update the **`terraform.auto.tfvars`** with the AMI IDs.
+
+![update autotfvars with ami ids](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/77ce78e2-73c1-4519-a282-89d9b8e5cded)
+
 ### Migrate `.tf` codes to Terraform Cloud
 
-We shall begin by migrating our codes to Terraform Cloud and manage our AWS infrastructure from there:
+In this step, we shall be migrating our codes to Terraform Cloud and manage our AWS infrastructure from there:
 
-1. Create a Terraform Cloud account
+**1.** Create a Terraform Cloud account
 
 We navigate to the [terraform cloud homepage](https://app.terraform.io/signup/account), create a new account and verify our email address.
 
 ![terraform cloud homepage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/44d3a030-328b-4722-8833-b44b03232084)
 
-2. Create an organization
+**2.** Create an organization
 
 We select "Create Organization", we choose a name for our organization and create it.
 
 ![create organization](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/63cef564-1e90-4bb7-bcb4-570a7062b72c)
 
-3. Configure a workspace
+**3.** Configure a workspace
 
 Here, we decide to use **`version control workflow`** as it is the most common and recommended way to run Terraform commands triggered from our git repository.
 
@@ -84,7 +102,7 @@ Here, we decide to use **`version control workflow`** as it is the most common a
 
 ![complete create workspace](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/253196d6-db4f-4adb-b7b9-55f09b6309da)
 
-4. Configure variables
+**4.** Configure variables
 
 Terraform Cloud supports two types of workspace variables: Environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
 
@@ -100,7 +118,19 @@ Terraform Cloud supports two types of workspace variables: Environment variables
 
 After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
 
-5.
+**5.** Update **`backend.tf`**
+
+We make sure to update the code in **`backend.tf`** with the name of our Terraform Cloud organization and workspace.
+
+![backend terraform cloud organisation and workspace names](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bf189825-65de-4b64-85dc-4f8d858e63b3)
+
+
+
+
+run terraform script
+update ansible script with values from terraform output
+run ansible script
+check the website
 
 
 
