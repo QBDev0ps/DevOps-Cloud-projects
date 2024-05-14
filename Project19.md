@@ -116,23 +116,75 @@ Terraform Cloud supports two types of workspace variables: Environment variables
 
 ![aws access key and secret key environment variable](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5160f29e-8be6-44ce-8c6d-769e0d7ea770)
 
-After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources.
-
-**5.** Update **`backend.tf`**
-
-We make sure to update the code in **`backend.tf`** with the name of our Terraform Cloud organization and workspace.
+After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources. However, we make sure to update the code in **`backend.tf`** with the name of our Terraform Cloud organization and workspace.
 
 ![backend terraform cloud organisation and workspace names](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bf189825-65de-4b64-85dc-4f8d858e63b3)
 
-**6.** Push changes to remote repository
+**5.** Push changes to remote repository and run Terraform Script
 
-Next, we push the changes we made in the terraform code on our local machine to the remote repository we created earlier for terraform cloud.
+Next, we push the changes we made in the terraform code on our local machine to the github remote repository we created earlier for terraform cloud.
 
 ![push changes to remote](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/51612c6b-b8d7-450a-beff-a97071763af4)
 
-run terraform script
-update ansible script with values from terraform output
-run ansible script
+Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of github kicks in and triggers terraform cloud to automatically create a plan as shown below:
+
+
+
+We proceed to click on Confim and apply. Then a dialogue comes up which asks us to add a comment to explain the action. We type in a comment and then we click on Confirm plan.
+
+
+
+
+Subsequently terraform cloud starts the apply process and creates our infrastructure in AWS.
+
+
+On completion of the apply process as shown in the image above we navigate to the AWS console to check on our Target groups.
+
+
+Here, as seen in the image above, we notice that the instances in the target groups are unhealthy. This is because we are yet to have the instances properly configured.
+
+To fix this, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
+
+
+To ensure that the autoscaling group does not spin up instances to the load balancer, we also need to comment it out. So we navigate to the **`asg-bastion-nginx.tf`** and **`asg-webserver.tf`** files to implement this.
+
+Next, we push the changes to GitHub and then we apply the plan in Terraform Cloud.
+
+As we can see in the image above the apply run was successfully completed. We proceed to navigate to our AWS console and as we can see in the image below, there are no more targets registered to the target groups.
+
+And also when we check our Loadbalancers we can see that there are no listeners attached.
+
+
+
+
+**6.** update ansible script with values from terraform output
+
+To do this, we do not update the ansible script on our local machine. Rather, we SSH into the Bastion host and clone down the ansible script from our repository then we go ahead to make our changes.
+
+But before we proceed, we will need to set up SSH Agent on our windowss machine. We proceed to do this with the help of the [official windows openssh key management documentation](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement) and we execute the following commands on Windows Powershell.
+
+```
+# By default the ssh-agent service is disabled. Configure it to start automatically.
+# Make sure you're running as an Administrator.
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Start the service
+Start-Service ssh-agent
+
+# This should return a status of Running
+Get-Service ssh-agent
+
+# Now load your key files into ssh-agent
+ssh-add <user-key>
+
+# Ensure Key has been added
+ssh-add -l
+```
+
+
+**7** Run ansible script
+
+
 check the website
 
 
