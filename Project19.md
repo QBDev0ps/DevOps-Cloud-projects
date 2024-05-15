@@ -128,23 +128,29 @@ Next, we push the changes we made in the terraform code on our local machine to 
 
 Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of github kicks in and triggers terraform cloud to automatically create a plan as shown below:
 
-
+![automatically triggered plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/437b2313-b4fa-4dc7-b111-6e65403e7d43)
 
 We proceed to click on Confim and apply. Then a dialogue comes up which asks us to add a comment to explain the action. We type in a comment and then we click on Confirm plan.
 
+![click on confirm and apply](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/98eab84e-f22a-444b-996f-f498a989124b)
 
+![confirm plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/acc85abc-a60a-4f3e-9fdb-6ef1fd4f04a9)
 
+Subsequently, terraform cloud starts the apply process and creates our infrastructure in AWS.
 
-Subsequently terraform cloud starts the apply process and creates our infrastructure in AWS.
+![terraform apply starts running](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/aa8c369d-c3e7-46d3-918c-4e87e11e64ac)
 
+![apply finished](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/87a9f401-ec72-436a-bc16-bc4d6f7fb9f2)
 
-On completion of the apply process as shown in the image above we navigate to the AWS console to check on our Target groups.
+On completion of the apply process as shown in the image above, we navigate to the AWS console to check on our Target groups.
 
+![health check fail](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b858d779-e801-4957-9a69-5bfa7801a9f0)
 
 Here, as seen in the image above, we notice that the instances in the target groups are unhealthy. This is because we are yet to have the instances properly configured.
 
 To fix this, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
 
+![comment out listeners](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eafa7866-22d3-47ea-a8d9-b2377c864d07)
 
 To ensure that the autoscaling group does not spin up instances to the load balancer, we also need to comment it out. So we navigate to the **`asg-bastion-nginx.tf`** and **`asg-webserver.tf`** files to implement this.
 
