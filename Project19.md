@@ -182,7 +182,16 @@ ssh-add -l
 ```
 
 
-**7** Run ansible script
+update dns name for ialb in nginx reverse proxy
+copy rds endpoint and update for wordpress and tooling
+Update password and username for wordpress and tooling
+copy and update efs access point ID and file system ID for wordpress and tooling
+update roles path in ansible.cfg file export ANSIBLE_CONFIG=/home/ec2-user/ansible-deploy-pbl-19/roles
+
+
+**7.** Run ansible Playbook
+
+ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml
 
 
 check the website
