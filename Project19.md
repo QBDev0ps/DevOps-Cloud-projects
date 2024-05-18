@@ -1,6 +1,8 @@
 # Automate Infrastructure With IaC using Terraform. Part 4 - Terraform Cloud
 
-In [Project 18](https://github.com/QuadriBello/DevOps-Cloud/blob/main/Project18.md), we refactored our terraform codes into modules to make our code base less cumbersome and more reusable and then subsequently we introduced the concept of backends and we migrated our `.tf ` state file to an AWS S3 bucket to enable easy collaboration with other members of the DevOps team. In this project we shall incorporate more new concepts into our deployment and ensure that our overall infrastructure is working by the time we are done.
+In [Project 18](https://github.com/QuadriBello/DevOps-Cloud/blob/main/Project18.md), we refactored our terraform codes into modules to make our code base less cumbersome and more reusable and then subsequently we introduced the concept of backends and we migrated our `.tf ` state file to an AWS S3 bucket to enable easy collaboration with other members of the DevOps team. In this project we shall incorporate more new concepts into our deployment and ensure that our overall infrastructure as depicted in the image below is working by the time we are done.
+
+![152831445-844e3865-0317-4bf4-969a-490a7c1e06ba](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/785904a9-508a-4d2c-be7c-b6f9f1640a4f)
 
 Up till now, we have had to install Terraform ourselves and we have been running Terraform codes from a command line on our local computer. However, in the Cloud world it is quite common to provide a managed version of an open-source software like Terraform. Managed means that we do not have to install, configure and maintain it ourselves - we just have to create an account and use it "as A Service".
 
@@ -22,7 +24,7 @@ By combining these tools, we shall automate the provisioning process and ensure 
 
 ### Build AMIs Using Packer
 
-As stated before, we shall use packer in this project to create the AMIs for the launch templates used by the Auto Scaling Group. We have the Packer codes we used for this purpose stored in this repository. Packer creates the instances, provision the instances using shell scripts and creates the AMIs. It also deletes the instances after the completion of the AMIs creation process.
+As stated before, we shall use packer in this project to create the AMIs for the launch templates used by the Auto Scaling Group. We have the Packer codes we used for this purpose stored in this [repository](https://github.com/QuadriBello/QB-PBL19-Codebase.git). Packer creates the instances, provision the instances using shell scripts and creates the AMIs. It also deletes the instances after the completion of the AMIs creation process.
 
 **1.** Run the Packer command to build AMIs
 
@@ -82,7 +84,7 @@ Here, we decide to use **`version control workflow`** as it is the most common a
 
 ![create workspace](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3e181484-a542-493b-94bf-1ebf554b8eff)
 
-**i.** We create a new repository in our GitHub and we call it **`qb-terraform-cloud`**, then we push our Terraform codes developed in the previous projects to the repository.
+**i.** We create a new repository in our GitHub and we call it [**`qb-terraform-cloud`**](https://github.com/QuadriBello/qb-terraform-cloud.git), then we push our Terraform codes developed in the previous projects to the repository.
 
 ![create new repo and push terraform code](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c894a7d7-2e73-486c-add9-6210575fd819)
 
@@ -120,11 +122,11 @@ Terraform Cloud supports two types of workspace variables: Environment variables
 
 **4.** Push changes to remote repository and run Terraform Script
 
-Next, we push the changes we made in the terraform code on our local machine to the github remote repository we created earlier for terraform cloud.
+Next, we push the changes we made in the terraform code on our local machine to the GitHub remote repository we created earlier for terraform cloud.
 
 ![push changes to remote](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/51612c6b-b8d7-450a-beff-a97071763af4)
 
-**i.** Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of github kicks in and triggers terraform cloud to automatically create a plan as shown below:
+**i.** Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of GitHub kicks in and triggers terraform cloud to automatically create a plan as shown below:
 
 ![automatically triggered plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/437b2313-b4fa-4dc7-b111-6e65403e7d43)
 
@@ -146,7 +148,7 @@ Next, we push the changes we made in the terraform code on our local machine to 
 
 Here, as seen in the image above, we notice that the instances in the target groups are unhealthy. This is because we are yet to have the instances properly configured.
 
-**v.** To fix the above issue, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the nginx, web and tooling listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
+**v.** To fix the above issue, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the nginx, web and tooling listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances right away with Ansible.
 
 ![comment out listeners](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eafa7866-22d3-47ea-a8d9-b2377c864d07)
 
