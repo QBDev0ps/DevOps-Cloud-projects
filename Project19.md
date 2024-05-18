@@ -68,17 +68,15 @@ In this step, we shall be migrating our codes to Terraform Cloud and manage our 
 
 **1.** Create a Terraform Cloud account
 
-We navigate to the [terraform cloud homepage](https://app.terraform.io/signup/account), create a new account and verify our email address.
+**i.** We navigate to the [terraform cloud homepage](https://app.terraform.io/signup/account), create a new account and verify our email address.
 
 ![terraform cloud homepage](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/44d3a030-328b-4722-8833-b44b03232084)
 
-**2.** Create an organization
-
-We select "Create Organization", we choose a name for our organization and create it.
+**ii.** Next we select "Create Organization", we choose a name for our organization and create it.
 
 ![create organization](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/63cef564-1e90-4bb7-bcb4-570a7062b72c)
 
-**3.** Configure a workspace
+**2.** Configure a Workspace
 
 Here, we decide to use **`version control workflow`** as it is the most common and recommended way to run Terraform commands triggered from our git repository.
 
@@ -102,7 +100,7 @@ Here, we decide to use **`version control workflow`** as it is the most common a
 
 ![complete create workspace](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/253196d6-db4f-4adb-b7b9-55f09b6309da)
 
-**4.** Configure variables
+**3.** Configure Variables
 
 Terraform Cloud supports two types of workspace variables: Environment variables and Terraform variables. Either type can be marked as sensitive, which prevents them from being displayed in the Terraform Cloud web UI and makes them write-only.
 
@@ -116,58 +114,69 @@ Terraform Cloud supports two types of workspace variables: Environment variables
 
 ![aws access key and secret key environment variable](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5160f29e-8be6-44ce-8c6d-769e0d7ea770)
 
-After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources. However, we make sure to update the code in **`backend.tf`** with the name of our Terraform Cloud organization and workspace.
+**iii.** After setting these 2 environment variables as shown in the image above, our Terraform Cloud is all set to apply the codes from GitHub and create all necessary AWS resources. However, we make sure to update the code in **`backend.tf`** with the name of our Terraform Cloud organization and workspace.
 
 ![backend terraform cloud organisation and workspace names](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/bf189825-65de-4b64-85dc-4f8d858e63b3)
 
-**5.** Push changes to remote repository and run Terraform Script
+**4.** Push changes to remote repository and run Terraform Script
 
 Next, we push the changes we made in the terraform code on our local machine to the github remote repository we created earlier for terraform cloud.
 
 ![push changes to remote](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/51612c6b-b8d7-450a-beff-a97071763af4)
 
-Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of github kicks in and triggers terraform cloud to automatically create a plan as shown below:
+**i.** Whenever we push updated code from our local machine to our github repository **`qb-terraform-cloud`**, the version control functionalities of github kicks in and triggers terraform cloud to automatically create a plan as shown below:
 
 ![automatically triggered plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/437b2313-b4fa-4dc7-b111-6e65403e7d43)
 
-We proceed to click on Confim and apply. Then a dialogue comes up which asks us to add a comment to explain the action. We type in a comment and then we click on Confirm plan.
+**ii.** We proceed to click on Confim and apply. Then a dialogue comes up which asks us to add a comment to explain the action. We type in a comment and then we click on Confirm plan.
 
 ![click on confirm and apply](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/98eab84e-f22a-444b-996f-f498a989124b)
 
 ![confirm plan](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/acc85abc-a60a-4f3e-9fdb-6ef1fd4f04a9)
 
-Subsequently, terraform cloud starts the apply process and creates our infrastructure in AWS.
+**iii.** Subsequently, terraform cloud starts the apply process and creates our infrastructure in AWS.
 
 ![terraform apply starts running](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/aa8c369d-c3e7-46d3-918c-4e87e11e64ac)
 
 ![apply finished](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/87a9f401-ec72-436a-bc16-bc4d6f7fb9f2)
 
-On completion of the apply process as shown in the image above, we navigate to the AWS console to check on our Target groups.
+**iv.** On completion of the apply process as shown in the image above, we navigate to the AWS console to check on our Target groups.
 
 ![health check fail](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b858d779-e801-4957-9a69-5bfa7801a9f0)
 
 Here, as seen in the image above, we notice that the instances in the target groups are unhealthy. This is because we are yet to have the instances properly configured.
 
-To fix this, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
+**v.** To fix the above issue, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
 
 ![comment out listeners](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eafa7866-22d3-47ea-a8d9-b2377c864d07)
 
-To ensure that the autoscaling group does not spin up instances to the load balancer, we also need to comment it out. So we navigate to the **`asg-bastion-nginx.tf`** and **`asg-webserver.tf`** files to implement this.
+**vi.** To ensure that the autoscaling group does not spin up instances to the load balancer, we also need to comment it out. So we navigate to the **`asg-bastion-nginx.tf`** and **`asg-webserver.tf`** files to implement this.
 
-Next, we push the changes to GitHub and then we apply the plan in Terraform Cloud.
+![comment out autoscaling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/437fbfcc-db1d-4a3e-8e4a-adf8fba916b7)
 
-As we can see in the image above the apply run was successfully completed. We proceed to navigate to our AWS console and as we can see in the image below, there are no more targets registered to the target groups.
+![comment out auto scaling  2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3ad9da12-d554-49c2-a169-e94152d339f7)
 
-And also when we check our Loadbalancers we can see that there are no listeners attached.
+**vii.** Next, we push the changes to GitHub and then we apply the plan in Terraform Cloud.
 
+![push changes again](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a8c2ed3c-69f5-4137-b9c7-01b3b0a788f4)
 
+![apply listener changes](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/44f1e0fe-c33b-48aa-9300-ac5d2a18c4f2)
 
+![apply finished listener changes](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/e6aad91f-0823-4abd-b35f-58dd6181baa6)
 
-**6.** update ansible script with values from terraform output
+**viii.** As we can see in the image above the apply run was successfully completed. We proceed to navigate to our AWS console and as we can see in the image below, there are no more targets registered to the target groups.
+
+![no more registered targets](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7a099bc9-6e3f-44d6-a39d-df26cb6ccefa)
+
+**ix.** And also when we check our Loadbalancers we can see that there are no listeners attached.
+
+![no listeners attached](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/587240b6-c9c5-49a3-b4ab-1dbffdf53612)
+
+**5.** Update Ansible script with values from Terraform output
 
 To do this, we do not update the ansible script on our local machine. Rather, we SSH into the Bastion host and clone down the ansible script from our repository then we go ahead to make our changes.
 
-But before we proceed, we will need to set up SSH Agent on our windowss machine. We proceed to do this with the help of the [official windows openssh key management documentation](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement) and we execute the following commands on Windows Powershell.
+**i.** But before we proceed, we will need to set up SSH Agent on our windowss machine. We proceed to do this with the help of the [official windows openssh key management documentation](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement) and we execute the following commands on Windows Powershell.
 
 ```
 # By default the ssh-agent service is disabled. Configure it to start automatically.
@@ -187,15 +196,67 @@ ssh-add <user-key>
 ssh-add -l
 ```
 
+![add open ssh](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/da42e48f-bb8d-4eb5-9ab6-d5ddbe597b06)
 
-update dns name for ialb in nginx reverse proxy
-copy rds endpoint and update for wordpress and tooling
-Update password and username for wordpress and tooling
-copy and update efs access point ID and file system ID for wordpress and tooling
-update roles path in ansible.cfg file export ANSIBLE_CONFIG=/home/ec2-user/ansible-deploy-pbl-19/roles
+**ii.** To configure our infrastructure with Ansible, we proceed need to ssh into the bastion instance and then we clone down the Ansible repository in github.
 
+![connect to bastion via ssh](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/fa68a89d-bce6-4d5a-b714-0c899ff50f87)
 
-**7.** Run ansible Playbook
+![clone down ansible repo](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/7a2e83c1-58e7-43a7-ae59-52e41c594f94)
+
+**iii.** Ansible will also require a connection to our AWS account in order to to automatically obtain the IP address for our dynamic inventory so we proceed to execute **`$ aws configure`** and then we add our **`AWS ACCESS KEY ID`** and **`AWS SECRET ACCESS KEY`**
+
+![run aws configure](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6c67ac5d-3ea7-49fb-8ce3-46c6c4b1c28a)
+
+**iv.** To test the connection and ensure that Ansible is able to fetch the IP addresses, we execute the following command:
+
+**`$ ansible-inventory -i inventory/aws_ec2.yml --graph`**
+
+![run graph command to get ip addresses](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0f74f8d6-746b-4dc1-936b-069bae5df544)
+
+**v.** Next, we will need to carry out the following updates in Ansible:
+
+- Update dns name for ialb in nginx reverse proxy.
+
+![DNS name copied](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4336a3b9-7734-4e45-a64b-1954565e8397)
+
+![updatedns name for ialb in nginx-con-j2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ff7dec20-dcae-456c-96fa-82495ed04ae6)
+
+- Copy RDS endpoint and update for Wordpress and Tooling. Also update password and username for Wordpress and Tooling.
+
+![rds end point copied](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/c698cc2c-fa05-4cfe-b2b3-33e734eba20f)
+
+![wordpress endpoint password and username updated](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/0aeda8c9-41ad-48bc-a880-8840d085595c)
+
+![tooling end point password and username updated](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/9b1d1f5b-f91e-4e90-8e74-0aef20e7c315)
+
+- Copy and update EFS access point ID and file system ID for Wordpress.
+
+![acesspoint for wordpress1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/63a5be46-ebbd-47e4-be16-3325aee8a3bc)
+
+![acesspoint for wordpress2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/45a38ada-dc02-42a1-971a-3bc355ef0716)
+
+![wordpress acesspoint copied](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/487eea25-81d6-44f1-9cf6-606a36e3ae67)
+
+- Copy and update EFS access point ID and file system ID for Tooling.
+
+![access point for tooling 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/66ae14cf-9c40-4e6d-93c3-12a1906d49e5)
+
+![access point for tooling 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6580537f-317d-419a-acfc-e8834faaabb5)
+
+![tooling accesspoint updated](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/a1479212-2bc4-4653-a898-6a6e7b0c17ea)
+
+- Update roles path in **`ansible.cfg`** file.
+
+![update roles path](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/152f07e9-8112-4440-a19e-425080d46de4)
+
+- Export the roles path with the following command:
+
+ **`$ export ANSIBLE_CONFIG=/home/ec2-user/ansible-deploy-pbl-19/roles`**
+
+![export ansible config](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/5c663859-33be-43ba-ade6-35194c442efb)
+
+**6.** Run ansible Playbook
 
 ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml
 
