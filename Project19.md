@@ -146,7 +146,7 @@ Next, we push the changes we made in the terraform code on our local machine to 
 
 Here, as seen in the image above, we notice that the instances in the target groups are unhealthy. This is because we are yet to have the instances properly configured.
 
-**v.** To fix the above issue, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
+**v.** To fix the above issue, since it is the listeners that route traffic to the target groups which contain our instances, we navigate back to our terraform code and we comment out the nginx and web listeners in the **`alb.tf`** file. We choose to do this since we will be running into a lot of errors if we attempt to configure the instances with Ansible.
 
 ![comment out listeners](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eafa7866-22d3-47ea-a8d9-b2377c864d07)
 
