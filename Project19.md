@@ -260,11 +260,46 @@ ssh-add -l
 
 **6.** Run ansible Playbook
 
-ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml
+**i.** We execute the following command to run our ansible playbook and use ansible to configure our infrastructure
+
+**`$ ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml`**
+
+![ansible playbook success 1](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/b5ad36e1-d876-4e96-b213-3c18c585c61e)
+
+![ansible playbook success 2](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/eb7e422a-c8fd-4ba6-87c4-0a34b03cd738)
+
+![ansible playbook success 3](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/87c59f17-f016-45bc-871b-ce6d58dbea2b)
+
+**ii.** Our playbooks ran successfully as seen in the images above. Subsequently, we proceed to the terraform script in our local machine and we uncomment the auto scaling attachment in the **`asg-bastion-nginx.tf`** and **`asg-tooling-wordpress.tf`** files. We also make sure to remove the comments on the listeners in **`alb.tf`**
+
+![uncomment autoscaling](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/67fcdf51-4cdf-4d04-9e56-6eb959f8c942)
+
+![uncomment alb listener](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6fea53fe-628b-43e3-b46a-4733520c6669)
+
+**iii.** Next, we commit and push the changes to our remote GitHub repository.
+
+![uncomment commit](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/6c487af9-44e5-4795-adbc-a444bcea90ce)
+
+**iv.** Terraform cloud automatically detects the changes and runs a plan which we apply accordingly.
+
+![plan uncomment](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/d977999c-22d7-43f7-b52a-889db7149db5)
+
+![uncomment plan finished](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/34e6b0a5-80ce-4175-a886-3cb9b722f92c)
+
+**v.** We navigate to Route 53 in our AWS console and we copy the URL records for both Wordpress and Tooling websites.
+
+![route 53 URL records](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/818cebe1-7f07-49c3-b20c-a1f487bf68eb)
+
+**vi.** We paste the records in our browser and as seen in the images below, both the Wordpress and Tooling websites are functional and working.
+
+![Word press working](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/3f666cd3-bda9-465f-b54f-155b3e0ab543)
+
+![tooling website working](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/ba086ba4-85f9-4472-9198-5e5d1acaa001)
 
 
-check the website
+### Conclusion 
 
+We have now successfully come to the end of this project. We have been able to combine the use of tools like Packer to build our AMIs, Terraform in combination with Github and Terraform Cloud to deploy our infrastructure and then Ansible as a configuration management tool to configure our resources. Our objective was to implement these tools in automating the deployment of AWS cloud solutions for 2 company websites and we were able to acheive this. In the future, we will look to extend the scope of the project and take a step further by automating the whole deployment process using Jenkins. Thank you.
 
 
 
