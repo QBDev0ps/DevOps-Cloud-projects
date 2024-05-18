@@ -218,7 +218,7 @@ ssh-add -l
 
 **v.** Next, we will need to carry out the following updates in Ansible:
 
-- Update dns name for ialb in nginx reverse proxy.
+- Update dns name for ialb in the **`nginx.conf.j2`** file in nginx reverse proxy.
 
 ![DNS name copied](https://github.com/QuadriBello/DevOps-Cloud/assets/140855364/4336a3b9-7734-4e45-a64b-1954565e8397)
 
