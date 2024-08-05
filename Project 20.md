@@ -43,4 +43,16 @@ Docker is an open-source platform that enables developers to automate the deploy
 
 **v.** **Batch Processing:** Containers can be used for running batch jobs and data processing tasks in a controlled and reproducible manner.
 
-### <br># Install Docker and prepare for migration to the Cloud<br/>
+### <br>Install Docker and prepare for migration to the Cloud<br/>
+
+First we need to install [Docker Engine](https://docs.docker.com/engine/install/) which is a client-server application that contains:
+
+- A server with a long-running daemon process dockerd.
+- APIs that specify interfaces that programs can use to talk to and instruct the Docker daemon.
+- A command-line interface (CLI) client docker.
+
+### MySQL in container
+
+Let us start assembling our application from the Database layer - we will use a pre-built MySQL database container, configure it, and make sure it is ready to receive requests from our PHP application.
+
+#### Step 1: Pull MYSQL Docker image from [Docker Hub Registry](https://hub.docker.com)
