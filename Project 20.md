@@ -56,19 +56,28 @@ To install Docker on an Ubuntu instance we take the following steps:
 **i.** Set up the repository: 
   
   ```
-  sudo apt-get update
-  sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+  sudo apt update -y
+  sudo apt upgrade -y
+  sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
   ```
+
+![update server](https://github.com/user-attachments/assets/b6b6d019-9c6c-4a60-bfe9-5a6b00fd9afe)
+
+![upgrade server](https://github.com/user-attachments/assets/39e89611-07f4-4de3-81f8-ad014294f931)
+
+![apt install](https://github.com/user-attachments/assets/2e45b264-cc33-4f6d-97f8-b20835d091df)
 
 **ii.** Add Docker’s official GPG key: 
 
-**`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`**
+```
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
 
-**iii.** Set up stable repository:
+![add official gpg key](https://github.com/user-attachments/assets/e66a3ccc-c5fc-4e53-9a76-1cde89e19061)
+
+**iii.** Set up Docker repository:
 
 ```
 echo \
@@ -76,48 +85,48 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
+![add docker repo](https://github.com/user-attachments/assets/69b271cd-f133-42b2-bae2-6ae8e3069c9f)
+
 **iv.** Install Docker Engine:
 
 ```
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt update -y
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-**v.** Install specific version of Docker:
-  
-**`apt-cache madison docker-ce`**
+![update server 2](https://github.com/user-attachments/assets/05f2c9ff-292a-424e-9887-f263baf2f1d4)
 
-**vi.** Install a specific version using the version string from the second column, for example, 5:18.09.1~3-0~ubuntu-xenial.
-
- **`sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io`**
+![install docker](https://github.com/user-attachments/assets/d05237fa-a5b7-4b3a-9a1f-e918a7364355)
  
-**vii.** Verify that Docker Engine is installed correctly by running the hello-world image.
+**v.** Verify that Docker Engine is installed correctly by running the hello-world image.
 
+![docker run hello world](https://github.com/user-attachments/assets/06654f7d-b219-43fc-924d-85a6b10c3188)
 
-
-In this project we will be using the Tooling web application we used in our previous projects, which is a PHP-based web solution backed by a MySQL database – all technologies you are already familiar with and which you shall be comfortable using by now.
-
-So, let us migrate the Tooling Web Application from a VM-based solution into a containerized one.
+In this project we will be using the Tooling web application we used in our previous projects, which is a PHP-based web solution backed by a MySQL database. We proceed by migrating the Tooling Web Application from a VM-based solution into a containerized one.
 
 ### MySQL in container
 
-Let us start assembling our application from the Database layer - we will use a pre-built MySQL database container, configure it, and make sure it is ready to receive requests from our PHP application.
+We start assembling our application from the Database layer - we will use a pre-built MySQL database container, configure it, and make sure it is ready to receive requests from our PHP application.
 
 #### Step 1: Pull MYSQL Docker image from [Docker Hub Registry](https://hub.docker.com)
 
 **i.** We begin by pulling the appropriate [Docker image for MySQL](https://hub.docker.com/_/mysql):
 
-**`docker pull mysql/mysql-server:latest`**
+**`sudo docker pull mysql/mysql-server:latest`**
+
+![docker pull](https://github.com/user-attachments/assets/f29ae0d8-5bd6-47d7-99ea-6139dbb571e4)
 
 **ii.** Then we subsequently enter the following command to list the images and check that we have downloaded them successfully:
 
-**`docker images ls`**
+**`sudo docker images`**
+
+![docker images](https://github.com/user-attachments/assets/74c45485-2632-489e-ad95-db203c7f4221)
 
 #### Step 2: Deploy the MySQL Container to your Docker Engine
 
 **i.** Once we have the image, we move on to deploying a new MySQL container with:
 
-**`docker run --name <container_name> -e MYSQL_ROOT_PASSWORD=<my-secret-pw> -d mysql/mysql-server:latest`**
+**`sudo docker run --name <container_name> -e MYSQL_ROOT_PASSWORD=<my-secret-pw> -d mysql/mysql-server:latest`**
 
 **Notes**
 - Replace `<container_name>` with the name of your choice. If you do not provide a name, Docker will generate a random one
@@ -125,16 +134,20 @@ Let us start assembling our application from the Database layer - we will use a 
 - Replace `<my-secret-pw>` with your chosen password
 - In the command above, we used the latest version tag. This tag may differ according to the image you downloaded
 
+![docker run container](https://github.com/user-attachments/assets/3c8834df-75c6-4ee8-9ee1-c5b4eaa92004)
+
 **ii.** Then, we check to see if the MySQL container is running: Assuming the container name specified is **`mysql-server`**
 
-**`docker ps -a`**
+**`sudo docker ps -a`**
 
 ```
 CONTAINER ID   IMAGE                                COMMAND                  CREATED          STATUS                             PORTS                       NAMES
 7141da183562   mysql/mysql-server:latest            "/entrypoint.sh mysq…"   12 seconds ago   Up 11 seconds (health: starting)   3306/tcp, 33060-33061/tcp   mysql-server
 ```
 
-Now we see the newly created container listed in the output. It includes container details, one being the status of this virtual environment. The status changes from `health: starting` to `healthy`, once the setup is complete.
+![container image](https://github.com/user-attachments/assets/625a3aaf-2b33-4b48-9f16-f3354d696fea)
+
+Now  as seen in the image above, we see the newly created container listed in the output. It includes container details, one being the status of this virtual environment. The status changes from `health: starting` to `healthy`, once the setup is complete.
 
 #### Step 3: Connecting to the MySQL Docker Container
 
@@ -150,9 +163,25 @@ Then we provide the root password when prompted. With that, we have connected th
 
 Finally, we change the server root password to protect our database.
 
+![connect directly to container](https://github.com/user-attachments/assets/c2027ab0-b770-4637-9140-c448f4295841)
+
 **Approach 2**
 
-First, we create a network:
+**Note**
+
+Before proceeding with this approach, we will need to stop and remove the previous mysql docker container.
+
+```
+sudo docker ps -a
+
+sudo docker stop <container name> 
+
+sudo docker rm <container name>
+```
+
+![remove old container](https://github.com/user-attachments/assets/66c98afc-249d-469c-b092-f5ac7d27d028)
+
+To begin with our second approach, we create a network:
 
 **`docker network create --subnet=172.18.0.0/24 tooling_app_network`**
 
