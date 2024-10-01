@@ -51,6 +51,54 @@ First we need to install [Docker Engine](https://docs.docker.com/engine/install/
 - APIs that specify interfaces that programs can use to talk to and instruct the Docker daemon.
 - A command-line interface (CLI) client docker.
 
+To install Docker on an Ubuntu instance we take the following steps:
+
+**i.** Set up the repository: 
+  
+  ```
+  sudo apt-get update
+  sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+  ```
+
+**ii.** Add Docker’s official GPG key: 
+
+**`curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`**
+
+**iii.** Set up stable repository:
+
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+**iv.** Install Docker Engine:
+
+```
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+**v.** Install specific version of Docker:
+  
+**`apt-cache madison docker-ce`**
+
+**vi.** Install a specific version using the version string from the second column, for example, 5:18.09.1~3-0~ubuntu-xenial.
+
+ **`sudo apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> containerd.io`**
+ 
+**vii.** Verify that Docker Engine is installed correctly by running the hello-world image.
+
+
+
+In this project we will be using the Tooling web application we used in our previous projects, which is a PHP-based web solution backed by a MySQL database – all technologies you are already familiar with and which you shall be comfortable using by now.
+
+So, let us migrate the Tooling Web Application from a VM-based solution into a containerized one.
+
 ### MySQL in container
 
 Let us start assembling our application from the Database layer - we will use a pre-built MySQL database container, configure it, and make sure it is ready to receive requests from our PHP application.
