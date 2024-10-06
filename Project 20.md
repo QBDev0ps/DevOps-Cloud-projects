@@ -355,7 +355,7 @@ Flags used:
 - We need to specify the **`--network`** flag so that both the Tooling app and the database can easily connect on the same virtual network we created earlier.
 - The **`-p`** flag is used to map the container port with the host port. Within the container, **`apache`** is the webserver running and, by default, it listens on port 80. This can be confirmed with the **`CMD ["start-apache"]`** section of the Dockerfile. But we cannot directly use port 80 on our host machine because it is already in use. The workaround is to use another port that is not used by the host machine. In our case, port 8085 is free, so we can map that to port 80 running in the container.
 
-##### Blocker 
+#### Blocker 
 
 ![blocker](https://github.com/user-attachments/assets/4ef71ffe-4f92-4ad2-983d-5aef9e7c5193)
 
