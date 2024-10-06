@@ -411,7 +411,7 @@ sudo systemctl restart apache2
 ```
 
 By following these steps, we were able to resolve the issue with the `www-browser` command not being found and properly fetch the Apache server status page.
-```
+
 
 If everything works, you can open the browser and type `http://localhost:8085`
 
