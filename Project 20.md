@@ -185,7 +185,10 @@ To begin with our second approach, we create a network:
 
 **`docker network create --subnet=172.18.0.0/24 tooling_app_network`**
 
-Creating a custom network is not necessary because even if we do not create a network, Docker will use the default network for all the containers we run. By default, the network we created above is of **`DRIVER`** **`Bridge`** is a requirement to control the **`cidr`** range of the containers running the entire application stack. This will be an ideal situation to create a network and specify the **`--subnet`**
+Creating a custom network is not necessary because even if we do not create a network, Docker will use the default network for all the containers we run. By default, the network we created above is of **`DRIVER`** **`Bridge`** So, also, it is the default network. You can verify this by running the **`docker network ls`** command.  But there are use cases where this is necessary. For example, if there is a requirement to control the **`cidr`** range of the containers running the entire application stack. This will be an ideal situation to create a network and specify the **`--subnet`**
+
+![create docker network](https://github.com/user-attachments/assets/3d77aa8a-fd37-4558-b852-9d3a94ed06a0)
+
 
 For clarity's sake, we will create a network with a subnet dedicated for our project and use it for both MySQL and the application so that they can connect.
 
@@ -200,6 +203,8 @@ Then, we pull the image and run the container, all in one command like below:
 ```
 docker run --network tooling_app_network -h mysqlserverhost --name=mysql-server -e MYSQL_ROOT_PASSWORD=$MYSQL_PW  -d mysql/mysql-server:latest 
 ```
+
+![pull image and run container](https://github.com/user-attachments/assets/21c58148-9d5d-48e0-b6e5-1b1cde7193a1)
 
 **Notes**
 
@@ -220,6 +225,8 @@ CONTAINER ID   IMAGE                                COMMAND                  CRE
 7141da183562   mysql/mysql-server:latest            "/entrypoint.sh mysq…"   12 seconds ago   Up 11 seconds (health: starting)   3306/tcp, 33060-33061/tcp   mysql-server
 ```
 
+![confirm container is running](https://github.com/user-attachments/assets/5f856ce0-1a27-40d3-bcec-3aba7dca2fa9)
+
 As you already know, it is best practice not to connect to the MySQL server remotely using the root user. Therefore, we will create an **`SQL`** script that will create a user we can use to connect remotely.
 
 We create a file and name it **`create_user.sql`** and add the below code in the file:
@@ -233,6 +240,8 @@ Next, we run the script:
 
 **`docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < ./create_user.sql`**
 
+![create sql user and run script](https://github.com/user-attachments/assets/1a86046f-1b1e-4c26-8c71-4b1186bd4a2f)
+
 ##### Connecting to the MySQL server from a second container running the MySQL client utility
 
 The good thing about this approach is that we do not have to install any client tool on our local machine, and we do not need to connect directly to the container running the MySQL server.
@@ -242,6 +251,8 @@ We run the MySQL Client Container:
 ```
 docker run --network tooling_app_network --name mysql-client -it --rm mysql mysql -h mysqlserverhost -u <user-created-from-the-SQL-script> -p
 ```
+
+![connect to mysql server](https://github.com/user-attachments/assets/db7ad184-8156-4e4a-afb7-2e640bc8de98)
 
 **Notes**
 
@@ -263,9 +274,13 @@ Now we need to prepare a database schema so that the Tooling application can con
 
 **`git clone https://github.com/darey-devops/tooling.git`**
 
+![git clone](https://github.com/user-attachments/assets/34cd4257-f198-45b8-8eec-55f9371e92d6)
+
 **ii.** On your terminal, export the location of the SQL file
 
 **`export tooling_db_schema=~/tooling/html/tooling_db_schema.sql`**
+
+![export tooling db schema](https://github.com/user-attachments/assets/e032a5ad-c957-43df-b8f5-c3f36931fd52)
 
 We can find the **`tooling_db_schema.sql`** in the **`html`** folder of cloned repo.
 
@@ -273,7 +288,11 @@ We can find the **`tooling_db_schema.sql`** in the **`html`** folder of cloned r
 
 **`docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < $tooling_db_schema`**
 
-**iv.** Update the **`db_conn.php`** file with connection details to the database
+![create database and prepare schema](https://github.com/user-attachments/assets/35fa3f1d-b6ef-4d1c-aeba-9b704a29e976)
+
+**iv.** Update the **`db_conn.php`** file with connection details to the database.
+
+**`sudo vi db_conn.php`**
 
 ```
 $servername = "mysqlserverhost";
@@ -282,7 +301,22 @@ $password = "<client-secret-password>";
 $dbname = "toolingdb";
 ```
 
-**v.** Run the Tooling App
+![update db conn php](https://github.com/user-attachments/assets/fb66dd1b-0387-4565-aa79-dcdad2f7c578)
+
+**v.** Also update the **`.env`** file with connection details to the database The .env file is located in the html tooling/html/.env folder but not visible in terminal.
+
+**`sudo vi .env`**
+
+```
+MYSQL_IP=mysqlserverhost
+MYSQL_USER=<username>
+MYSQL_PASS=<client-secret-password>
+MYSQL_DBNAME=toolingdb
+```
+
+![edit env](https://github.com/user-attachments/assets/3b896384-0c1d-463d-8da6-2ff886be9988)
+
+**vi.** Run the Tooling App
 
 Containerization of an application starts with creation of a file with a special name - **`Dockerfile`** (without any extensions). This can be considered as a 'recipe' or 'instruction' that tells Docker how to pack your application into a container. In this project, we will build our container from a pre-created **`Dockerfile`**, but as a DevOps engineer, we must also be able to write Dockerfiles. 
 
@@ -304,11 +338,15 @@ We ensure we are inside the folder that has the `Dockerfile` and then we build o
 
 **`docker build -t tooling:0.0.1 .`**
 
+![docker build](https://github.com/user-attachments/assets/895dae32-8b66-46e8-9f53-d5c4126cab69)
+
 In the above command, we specify a parameter **`-t`**, so that the image can be tagged **`tooling"0.0.1`** - Also, notice the **`.`** at the end. This is important as it tells Docker to locate the **`Dockerfile`** in the current directory we are running the command. Otherwise, we would need to specify the absolute path to the **`Dockerfile`**.
 
-**vi.** Run the container:
+**vii.** Run the container:
 
 **`docker run --network tooling_app_network -p 8085:80 -it tooling:0.0.1`**
+
+![docker run final](https://github.com/user-attachments/assets/d15421b8-131e-4654-bb69-f7d5e36d0f1f)
 
 **Notes**
 
@@ -317,18 +355,72 @@ Flags used:
 - We need to specify the **`--network`** flag so that both the Tooling app and the database can easily connect on the same virtual network we created earlier.
 - The **`-p`** flag is used to map the container port with the host port. Within the container, **`apache`** is the webserver running and, by default, it listens on port 80. This can be confirmed with the **`CMD ["start-apache"]`** section of the Dockerfile. But we cannot directly use port 80 on our host machine because it is already in use. The workaround is to use another port that is not used by the host machine. In our case, port 8085 is free, so we can map that to port 80 running in the container.
 
-**Note:** *You will get an error. But you must troubleshoot this error and fix it. Below is your error message.*
+##### Blocker 
+
+![blocker](https://github.com/user-attachments/assets/4ef71ffe-4f92-4ad2-983d-5aef9e7c5193)
+
+To resolve the issue the following steps were followed:
+
+###### Step 1: Install a Text-Based Web Browser
+
+We installed `lynx` which is a commonly used text-based web browsers.
 
 ```
-AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+sudo apt update
+sudo apt install lynx
 ```
-**Hint:** *You must have faced this error in some of the past projects. It is time to begin to put your skills to good use. Simply do a google search of the error message, and figure out where to update the configuration file to get the error out of your way.*
+
+###### Step 2: Create a Symbolic Link to `www-browser`
+
+Once we installed `lynx` or `w3m`, we created a symbolic link to `www-browser`.
+
+```
+sudo ln -s /usr/bin/lynx /usr/bin/www-browser
+```
+
+###### Step 3: Verify the Installation
+
+We ran the following command to verify that the symbolic link is working:
+
+```
+www-browser -dump http://localhost:80/server-status
+```
+
+###### Step 4: Adjust the `APACHE_LYNX` Variable
+
+We proceeded to adjust the `APACHE_LYNX` variable in the `/etc/apache2/envvars` file to point to the correct path of the text-based browser.
+
+- Open the `/etc/apache2/envvars` file in a text editor:
+
+```
+sudo nano /etc/apache2/envvars
+```
+
+- Add or modify the line to point to the correct browser:
+
+```
+export APACHE_LYNX='/usr/bin/lynx'
+```
+
+- Save the file and exit the text editor.
+
+- Restart Apache to apply the changes:
+
+```
+sudo systemctl restart apache2
+```
+
+By following these steps, we were able to resolve the issue with the `www-browser` command not being found and properly fetch the Apache server status page.
+```
 
 If everything works, you can open the browser and type `http://localhost:8085`
 
 You will see the login page.
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project20/Tooling-Login.png" width="936px" height="550px">
+![website success 1](https://github.com/user-attachments/assets/ab704455-e0be-40e0-b729-33e1dab63277)
+
 The default email is `test@gmail.com`, the password is `12345` or you can check users' credentials stored in the `toolingdb.user` table.
 
+![website successs 2](https://github.com/user-attachments/assets/a853589b-0161-446e-ac79-b6dc7f99bd96)
 
+#### Practice Task №1 - Implement a POC to migrate the PHP-Todo app into a containerized application.
