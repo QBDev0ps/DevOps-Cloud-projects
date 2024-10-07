@@ -422,5 +422,3 @@ You will see the login page.
 The default email is `test@gmail.com`, the password is `12345` or you can check users' credentials stored in the `toolingdb.user` table.
 
 ![website successs 2](https://github.com/user-attachments/assets/a853589b-0161-446e-ac79-b6dc7f99bd96)
-
-#### Practice Task №1 - Implement a POC to migrate the PHP-Todo app into a containerized application.
