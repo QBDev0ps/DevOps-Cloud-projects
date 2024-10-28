@@ -154,3 +154,45 @@ Default region name [None]: us-east-1
 Default output format [None]: json
 ```
 
+Test your AWS CLI by running:
+
+```markdown
+aws ec2 describe-vpcs
+```
+Aws VPC details with AWSCLI:
+
+![AWS-VPC](Images/confirm-awscl.png)
+
+## Installing kubectl
+
+Kubernetes cluster has a Web API that can receive HTTP/HTTPS requests, but it is quite cumbersome to curl an API each and every time you need to send some command, so kubectl command tool was developed to ease a K8s administrator’s life.
+
+With this tool you can easily interact with Kubernetes to deploy applications, inspect and manage cluster resources, view logs and perform many more administrative operations.
+
+Linux Or Windows using Gitbash or similar tool
+
+Download the binary
+
+**`wget https://storage.googleapis.com/kubernetes-release/release/v1.21.0/bin/linux/amd64/kubectl`**
+
+Make it executable
+
+```
+chmod +x kubectl
+```
+
+Move to the Bin directory
+
+```
+sudo mv kubectl /usr/local/bin/
+```
+
+Verify that kubectl version 1.21.0 or higher is installed:
+
+```
+kubectl version --client
+```
+
+Output:
+
+![kubectl](Images/kubectl.png)
