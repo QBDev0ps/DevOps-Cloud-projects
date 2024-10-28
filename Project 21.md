@@ -17,7 +17,7 @@ This project is the first of a series Kubernetes-related practice projects, so g
 
 *Kubernetes (κυβερνήτης, Greek for "helmsman" or "pilot" or "governor", and the etymological root of cybernetics)
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project21/kubernetes_sail.png" width="936px" height="550px">
+![kubernetes-logo pilot](https://github.com/user-attachments/assets/28d618c5-5ba5-430d-a8da-d49f39fb40f0)
 
 ### Why migrate from Docker Compose to K8s
 
@@ -49,17 +49,18 @@ If we had two compute nodes to run our containers, let us consider a following s
 **Container orchestration** is a concept that allows to address these two scenarios, it provides automation of all the aspects of coordinating and managing containers. Container orchestration is focused on managing life cycle of containers and their dynamic environments.
 
 It is about automating the entire lifecycle of containers running across multiple nodes:
-  - Configuring and scheduling of containers on nodes
-  - Ensuring the availability of containers, even when they die
-  - Scaling of containers to equally balance application workloads across infrastructure
-  - Allocation of resources between containers
-  - Load balancing, traffic routing and service discovery of containers
-  - Health monitoring of containers
+
+  - Configuring and scheduling of containers on nodes.
+  - Ensuring the availability of containers, even when they die.
+  - Scaling of containers to equally balance application workloads across infrastructure.
+  - Allocation of resources between containers.
+  - Load balancing, traffic routing and service discovery of containers.
+  - Health monitoring of containers.
   - Securing the interactions between containers.
 
 Kubernetes is a tool designed to do Container Orchestration and it does its job very well when correctly configured.
 
-As mentioned earlier, there are other alternatives to Docker Compose. But, throughout the entire PBL program, we will not focus on **Docker Swarm**. We will rather spend more time with **Kubernetes**. Part of the reason for this is because Kubernetes has more functionalities and is widely in use in the industry. 
+As mentioned earlier, there are other alternatives to Docker Compose. But, throughout the entire PBL program, we will not focus on **Docker Swarm**. We will rather spend more time with **Kubernetes**. Part of the reason for this is because Kubernetes has more functionalities and is more widely in use in the industry. 
 
 To know when to choose between  **Docker Swarm** and **Kubernetes**, [Here is an interesting article to read](https://dzone.com/articles/quotdocker-swarm-or-kubernetesquot-is-it-the-right) with some very enlightening stats.
 
@@ -69,20 +70,21 @@ Kubernetes is a not a single package application that you can install with one c
 
 Let us take a look at Kubernetes architecture diagram below:
 
-<img src="https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project21/K8s_architecture.png" width="936px" height="550px">
+![kubernetes architecture](https://github.com/user-attachments/assets/fb14192d-54b3-4a59-bc58-209be29c145d)
+
 Read about every component in the [official documentation](https://kubernetes.io/docs/concepts/overview/components/).
 
-Make sure you understand the role of each component on the diagram above, without this understanding it will be extremely difficult for you to install and operate a K8s cluster, especially when it comes to troubleshooting and maintenance.
+DevOps engineers need to make sure they understand the role of each component on the diagram above, without this understanding it will be extremely difficult to install and operate a K8s cluster, especially when it comes to troubleshooting and maintenance.
 
-As an IT professional in general, you shall be comfortable using official documentation for tools you use, in case of Kubernetes - it has a very well structured and comprehensive documentation portal with multiple configuration code snippets. We strongly encourage you to add it to your bookmarks and refer to it every time you have a K8s-related question. 
+It is expected that IT professionals are generally comfortable using official documentation for tools they use, in case of Kubernetes - it has a very well structured and comprehensive documentation portal with multiple configuration code snippets. And it is strongly encouraged that DevOps engineers add it to their bookmarks and refer to it every time they have a K8s-related question. 
 
 ### "Kubernetes From-Ground-Up"
 
 #### K8s installation options
 
-So far, Kubernetes sounds like a lot of fun, right? With its intuitive architecture, and rich configuration options, you may already want to jump right in, spin up a few VMs and begin to install and configure a Kubernetes cluster. But hold on for a second. Installing and configuring Kubernetes is far from being a walk in the park, i.e., it is very difficult to implement and get it ready for production. Especially, if you want to setup a highly available, and secure Kubernetes cluster. 
+So far, Kubernetes sounds like a lot of fun with its intuitive architecture, and rich configuration options, but however, installing and configuring Kubernetes is far from being a walk in the park, i.e., it is very difficult to implement and get it ready for production. Especially, if we want to setup a highly available, and secure Kubernetes cluster. 
 
-The good news is, there are open-source tools available today that already has all the hard work done and you can plug into them easily. An example of that is [**minikube**](https://minikube.sigs.k8s.io/docs/start/), which can be used during testing and development.
+The good news is, there are open-source tools available today that already has all the hard work done and we can plug into them easily. An example of that is [**minikube**](https://minikube.sigs.k8s.io/docs/start/), which can be used during testing and development.
 
 For a better understanding of each aspect of spinning up a Kubernetes cluster, we will do it without any automated helpers. You will install each and every component manually from scratch and learn how to make them work together - we call this approach "K8s From-Ground-Up".
 
@@ -105,36 +107,50 @@ You will be able to appreciate automation tools and managed versions of Kubernet
 
 **DISCLAIMER:** The following setup of Kubernetes should be used for learning purpose only, and not to be considered for production. This is because setting up a K8s cluster for production use has a lot more moving parts, especially when it comes to planning the nodes, and securing the cluster. The purpose of **"K8s From-Ground-Up"** is to get you much closer to the different components as shown in the architecture diagram and relate with what you have been learning about Kubernetes.
 
-#### Tools to be used and expected result of the Project 20 
+## Tools to be used and expected result of the Project 20
 
-- VM: AWS EC2
-- OS: Ubuntu 20.04 lts+
-- Docker Engine
-- `kubectl` console utility
-- `cfssl` and `cfssljson` utilities 
-- Kubernetes cluster
+* VM: AWS EC2
+* OS: Ubuntu 20.04 lts+
+* Docker Engine
+* kubectl console utility
+* cfssl and cfssljson utilities
+* Kubernetes cluster
 
-You will create 6 EC2 Instances, and in the end, we will have the following parts of the cluster properly configured:
+We will create 3 EC2 Instances, and in the end, we will have the following parts of the cluster properly configured:
 
-- Three Kubernetes Master
-- Three Kubernetes Worker Nodes
-- Configured SSL/TLS certificates for Kubernetes components to communicate securely
-- Configured Node Network
-- Configured Pod Network
+* One Kubernetes Master
+* Two Kubernetes Worker Nodes
+* Configured SSL/TLS certificates for Kubernetes components to *    communicate securely
+* Configured Node Network
+* Configured Pod Network
 
 
 #### Step 0 Install client tools before bootstrapping the cluster.
 
-First, you will need some client tools installed and configurations made on your client workstation: 
+First, we will need some client tools installed and configurations made on our client workstation: 
 
   - [awscli](https://aws.amazon.com/cli/) - is a unified tool to manage your AWS services
   - [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) - this command line utility will be your main control tool to manage your K8s cluster. You will use this tool so many times, so you will be able to type 'kubetcl' on your keyboard with a speed of light. You can always make a shortcut (alias) to just one character 'k'. Also, add this extremely useful official `kubectl` Cheat Sheet to your bookmarks, it has examples of the most used 'kubectl' commands.
   - [cfssl](https://blog.cloudflare.com/introducing-cfssl/) - an open source toolkit for everything TLS/SSL from [Cloudflare](https://www.cloudflare.com/)
   - [cfssljson](https://github.com/cloudflare/cfssl) - a program, which takes the JSON output from the `cfssl` and writes certificates, keys, [CSRs](https://en.wikipedia.org/wiki/Certificate_signing_request), and bundles to disk.
 
-##### Install and configure AWS CLI
+## Install and configure AWS CLI
 
-Configure AWS CLI to access all AWS services used, for this you need to have a user with programmatic access keys configured in AWS Identity and Access Management (IAM):
+Configure AWS CLI to access all AWS services used, for this we need to have a user with programmatic access keys configured in AWS Identity and Access Management (IAM):
 
-![](https://darey-io-nonprod-pbl-projects.s3.eu-west-2.amazonaws.com/project21/iam_keys.png)
+
+
+Generate access keys and store them in a safe place.
+
+On your local workstation download and install the latest version of AWS CLI
+
+To configure your AWS CLI – run your shell (or cmd if using Windows) and run:
+
+```
+aws configure --profile %your_username%
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: us-east-1
+Default output format [None]: json
+```
 
